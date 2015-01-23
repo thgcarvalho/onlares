@@ -24,7 +24,7 @@ public class InitialDataObserver {
 		EntityManager em = JPAUtil.criaEntityManager();
 		em.getTransaction().begin();
 
-		em.persist(new Usuario("onlares", "onlares"));
+		em.persist(new Usuario("onlares@onlares.com.br", "onlares"));
 
 		em.persist(new Produto("Produto 01", 100.99, 2));
 		em.persist(new Produto("Produto 02", 10.99, 4));

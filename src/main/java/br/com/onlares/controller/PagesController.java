@@ -51,8 +51,8 @@ public class PagesController {
 
 	}
 	
-	@Path("/pages/motifications")
-	public void motifications() {
+	@Path("/pages/notifications")
+	public void notifications() {
 
 	}
 	
