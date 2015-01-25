@@ -38,6 +38,10 @@ public class LoginController {
 	public void form() {
 
 	}
+	
+	@Get("/login")
+	@Public
+	public void login() { }
 
 	@Post
 	@Public

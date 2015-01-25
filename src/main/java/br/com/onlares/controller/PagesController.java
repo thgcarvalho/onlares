@@ -5,6 +5,11 @@ import br.com.caelum.vraptor.Path;
 
 @Controller
 public class PagesController {
+	
+	@Path("/pages/teste")
+	public void teste() {
+
+	}
 
 	@Path("/pages/blank")
 	public void blank() {
