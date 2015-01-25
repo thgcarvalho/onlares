@@ -1,9 +1,11 @@
-package br.com.onlares.model;
+package br.com.onlares.controller;
 
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+
+import br.com.onlares.model.Usuario;
 
 @SessionScoped
 @Named
@@ -21,6 +23,8 @@ public class UsuarioLogado implements Serializable{
 		this.usuario = usuario;
 	}
 	
-	
+	public void logout() {
+		this.usuario = null;
+	}
 	
 }

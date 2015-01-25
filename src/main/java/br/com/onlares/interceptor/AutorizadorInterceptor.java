@@ -10,7 +10,7 @@ import br.com.caelum.vraptor.controller.ControllerMethod;
 import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
 import br.com.onlares.annotations.Public;
 import br.com.onlares.controller.LoginController;
-import br.com.onlares.model.UsuarioLogado;
+import br.com.onlares.controller.UsuarioLogado;
 
 @Intercepts
 public class AutorizadorInterceptor {

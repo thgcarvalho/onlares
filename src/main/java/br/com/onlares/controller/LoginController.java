@@ -11,7 +11,6 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Public;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Usuario;
-import br.com.onlares.model.UsuarioLogado;
 
 @Controller
 public class LoginController {
@@ -46,13 +45,18 @@ public class LoginController {
 	@Post
 	@Public
 	public void auth(Usuario usuario) {
-		System.out.println("Usuario Existe? " + dao.existe(usuario));
 		if (!dao.existe(usuario)) {
 			validator.add(new I18nMessage("login", "login.invalido"));
 			validator.onErrorUsePageOf(this).form();
 		} 
 		usuarioLogado.setUsuario(usuario);
-		result.redirectTo(PagesController.class).index();
+		result.redirectTo(DashboardController.class).index();
+	}
+	
+	@Get("/logout")
+	public void sair() {
+		usuarioLogado.logout();
+		result.redirectTo(this).login();
 	}
 
 }

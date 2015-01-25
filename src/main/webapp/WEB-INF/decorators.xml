@@ -2,6 +2,6 @@
 
 <decorators defaultdir="/templates">
 	<decorator name="main" page="template_principal.jsp">
-		<pattern>/pages/teste*</pattern>
+		<pattern>/dashboard/*</pattern>
 	</decorator>
 </decorators>

@@ -4,7 +4,6 @@ import javax.enterprise.event.Observes;
 import javax.persistence.EntityManager;
 
 import br.com.caelum.vraptor.events.VRaptorInitialized;
-import br.com.onlares.model.Produto;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.util.JPAUtil;
 
@@ -26,10 +25,6 @@ public class InitialDataObserver {
 
 		em.persist(new Usuario("onlares@onlares.com.br", "onlares"));
 
-		em.persist(new Produto("Produto 01", 100.99, 2));
-		em.persist(new Produto("Produto 02", 10.99, 4));
-		em.persist(new Produto("Produto 03", 1.99, 6));
-		
 		em.getTransaction().commit();
 		em.close();
 	}	
