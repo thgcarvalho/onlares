@@ -20,8 +20,6 @@ public class UsuarioDao {
 	}
 	
 	public boolean existe(Usuario usuario) {
-		System.out.println(usuario.getEmail());
-		System.out.println(usuario.getSenha());
 		return !em.createQuery("select u from Usuario u where u.email = "
 			+ ":email and u.senha = :senha", Usuario.class)
 			.setParameter("email", usuario.getEmail())
