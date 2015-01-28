@@ -16,10 +16,10 @@
                  <!-- /input-group -->
              </li>
              <li>
-                 <a href="index"><i class="fa fa-home fa-fw"></i> Home</a>
+                 <a href="${ctx}/dashboard/index"><i class="fa fa-home fa-fw"></i> Home</a>
              </li>
              <li>
-                 <a href="#"><i class="fa fa-group fa-fw"></i> Moradores</a>
+                 <a href="${ctx}/morador/lista"><i class="fa fa-group fa-fw"></i> Moradores</a>
              </li>
              <li>
                  <a href="#"><i class="fa fa-book fa-fw"></i> Reservas<span class="fa arrow"></span></a>
@@ -49,7 +49,7 @@
                  <!-- /.nav-second-level -->
              </li>
              <li>
-                 <a href="#"><i class="fa fa-book fa-fw"></i> Portaría<span class="fa arrow"></span></a>
+                 <a href="#"><i class="fa fa-sign-out fa-fw"></i> Portaría<span class="fa arrow"></span></a>
                  <ul class="nav nav-second-level">
                      <li>
                          <a href="#">Entradas</a>

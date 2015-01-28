@@ -2,9 +2,11 @@ package br.com.onlares.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,18 +23,24 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private String nome;
+	private String tipo;
 	@Column(name="alertas_por_email")
 	private boolean alertasPorEmail;
-	@OneToOne
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "condominio_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private Condominio condominio;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "endereco_id", referencedColumnName = "id", insertable = false, updatable = false)
+	private Endereco endereco;
 
 	public Usuario() {
 		
 	}
 	
-	public Usuario(String email, String senha) {
+	public Usuario(String email, String senha, String nome) {
 		this.email = email;
 		this.senha = senha;
+		this.nome = nome;
 	}
 	
 	public Long getId() {
@@ -67,6 +75,14 @@ public class Usuario {
 		this.nome = nome;
 	}
 	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 	public boolean isAlertasPorEmail() {
 		return alertasPorEmail;
 	}
@@ -82,5 +98,12 @@ public class Usuario {
 	public void setCondominio(Condominio condominio) {
 		this.condominio = condominio;
 	}
-
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 }

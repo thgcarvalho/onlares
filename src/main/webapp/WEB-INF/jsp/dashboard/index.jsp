@@ -1,3 +1,6 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@ include file="/templates/jstl.jsp" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -28,7 +31,7 @@
 
 	<div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Dashboard</h1>
+            <h1 class="page-header">${usuarioLogado} -${usuarioLogado.usuario.nome} - ${usuarioLogado.usuario.condominio.nome}</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
