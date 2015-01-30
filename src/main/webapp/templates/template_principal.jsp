@@ -13,20 +13,13 @@
 <body class="no-skin">
 
 	<div id="navbar" class="navbar navbar-default">
-		<script type="text/javascript">
-			try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-		</script>
 		<!-- Top -->
 		<%@ include file="/templates/header.jsp"%>
 	</div>
 	
 	<div class="main-container" id="main-container">
-		<script type="text/javascript">
-			try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-		</script>
 		<!-- Menu -->
 		<%@ include file="/templates/menu.jsp"%>
-	
 	
 		<!-- Page Content -->
 	    <div class="main-content">

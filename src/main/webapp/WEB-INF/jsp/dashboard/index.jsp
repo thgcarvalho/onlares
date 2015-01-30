@@ -5,9 +5,6 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-	<title>Blank Page - Ace Admin</title>
-
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
@@ -54,15 +51,10 @@
 		</script>
 
 		<ul class="breadcrumb">
-			<li>
+			<li class="active">
 				<i class="ace-icon fa fa-home home-icon"></i>
 				<a href="#">Home</a>
 			</li>
-
-			<li>
-				<a href="#">Other Pages</a>
-			</li>
-			<li class="active">Blank Page</li>
 		</ul><!-- /.breadcrumb -->
 
 		<div class="nav-search" id="nav-search">
