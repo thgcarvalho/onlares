@@ -10,32 +10,35 @@
 	<!-- head que muda! -->
 	<decorator:head />
 </head>
-<body>
-	<div id="wrapper">
+<body class="no-skin">
 
-		<!-- Navigation -->
-		<nav class="navbar navbar-default navbar-static-top" role="navigation"
-			style="margin-bottom: 0">
-
-			<%@ include file="/templates/header.jsp"%>
-			
-			<%@ include file="/templates/menu.jsp"%>
-
-		</nav>
-		
+	<div id="navbar" class="navbar navbar-default">
+		<script type="text/javascript">
+			try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+		</script>
+		<!-- Top -->
+		<%@ include file="/templates/header.jsp"%>
+	</div>
+	
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+		</script>
+		<!-- Menu -->
+		<%@ include file="/templates/menu.jsp"%>
+	
+	
 		<!-- Page Content -->
-        <div id="page-wrapper">
-        
+	    <div class="main-content">
 	        <%@ include file="/templates/messages.jsp"%>
 			<!-- body que muda! -->
 			<decorator:body />
-			
-        </div>
-        <!-- /#page-wrapper -->
-
+		</div>
+	
+		<%@ include file="/templates/footer.jsp"%>
 	</div>
-
-	<%@ include file="/templates/footer.jsp"%>
+	
+	<decorator:getProperty property="page.local_script"></decorator:getProperty>
 
 </body>
 </html>
