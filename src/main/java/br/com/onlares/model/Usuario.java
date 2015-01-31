@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,9 +18,9 @@ import javax.persistence.Table;
 @Table(name = "usuario")
 public class Usuario {
 
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String email;
 	private String senha;
 	private String nome;
@@ -27,10 +28,10 @@ public class Usuario {
 	@Column(name="alertas_por_email")
 	private boolean alertasPorEmail;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "condominio_id", referencedColumnName = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "condominio_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private Condominio condominio;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "endereco_id", referencedColumnName = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "endereco_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private Endereco endereco;
 
 	public Usuario() {

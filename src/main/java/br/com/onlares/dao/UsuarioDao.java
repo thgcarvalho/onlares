@@ -2,6 +2,7 @@ package br.com.onlares.dao;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import br.com.onlares.model.Usuario;
 
@@ -17,6 +18,13 @@ public class UsuarioDao {
 	@Deprecated
 	public UsuarioDao() {
 		this(null); // para uso do CDI
+	}
+	
+	public Usuario buscaPorEmail(String email) {
+		String strQuery = "SELECT u FROM Usuario u WHERE u.email = :email";
+		Query query = em.createQuery(strQuery, Usuario.class);
+		query.setParameter("email", email);
+		return (Usuario) query.getSingleResult();
 	}
 	
 	public boolean existe(Usuario usuario) {

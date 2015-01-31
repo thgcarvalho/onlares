@@ -49,7 +49,8 @@ public class LoginController {
 			validator.add(new I18nMessage("login", "login.invalido"));
 			validator.onErrorUsePageOf(this).form();
 		} 
-		usuarioLogado.setUsuario(usuario);
+		Usuario usuarioDB = dao.buscaPorEmail(usuario.getEmail());
+		usuarioLogado.setUsuario(usuarioDB);
 		result.redirectTo(DashboardController.class).index();
 	}
 	
