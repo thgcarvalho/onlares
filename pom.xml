@@ -16,6 +16,24 @@
 
 	<dependencies>
 	
+		<!-- ********************* -->
+		<!--   TEST DEPENDENCIES   -->
+		<!-- ********************* -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.8.4</version>
+			<scope>test</scope>
+		</dependency>
+	
 		<!-- ************************ -->
 		<!--   VRAPTOR DEPENDENCIES   -->
 		<!-- ************************ -->
@@ -61,6 +79,12 @@
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>2.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
 		</dependency>
 
 		<dependency>
