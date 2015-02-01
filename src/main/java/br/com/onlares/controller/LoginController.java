@@ -54,4 +54,8 @@ public class LoginController {
 		result.redirectTo(this).login();
 	}
 
+	public UsuarioLogado getUsuarioLogado() {
+		return usuarioLogado;
+	}
+
 }
