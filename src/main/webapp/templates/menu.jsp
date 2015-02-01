@@ -13,19 +13,19 @@
 	<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 		<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 			<button class="btn btn-success">
-				<i class="ace-icon fa fa-signal"></i>
+				<i class="ace-icon fa fa-phone"></i>
 			</button>
 
 			<button class="btn btn-info">
-				<i class="ace-icon fa fa-pencil"></i>
-			</button>
-
-			<button class="btn btn-warning">
 				<i class="ace-icon fa fa-users"></i>
 			</button>
 
+			<button class="btn btn-warning">
+				<i class="ace-icon fa fa-calendar"></i>
+			</button>
+
 			<button class="btn btn-danger">
-				<i class="ace-icon fa fa-cogs"></i>
+				<i class="ace-icon fa fa-warning"></i>
 			</button>
 		</div>
 
@@ -52,7 +52,7 @@
 		
 		<li class="">
 			<a href="${ctx}/morador/lista">
-				<i class="menu-icon fa fa-home"></i>
+				<i class="menu-icon fa fa-users"></i>
 				<span class="menu-text"> Moradores </span>
 			</a>
 
@@ -71,7 +71,7 @@
 
 			<ul class="submenu">
 				<li class="">
-					<a href="tables.html">
+					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Deck
 					</a>
@@ -80,7 +80,7 @@
 				</li>
 
 				<li class="">
-					<a href="jqgrid.html">
+					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Salão de Festas
 					</a>
@@ -102,7 +102,7 @@
 
 			<ul class="submenu">
 				<li class="">
-					<a href="form-elements.html">
+					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Visitantes
 					</a>
@@ -111,7 +111,7 @@
 				</li>
 
 				<li class="">
-					<a href="form-elements-2.html">
+					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Obras
 					</a>
@@ -120,7 +120,7 @@
 				</li>
 
 				<li class="">
-					<a href="form-wizard.html">
+					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Mudanças
 					</a>
@@ -131,7 +131,7 @@
 		</li>
 
 		<li class="">
-			<a href="widgets.html">
+			<a href="#">
 				<i class="menu-icon fa fa-envelope-o"></i>
 				<span class="menu-text"> Correspondências </span>
 			</a>
@@ -140,7 +140,7 @@
 		</li>
 
 		<li class="">
-			<a href="calendar.html">
+			<a href="#">
 				<i class="menu-icon fa fa-calendar"></i>
 
 				<span class="menu-text">
@@ -156,7 +156,7 @@
 		</li>
 		
 		<li class="">
-			<a href="gallery.html">
+			<a href="#">
 				<i class="menu-icon fa fa-comment-o"></i>
 				<span class="menu-text"> Mensagens </span>
 			</a>
@@ -165,7 +165,7 @@
 		</li>
 
 		<li class="">
-			<a href="gallery.html">
+			<a href="#">
 				<i class="menu-icon fa fa-warning"></i>
 				<span class="menu-text"> Avisos </span>
 			</a>
@@ -174,7 +174,7 @@
 		</li>
 
 		<li class="">
-			<a href="gallery.html">
+			<a href="#">
 				<i class="menu-icon fa fa-comments"></i>
 				<span class="menu-text"> Enquetes </span>
 			</a>
@@ -183,7 +183,7 @@
 		</li>
 
 		<li class="">
-			<a href="gallery.html">
+			<a href="#">
 				<i class="menu-icon fa fa-files-o"></i>
 				<span class="menu-text"> Documentos </span>
 			</a>
@@ -192,7 +192,7 @@
 		</li>
 		
 		<li class="">
-			<a href="gallery.html">
+			<a href="#">
 				<i class="menu-icon fa fa-phone"></i>
 				<span class="menu-text"> Fornecedores </span>
 			</a>

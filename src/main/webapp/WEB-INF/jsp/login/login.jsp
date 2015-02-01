@@ -4,33 +4,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="description" content="User login page" />
+	<meta name="description" content="Login" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
 	<!-- bootstrap & fontawesome -->
-	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="../assets/font-awesome/4.2.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
 
 	<!-- text fonts -->
-	<link rel="stylesheet" href="../assets/fonts/fonts.googleapis.com.css" />
+	<link rel="stylesheet" href="${ctx}/assets/fonts/fonts.googleapis.com.css" />
 
 	<!-- ace styles -->
-	<link rel="stylesheet" href="../assets/css/ace.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/ace.min.css" />
 
 	<!--[if lte IE 9]>
-		<link rel="stylesheet" href="../assets/css/ace-part2.min.css" />
+		<link rel="stylesheet" href="${ctx}/assets/css/ace-part2.min.css" />
 	<![endif]-->
-	<link rel="stylesheet" href="../assets/css/ace-rtl.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/ace-rtl.min.css" />
 
 	<!--[if lte IE 9]>
-	  <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
+	  <link rel="stylesheet" href="${ctx}/assets/css/ace-ie.min.css" />
 	<![endif]-->
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
 	<!--[if lt IE 9]>
-	<script src="../assets/js/html5shiv.min.js"></script>
-	<script src="../assets/js/respond.min.js"></script>
+	<script src="${ctx}/assets/js/html5shiv.min.js"></script>
+	<script src="${ctx}/assets/js/respond.min.js"></script>
 	<![endif]-->
 </head>
 
@@ -46,11 +46,10 @@
 						<div class="login-container">
 							<div class="center">
 								<h1>
-									<i class="ace-icon fa fa-leaf green"></i>
-									<span class="red">Ace</span>
-									<span class="white" id="id-text2" class="grey" >Application</span>
+									<i class="ace-icon fa fa-home green"></i>
+									<span class="blue">OnLares</span>
 								</h1>
-								<h4 class="blue" id="id-company-text" class="blue" >&copy; Company Name</h4>
+								<h4 class="blue" id="id-company-text" class="blue" >&copy; GranDev</h4>
 							</div>
 
 							<div class="space-6"></div>
@@ -246,28 +245,28 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-		<script src="../assets/js/jquery.2.1.1.min.js"></script>
+		<script src="${ctx}/assets/js/jquery.2.1.1.min.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="../assets/js/jquery.1.11.1.min.js"></script>
+<script src="${ctx}/assets/js/jquery.1.11.1.min.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='../assets/js/jquery.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='${ctx}/assets/js/jquery.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='../assets/js/jquery1x.min.js'>"+"<"+"/script>");
+ window.jQuery || document.write("<script src='${ctx}/assets/js/jquery1x.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if('ontouchstart' in document.documentElement) document.write("<script src='${ctx}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- inline scripts related to this page -->

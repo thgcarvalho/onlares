@@ -19,8 +19,8 @@
 	<div class="navbar-header pull-left">
 		<a href="index.html" class="navbar-brand">
 			<small>
-				<i class="fa fa-leaf"></i>
-				Ace Admin
+				<i class="fa fa-home"></i>
+				OnLares
 			</small>
 		</a>
 	</div>
@@ -188,7 +188,7 @@
 						<ul class="dropdown-menu dropdown-navbar">
 							<li>
 								<a href="#" class="clearfix">
-									<img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+									<img src="../assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Alex:</span>
@@ -205,7 +205,7 @@
 
 							<li>
 								<a href="#" class="clearfix">
-									<img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+									<img src="../assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Susan:</span>
@@ -222,7 +222,7 @@
 
 							<li>
 								<a href="#" class="clearfix">
-									<img src="assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+									<img src="../assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Bob:</span>
@@ -239,7 +239,7 @@
 
 							<li>
 								<a href="#" class="clearfix">
-									<img src="assets/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+									<img src="../assets/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Kate:</span>
@@ -256,7 +256,7 @@
 
 							<li>
 								<a href="#" class="clearfix">
-									<img src="assets/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+									<img src="../assets/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Fred:</span>
@@ -284,10 +284,10 @@
 
 			<li class="light-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-					<img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
+					<img class="nav-user-photo" src="../assets/avatars/avatar2.png" alt="Usuário" />
 					<span class="user-info">
-						<small>Welcome,</small>
-						Jason
+						<small>Bem vindo,</small>
+						${usuarioLogado.usuario.nome}
 					</span>
 
 					<i class="ace-icon fa fa-caret-down"></i>
@@ -297,23 +297,23 @@
 					<li>
 						<a href="#">
 							<i class="ace-icon fa fa-cog"></i>
-							Settings
+							Configurações
 						</a>
 					</li>
 
 					<li>
 						<a href="profile.html">
 							<i class="ace-icon fa fa-user"></i>
-							Profile
+							Perfil
 						</a>
 					</li>
 
 					<li class="divider"></li>
 
 					<li>
-						<a href="#">
+						<a href="${ctx}/logout">
 							<i class="ace-icon fa fa-power-off"></i>
-							Logout
+							Sair
 						</a>
 					</li>
 				</ul>

@@ -32,22 +32,16 @@ public class LoginController {
 		this(null, null, null, null);
 	}
 
-	@Get
-	@Public
-	public void form() {
-
-	}
-	
 	@Get("/login")
 	@Public
 	public void login() { }
 
-	@Post
+	@Post("/auth")
 	@Public
 	public void auth(Usuario usuario) {
 		if (!dao.existe(usuario)) {
 			validator.add(new I18nMessage("login", "login.invalido"));
-			validator.onErrorUsePageOf(this).form();
+			validator.onErrorUsePageOf(this).login();
 		} 
 		Usuario usuarioDB = dao.buscaPorEmail(usuario.getEmail());
 		usuarioLogado.setUsuario(usuarioDB);
