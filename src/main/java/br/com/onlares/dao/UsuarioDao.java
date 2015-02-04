@@ -38,5 +38,9 @@ public class UsuarioDao {
 	public void salva(Usuario usuario) {
 		em.persist(usuario);
 	}
+	
+	public void edita(Usuario usuario) {
+		em.merge(usuario);
+	}
 
 }

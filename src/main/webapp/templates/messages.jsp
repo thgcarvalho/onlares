@@ -3,12 +3,14 @@
 
 <!-- Error Messages -->
 <c:if test="${not empty errors}">
-	<div class="alert alert-error">
-		<button type="button" class="close" data-dismiss="alert">×</button>
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert">
+			<i class="ace-icon fa fa-times"></i>
+		</button>
 		<h4>Erro(s):</h4>
 		<ul class="clearfix">
 			<c:forEach items="${errors}" var="error">
-				<li><strong>${error.category}</strong> - ${error.message}</li>
+				<li><strong><i class="ace-icon fa fa-times"></i> ${error.category}</strong> - ${error.message}</li>
 			</c:forEach>
 		</ul>
 	</div>
@@ -20,3 +22,7 @@
 		${notice}
 	</div>
 </c:if>
+
+<script type="text/javascript">
+	var $path_assets = "dist";//this will be used in gritter alerts containing images
+</script>

@@ -28,6 +28,7 @@ public class LoginController {
 		this.usuarioLogado = usuarioLogado;
 	}
 	
+	@Deprecated
 	public LoginController() {
 		this(null, null, null, null);
 	}

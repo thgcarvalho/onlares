@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author Thiago Carvalho
@@ -20,6 +21,10 @@ public class AlteraSenha implements Serializable {
 	private String codigo;
 	private String email;
 	private String status;
+	@Transient
+	private String novaSenha;
+	@Transient
+	private String repeticaoDeNovaSenha;
 	
 	public String getCodigo() {
 		return codigo;
@@ -38,5 +43,17 @@ public class AlteraSenha implements Serializable {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getNovaSenha() {
+		return novaSenha;
+	}
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
+	}
+	public String setRepeticaoDeNovaSenha() {
+		return repeticaoDeNovaSenha;
+	}
+	public void setRepeticaoDeNovaSenha(String repeticaoDeNovaSenha) {
+		this.repeticaoDeNovaSenha = repeticaoDeNovaSenha;
 	}
 }

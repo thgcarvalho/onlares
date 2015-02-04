@@ -35,9 +35,7 @@
 </head>
 
 	<body class="login-layout light-login">
-		<c:forEach items="${errors}" var="erro">
-			${erro.category} - ${erro.message} <br/>
-		</c:forEach>
+		<%@ include file="/templates/messages.jsp"%>
 	
 		<div class="main-container">
 			<div class="main-content">
@@ -142,7 +140,7 @@
 
 													<div class="clearfix">
 														<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
-															<i class="ace-icon fa fa-lightbulb-o"></i>
+															<i class="ace-icon glyphicon glyphicon-ok"></i>
 															<span class="bigger-110">Enviar!</span>
 														</button>
 													</div>
