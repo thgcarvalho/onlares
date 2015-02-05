@@ -14,9 +14,9 @@
 			<property name="hibernate.connection.username" value="postgres" />
 			<property name="hibernate.connection.password" value="postgres" />
 			
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="update" /> -->
 			
-			<!--Configuracoes de pool de conexões -->
+			<!-- Configuracoes de pool de conexões -->
 			<property name="hibernate.c3p0.min_size" value="5" />
 			<property name="hibernate.c3p0.max_size" value="20" />
 			<property name="hibernate.c3p0.timeout" value="300" />

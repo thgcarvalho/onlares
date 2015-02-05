@@ -1,7 +1,5 @@
 package br.com.onlares.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,9 +11,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "altera_senha")
-public class AlteraSenha implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class AlteraSenha {
 
 	@Id
 	private String codigo;
@@ -24,7 +20,17 @@ public class AlteraSenha implements Serializable {
 	@Transient
 	private String novaSenha;
 	@Transient
-	private String repeticaoDeNovaSenha;
+	private String confirmacaoDeNovaSenha;
+	
+	public AlteraSenha() {
+	}
+	
+	
+	public AlteraSenha(String codigo, String email, String status) {
+		this.codigo = codigo;
+		this.email = email;
+		this.status = status;
+	}
 	
 	public String getCodigo() {
 		return codigo;
@@ -50,10 +56,11 @@ public class AlteraSenha implements Serializable {
 	public void setNovaSenha(String novaSenha) {
 		this.novaSenha = novaSenha;
 	}
-	public String setRepeticaoDeNovaSenha() {
-		return repeticaoDeNovaSenha;
+	public String getConfirmacaoDeNovaSenha() {
+		return confirmacaoDeNovaSenha;
 	}
-	public void setRepeticaoDeNovaSenha(String repeticaoDeNovaSenha) {
-		this.repeticaoDeNovaSenha = repeticaoDeNovaSenha;
+	public void setConfirmacaoDeNovaSenha(String confirmacaoDeNovaSenha) {
+		this.confirmacaoDeNovaSenha = confirmacaoDeNovaSenha;
 	}
+	
 }

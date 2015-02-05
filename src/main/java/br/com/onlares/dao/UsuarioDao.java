@@ -36,11 +36,15 @@ public class UsuarioDao {
 	}
 
 	public void salva(Usuario usuario) {
+		em.getTransaction().begin();
 		em.persist(usuario);
+		em.getTransaction().commit();
 	}
 	
 	public void edita(Usuario usuario) {
+		em.getTransaction().begin();
 		em.merge(usuario);
+		em.getTransaction().commit();
 	}
 
 }

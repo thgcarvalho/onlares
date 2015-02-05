@@ -58,13 +58,13 @@
 									<div class="widget-body">
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
-												Alteração de Senha ${alteraSenha.codigo}
+												Formulário de alteração de senha
 											</h4>
 
 											<div class="space-6"></div>
 
 											<form action="${ctx}/alteraSenha/altera" method="post">
-									
+												<input type="hidden" name="alteraSenha.codigo" value="${codigo}" />
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -77,7 +77,7 @@
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
 															<input type="password" class="form-control" placeholder="Repita a Nova Senha"
-															 name="alteraSenha.repeticaoDeNovaSenha" />
+								 							 name="alteraSenha.confirmacaoDeNovaSenha" />
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
 													</label>
