@@ -2,10 +2,16 @@ package br.com.onlares.controller;
 
 import javax.inject.Inject;
 
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.simplemail.Mailer;
 import br.com.caelum.vraptor.validator.Severity;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
@@ -24,6 +30,8 @@ public class AlteraSenhaController {
 	
 	private static final String STATUS_SENHA_NAO_ALTERADA = "0";
 	private static final String STATUS_SENHA_ALTERADA = "1";
+	
+	//private final Mailer mailer;
 	private final UsuarioDao usuarioDao;
 	private final AlteraSenhaDao alteraSenhaDao;
 	private final Validator validator;
@@ -31,6 +39,7 @@ public class AlteraSenhaController {
 
 	@Inject
 	public AlteraSenhaController(UsuarioDao usuarioDao, AlteraSenhaDao alteraSenhaDao, Validator validator, Result result) {
+		//this.mailer = mailer;
 		this.usuarioDao = usuarioDao;
 		this.alteraSenhaDao = alteraSenhaDao;
 		this.validator = validator;
@@ -41,6 +50,16 @@ public class AlteraSenhaController {
 	public AlteraSenhaController() {
 		this(null, null, null, null);
 	}
+	
+    @Path("/alteraSenha/enviar")
+    @Post
+    public void enviar() throws EmailException {
+        Email email = new SimpleEmail();
+        email.setSubject("Your new password");
+        email.addTo("thg.exe@gmail.com");
+        email.setMsg("TESTE");
+       // mailer.send(email); // Hostname, port and security settings are made by the Mailer
+    }
 	
 	@Get("/alteraSenha")
 	@Public
