@@ -107,10 +107,12 @@
 											</div>
 
 											<div>
+											<!-- 
 												<a href="#" data-target="#signup-box" class="user-signup-link">
 													Primeiro acesso
 													<i class="ace-icon fa fa-arrow-right"></i>
 												</a>
+											 -->
 											</div>
 										</div>
 									</div><!-- /.widget-body -->
@@ -129,17 +131,17 @@
 												Insira seu email para receber as instruções
 											</p>
 
-											<form>
+											<form action="${ctx}/alteraSenha/enviaCodigo" method="post" >
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
+															<input type="email" class="form-control" placeholder="Email" name="emailDoUsuario" autofocus />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
 													</label>
 
 													<div class="clearfix">
-														<button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+														<button type="submit" class="width-35 pull-right btn btn-sm btn-danger">
 															<i class="ace-icon glyphicon glyphicon-ok"></i>
 															<span class="bigger-110">Enviar!</span>
 														</button>

@@ -7,7 +7,6 @@
 		<button type="button" class="close" data-dismiss="alert">
 			<i class="ace-icon fa fa-times"></i>
 		</button>
-		<h4>Erro(s):</h4>
 		<ul class="clearfix">
 			<c:forEach items="${errors}" var="error">
 				<li><strong><i class="ace-icon fa fa-times"></i> ${error.category}</strong> - ${error.message}</li>
