@@ -4,9 +4,9 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 
 @Controller
-public class DashboardController {
+public class HomeController {
 	
-	@Get("/dashboard/index")
+	@Get("/home/index")
 	public void index() {
 
 	}

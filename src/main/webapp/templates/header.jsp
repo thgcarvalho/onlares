@@ -17,7 +17,7 @@
 	</button>
 
 	<div class="navbar-header pull-left">
-		<a href="index.html" class="navbar-brand">
+		<a href="${ctx}/home/index" class="navbar-brand">
 			<small>
 				<i class="fa fa-home"></i>
 				OnLares

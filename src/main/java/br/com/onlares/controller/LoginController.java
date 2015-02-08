@@ -46,7 +46,7 @@ public class LoginController {
 		} 
 		Usuario usuarioDB = dao.buscaPorEmail(usuario.getEmail());
 		usuarioLogado.setUsuario(usuarioDB);
-		result.redirectTo(DashboardController.class).index();
+		result.redirectTo(HomeController.class).index();
 	}
 	
 	@Get("/logout")

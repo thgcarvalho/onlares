@@ -42,7 +42,7 @@
 
 	<ul class="nav nav-list">
 		<li class="">
-			<a href="${ctx}/dashboard/index">
+			<a href="${ctx}/home/index">
 				<i class="menu-icon fa fa-home"></i>
 				<span class="menu-text"> Home </span>
 			</a>

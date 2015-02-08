@@ -53,7 +53,7 @@
 		<ul class="breadcrumb">
 			<li>
 				<i class="ace-icon fa fa-home home-icon"></i>
-				<a href="#">Home</a>
+				<a href="${ctx}/home/index">Home</a>
 			</li>
 
 			<li class="active">Moradores</li>

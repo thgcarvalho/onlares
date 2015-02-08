@@ -9,14 +9,12 @@ import org.apache.commons.mail.SimpleEmail;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.simplemail.Mailer;
 import br.com.caelum.vraptor.validator.Severity;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.caelum.vraptor.view.Results;
 import br.com.onlares.annotations.Public;
 import br.com.onlares.dao.AlteraSenhaDao;
 import br.com.onlares.dao.UsuarioDao;
@@ -79,7 +77,7 @@ public class AlteraSenhaController {
         email.setSubject("Instruções para Nova Senha");
         email.addTo("thg.exe@gmail.com");
         email.setMsg("TESTE");
-        //mailer.send(email);
+        mailer.send(email);
         
         result.include("notice", "Um email com as instruções foi enviado para " + emailDoUsuario);
 		result.redirectTo(LoginController.class).login();
