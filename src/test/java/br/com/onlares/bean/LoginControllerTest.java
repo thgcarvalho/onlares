@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.security.NoSuchAlgorithmException;
+
 import org.junit.Test;
 
 import br.com.caelum.vraptor.Result;
@@ -46,7 +48,7 @@ public class LoginControllerTest {
 	}
 	
 	@Test(expected=ValidationException.class)  
-	public void deveDarErroDeValidacaoCasoUsuarioNaoExista() {
+	public void deveDarErroDeValidacaoCasoUsuarioNaoExista() throws NoSuchAlgorithmException {
 		UsuarioDao daoFalso = mock(UsuarioDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();

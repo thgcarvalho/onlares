@@ -1,10 +1,13 @@
 package br.com.onlares.dao;
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.onlares.model.Usuario;
+import br.com.onlares.util.MD5Hashing;
 
 public class UsuarioDao {
 
@@ -27,11 +30,11 @@ public class UsuarioDao {
 		return (Usuario) query.getSingleResult();
 	}
 	
-	public boolean existe(Usuario usuario) {
+	public boolean existe(Usuario usuario) throws NoSuchAlgorithmException {
 		return !em.createQuery("select u from Usuario u where u.email = "
 			+ ":email and u.senha = :senha", Usuario.class)
 			.setParameter("email", usuario.getEmail())
-			.setParameter("senha", usuario.getSenha())
+			.setParameter("senha", MD5Hashing.convertStringToMd5(usuario.getSenha()))
 			.getResultList().isEmpty();
 	}
 

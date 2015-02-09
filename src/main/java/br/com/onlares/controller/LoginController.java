@@ -7,6 +7,8 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
+import br.com.caelum.vraptor.validator.Severity;
+import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Public;
 import br.com.onlares.dao.UsuarioDao;
@@ -40,8 +42,14 @@ public class LoginController {
 	@Post("/auth")
 	@Public
 	public void auth(Usuario usuario) {
-		if (!dao.existe(usuario)) {
-			validator.add(new I18nMessage("login", "login.invalido"));
+		try {
+			if (!dao.existe(usuario)) {
+				validator.add(new I18nMessage("login", "login.invalido"));
+				validator.onErrorUsePageOf(this).login();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			validator.add(new SimpleMessage("login", e.getMessage(), Severity.ERROR));
 			validator.onErrorUsePageOf(this).login();
 		} 
 		Usuario usuarioDB = dao.buscaPorEmail(usuario.getEmail());

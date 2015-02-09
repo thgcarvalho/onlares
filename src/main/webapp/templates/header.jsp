@@ -18,10 +18,7 @@
 
 	<div class="navbar-header pull-left">
 		<a href="${ctx}/home/index" class="navbar-brand">
-			<small>
-				<i class="fa fa-home"></i>
-				OnLares
-			</small>
+			<img alt="OnLares" src="${ctx}/images/onlares_branco.png" height="28">
 		</a>
 	</div>
 

@@ -21,6 +21,7 @@ import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.AlteraSenha;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.service.GeradorDeCodigo;
+import br.com.onlares.util.MD5Hashing;
 
 /**
  * @author Thiago Carvalho
@@ -139,7 +140,7 @@ public class AlteraSenhaController {
 				email = alteraSenhaDB.getEmail();
 				usuarioDB = usuarioDao.buscaPorEmail(email);
 				// Atualiza usuario
-				usuarioDB.setSenha(novaSenha); // TODO adicionar MD5
+				usuarioDB.setSenha(MD5Hashing.convertStringToMd5(novaSenha));
 				usuarioDao.edita(usuarioDB);
 				// Atualiza alteraSenha
 				alteraSenhaDB.setStatus(STATUS_SENHA_ALTERADA);

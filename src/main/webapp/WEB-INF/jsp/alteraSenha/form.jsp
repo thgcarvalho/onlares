@@ -43,11 +43,10 @@
 				<div class="row">
 					<div class="col-sm-10 col-sm-offset-1">
 						<div class="login-container">
+							<br />
+							<br />
 							<div class="center">
-								<h1>
-									<i class="ace-icon fa fa-home green"></i>
-									<span class="blue">OnLares</span>
-								</h1>
+								<img alt="OnLares" src="${ctx}/images/onlares.png" height="90">
 								<h4 class="blue" id="id-company-text" class="blue" >&copy; GranDev</h4>
 							</div>
 
@@ -58,7 +57,7 @@
 									<div class="widget-body">
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
-												Formulário de alteração de senha
+												Redefinição de senha
 											</h4>
 
 											<div class="space-6"></div>
