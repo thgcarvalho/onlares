@@ -33,7 +33,7 @@ public class Usuario {
 	private Condominio condominio;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id", insertable = true, updatable = true)
-	private Endereco endereco;
+	private Unidade endereco;
 
 	public Usuario() {
 		
@@ -101,11 +101,11 @@ public class Usuario {
 		this.condominio = condominio;
 	}
 	
-	public Endereco getEndereco() {
+	public Unidade getEndereco() {
 		return endereco;
 	}
 	
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(Unidade endereco) {
 		this.endereco = endereco;
 	}
 }

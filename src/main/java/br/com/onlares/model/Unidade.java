@@ -13,8 +13,8 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "endereco")
-public class Endereco implements Serializable {
+@Table(name = "unidade")
+public class Unidade implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
