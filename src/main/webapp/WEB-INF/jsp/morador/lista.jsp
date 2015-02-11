@@ -77,8 +77,7 @@
 								<tr>
 									<th>Nome</th>
 									<th>Email</th>
-									<th>Torre</th>
-									<th>Apartamento</th>
+									<th>Unidade</th>
 								</tr>
 							</thead>
 	
@@ -87,8 +86,7 @@
 									<tr>
 										<td>${morador.nome}</td>
 										<td>${morador.email}</td>
-										<td>${morador.endereco.torre}</td>
-										<td>${morador.endereco.apartamento}</td>
+										<td>${morador.unidade.localizacao}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

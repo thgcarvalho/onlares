@@ -46,7 +46,7 @@
 							<br />
 							<br />
 							<div class="center">
-								<img alt="OnLares" src="${ctx}/images/onlares.png" height="90">
+								<img alt="OnLares" src="${ctx}/images/onlares.png" height="70">
 								<h4 class="blue" id="id-company-text" class="blue" >&copy; GranDev</h4>
 							</div>
 

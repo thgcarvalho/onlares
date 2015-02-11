@@ -101,11 +101,11 @@ public class Usuario {
 		this.condominio = condominio;
 	}
 	
-	public Unidade getEndereco() {
+	public Unidade getUnidade() {
 		return unidade;
 	}
 	
-	public void setEndereco(Unidade unidade) {
+	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
 }
