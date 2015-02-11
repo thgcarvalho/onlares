@@ -12,25 +12,13 @@
 
 	<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 		<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-			<button class="btn btn-success">
-				<i class="ace-icon fa fa-phone"></i>
-			</button>
-
 			<button class="btn btn-info">
 				<i class="ace-icon fa fa-users"></i>
-			</button>
-
-			<button class="btn btn-warning">
-				<i class="ace-icon fa fa-calendar"></i>
-			</button>
-
-			<button class="btn btn-danger">
-				<i class="ace-icon fa fa-warning"></i>
 			</button>
 		</div>
 
 		<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-			<span class="btn btn-danger"></span>
+			<span class="btn btn-success"></span>
 		</div>
 	</div><!-- /.sidebar-shortcuts -->
 
@@ -47,7 +35,7 @@
 		<li class="">
 			<a href="${ctx}/morador/lista">
 				<i class="menu-icon fa fa-users"></i>
-				<span class="menu-text"> Moradores </span>
+				<span class="menu-text"> Usuários </span>
 			</a>
 
 			<b class="arrow"></b>

@@ -1,4 +1,4 @@
-package br.com.onlares.controller;
+package br.com.onlares.controller.admin;
 
 import javax.inject.Inject;
 
@@ -8,6 +8,8 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Public;
+import br.com.onlares.controller.HomeController;
+import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Usuario;
 
