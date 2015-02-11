@@ -25,7 +25,7 @@
 	<div class="navbar-buttons navbar-header pull-right" role="navigation">
 		<ul class="nav ace-nav">
 		    <li class="blue">
-				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+				<a data-toggle="dropdown" class="dropdown-toggle" href="${ctx}/admin/test">
 					<i class="ace-icon fa fa-lock"></i>
 				</a>
 			</li>

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <decorators defaultdir="/templates">
+
 	<decorator name="main" page="template_principal.jsp">
 		<pattern>/home/*</pattern>
 		<pattern>/morador/*</pattern>
 	</decorator>
+
+	<decorator name="admin" page="template_admin.jsp">
+		<pattern>/admin/*</pattern>
+	</decorator>
+	
 </decorators>
