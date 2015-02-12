@@ -33,7 +33,7 @@
 		</li>
 		
 		<li class="">
-			<a href="${ctx}/morador/lista">
+			<a href="${ctx}/adminMorador/novo">
 				<i class="menu-icon fa fa-users"></i>
 				<span class="menu-text"> Usuários </span>
 			</a>
