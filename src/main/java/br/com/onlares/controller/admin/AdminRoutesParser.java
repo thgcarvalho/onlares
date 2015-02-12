@@ -1,25 +1,22 @@
-//package br.com.onlares.controller;
+//package br.com.onlares.controller.admin;
 //
 //import javax.enterprise.context.ApplicationScoped;
 //import javax.enterprise.inject.Specializes;
-//import javax.inject.Inject;
 //
 //import br.com.caelum.vraptor.http.route.PathAnnotationRoutesParser;
 //import br.com.caelum.vraptor.http.route.Router;
 //
+///**
+// * @author Thiago Carvalho
+// * 
+// *  Altera a url padrao dos metodos nao anotados dos controllers do vrpator,
+// *  adicionado /admin aos controladores do pacote controller.admin
+// * 
+// */
 //@Specializes
 //@ApplicationScoped
 //public class AdminRoutesParser extends PathAnnotationRoutesParser {
 //
-//	/**
-//	 * @deprecated CDI eyes only
-//	 */
-//	
-//	protected AdminRoutesParser() {
-//		this(null);
-//	}
-//
-//	@Inject
 //	public AdminRoutesParser(Router router) {
 //		super(router);
 //	}
