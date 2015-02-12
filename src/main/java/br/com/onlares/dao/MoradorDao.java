@@ -21,14 +21,6 @@ public class MoradorDao {
 		this(null); // para uso do CDI
 	}
 	
-	public void adiciona(Usuario usuario) {
-		em.persist(usuario);
-	}
-
-	public void remove(Usuario usuario) {
-		em.remove(busca(usuario));
-	}
-
 	public Usuario busca(Usuario usuario) {
 		return em.find(Usuario.class, usuario.getId());
 	}

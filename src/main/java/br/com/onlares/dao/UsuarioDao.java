@@ -1,6 +1,7 @@
 package br.com.onlares.dao;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -23,6 +24,15 @@ public class UsuarioDao {
 		this(null); // para uso do CDI
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Usuario> lista() {
+		return em.createQuery("select u from Usuario u").getResultList();
+	}
+	
+	public Usuario busca(Usuario usuario) {
+		return em.find(Usuario.class, usuario.getId());
+	}
+	
 	public Usuario buscaPorEmail(String email) {
 		String strQuery = "SELECT u FROM Usuario u WHERE u.email = :email";
 		Query query = em.createQuery(strQuery, Usuario.class);
@@ -30,15 +40,22 @@ public class UsuarioDao {
 		return (Usuario) query.getSingleResult();
 	}
 	
-	public boolean existe(Usuario usuario) throws NoSuchAlgorithmException {
+	public boolean loginValido(Usuario usuario) throws NoSuchAlgorithmException {
 		return !em.createQuery("select u from Usuario u where u.email = "
 			+ ":email and u.senha = :senha", Usuario.class)
 			.setParameter("email", usuario.getEmail())
 			.setParameter("senha", MD5Hashing.convertStringToMd5(usuario.getSenha()))
 			.getResultList().isEmpty();
 	}
+	
+	public boolean existe(Usuario usuario) throws NoSuchAlgorithmException {
+		return !em.createQuery("select u from Usuario u where u.email = "
+			+ ":email", Usuario.class)
+			.setParameter("email", usuario.getEmail())
+			.getResultList().isEmpty();
+	}
 
-	public void salva(Usuario usuario) {
+	public void adiciona(Usuario usuario) {
 		em.getTransaction().begin();
 		em.persist(usuario);
 		em.getTransaction().commit();
@@ -47,6 +64,12 @@ public class UsuarioDao {
 	public void edita(Usuario usuario) {
 		em.getTransaction().begin();
 		em.merge(usuario);
+		em.getTransaction().commit();
+	}
+	
+	public void remove(Usuario usuario) {
+		em.getTransaction().begin();
+		em.remove(busca(usuario));
 		em.getTransaction().commit();
 	}
 

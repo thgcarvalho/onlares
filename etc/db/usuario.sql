@@ -7,6 +7,8 @@ CREATE TABLE usuario
   id bigserial NOT NULL,
   alertas_por_email boolean,
   email character varying(45),
+  fone1 character varying(14),
+  fone2 character varying(14),
   nome character varying(60),
   senha character varying(45),
   tipo character varying(45),

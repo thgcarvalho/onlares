@@ -93,6 +93,7 @@
 						</table>
 					</div><!-- /.span -->
 				</div><!-- /.row -->
+				<!-- END PAGE CONTENT -->
 			</div>
 		</div>
 	</div>

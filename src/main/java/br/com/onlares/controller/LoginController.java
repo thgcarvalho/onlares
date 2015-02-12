@@ -43,7 +43,7 @@ public class LoginController {
 	@Public
 	public void auth(Usuario usuario) {
 		try {
-			if (!dao.existe(usuario)) {
+			if (!dao.loginValido(usuario)) {
 				validator.add(new I18nMessage("login", "login.invalido"));
 				validator.onErrorUsePageOf(this).login();
 			}

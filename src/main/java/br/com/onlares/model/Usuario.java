@@ -29,6 +29,8 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	private String nome;
+	private String fone1;
+	private String fone2;
 	private String tipo;
 	@Column(name="alertas_por_email")
 	private boolean alertasPorEmail;
@@ -39,8 +41,9 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "unidade_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private Unidade unidade;
 
+	@Deprecated
 	public Usuario() {
-		
+		this(null, null, null); // para uso do CDI
 	}
 	
 	public Usuario(String email, String senha, String nome) {
@@ -52,63 +55,60 @@ public class Usuario implements Serializable {
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
 	public String getNome() {
 		return nome;
 	}
-
+	public String getFone1() {
+		return fone1;
+	}
+	public void setFone1(String fone1) {
+		this.fone1 = fone1;
+	}
+	public String getFone2() {
+		return fone2;
+	}
+	public void setFone2(String fone2) {
+		this.fone2 = fone2;
+	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 	public String getTipo() {
 		return tipo;
 	}
-
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
 	public boolean isAlertasPorEmail() {
 		return alertasPorEmail;
 	}
-	
 	public void setAlertasPorEmail(boolean alertasPorEmail) {
 		this.alertasPorEmail = alertasPorEmail;
 	}
-	
 	public Condominio getCondominio() {
 		return condominio;
 	}
-	
 	public void setCondominio(Condominio condominio) {
 		this.condominio = condominio;
 	}
-	
 	public Unidade getUnidade() {
 		return unidade;
 	}
-	
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
