@@ -25,8 +25,8 @@
 	<div class="navbar-buttons navbar-header pull-right" role="navigation">
 		<ul class="nav ace-nav">
 		    <li class="blue">
-				<a href="${ctx}/admin/home/index">
-					<i class="ace-icon fa fa-lock"></i>
+				<a href="${ctx}/home/index">
+					<i class="ace-icon fa fa-home"></i>
 				</a>
 			</li>
 		

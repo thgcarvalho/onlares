@@ -12,13 +12,13 @@
 
 	<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 		<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-			<button class="btn btn-info">
-				<i class="ace-icon fa fa-users"></i>
-			</button>
+	
+	
 		</div>
 
 		<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-			<span class="btn btn-success"></span>
+		
+
 		</div>
 	</div><!-- /.sidebar-shortcuts -->
 

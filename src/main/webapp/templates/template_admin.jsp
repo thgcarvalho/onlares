@@ -14,7 +14,7 @@
 
 	<div id="navbar" class="navbar navbar-default">
 		<!-- Top -->
-		<%@ include file="/templates/header.jsp"%>
+		<%@ include file="/templates/header_admin.jsp"%>
 	</div>
 	
 	<div class="main-container" id="main-container">
