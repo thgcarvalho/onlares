@@ -1,11 +1,9 @@
 package br.com.onlares.controller;
 
+import java.lang.reflect.Executable;
+
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
-
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
@@ -18,6 +16,7 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Public;
 import br.com.onlares.dao.AlteraSenhaDao;
 import br.com.onlares.dao.UsuarioDao;
+import br.com.onlares.email.ConfirmarAlteracaoDeEmail;
 import br.com.onlares.model.AlteraSenha;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.service.GeradorDeCodigo;
@@ -57,7 +56,7 @@ public class AlteraSenhaController {
 	
 	@Public
 	@Post("/alteraSenha/enviaCodigo")
-    public void enviaCodigo(String emailDoUsuario) throws EmailException {
+    public void enviaCodigo(String emailDoUsuario) {
 		try {
 			usuarioDao.buscaPorEmail(emailDoUsuario);
 		} catch (NoResultException e) {
@@ -74,12 +73,30 @@ public class AlteraSenhaController {
 		alteraSenha.setStatus(STATUS_SENHA_NAO_ALTERADA);
 		alteraSenhaDao.adiciona(alteraSenha);
 		// Envia email
-        Email email = new SimpleEmail();
-        email.setSubject("Instruções para Nova Senha");
-        email.addTo("thg.exe@gmail.com");
-        email.setMsg("TESTE");
-        mailer.send(email);
-        
+//		try {
+//	        Email email = new SimpleEmail();
+//	        email.setSubject("Instruções para Nova Senha");
+//	        email.addTo("thg.exe@gmail.com");
+//	        email.setMsg("TESTE");
+//	        mailer.send(email);
+//		} catch(EmailException eExp) {
+//			eExp.printStackTrace();	
+//			validator.add(new SimpleMessage("alterasenha.solicita", "Erro ao enviar email!", Severity.ERROR));
+//			validator.onErrorUsePageOf(LoginController.class).login();
+//		}
+		
+		try {
+			ConfirmarAlteracaoDeEmail alteracaoDeEmail = new ConfirmarAlteracaoDeEmail(emailDoUsuario, codigo);
+			if (alteracaoDeEmail.enviar()) {
+				throw new Exception("Falha!");
+			}
+		} catch (Exception exp) {
+			exp.printStackTrace();
+			validator.add(new SimpleMessage("alterasenha.solicita", "Erro ao enviar email!", Severity.ERROR));
+			validator.onErrorUsePageOf(LoginController.class).login();
+		}
+		
+		
         result.include("notice", "Um email com as instruções foi enviado para " + emailDoUsuario);
 		result.redirectTo(LoginController.class).login();
     }

@@ -1,10 +1,5 @@
 //package br.com.onlares.email;
 //
-//import javax.faces.context.FacesContext;
-//import javax.servlet.http.HttpServletRequest;
-//
-//import br.com.onlares.service.EmailService;
-//
 //
 ///**
 // * @author Thiago Carvalho
@@ -38,21 +33,11 @@
 //	}
 //	
 //	public String subject() {
-//		return "Solicita��o de recupera��o de senha";
+//		return "Solicitação de recuperação de senha";
 //	}
 //	
 //	public StringBuffer message() {
 //		StringBuffer message = new StringBuffer();
-//		FacesContext ctx = FacesContext.getCurrentInstance();
-//		HttpServletRequest req = (HttpServletRequest) ctx.getExternalContext().getRequest();
-//		System.out.println(ctx.getExternalContext().getRequestContextPath());
-//		System.out.println(req.getContextPath());
-//		
-//		
-//		FacesContext context = FacesContext.getCurrentInstance();
-//		String appPath = context.getExternalContext().getRealPath("");
-//		System.out.println(appPath);
-//		
 //		message = message.append("Clique no link para realizar a alteração: ");
 //		message = message.append("<a href='http://localhost:8080/onlares/public/alterasenha.jsf?codigo=" + this.codigo + "'>Link de Altera��o</a>");
 //		return message;
