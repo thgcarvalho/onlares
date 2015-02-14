@@ -75,10 +75,12 @@ public class AlteraSenhaController {
 		alteraSenhaDao.adiciona(alteraSenha);
 		// Envia email
 		try {
+			// TODO adicionar html content e context path
 	        Email email = new SimpleEmail();
 	        email.setSubject("Instruções para Nova Senha");
-	        email.addTo("thg.exe@gmail.com");
-	        email.setMsg("TESTE");
+	        email.addTo(emailDoUsuario);
+	        email.setMsg("Clique no link para realizar a alteração: "
+	        		+ "http://localhost:8080/onlares/alteraSenha/codigo/" + codigo );
 	        mailer.send(email);
 		} catch(EmailException eExp) {
 			eExp.printStackTrace();	
@@ -118,7 +120,7 @@ public class AlteraSenhaController {
 			validator.add(new SimpleMessage("alterasenha.altera", "Código inválido!", Severity.ERROR));
 			validator.onErrorUsePageOf(this).index();
 		}
-		
+
 		String codigo = alteraSenha.getCodigo();
 		String novaSenha = alteraSenha.getNovaSenha();
 		String confirmacaoDeNovaSenha = alteraSenha.getConfirmacaoDeNovaSenha();
