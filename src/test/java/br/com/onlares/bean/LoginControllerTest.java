@@ -28,14 +28,9 @@ public class LoginControllerTest {
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
-		Usuario usuarioDB = new Usuario();
-		usuarioDB.setEmail("tcarvalho@onlares.com.br");
-		usuarioDB.setSenha("S3cr3t");
-		usuarioDB.setNome("Thiago Carvalho");
+		Usuario usuarioDB = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", "Thiago Carvalho");
 		
-		Usuario usuarioForm = new Usuario();
-		usuarioForm.setEmail("tcarvalho@onlares.com.br");
-		usuarioForm.setSenha("S3cr3t");
+		Usuario usuarioForm = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", null);
 		
 		when(daoFalso.existe(usuarioForm)).thenReturn(true);
 		when(daoFalso.buscaPorEmail("tcarvalho@onlares.com.br")).thenReturn(usuarioDB);
@@ -53,9 +48,7 @@ public class LoginControllerTest {
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
-		Usuario usuarioForm = new Usuario();
-		usuarioForm.setEmail("naoexiste@onlares.com.br");
-		usuarioForm.setSenha("S3cr3t");
+		Usuario usuarioForm = new Usuario("naoexiste@onlares.com.br", "S3cr3t", null);
 		
 		when(daoFalso.existe(usuarioForm)).thenReturn(false);
 		
@@ -71,11 +64,7 @@ public class LoginControllerTest {
 		Result resultFalso = new MockResult();
 		UsuarioLogado usuarioLogado = new UsuarioLogado();
 		
-		Usuario usuario = new Usuario();
-		usuario.setEmail("tcarvalho@onlares.com.br");
-		usuario.setSenha("S3cr3t");
-		usuario.setNome("Thiago Carvalho");
-		
+		Usuario usuario = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", "Thiago Carvalho");
 		usuarioLogado.setUsuario(usuario);
 		
 		LoginController loginController = new LoginController(null, null, resultFalso, usuarioLogado);
