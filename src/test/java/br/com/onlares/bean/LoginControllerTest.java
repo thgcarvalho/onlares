@@ -29,10 +29,9 @@ public class LoginControllerTest {
 		Result resultFalso = new MockResult();
 		
 		Usuario usuarioDB = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", "Thiago Carvalho");
-		
 		Usuario usuarioForm = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", null);
 		
-		when(daoFalso.existe(usuarioForm)).thenReturn(true);
+		when(daoFalso.loginValido(usuarioForm)).thenReturn(true);
 		when(daoFalso.buscaPorEmail("tcarvalho@onlares.com.br")).thenReturn(usuarioDB);
 		
 		LoginController loginController = new LoginController(daoFalso, validatorFalso, resultFalso, new UsuarioLogado());

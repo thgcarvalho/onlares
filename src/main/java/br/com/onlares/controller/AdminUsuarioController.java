@@ -17,7 +17,7 @@ import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Usuario;
 
 @Controller
-public class AdminMoradorController {
+public class AdminUsuarioController {
 
 	private final UsuarioDao usuarioDao;
 	private final UnidadeDao unidadeDao;
@@ -25,21 +25,21 @@ public class AdminMoradorController {
 	private final Result result;
 
 	@Inject
-	public AdminMoradorController(UsuarioDao usuarioDao, UnidadeDao unidadeDao, Validator validator, Result result) {
+	public AdminUsuarioController(UsuarioDao usuarioDao, UnidadeDao unidadeDao, Validator validator, Result result) {
 		this.usuarioDao = usuarioDao;
 		this.unidadeDao = unidadeDao;
 		this.validator = validator;
 		this.result = result;
 	}
 	
-	public AdminMoradorController() {
+	public AdminUsuarioController() {
 		this(null, null, null, null);
 	}
 	
 	@Admin
 	@Get
 	public void lista() {
-		result.include("moradorList", usuarioDao.lista());
+		result.include("usuarioList", usuarioDao.lista());
 	}
 	
 	@Admin
@@ -51,11 +51,6 @@ public class AdminMoradorController {
 	@Admin
 	@Post
 	public void adiciona(Usuario usuario) throws NoSuchAlgorithmException {
-		System.out.println("Usuario.nome=" + usuario.getNome());
-		System.out.println("Usuario.email=" + usuario.getEmail());
-		System.out.println("Usuario.fone1=" + usuario.getFone1());
-		System.out.println("Usuario.fone2=" + usuario.getFone2());
-
 		if (usuarioDao.existe(usuario)) {
 			validator.add(new SimpleMessage("usuario.adiciona", "Email já cadastrado", Severity.ERROR));
 			validator.onErrorUsePageOf(this).novo();
@@ -64,8 +59,6 @@ public class AdminMoradorController {
 			validator.add(new SimpleMessage("usuario.adiciona", "Selecione a unidade", Severity.ERROR));
 			validator.onErrorUsePageOf(this).novo();
 		}
-		System.out.println("Usuario.unidade.id=" + usuario.getUnidade().getId());
-		System.out.println("Usuario.unidade.localizacao=" + usuario.getUnidade().getLocalizacao());
 		
 		usuarioDao.adiciona(usuario);
 		result.redirectTo(this).lista();

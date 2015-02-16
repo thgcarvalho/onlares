@@ -9,6 +9,9 @@
 	<meta name="description" content="Static &amp; Dynamic Tables" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 	
+	<!-- grandev -->
+	<link rel="stylesheet" href="../resources/css/style.css" />
+	
 	<!-- bootstrap & fontawesome -->
 	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="../assets/font-awesome/4.2.0/css/font-awesome.min.css" />
@@ -63,30 +66,93 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Moradores
+				Usuarios
 			</h1>
 		</div><!-- /.page-header -->
+		
+		<div class="clearfix">
+			<div class="pull-right tableTools-buttons">
+				<a href="${ctx}/adminUsuario/novo">
+					<button class="btn btn-success" type="submit" >
+						<i class="ace-icon fa fa-plus bigger-110"></i>
+						Novo
+					</button>
+				</a>
+			</div>
+		</div>
 	
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
 					<div class="col-xs-12">
-						<table id="simple-table" class="table table-striped table-bordered table-hover">
+						<table id="simply-table" class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>Nome</th>
 									<th>Email</th>
 									<th>Unidade</th>
+									<th></th>
 								</tr>
 							</thead>
 	
 							<tbody>
-								<c:forEach items="${moradorList}" var="morador">
+								<c:forEach items="${usuarioList}" var="morador">
 									<tr>
-										<td>${morador.nome}</td>
+										<td>
+											<a href="#">${morador.nome}</a>
+										</td>
 										<td>${morador.email}</td>
 										<td>${morador.unidade.localizacao}</td>
+										<td>
+											<div class="hidden-sm hidden-xs action-buttons">
+												<a class="blue" href="#">
+													<i class="ace-icon fa fa-search-plus bigger-130"></i>
+												</a>
+
+												<a class="green" href="#">
+													<i class="ace-icon fa fa-pencil bigger-130"></i>
+												</a>
+
+												<a class="red" href="#">
+													<i class="ace-icon fa fa-trash-o bigger-130"></i>
+												</a>
+											</div>
+
+											<div class="hidden-md hidden-lg">
+												<div class="inline pos-rel">
+													<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+														<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+													</button>
+
+													<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+														<li>
+															<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+																<span class="blue">
+																	<i class="ace-icon fa fa-search-plus bigger-120"></i>
+																</span>
+															</a>
+														</li>
+
+														<li>
+															<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+																<span class="green">
+																	<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+																</span>
+															</a>
+														</li>
+
+														<li>
+															<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+																<span class="red">
+																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
+																</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -366,9 +432,9 @@
 	        $(this).addClass('active');
 	    });
 	
-		$(function() {
-			$('#menuadmin_usuarios').addClass('active');
-		});
+		window.onload = function() {
+			document.getElementById('menuadmin_usuarios').className = 'active';
+		};
 	</script>
 </content>
 

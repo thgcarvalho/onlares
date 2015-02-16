@@ -25,7 +25,7 @@
 	<ul  id="menuadmin_home" class="nav nav-list">
 		
 		<li id="menuadmin_usuarios" class="">
-			<a href="${ctx}/adminMorador/novo">
+			<a href="${ctx}/adminUsuario/lista">
 				<i class="menu-icon fa fa-users"></i>
 				<span class="menu-text"> Usuários </span>
 			</a>

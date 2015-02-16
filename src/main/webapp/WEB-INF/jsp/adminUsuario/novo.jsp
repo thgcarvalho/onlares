@@ -63,14 +63,14 @@
 				<a href="${ctx}/admin/index">Admin</a>
 			</li>
 
-			<li class="active">Novo Morador</li>
+			<li class="active">Novo Usuario</li>
 		</ul><!-- /.breadcrumb -->
 	</div>
 	
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Novo Morador
+				Novo Usuario
 			</h1>
 		</div><!-- /.page-header -->
 	
@@ -605,9 +605,9 @@
 	        $(this).addClass('active');
 	    });
 	
-		$(function() {
-			$('#menuadmin_usuarios').addClass('active');
-		});
+		window.onload = function() {
+			document.getElementById('menuadmin_usuarios').className = 'active';
+		};
 	</script>
 </content>
 
