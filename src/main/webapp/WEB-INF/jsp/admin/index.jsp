@@ -52,8 +52,8 @@
 
 		<ul class="breadcrumb">
 			<li class="active">
-				<i class="ace-icon fa fa-home home-icon"></i>
-				Home
+				<i class="ace-icon fa fa-user home-icon"></i>
+				Admin
 			</li>
 		</ul><!-- /.breadcrumb -->
 

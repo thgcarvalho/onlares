@@ -24,11 +24,15 @@
 
 	<div class="navbar-buttons navbar-header pull-right" role="navigation">
 		<ul class="nav ace-nav">
-		    <li class="blue">
-				<a href="${ctx}/admin/index">
-					<i class="ace-icon fa fa-lock"></i>
-				</a>
-			</li>
+		
+			<c:if test="${usuarioLogado.usuario.admin}">
+      			<li class="blue" >
+					<a href="${ctx}/admin/index">
+						<i class="ace-icon fa fa-user"></i> Administrativo
+					</a>
+				</li>
+			</c:if>
+		
 		
 			<li class="purple">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">

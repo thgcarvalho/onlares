@@ -52,6 +52,10 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 	
+	public boolean isAdmin() {
+		return (this.tipo != null && this.tipo.equals("ADMIN"));
+	}
+	
 	public Long getId() {
 		return id;
 	}

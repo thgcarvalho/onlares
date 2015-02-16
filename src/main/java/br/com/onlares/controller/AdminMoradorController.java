@@ -36,11 +36,13 @@ public class AdminMoradorController {
 		this(null, null, null, null);
 	}
 	
+	@Admin
 	@Get
 	public void lista() {
 		result.include("moradorList", usuarioDao.lista());
 	}
 	
+	@Admin
 	@Get
 	public void novo() {
 		result.include("unidadeList", unidadeDao.lista());

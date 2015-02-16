@@ -23,14 +23,6 @@
 	</div><!-- /.sidebar-shortcuts -->
 
 	<ul  id="menuadmin_home" class="nav nav-list">
-		<li class="">
-			<a href="${ctx}/home/index">
-				<i class="menu-icon fa fa-home"></i>
-				<span class="menu-text"> Cadastro </span>
-			</a>
-
-			<b class="arrow"></b>
-		</li>
 		
 		<li id="menuadmin_usuarios" class="">
 			<a href="${ctx}/adminMorador/novo">

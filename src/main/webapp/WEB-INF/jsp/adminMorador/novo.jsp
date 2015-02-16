@@ -59,8 +59,8 @@
 
 		<ul class="breadcrumb">
 			<li>
-				<i class="ace-icon fa fa-home home-icon"></i>
-				<a href="${ctx}/home/index">Home</a>
+				<i class="ace-icon fa fa-user home-icon"></i>
+				<a href="${ctx}/admin/index">Admin</a>
 			</li>
 
 			<li class="active">Novo Morador</li>

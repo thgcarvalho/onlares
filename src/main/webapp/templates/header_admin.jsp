@@ -26,7 +26,7 @@
 		<ul class="nav ace-nav">
 		    <li class="blue">
 				<a href="${ctx}/home/index">
-					<i class="ace-icon fa fa-home"></i>
+					<i class="ace-icon fa fa-home"></i> Home
 				</a>
 			</li>
 		
