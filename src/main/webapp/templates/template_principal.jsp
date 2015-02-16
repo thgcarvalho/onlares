@@ -1,7 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ include file="/templates/jstl.jsp"%>
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
-	prefix="decorator"%>
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 
 <!DOCTYPE html>
 <html>

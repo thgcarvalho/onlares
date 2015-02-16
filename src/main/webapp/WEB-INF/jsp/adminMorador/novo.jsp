@@ -597,7 +597,18 @@
 			
 			});
 		</script>
-
+		
+	<!-- menu script -->
+	<script type="text/javascript">
+		$('li').click(function(e) {
+			$('li').removeClass('active');
+	        $(this).addClass('active');
+	    });
+	
+		$(function() {
+			$('#menuadmin_usuarios').addClass('active');
+		});
+	</script>
 </content>
 
 </body>

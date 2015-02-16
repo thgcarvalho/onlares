@@ -106,6 +106,19 @@
 	<script src="../assets/js/ace.min.js"></script>
 	
 	<!-- inline scripts related to this page -->
+	
+	
+	<!-- menu script -->
+	<script type="text/javascript">
+		$('li').click(function(e) {
+			$('li').removeClass('active');
+	        $(this).addClass('active');
+	    });
+	
+		$(function() {
+			$('#menu_home').addClass('active');
+		});
+	</script>
 </content>
 
 </body>

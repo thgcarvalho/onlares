@@ -22,7 +22,7 @@
 		</div>
 	</div><!-- /.sidebar-shortcuts -->
 
-	<ul class="nav nav-list">
+	<ul  id="menuadmin_home" class="nav nav-list">
 		<li class="">
 			<a href="${ctx}/home/index">
 				<i class="menu-icon fa fa-home"></i>
@@ -32,7 +32,7 @@
 			<b class="arrow"></b>
 		</li>
 		
-		<li class="">
+		<li id="menuadmin_usuarios" class="">
 			<a href="${ctx}/adminMorador/novo">
 				<i class="menu-icon fa fa-users"></i>
 				<span class="menu-text"> Usuários </span>

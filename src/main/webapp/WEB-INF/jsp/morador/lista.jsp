@@ -356,7 +356,21 @@
 					}
 				
 				})
-			</script>
+
+	</script>
+	
+	<!-- menu script -->
+	<script type="text/javascript">
+		$('li').click(function(e) {
+			$('li').removeClass('active');
+	        $(this).addClass('active');
+	    });
+	
+		window.onload = function() {
+			document.getElementById('menu_moradores').className = 'active';
+		};
+	</script>
+	
 </content>
 
 </body>
