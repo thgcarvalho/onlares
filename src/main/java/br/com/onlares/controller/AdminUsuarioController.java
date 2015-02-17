@@ -45,6 +45,7 @@ public class AdminUsuarioController {
 	@Admin
 	@Get
 	public void novo() {
+		System.out.println("CARREGOU");
 		result.include("unidadeList", unidadeDao.lista());
 	}
 
@@ -62,5 +63,14 @@ public class AdminUsuarioController {
 		
 		usuarioDao.adiciona(usuario);
 		result.redirectTo(this).lista();
+	}
+	
+	@Admin
+	@Get("/adminUsuario/deleta/{usuarioID}")
+    public void deleta(long usuarioID) {
+		System.out.println("usuarioID=" + usuarioID);
+		//Usuario usuarioDB = usuarioDao.busca(usuario);
+		//usuarioDao.remove(usuarioDB);
+		result.forwardTo(this).lista();
 	}
 }

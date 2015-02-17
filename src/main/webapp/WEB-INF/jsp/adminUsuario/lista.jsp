@@ -10,38 +10,38 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 	
 	<!-- grandev -->
-	<link rel="stylesheet" href="../resources/css/style.css" />
+	<link rel="stylesheet" href="${ctx}/resources/css/style.css" />
 	
 	<!-- bootstrap & fontawesome -->
-	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="../assets/font-awesome/4.2.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
 	
 	<!-- page specific plugin styles -->
 	
 	<!-- text fonts -->
-	<link rel="stylesheet" href="../assets/fonts/fonts.googleapis.com.css" />
+	<link rel="stylesheet" href="${ctx}/assets/fonts/fonts.googleapis.com.css" />
 	
 	<!-- ace styles -->
-	<link rel="stylesheet" href="../assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+	<link rel="stylesheet" href="${ctx}/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 	
 	<!--[if lte IE 9]>
-		<link rel="stylesheet" href="../assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+		<link rel="stylesheet" href="${ctx}/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
 	<![endif]-->
 	
 	<!--[if lte IE 9]>
-	  <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
+	  <link rel="stylesheet" href="${ctx}/assets/css/ace-ie.min.css" />
 	<![endif]-->
 	
 	<!-- inline styles related to this page -->
 	
 	<!-- ace settings handler -->
-	<script src="../assets/js/ace-extra.min.js"></script>
+	<script src="${ctx}/assets/js/ace-extra.min.js"></script>
 	
 	<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 	
 	<!--[if lte IE 8]>
-	<script src="../assets/js/html5shiv.min.js"></script>
-	<script src="../assets/js/respond.min.js"></script>
+	<script src="${ctx}/assets/js/html5shiv.min.js"></script>
+	<script src="${ctx}/assets/js/respond.min.js"></script>
 	<![endif]-->
 
 </head>
@@ -99,26 +99,27 @@
 							</thead>
 	
 							<tbody>
-								<c:forEach items="${usuarioList}" var="morador">
+								<c:forEach items="${usuarioList}" var="usuario">
 									<tr>
 										<td>
-											<a href="#">${morador.nome}</a>
+											<a href="#">${usuario.nome}</a>
 										</td>
-										<td>${morador.email}</td>
-										<td>${morador.fone1}</td>
-										<td>${morador.fone2}</td>
-										<td>${morador.unidade.localizacao}</td>
+										<td>${usuario.email}</td>
+										<td>${usuario.fone1}</td>
+										<td>${usuario.fone2}</td>
+										<td>${usuario.unidade.localizacao}</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
-												<a class="blue" href="#">
+												<a class="visualizar" href="#">
 													<i class="ace-icon fa fa-search-plus bigger-130"></i>
 												</a>
 
-												<a class="green" href="#">
+												<a class="editar" href="#">
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 
-												<a class="red" href="#">
+												<a class="deletar" href="<c:url value="/adminUsuario/deleta/${usuario.id}" />" 
+                    								title="Deletar '${usuario.nome}'.">
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
 											</div>
@@ -147,7 +148,9 @@
 														</li>
 
 														<li>
-															<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+															<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete"></a>
+															<a class="tooltip-error"  href="<c:url value="/adminUsuario/deleta/${item.ID}" />" 
+                    											title="Edit '${item.name}'.">
 																<span class="red">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																</span>
@@ -173,40 +176,40 @@
 	<!-- basic scripts -->
 	
 	<!--[if !IE]> -->
-	<script src="../assets/js/jquery.2.1.1.min.js"></script>
+	<script src="${ctx}/assets/js/jquery.2.1.1.min.js"></script>
 	
 	<!-- <![endif]-->
 	
 	<!--[if IE]>
-	<script src="../assets/js/jquery.1.11.1.min.js"></script>
+	<script src="${ctx}/assets/js/jquery.1.11.1.min.js"></script>
 	<![endif]-->
 	
 	<!--[if !IE]> -->
 	<script type="text/javascript">
-		window.jQuery || document.write("<script src='../assets/js/jquery.min.js'>"+"<"+"/script>");
+		window.jQuery || document.write("<script src='${ctx}/assets/js/jquery.min.js'>"+"<"+"/script>");
 	</script>
 	
 	<!-- <![endif]-->
 	
 	<!--[if IE]>
 	<script type="text/javascript">
-	 window.jQuery || document.write("<script src='../assets/js/jquery1x.min.js'>"+"<"+"/script>");
+	 window.jQuery || document.write("<script src='${ctx}/assets/js/jquery1x.min.js'>"+"<"+"/script>");
 	</script>
 	<![endif]-->
 	<script type="text/javascript">
-		if('ontouchstart' in document.documentElement) document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		if('ontouchstart' in document.documentElement) document.write("<script src='${ctx}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 	</script>
-	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="${ctx}/assets/js/bootstrap.min.js"></script>
 	
 	<!-- page specific plugin scripts -->
-	<script src="../assets/js/jquery.dataTables.min.js"></script>
-	<script src="../assets/js/jquery.dataTables.bootstrap.min.js"></script>
-	<script src="../assets/js/dataTables.tableTools.min.js"></script>
-	<script src="../assets/js/dataTables.colVis.min.js"></script>
+	<script src="${ctx}/assets/js/jquery.dataTables.min.js"></script>
+	<script src="${ctx}/assets/js/jquery.dataTables.bootstrap.min.js"></script>
+	<script src="${ctx}/assets/js/dataTables.tableTools.min.js"></script>
+	<script src="${ctx}/assets/js/dataTables.colVis.min.js"></script>
 	
 	<!-- ace scripts -->
-	<script src="../assets/js/ace-elements.min.js"></script>
-	<script src="../assets/js/ace.min.js"></script>
+	<script src="${ctx}/assets/js/ace-elements.min.js"></script>
+	<script src="${ctx}/assets/js/ace.min.js"></script>
 	
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
@@ -252,7 +255,7 @@
 		
 			//initiate TableTools extension
 			var tableTools_obj = new $.fn.dataTable.TableTools( oTable1, {
-				"sSwfPath": "../assets/swf/copy_csv_xls_pdf.swf",
+				"sSwfPath": "${ctx}/assets/swf/copy_csv_xls_pdf.swf",
 				
 				"sRowSelector": "td:not(:last-child)",
 				"sRowSelect": "multi",
@@ -430,6 +433,17 @@
 			}
 		
 		})
+	</script>
+	
+	<!-- delet script -->
+	<script type="text/javascript">
+   		$(document).ready(function() {
+	       $('.deletar').click(function(event) {           
+	           if (!confirm('Você realmente deseja exlucir esse registro?')) {
+	               event.preventDefault();
+	           }
+	       });
+	    });
 	</script>
 			
 	<!-- menu script -->

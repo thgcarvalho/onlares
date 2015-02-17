@@ -118,7 +118,7 @@
 						<ul class="dropdown-menu dropdown-navbar">
 							<li>
 								<a href="#" class="clearfix">
-									<img src="../assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+									<img src="${ctx}/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Alex:</span>
@@ -135,7 +135,7 @@
 
 							<li>
 								<a href="#" class="clearfix">
-									<img src="../assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+									<img src="${ctx}/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Susan:</span>
@@ -152,7 +152,7 @@
 
 							<li>
 								<a href="#" class="clearfix">
-									<img src="../assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+									<img src="${ctx}/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Bob:</span>
@@ -169,7 +169,7 @@
 
 							<li>
 								<a href="#" class="clearfix">
-									<img src="../assets/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+									<img src="${ctx}/assets/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Kate:</span>
@@ -186,7 +186,7 @@
 
 							<li>
 								<a href="#" class="clearfix">
-									<img src="../assets/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+									<img src="${ctx}/assets/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
 									<span class="msg-body">
 										<span class="msg-title">
 											<span class="blue">Fred:</span>
@@ -214,7 +214,7 @@
 
 			<li class="light-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-					<img class="nav-user-photo" src="../assets/avatars/avatar2.png" alt="Usuário" />
+					<img class="nav-user-photo" src="${ctx}/assets/avatars/avatar2.png" alt="Usuário" />
 					<span class="user-info">
 						<small>Bem vindo,</small>
 						${usuarioLogado.usuario.nome}

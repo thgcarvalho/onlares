@@ -1,4 +1,15 @@
-
 .tableTools-buttons {
   margin-bottom:8px;
+}
+
+.visualizar {
+  color:#478FCA !important;
+}
+
+.editar {
+  color:#69AA46 !important;
+}
+
+.deletar {
+  color:#DD5A43 !important;
 }
