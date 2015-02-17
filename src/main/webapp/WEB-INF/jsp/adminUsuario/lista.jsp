@@ -59,7 +59,7 @@
 				<a href="${ctx}/home/index">Home Admin</a>
 			</li>
 
-			<li class="active">Moradores</li>
+			<li class="active">Usuários</li>
 		</ul><!-- /.breadcrumb -->
 	</div>
 	
@@ -86,11 +86,13 @@
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
 					<div class="col-xs-12">
-						<table id="simply-table" class="table table-striped table-bordered table-hover">
+						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>Nome</th>
 									<th>Email</th>
+									<th>Fone 1</th>
+									<th>Fone 2</th>
 									<th>Unidade</th>
 									<th></th>
 								</tr>
@@ -103,6 +105,8 @@
 											<a href="#">${morador.nome}</a>
 										</td>
 										<td>${morador.email}</td>
+										<td>${morador.fone1}</td>
+										<td>${morador.fone2}</td>
 										<td>${morador.unidade.localizacao}</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
@@ -215,7 +219,7 @@
 				bAutoWidth: false,
 				"aoColumns": [
 				  { "bSortable": false },
-				  null, null,null, null, null,
+				  null, null, null, null,
 				  { "bSortable": false }
 				],
 				"aaSorting": [],
@@ -231,6 +235,9 @@
 				//you may want to wrap the table inside a "div.dataTables_borderWrap" element
 		
 				//"iDisplayLength": 50
+				"language": {
+	                "url": "../resources/lang/dataTables.pt.lang"
+	            }
 		    } );
 			//oTable1.fnAdjustColumnSizing();
 		
@@ -397,33 +404,33 @@
 			
 			//select/deselect a row when the checkbox is checked/unchecked
 			$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-						var $row = $(this).closest('tr');
-						if(this.checked) $row.addClass(active_class);
-						else $row.removeClass(active_class);
-					});
-				
-					
-				
-					/********************************/
-					//add tooltip for small view action buttons in dropdown menu
-					$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-					
-					//tooltip placement on right or left
-					function tooltip_placement(context, source) {
-						var $source = $(source);
-						var $parent = $source.closest('table')
-						var off1 = $parent.offset();
-						var w1 = $parent.width();
-				
-						var off2 = $source.offset();
-						//var w2 = $source.width();
-				
-						if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-						return 'left';
-					}
-				
-				})
-			</script>
+				var $row = $(this).closest('tr');
+				if(this.checked) $row.addClass(active_class);
+				else $row.removeClass(active_class);
+			});
+		
+			
+		
+			/********************************/
+			//add tooltip for small view action buttons in dropdown menu
+			$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
+			
+			//tooltip placement on right or left
+			function tooltip_placement(context, source) {
+				var $source = $(source);
+				var $parent = $source.closest('table')
+				var off1 = $parent.offset();
+				var w1 = $parent.width();
+		
+				var off2 = $source.offset();
+				//var w2 = $source.width();
+		
+				if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
+				return 'left';
+			}
+		
+		})
+	</script>
 			
 	<!-- menu script -->
 	<script type="text/javascript">
