@@ -18,7 +18,7 @@
 
 	<div class="navbar-header pull-left">
 		<a href="${ctx}/home/index" class="navbar-brand">
-			<img alt="OnLares" src="${ctx}/images/onlares_branco.png" height="26">
+			<img alt="OnLares" src="${ctx}/resources/images/onlares_branco.png" height="26">
 		</a>
 	</div>
 

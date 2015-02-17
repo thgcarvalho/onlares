@@ -5,6 +5,9 @@
 	<decorator name="main" page="template_principal.jsp">
 		<pattern>/home/*</pattern>
 		<pattern>/morador/*</pattern>
+		<pattern>/WEB-INF/jsp/error/*</pattern>
+		<pattern>/jsp/error/*</pattern>
+		<pattern>/error/*</pattern>
 	</decorator>
 
 	<decorator name="admin" page="template_admin.jsp">

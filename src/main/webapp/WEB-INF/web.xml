@@ -48,14 +48,14 @@
 	<!-- ************************* -->
 	
 
-	<!-- error-code related error pages 
+	<!-- error-code related error pages -->
 	<error-page>
 	    <error-code>404</error-code>
-	    <location>/webapp/jsp/erro/error-404.jsp</location>
+	    <location>/WEB-INF/jsp/error/error-404.jsp</location>
 	</error-page>
 	<error-page>
 	    <error-code>500</error-code>
-	    <location>/erro/error-500.jsp</location>
+	    <location>/WEB-INF/jsp/error/error-500.jsp</location>
 	</error-page>
-	-->
+
 </web-app>

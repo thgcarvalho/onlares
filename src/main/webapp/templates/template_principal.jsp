@@ -6,6 +6,10 @@
 <html>
 <head>
 	<%@ include file="/templates/head.jsp"%>
+
+	<link rel="icon" href="${ctx}/resources/images/favicon-16.png" />
+	<link rel="shortcut icon" href="${ctx}/resources/onlares.ico" />
+	<link rel="shortcut icon" href="${ctx}/resources/images/favicon-32.png" />
 	<!-- head que muda! -->
 	<decorator:head />
 </head>
