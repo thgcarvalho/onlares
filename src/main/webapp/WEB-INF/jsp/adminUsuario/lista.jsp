@@ -100,7 +100,7 @@
 	
 							<tbody>
 								<c:forEach items="${usuarioList}" var="usuario">
-									<tr>
+									<tr id="myTableRow">
 										<td>
 											<a href="#">${usuario.nome}</a>
 										</td>
@@ -117,11 +117,12 @@
 												<a class="editar" href="#">
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
-
-												<a class="deletar" href="<c:url value="/adminUsuario/deleta/${usuario.id}" />" 
-                    								title="Deletar '${usuario.nome}'.">
+												
+												<a class="deletar" href="${linkTo[AdminUsuarioController].remove(usuario.email)}" 
+                    								title="Remover '${usuario.nome}'." >
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
+																			
 											</div>
 
 											<div class="hidden-md hidden-lg">
@@ -435,7 +436,29 @@
 		})
 	</script>
 	
-	<!-- delet script -->
+	<!-- delete script -->
+	<script type="text/javascript">
+		$(".deletar").on("click", function(event) {
+			if (confirm('Você realmente deseja exlucir esse registro?')) {
+				event.preventDefault();
+				$.ajax({
+					url: $(this).attr("href"),
+					type: 'POST',
+					data: { _method: "DELETE"}
+				}).done(function(data, textStatus, jqXHR){
+					console.log("REMOVER");
+				}).fail(function(jqXHR, textStatus, errorThrown){
+					console.log("O item não foi removido!");
+					alert("O item não foi removido!");
+				});
+			      
+			    $(this).closest('tr').remove();
+			    return false;
+			}
+		});
+	</script>
+	
+	<!-- delet script 
 	<script type="text/javascript">
    		$(document).ready(function() {
 	       $('.deletar').click(function(event) {           
@@ -445,7 +468,7 @@
 	       });
 	    });
 	</script>
-			
+		-->	
 	<!-- menu script -->
 	<script type="text/javascript">
 		$('li').click(function(e) {

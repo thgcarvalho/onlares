@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
@@ -66,11 +67,12 @@ public class AdminUsuarioController {
 	}
 	
 	@Admin
-	@Get("/adminUsuario/deleta/{usuarioID}")
-    public void deleta(long usuarioID) {
-		System.out.println("usuarioID=" + usuarioID);
-		//Usuario usuarioDB = usuarioDao.busca(usuario);
-		//usuarioDao.remove(usuarioDB);
-		result.forwardTo(this).lista();
+	@Delete("/adminUsuario/{email}")
+	public void remove(String email){
+		System.out.println("REMOVE usuarioID=" + email);
+		Usuario usuario = usuarioDao.buscaPorEmail(email);
+		usuarioDao.remove(usuario);
+		result.nothing();
 	}
+	
 }
