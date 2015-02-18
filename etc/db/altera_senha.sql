@@ -1,8 +1,8 @@
--- Table: altera_email
+-- Table: altera_senha
 
--- DROP TABLE altera_email;
+-- DROP TABLE altera_senhal;
 
-CREATE TABLE altera_email
+CREATE TABLE altera_senha
 (
   codigo character varying(16) NOT NULL,
   email_antigo character varying(45),
@@ -13,6 +13,6 @@ CREATE TABLE altera_email
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE altera_email
+ALTER TABLE altera_senha
   OWNER TO postgres;
 

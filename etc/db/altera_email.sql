@@ -14,4 +14,4 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE altera_email
-  OWNER TO grandevc;
+  OWNER TO postgres;

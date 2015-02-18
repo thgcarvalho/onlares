@@ -15,7 +15,7 @@ CREATE TABLE usuario
   condominio_id bigint,
   unidade_id bigint,
   CONSTRAINT usuario_pkey PRIMARY KEY (id),
-  CONSTRAINT unique_usuario UNIQUE (usuario)
+  CONSTRAINT unique_usuario UNIQUE (email),
   CONSTRAINT fk_condominio FOREIGN KEY (condominio_id)
       REFERENCES condominio (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
