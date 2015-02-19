@@ -55,8 +55,8 @@
 
 		<ul class="breadcrumb">
 			<li>
-				<i class="ace-icon fa fa-home home-icon"></i>
-				<a href="${ctx}/home/index">Home Admin</a>
+				<i class="ace-icon fa fa-user home-icon"></i>
+				<a href="${ctx}/home/index">Admin</a>
 			</li>
 
 			<li class="active">Usuários</li>
@@ -66,7 +66,7 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Usuarios
+				Usuários
 			</h1>
 		</div><!-- /.page-header -->
 		
@@ -91,8 +91,6 @@
 								<tr>
 									<th>Nome</th>
 									<th>Email</th>
-									<th>Fone 1</th>
-									<th>Fone 2</th>
 									<th>Unidade</th>
 									<th></th>
 								</tr>
@@ -105,8 +103,6 @@
 											<a href="#">${usuario.nome}</a>
 										</td>
 										<td>${usuario.email}</td>
-										<td>${usuario.fone1}</td>
-										<td>${usuario.fone2}</td>
 										<td>${usuario.unidade.localizacao}</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
@@ -114,7 +110,8 @@
 													<i class="ace-icon fa fa-search-plus bigger-130"></i>
 												</a>
 
-												<a class="editar" href="#">
+												<a class="editar" href="${linkTo[AdminUsuarioController].edita(usuario.email)}" 
+													title="Editar '${usuario.nome}'." >
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 												
@@ -223,7 +220,7 @@
 				bAutoWidth: false,
 				"aoColumns": [
 				  { "bSortable": false },
-				  null, null, null, null,
+				  null, null,
 				  { "bSortable": false }
 				],
 				"aaSorting": [],

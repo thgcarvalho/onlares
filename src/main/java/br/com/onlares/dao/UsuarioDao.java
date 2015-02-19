@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.onlares.model.Usuario;
@@ -34,10 +35,16 @@ public class UsuarioDao {
 	}
 	
 	public Usuario buscaPorEmail(String email) {
+		Usuario usuario;
 		String strQuery = "SELECT u FROM Usuario u WHERE u.email = :email";
-		Query query = em.createQuery(strQuery, Usuario.class);
-		query.setParameter("email", email);
-		return (Usuario) query.getSingleResult();
+		try {
+			Query query = em.createQuery(strQuery, Usuario.class);
+			query.setParameter("email", email);
+			usuario = (Usuario) query.getSingleResult();
+		} catch (NoResultException nrExp) {
+			usuario = null;
+		}
+		return usuario;
 	}
 	
 	public boolean loginValido(Usuario usuario) throws NoSuchAlgorithmException {
@@ -48,7 +55,7 @@ public class UsuarioDao {
 			.getResultList().isEmpty();
 	}
 	
-	public boolean existe(Usuario usuario) throws NoSuchAlgorithmException {
+	public boolean existe(Usuario usuario) {
 		return !em.createQuery("select u from Usuario u where u.email = "
 			+ ":email", Usuario.class)
 			.setParameter("email", usuario.getEmail())
@@ -61,7 +68,7 @@ public class UsuarioDao {
 		em.getTransaction().commit();
 	}
 	
-	public void edita(Usuario usuario) {
+	public void altera(Usuario usuario) {
 		em.getTransaction().begin();
 		em.merge(usuario);
 		em.getTransaction().commit();

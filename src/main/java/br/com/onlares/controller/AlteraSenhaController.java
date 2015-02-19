@@ -149,7 +149,7 @@ public class AlteraSenhaController {
 				usuarioDB = usuarioDao.buscaPorEmail(email);
 				// Atualiza usuario
 				usuarioDB.setSenha(MD5Hashing.convertStringToMd5(novaSenha));
-				usuarioDao.edita(usuarioDB);
+				usuarioDao.altera(usuarioDB);
 				// Atualiza alteraSenha
 				alteraSenhaDB.setStatus(STATUS_SENHA_ALTERADA);
 				alteraSenhaDao.edita(alteraSenhaDB);
