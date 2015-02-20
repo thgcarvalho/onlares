@@ -23,6 +23,15 @@
 	</div><!-- /.sidebar-shortcuts -->
 
 	<ul  id="menuadmin_home" class="nav nav-list">
+	
+		<li id="menuadmin_unidades" class="">
+			<a href="${ctx}/adminUnidade/lista">
+				<i class="menu-icon fa fa-map-marker"></i>
+				<span class="menu-text"> Unidades </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
 		
 		<li id="menuadmin_usuarios" class="">
 			<a href="${ctx}/adminUsuario/lista">

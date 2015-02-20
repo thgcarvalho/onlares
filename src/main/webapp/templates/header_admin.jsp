@@ -32,7 +32,7 @@
 		
 			<li class="light-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-					<img class="nav-user-photo" src="${ctx}/assets/avatars/avatar2.png" alt="Usuário" />
+					<!-- <img class="nav-user-photo" src="${ctx}/assets/avatars/avatar2.png" alt="Usuário" />  -->
 					<span class="user-info">
 						<small>Bem vindo,</small>
 						${usuarioLogado.usuario.nome}
@@ -42,19 +42,19 @@
 				</a>
 
 				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-					<li>
+					<!-- <li>
 						<a href="#">
 							<i class="ace-icon fa fa-cog"></i>
 							Configurações
 						</a>
-					</li>
+					</li>  -->
 
-					<li>
+					<!-- <li>
 						<a href="profile.html">
 							<i class="ace-icon fa fa-user"></i>
 							Perfil
 						</a>
-					</li>
+					</li>  -->
 
 					<li class="divider"></li>
 

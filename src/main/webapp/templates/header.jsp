@@ -37,13 +37,13 @@
 			<li class="purple">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<i class="ace-icon fa fa-bell icon-animated-bell"></i>
-					<span class="badge badge-important">8</span>
+					<span class="badge badge-important">0</span>
 				</a>
 
 				<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
 					<li class="dropdown-header">
 						<i class="ace-icon fa fa-exclamation-triangle"></i>
-						8 Notifications
+						0 Notifications
 					</li>
 
 					<li class="dropdown-content">
@@ -105,13 +105,13 @@
 			<li class="green">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-					<span class="badge badge-success">5</span>
+					<span class="badge badge-success">0</span>
 				</a>
 
 				<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
 					<li class="dropdown-header">
 						<i class="ace-icon fa fa-envelope-o"></i>
-						5 Messages
+						0 Messages
 					</li>
 
 					<li class="dropdown-content">
@@ -214,7 +214,7 @@
 
 			<li class="light-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-					<img class="nav-user-photo" src="${ctx}/assets/avatars/avatar2.png" alt="Usuário" />
+					<!-- <img class="nav-user-photo" src="${ctx}/assets/avatars/avatar2.png" alt="Usuário" /> -->
 					<span class="user-info">
 						<small>Bem vindo,</small>
 						${usuarioLogado.usuario.nome}
@@ -224,19 +224,19 @@
 				</a>
 
 				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-					<li>
+					<!-- <li>
 						<a href="#">
 							<i class="ace-icon fa fa-cog"></i>
 							Configurações
 						</a>
-					</li>
+					</li>  -->
 
-					<li>
+					<!-- <li>
 						<a href="profile.html">
 							<i class="ace-icon fa fa-user"></i>
 							Perfil
 						</a>
-					</li>
+					</li> -->
 
 					<li class="divider"></li>
 
