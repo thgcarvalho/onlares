@@ -106,7 +106,7 @@
 										<td>${usuario.unidade.localizacao}</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
-												<a class="visualizar" href="#">
+												<a class="visualizar" href="${linkTo[PerfilController].visualiza(usuario.email)}">
 													<i class="ace-icon fa fa-search-plus bigger-130"></i>
 												</a>
 

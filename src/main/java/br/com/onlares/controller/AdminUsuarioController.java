@@ -43,17 +43,6 @@ public class AdminUsuarioController {
 	}
 	
 	@Admin
-	@Get("/adminUsuario/visualiza/{email}")
-	public void visualiza(String email) {
-		Usuario usuario = usuarioDao.buscaPorEmail(email);
-		if (usuario == null) {
-			result.notFound();
-		} else {
-			result.include("usuario", usuario);
-		}
-	}
-	
-	@Admin
 	@Get("/adminUsuario/novo")
 	public void novo() {
 		result.include("unidadeList", unidadeDao.lista());
