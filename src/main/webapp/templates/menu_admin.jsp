@@ -12,13 +12,13 @@
 
 	<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 		<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-	
-	
+			<a class="btn-admin btn-info" href="${ctx}/home/index">
+				<i class="ace-icon fa fa-home"></i>
+			</a>
 		</div>
 
 		<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-		
-
+			<span class="btn-admin btn-info"></span>
 		</div>
 	</div><!-- /.sidebar-shortcuts -->
 

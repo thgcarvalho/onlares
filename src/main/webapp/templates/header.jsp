@@ -28,7 +28,7 @@
 			<c:if test="${usuarioLogado.usuario.admin}">
       			<li class="blue" >
 					<a href="${ctx}/admin/index">
-						<i class="ace-icon fa fa-user"></i> Administrativo
+						<i class="ace-icon fa fa-user"></i>
 					</a>
 				</li>
 			</c:if>

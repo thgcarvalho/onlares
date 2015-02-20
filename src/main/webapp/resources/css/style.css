@@ -13,3 +13,37 @@
 .deletar {
   color:#DD5A43 !important;
 }
+
+.sidebar .sidebar-shortcuts-large > .btn-admin {
+  border-width:4px;
+  line-height:24px;
+  padding:0;
+  text-align:center;
+  width:176px;
+}
+
+.sidebar .sidebar-shortcuts-mini > .btn-admin {
+  border-radius:0;
+  border-width:0;
+  font-size:0;
+  line-height:0;
+  margin:1px;
+  opacity:0.85;
+  padding:17px;
+}
+
+.btn-admin {
+  -webkit-transition:background-color 0.15s, border-color 0.15s, opacity 0.15s;
+  background-image:none !important;
+  border:5px solid #FFFFFF;
+  border-radius:0;
+  box-shadow:none !important;
+  color:#FFFFFF !important;
+  cursor:pointer;
+  display:inline-block;
+  margin:0;
+  position:relative;
+  text-shadow:rgba(0, 0, 0, 0.247059) 0 -1px 0;
+  transition:background-color 0.15s, border-color 0.15s, opacity 0.15s;
+  vertical-align:middle;
+}
