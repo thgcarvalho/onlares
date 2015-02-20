@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
@@ -38,21 +37,30 @@ public class AdminUsuarioController {
 	}
 	
 	@Admin
-	@Get
-	@Path(value="/adminUsuario/lista", priority=Path.HIGH)
+	@Get("/adminUsuario/lista")
 	public void lista() {
 		result.include("usuarioList", usuarioDao.lista());
 	}
 	
 	@Admin
-	@Get
-	@Path(value="/adminUsuario/novo", priority=Path.HIGH)
+	@Get("/adminUsuario/visualiza/{email}")
+	public void visualiza(String email) {
+		Usuario usuario = usuarioDao.buscaPorEmail(email);
+		if (usuario == null) {
+			result.notFound();
+		} else {
+			result.include("usuario", usuario);
+		}
+	}
+	
+	@Admin
+	@Get("/adminUsuario/novo")
 	public void novo() {
 		result.include("unidadeList", unidadeDao.lista());
 	}
 
 	@Admin
-	@Post("/adminUsuario/adiciona")
+	@Post("/adminUsuario")
 	public void adiciona(Usuario usuario) {
 		if (usuarioDao.existe(usuario)) {
 			validator.add(new SimpleMessage("usuario.adiciona", "Email já cadastrado", Severity.ERROR));
@@ -68,8 +76,7 @@ public class AdminUsuarioController {
 	}
 	
 	@Admin
-	@Get
-	@Path(value="/adminUsuario/{email}", priority=Path.LOW)
+	@Get("/adminUsuario/edita/{email}")
 	public void edita(String email) {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
 		if (usuario == null) {
@@ -83,7 +90,6 @@ public class AdminUsuarioController {
 	@Admin
 	@Put("/adminUsuario/{email}")
 	public void altera(Usuario usuario) {
-		System.out.println(usuario);
 //		if (usuarioDao.existe(usuario)) {
 //			validator.add(new SimpleMessage("usuario.adiciona", "Email já cadastrado", Severity.ERROR));
 //			validator.onErrorUsePageOf(this).edita(usuario.getEmail());

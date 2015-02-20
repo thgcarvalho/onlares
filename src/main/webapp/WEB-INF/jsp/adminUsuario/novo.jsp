@@ -77,7 +77,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				<form class="form-horizontal" role="form" action="<c:url value="adiciona" />" method="post">
+				<form class="form-horizontal" role="form" action="${ctx }/adminUsuario" method="post">
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Nome </label>
 

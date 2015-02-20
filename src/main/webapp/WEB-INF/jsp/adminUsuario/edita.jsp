@@ -77,7 +77,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				<form class="form-horizontal" role="form" action="<c:url value="altera" />" method="post">
+				<form class="form-horizontal" role="form" action="${ctx }/adminUsuario/" method="post">
 					<input type="hidden" name="_method" value="PUT">
 					<input type="hidden" name="usuario.id" value="${usuario.id}">
 					<div class="form-group">
