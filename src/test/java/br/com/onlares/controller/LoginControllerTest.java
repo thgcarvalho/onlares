@@ -1,4 +1,4 @@
-package br.com.onlares.bean;
+package br.com.onlares.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
