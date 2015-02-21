@@ -1,5 +1,7 @@
 package br.com.onlares.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -8,7 +10,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.validator.Severity;
+import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
@@ -51,14 +53,20 @@ public class AdminUsuarioController {
 	@Admin
 	@Post("/adminUsuario")
 	public void adiciona(Usuario usuario) {
+		if (checkNull(usuario.getNome()).equals("")) {
+			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Nome"));
+		}
+		if (checkNull(usuario.getEmail()).equals("")) {
+			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Email"));
+		}
 		if (usuarioDao.existe(usuario)) {
-			validator.add(new SimpleMessage("usuario.adiciona", "Email já cadastrado", Severity.ERROR));
-			validator.onErrorUsePageOf(this).novo();
+			validator.add(new SimpleMessage("usuario.adiciona", "Email já cadastrado"));
 		}
 		if (usuario.getUnidade() == null) {
-			validator.add(new SimpleMessage("usuario.adiciona", "Selecione a unidade", Severity.ERROR));
-			validator.onErrorUsePageOf(this).novo();
+			validator.add(new SimpleMessage("usuario.adiciona", "Selecione a unidade"));
 		}
+		
+		validator.onErrorUsePageOf(this).novo();
 		usuarioDao.adiciona(usuario);
 		result.include("notice", "Usuário adicionado com sucesso!");
 		result.redirectTo(this).lista();
@@ -79,14 +87,24 @@ public class AdminUsuarioController {
 	@Admin
 	@Put("/adminUsuario/{email}")
 	public void altera(Usuario usuario) {
-//		if (usuarioDao.existe(usuario)) {
-//			validator.add(new SimpleMessage("usuario.adiciona", "Email já cadastrado", Severity.ERROR));
-//			validator.onErrorUsePageOf(this).edita(usuario.getEmail());
-//		}
 		if (usuario.getUnidade() == null) {
-			validator.add(new SimpleMessage("usuario.adiciona", "Selecione a unidade", Severity.ERROR));
-			validator.onErrorUsePageOf(this).edita(usuario.getEmail());
+			validator.add(new SimpleMessage("usuario.edita", "Selecione a unidade"));
 		}
+		
+		List<Usuario> usuarios = usuarioDao.lista();
+		usuarios.add(usuario);
+		int mesmoEmail = 0;
+		for (Usuario usuarioCadastrado : usuarios) {
+			if (usuarioCadastrado.getEmail().equals(usuario.getEmail())) {
+				mesmoEmail++;
+			}
+		}
+		if (mesmoEmail > 1) {
+			validator.add(new SimpleMessage("usuario.edita", "Email usado por outro usuário"));
+		}
+		
+		validator.onErrorUsePageOf(this).edita(usuario.getEmail());
+		
 		usuarioDao.altera(usuario);
 		result.include("notice", "Usuário atualizado com sucesso!");
 		result.redirectTo(this).lista();
@@ -99,6 +117,14 @@ public class AdminUsuarioController {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
 		usuarioDao.remove(usuario);
 		result.nothing();
+	}
+	
+	private String checkNull(String value) {
+		if (value == null) {
+			return ("");
+		} else {
+			return (value.trim());
+		}
 	}
 	
 }

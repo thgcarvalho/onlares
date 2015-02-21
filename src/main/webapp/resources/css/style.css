@@ -47,3 +47,8 @@
   transition:background-color 0.15s, border-color 0.15s, opacity 0.15s;
   vertical-align:middle;
 }
+
+.form-group.required .control-label:after { 
+   content:"*";
+   color:red;
+}

@@ -1,5 +1,7 @@
 package br.com.onlares.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -8,7 +10,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.validator.Severity;
+import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
@@ -48,10 +50,15 @@ public class AdminUnidadeController {
 	@Admin
 	@Post("/adminUnidade")
 	public void adiciona(Unidade unidade) {
-		if (unidadeDao.existe(unidade)) {
-			validator.add(new SimpleMessage("unidade.adiciona", "Email já cadastrado", Severity.ERROR));
-			validator.onErrorUsePageOf(this).novo();
+		if (checkNull(unidade.getLocalizacao()).equals("")) {
+			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Localização"));
 		}
+		if (unidadeDao.existe(unidade)) {
+			validator.add(new SimpleMessage("unidade.adiciona", "Unidade já cadastrada"));
+		}
+		
+		validator.onErrorUsePageOf(this).novo();
+		
 		unidadeDao.adiciona(unidade);
 		result.include("notice", "Unidade adicionada com sucesso!");
 		result.redirectTo(this).lista();
@@ -72,13 +79,23 @@ public class AdminUnidadeController {
 	@Admin
 	@Put("/adminUnidade/{id}")
 	public void altera(Unidade unidade) {
-//		if (usuario.getUnidade() == null) {
-//			validator.add(new SimpleMessage("usuario.adiciona", "Selecione a unidade", Severity.ERROR));
-//			validator.onErrorUsePageOf(this).edita(usuario.getEmail());
-//		}
-//		usuarioDao.altera(usuario);
-//		result.include("notice", "Usuário atualizado com sucesso!");
-//		result.redirectTo(this).lista();
+		List<Unidade> unidades = unidadeDao.lista();
+		unidades.add(unidade);
+		int mesmoEmail = 0;
+		for (Unidade unidadeCadastrada : unidades) {
+			if (unidadeCadastrada.getLocalizacao().equals(unidade.getLocalizacao())) {
+				mesmoEmail++;
+			}
+		}
+		if (mesmoEmail > 1) {
+			validator.add(new SimpleMessage("unidade.edita", "Unidade já existente"));
+		}
+		
+		validator.onErrorUsePageOf(this).edita(unidade.getId());
+		
+		unidadeDao.altera(unidade);
+		result.include("notice", "Unidade atualizada com sucesso!");
+		result.redirectTo(this).lista();
 	}
 	
 	@Admin
@@ -88,6 +105,14 @@ public class AdminUnidadeController {
 //		Usuario usuario = usuarioDao.buscaPorEmail(email);
 //		usuarioDao.remove(usuario);
 //		result.nothing();
+	}
+	
+	private String checkNull(String value) {
+		if (value == null) {
+			return ("");
+		} else {
+			return (value.trim());
+		}
 	}
 	
 }
