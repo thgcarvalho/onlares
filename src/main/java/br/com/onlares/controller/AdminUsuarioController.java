@@ -66,7 +66,9 @@ public class AdminUsuarioController {
 			validator.add(new SimpleMessage("usuario.adiciona", "Selecione a unidade"));
 		}
 		
+		result.include("unidadeList", unidadeDao.lista());
 		validator.onErrorUsePageOf(this).novo();
+		
 		usuarioDao.adiciona(usuario);
 		result.include("notice", "Usuário adicionado com sucesso!");
 		result.redirectTo(this).lista();
@@ -113,7 +115,7 @@ public class AdminUsuarioController {
 	@Admin
 	@Delete("/adminUsuario/{email}")
 	public void remove(String email){
-		System.out.println("REMOVE usuarioID=" + email);
+		System.out.println("USUARIO = " + email + " FOI REMOVIDO!");
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
 		usuarioDao.remove(usuario);
 		result.nothing();

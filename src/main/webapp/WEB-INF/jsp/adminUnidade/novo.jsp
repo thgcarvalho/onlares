@@ -77,12 +77,13 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				<form class="form-horizontal" role="form" action="${ctx }/adminUnidade" method="post">
+				<form class="form-horizontal" role="form" action="${ctx}/adminUnidade" method="post">
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="nome"> Unidade </label>
+						<label class="col-sm-3 control-label no-padding-right" for="nome"> Unidade* </label>
 
 						<div class="col-sm-9">
-							<input type="text" id="unidade" name="unidade.localizacao" placeholder="Unidade" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
+							<input type="text" required="required" id="unidade" name="unidade.localizacao" value="${unidade.localizacao}" 
+							placeholder="Unidade" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
 						</div>
 					</div>
 

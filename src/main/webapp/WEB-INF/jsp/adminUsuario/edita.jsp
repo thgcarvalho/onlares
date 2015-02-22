@@ -81,10 +81,10 @@
 					<input type="hidden" name="_method" value="PUT">
 					<input type="hidden" name="usuario.id" value="${usuario.id}">
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="nome"> Nome </label>
+						<label class="col-sm-3 control-label no-padding-right" for="nome"> Nome* </label>
 
 						<div class="col-sm-9">
-							<input type="text" id="nome" name="usuario.nome" value="${usuario.nome}" 
+							<input type="text" required="required" id="nome" name="usuario.nome" value="${usuario.nome}" 
 							placeholder="Nome" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
 						</div>
 					</div>
@@ -92,10 +92,10 @@
 					<div class="space-4"></div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="email"> Email </label>
+						<label class="col-sm-3 control-label no-padding-right" for="email"> Email* </label>
 
 						<div class="col-sm-9">
-							<input type="email" id="email" name="usuario.email" value="${usuario.email}" 
+							<input type="email" required="required" id="email" name="usuario.email" value="${usuario.email}" 
 							placeholder="Email" maxlength="45" class="col-xs-10 col-sm-5" />
 						</div>
 					</div>
@@ -132,7 +132,7 @@
 							<c:forEach items="${unidadeList}" var="unidade" >							
 								<c:choose>
 								<c:when test="${usuario.unidade.id == unidade.id}">
-									<option value="${usuario.id}" selected="selected">${unidade.localizacao}</option>
+									<option value="${unidade.id}" selected="selected">${unidade.localizacao}</option>
 								</c:when>
 								<c:otherwise>
 									<option value="${unidade.id}">${unidade.localizacao}</option>

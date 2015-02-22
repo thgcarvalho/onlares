@@ -85,7 +85,8 @@
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Nome* </label>
 
 						<div class="col-sm-9">
-							<input type="text" id="nome" required="required" name="usuario.nome" placeholder="Nome" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
+							<input type="text" required="required" id="nome" name="usuario.nome" value="${usuario.nome}" 
+							placeholder="Nome" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
 						</div>
 					</div>
 
@@ -95,7 +96,8 @@
 						<label class="col-sm-3 control-label no-padding-right required" for="email"> Email* </label>
 
 						<div class="col-sm-9">
-							<input type="email" id="email" required="required" name="usuario.email" placeholder="Email" maxlength="45" class="col-xs-10 col-sm-5" />
+							<input type="email" required="required" id="email" name="usuario.email" value="${usuario.email}" 
+							placeholder="Email" maxlength="45" class="col-xs-10 col-sm-5" />
 						</div>
 					</div>
 					
@@ -105,7 +107,8 @@
 						<label class="col-sm-3 control-label no-padding-right" for="fone1"> Fone 1 </label>
 
 						<div class="col-sm-9">
-							<input type="text" name="usuario.fone1" placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="fone1" />
+							<input type="text" name="usuario.fone1" value="${usuario.fone1}" 
+							placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="fone1" />
 						</div>
 					</div>
 					
@@ -115,7 +118,8 @@
 						<label class="col-sm-3 control-label no-padding-right" for="fone2"> Fone 2 </label>
 
 						<div class="col-sm-9">
-							<input type="text" name="usuario.fone2" placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="fone2" />
+							<input type="text" name="usuario.fone2" value="${usuario.fone2}" 
+							placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="fone2" />
 						</div>
 					</div>
 					
@@ -126,8 +130,15 @@
 
 						<div class="col-sm-9">
 						<select name="usuario.unidade.id" class="col-xs-10 col-sm-5" id="unidade" data-placeholder="Escolha a unidade...">
-							<c:forEach items="${unidadeList}" var="unidade" >
-								<option value="${unidade.id}">${unidade.localizacao}</option>
+							<c:forEach items="${unidadeList}" var="unidade" >							
+								<c:choose>
+								<c:when test="${usuario.unidade.id == unidade.id}">
+									<option value="${unidade.id}" selected="selected">${unidade.localizacao}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${unidade.id}">${unidade.localizacao}</option>
+								</c:otherwise>
+							</c:choose>
 							</c:forEach>
 						</select>
 						</div>

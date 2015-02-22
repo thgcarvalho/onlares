@@ -81,11 +81,11 @@
 					<input type="hidden" name="_method" value="PUT">
 					<input type="hidden" name="usuario.id" value="${usuario.id}">
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="nome"> Nome </label>
+						<label class="col-sm-3 control-label no-padding-right" for="nome"> Unidade* </label>
 
 						<div class="col-sm-9">
-							<input type="text" id="nome" name="usuario.nome" value="${usuario.nome}" 
-							placeholder="Nome" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
+							<input type="text" required="required" id="unidade" name="unidade.localizacao" value="${unidade.localizacao}" 
+							placeholder="Unidade" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
 						</div>
 					</div>
 
