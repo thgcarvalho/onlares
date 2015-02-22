@@ -79,6 +79,10 @@ public class AdminUnidadeController {
 	@Admin
 	@Put("/adminUnidade/{id}")
 	public void altera(Unidade unidade) {
+		if (checkNull(unidade.getLocalizacao()).equals("")) {
+			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Localização"));
+			validator.onErrorUsePageOf(this).edita(unidade.getId());
+		}
 		List<Unidade> unidades = unidadeDao.lista();
 		unidades.add(unidade);
 		int mesmoEmail = 0;

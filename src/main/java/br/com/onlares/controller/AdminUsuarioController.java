@@ -89,20 +89,25 @@ public class AdminUsuarioController {
 	@Admin
 	@Put("/adminUsuario/{email}")
 	public void altera(Usuario usuario) {
+		if (checkNull(usuario.getNome()).equals("")) {
+			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Nome"));
+		}
 		if (usuario.getUnidade() == null) {
 			validator.add(new SimpleMessage("usuario.edita", "Selecione a unidade"));
 		}
+		if (checkNull(usuario.getEmail()).equals("")) {
+			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Email"));
+			validator.onErrorUsePageOf(this).edita(usuario.getEmail());
+		}
 		
-		List<Usuario> usuarios = usuarioDao.lista();
-		usuarios.add(usuario);
-		int mesmoEmail = 0;
+		List<Usuario> usuarios = usuarioDao.lista(); // TODO essa lista deve carregar todos os usuarios do sistema
 		for (Usuario usuarioCadastrado : usuarios) {
 			if (usuarioCadastrado.getEmail().equals(usuario.getEmail())) {
-				mesmoEmail++;
+				if (!usuarioCadastrado.getId().equals(usuario.getId())) {
+					validator.add(new SimpleMessage("usuario.edita", "Email usado por outro usuário"));
+					break;
+				}
 			}
-		}
-		if (mesmoEmail > 1) {
-			validator.add(new SimpleMessage("usuario.edita", "Email usado por outro usuário"));
 		}
 		
 		validator.onErrorUsePageOf(this).edita(usuario.getEmail());

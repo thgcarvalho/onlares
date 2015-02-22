@@ -27,8 +27,10 @@ import br.com.onlares.model.Usuario;
 
 public class AdminUsuarioControllerTest {
 	
+	// ADICIONA
+	
 	@Test
-	public void deveObterUmaMensagemDeSucesso() {
+	public void deveObterUmaMensagemDeSucessoAoTentarAdicionarUsuario() {
 		UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
 		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
 		Validator validatorFalso = new MockValidator();
@@ -43,14 +45,14 @@ public class AdminUsuarioControllerTest {
 	    
 		when(usuarioDaoFalso.existe(usuarioForm)).thenReturn(false);
 		
-		AdminUsuarioController loginController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
-		loginController.adiciona(usuarioForm);
+		AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+		adminUsuarioController.adiciona(usuarioForm);
 		
 		assertTrue(resultFalso.included().containsKey("notice"));
 	}
 	
 	@Test
-	public void deveLancarValidationExceptionAoTentarCadastrarUsuarioSemNome() {
+	public void deveLancarValidationExceptionAoTentarAdicionarUsuarioSemNome() {
 		List<String> nomes = new ArrayList<String>();
 		nomes.add(null);
 		nomes.add(" ");
@@ -65,11 +67,11 @@ public class AdminUsuarioControllerTest {
 				UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
 				Validator validatorFalso = new MockValidator();
 				Result resultFalso = new MockResult();
-				AdminUsuarioController loginController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+				AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
 				Usuario usuarioForm = new Usuario(null, null, null);
 				usuarioForm.setNome(nome);
 				usuarioForm.setEmail("email@notnull.com");
-				loginController.adiciona(usuarioForm);
+				adminUsuarioController.adiciona(usuarioForm);
 				fail();
 			} catch (ValidationException e) {
 				List<Message> errors = e.getErrors();
@@ -89,7 +91,7 @@ public class AdminUsuarioControllerTest {
 	}
 	
 	@Test
-	public void deveLancarValidationExceptionAoTentarCadastrarUsuarioSemEmail() {
+	public void deveLancarValidationExceptionAoTentarAdicionarUsuarioSemEmail() {
 		List<String> emails = new ArrayList<String>();
 		emails.add(null);
 		emails.add(" ");
@@ -104,10 +106,10 @@ public class AdminUsuarioControllerTest {
 				UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
 				Validator validatorFalso = new MockValidator();
 				Result resultFalso = new MockResult();
-				AdminUsuarioController loginController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+				AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
 				Usuario usuarioForm = new Usuario(null, null, null);
 				usuarioForm.setEmail(email);
-				loginController.adiciona(usuarioForm);
+				adminUsuarioController.adiciona(usuarioForm);
 				fail();
 			} catch (ValidationException e) {
 				List<Message> errors = e.getErrors();
@@ -127,19 +129,19 @@ public class AdminUsuarioControllerTest {
 	}
 	
 	@Test
-	public void deveLancarValidationExceptionAoTentarCadastrarUsuarioSemUnidade() {
+	public void deveLancarValidationExceptionAoTentarAdicionarUsuarioSemUnidade() {
 		UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
 		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		Usuario usuarioForm = null;
-		AdminUsuarioController loginController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+		AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
 		
 	    try {
 	    	usuarioForm = new Usuario(null, null, null);
 			usuarioForm.setEmail("tcarvalho@onlares.com.br");
 			usuarioForm.setNome("Thiago Carvalho");
-	    	loginController.adiciona(usuarioForm);
+	    	adminUsuarioController.adiciona(usuarioForm);
 	        fail();
 	    } catch (ValidationException e) {
 	        List<Message> errors = e.getErrors();
@@ -148,13 +150,13 @@ public class AdminUsuarioControllerTest {
 	}
 	
 	@Test
-	public void deveLancarValidationExceptionAoTentarCadastrarUsuarioJaExistente() {
+	public void deveLancarValidationExceptionAoTentarAdicionarUsuarioJaExistente() {
 		UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
 		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		Usuario usuarioForm = null;
-		AdminUsuarioController loginController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+		AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
 		
 	    try {
 	    	usuarioForm = new Usuario(null, null, null);
@@ -163,11 +165,177 @@ public class AdminUsuarioControllerTest {
 			
 			when(usuarioDaoFalso.existe(usuarioForm)).thenReturn(true);
 			
-	    	loginController.adiciona(usuarioForm);
+	    	adminUsuarioController.adiciona(usuarioForm);
 	        fail();
 	    } catch (ValidationException e) {
 	        List<Message> errors = e.getErrors();
 	        assertTrue(errors.contains(new SimpleMessage("usuario.adiciona", "Email já cadastrado")));
+	    }
+	}
+	
+	// ALTERA
+	
+	@Test
+	public void deveObterUmaMensagemDeSucessoAoTentarAlterarUsuarioMantendoMesmoEmail() {
+		UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
+		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
+		Validator validatorFalso = new MockValidator();
+		Result resultFalso = new MockResult();
+		
+		Usuario usuarioDB = new Usuario(null, null, null);
+		usuarioDB.setId(1L);
+		usuarioDB.setEmail("tcarvalho@onlares.com.br");
+		usuarioDB.setNome("Thiago Carvalho");
+		Unidade unidade1 = new Unidade();
+		unidade1.setId(1L);
+		usuarioDB.setUnidade(unidade1);
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		usuarios.add(usuarioDB);
+		
+		Usuario usuarioForm = new Usuario(null, null, null);
+		usuarioForm.setId(1L);
+		usuarioForm.setEmail("tcarvalho@onlares.com.br");
+		usuarioForm.setNome("Thiago de Oliveira Carvalho");
+		Unidade unidade2 = new Unidade();
+		unidade2.setId(2L);
+		usuarioForm.setUnidade(unidade2);
+		
+		when(usuarioDaoFalso.lista()).thenReturn(usuarios);
+		
+		AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+		adminUsuarioController.altera(usuarioForm);
+		
+		assertTrue(resultFalso.included().containsKey("notice"));
+	}
+	
+	@Test
+	public void deveObterUmaMensagemDeSucessoAoTentarAlterarUsuarioAlterandoEmail() {
+		UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
+		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
+		Validator validatorFalso = new MockValidator();
+		Result resultFalso = new MockResult();
+		
+		Usuario usuarioDB = new Usuario(null, null, null);
+		usuarioDB.setId(1L);
+		usuarioDB.setEmail("tcarvalho@onlares.com");
+		usuarioDB.setNome("Thiago Carvalho");
+		Unidade unidade1 = new Unidade();
+		unidade1.setId(1L);
+		usuarioDB.setUnidade(unidade1);
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		usuarios.add(usuarioDB);
+		
+		Usuario usuarioForm = new Usuario(null, null, null);
+		usuarioForm.setId(1L);
+		usuarioForm.setEmail("tcarvalho@grandev.com.br");
+		usuarioForm.setNome("Thiago de Oliveira Carvalho");
+		Unidade unidade2 = new Unidade();
+		unidade2.setId(2L);
+		usuarioForm.setUnidade(unidade2);
+		
+		when(usuarioDaoFalso.lista()).thenReturn(usuarios);
+		
+		AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+		adminUsuarioController.altera(usuarioForm);
+		
+		assertTrue(resultFalso.included().containsKey("notice"));
+	}
+	
+	@Test
+	public void deveLancarValidationExceptionAoTentarAlterarUsuarioSemNome() {
+		List<String> nomes = new ArrayList<String>();
+		nomes.add(null);
+		nomes.add(" ");
+		nomes.add("");
+		
+		I18nMessage expectedMessage = new I18nMessage("usuario.edita", "campo.obrigatorio", "Nome");
+		expectedMessage.setBundle(new SafeResourceBundle(ResourceBundle.getBundle("messages"))); 
+		
+		for (String nome : nomes) {
+			try {
+				UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
+				UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
+				Validator validatorFalso = new MockValidator();
+				Result resultFalso = new MockResult();
+				AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+				Usuario usuarioForm = new Usuario(null, null, null);
+				usuarioForm.setNome(nome);
+				usuarioForm.setEmail("email@notnull.com");
+				adminUsuarioController.altera(usuarioForm);
+				fail();
+			} catch (ValidationException e) {
+				List<Message> errors = e.getErrors();
+				boolean found = false;
+				for (Message message : errors) {
+					message.setBundle(ResourceBundle.getBundle("messages"));
+					if (expectedMessage.getMessage().equals(message.getMessage())) {
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					fail("Does not contains the message: " + expectedMessage.getMessage() + " for " + nome);
+				}
+			}
+		}
+	}
+	
+	@Test
+	public void deveLancarValidationExceptionAoTentarAlterarUsuarioSemEmail() {
+		List<String> emails = new ArrayList<String>();
+		emails.add(null);
+		emails.add(" ");
+		emails.add("");
+		
+		I18nMessage expectedMessage = new I18nMessage("usuario.edita", "campo.obrigatorio", "Email");
+		expectedMessage.setBundle(new SafeResourceBundle(ResourceBundle.getBundle("messages"))); 
+
+		for (String email : emails) {
+			try {
+				UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
+				UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
+				Validator validatorFalso = new MockValidator();
+				Result resultFalso = new MockResult();
+				AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+				Usuario usuarioForm = new Usuario(null, null, null);
+				usuarioForm.setEmail(email);
+				adminUsuarioController.altera(usuarioForm);
+				fail();
+			} catch (ValidationException e) {
+				List<Message> errors = e.getErrors();
+				boolean found = false;
+				for (Message message : errors) {
+					message.setBundle(ResourceBundle.getBundle("messages"));
+					if (expectedMessage.getMessage().equals(message.getMessage())) {
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					fail("Does not contains the message: " + expectedMessage.getMessage() + " for " + email);
+				}
+			}
+		}
+	}
+	
+	@Test
+	public void deveLancarValidationExceptionAoTentarAlterarUsuarioSemUnidade() {
+		UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
+		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
+		Validator validatorFalso = new MockValidator();
+		Result resultFalso = new MockResult();
+		Usuario usuarioForm = null;
+		AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
+		
+	    try {
+	    	usuarioForm = new Usuario(null, null, null);
+			usuarioForm.setEmail("tcarvalho@onlares.com.br");
+			usuarioForm.setNome("Thiago Carvalho");
+	    	adminUsuarioController.altera(usuarioForm);
+	        fail();
+	    } catch (ValidationException e) {
+	        List<Message> errors = e.getErrors();
+	        assertTrue(errors.contains(new SimpleMessage("usuario.edita", "Selecione a unidade")));
 	    }
 	}
 	
@@ -181,18 +349,16 @@ public class AdminUsuarioControllerTest {
 		
 		List<Usuario> usuariosDB = new ArrayList<Usuario>();
 		Usuario usuarioDB1 = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", "Thiago Carvalho");
+		usuarioDB1.setId(1L);
 		Usuario usuarioDB2 = new Usuario("fulano@onlares.com.br", "P455w0rd", "Fulando de Tal");
+		usuarioDB2.setId(2L);
 		usuariosDB.add(usuarioDB1);
 		usuariosDB.add(usuarioDB2);
-		Usuario usuarioForm = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", null);
+		Usuario usuarioForm = new Usuario("fulano@onlares.com.br", "S3cr3t", "Thiago Carvalho");
+		usuarioForm.setId(1L);
 		
 	    try {
-	    	usuarioForm = new Usuario(null, null, null);
-			usuarioForm.setEmail("tcarvalho@onlares.com.br");
-			usuarioForm.setNome("Thiago Carvalho");
-			
 			when(usuarioDaoFalso.lista()).thenReturn(usuariosDB);
-			
 			alteraUsuarioController.altera(usuarioForm);
 	        fail();
 	    } catch (ValidationException e) {

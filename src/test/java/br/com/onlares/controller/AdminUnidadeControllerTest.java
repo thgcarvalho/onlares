@@ -25,8 +25,10 @@ import br.com.onlares.model.Unidade;
 
 public class AdminUnidadeControllerTest {
 	
+	// Adicionar
+	
 	@Test
-	public void deveObterUmaMensagemDeSucesso() {
+	public void deveObterUmaMensagemDeSucessoAoTentarAdicionar() {
 		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
@@ -36,14 +38,14 @@ public class AdminUnidadeControllerTest {
 		
 		when(unidadeDaoFalso.existe(unidadeForm)).thenReturn(false);
 		
-		AdminUnidadeController loginController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
-		loginController.adiciona(unidadeForm);
+		AdminUnidadeController adminUnidadeController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
+		adminUnidadeController.adiciona(unidadeForm);
 		
 		assertTrue(resultFalso.included().containsKey("notice"));
 	}
 	
-	@Test
-	public void deveLancarValidationExceptionAoTentarCadastrarUnidadeSemLocalizacao() {
+	@Test 
+	public void deveLancarValidationExceptionAoTentarAdicionarUnidadeSemLocalizacao() {
 		List<String> localizacoes = new ArrayList<String>();
 		localizacoes.add(null);
 		localizacoes.add(" ");
@@ -57,10 +59,10 @@ public class AdminUnidadeControllerTest {
 				UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
 				Validator validatorFalso = new MockValidator();
 				Result resultFalso = new MockResult();
-				AdminUnidadeController loginController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
+				AdminUnidadeController adminUnidadeController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
 				Unidade unidadeForm = new Unidade();
 				unidadeForm.setLocalizacao(localizacao);
-				loginController.adiciona(unidadeForm);
+				adminUnidadeController.adiciona(unidadeForm);
 				fail();
 			} catch (ValidationException e) {
 				List<Message> errors = e.getErrors();
@@ -80,12 +82,12 @@ public class AdminUnidadeControllerTest {
 	}
 	
 	@Test
-	public void deveLancarValidationExceptionAoTentarCadastrarUnidadeJaExistente() {
+	public void deveLancarValidationExceptionAoTentarAdicionarUnidadeJaExistente() {
 		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		Unidade unidadeForm = null;
-		AdminUnidadeController loginController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
+		AdminUnidadeController adminUnidadeController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
 		
 	    try {
 	    	unidadeForm = new Unidade();
@@ -93,12 +95,69 @@ public class AdminUnidadeControllerTest {
 			
 			when(unidadeDaoFalso.existe(unidadeForm)).thenReturn(true);
 			
-	    	loginController.adiciona(unidadeForm);
+	    	adminUnidadeController.adiciona(unidadeForm);
 	        fail();
 	    } catch (ValidationException e) {
 	        List<Message> errors = e.getErrors();
 	        assertTrue(errors.contains(new SimpleMessage("unidade.adiciona", "Unidade já cadastrada")));
 	    }
+	}
+	
+	// ALTERA
+	
+	@Test
+	public void deveObterUmaMensagemDeSucessoAoTentarAlterar() {
+		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
+		Validator validatorFalso = new MockValidator();
+		Result resultFalso = new MockResult();
+		
+		Unidade unidadeForm = new Unidade();
+		unidadeForm.setId(0L);
+		unidadeForm.setLocalizacao("Apartamento 603, Torre 1");
+		
+		when(unidadeDaoFalso.lista()).thenReturn(new ArrayList<Unidade>());
+		
+		AdminUnidadeController adminUnidadeController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
+		adminUnidadeController.altera(unidadeForm);
+		
+		assertTrue(resultFalso.included().containsKey("notice"));
+	}
+	
+	@Test 
+	public void deveLancarValidationExceptionAoTentarAlterarUnidadeSemLocalizacao() {
+		List<String> localizacoes = new ArrayList<String>();
+		localizacoes.add(null);
+		localizacoes.add(" ");
+		localizacoes.add("");
+		
+		I18nMessage expectedMessage = new I18nMessage("unidade.adiciona", "campo.obrigatorio", "Localização");
+		expectedMessage.setBundle(new SafeResourceBundle(ResourceBundle.getBundle("messages"))); 
+		
+		for (String localizacao : localizacoes) {
+			try {
+				UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
+				Validator validatorFalso = new MockValidator();
+				Result resultFalso = new MockResult();
+				AdminUnidadeController adminUnidadeController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
+				Unidade unidadeForm = new Unidade();
+				unidadeForm.setLocalizacao(localizacao);
+				adminUnidadeController.altera(unidadeForm);
+				fail();
+			} catch (ValidationException e) {
+				List<Message> errors = e.getErrors();
+				boolean found = false;
+				for (Message message : errors) {
+					message.setBundle(ResourceBundle.getBundle("messages"));
+					if (expectedMessage.getMessage().equals(message.getMessage())) {
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					fail("Does not contains the message: " + expectedMessage.getMessage() + " for " + localizacao);
+				}
+			}
+		}
 	}
 	
 	@Test
