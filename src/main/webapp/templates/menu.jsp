@@ -59,7 +59,7 @@
 			<b class="arrow"></b>
 		</li>
 
-		<li class="">
+		<li class="disabled">
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-book"></i>
 				<span class="menu-text"> Reservas </span>
@@ -70,7 +70,7 @@
 			<b class="arrow"></b>
 
 			<ul class="submenu">
-				<li class="">
+				<li class="disabled">
 					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Deck
@@ -79,7 +79,7 @@
 					<b class="arrow"></b>
 				</li>
 
-				<li class="">
+				<li class="disabled">
 					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Salão de Festas
@@ -90,7 +90,7 @@
 			</ul>
 		</li>
 
-		<li class="">
+		<li class="disabled">
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-sign-in"></i>
 				<span class="menu-text"> Autorizações </span>
@@ -101,7 +101,7 @@
 			<b class="arrow"></b>
 
 			<ul class="submenu">
-				<li class="">
+				<li class="disabled">
 					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Visitantes
@@ -110,7 +110,7 @@
 					<b class="arrow"></b>
 				</li>
 
-				<li class="">
+				<li class="disabled">
 					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Obras
@@ -119,7 +119,7 @@
 					<b class="arrow"></b>
 				</li>
 
-				<li class="">
+				<li class="disabled">
 					<a href="#">
 						<i class="menu-icon fa fa-caret-right"></i>
 						Mudanças
@@ -130,7 +130,7 @@
 			</ul>
 		</li>
 
-		<li class="">
+		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-envelope-o"></i>
 				<span class="menu-text"> Correspondências </span>
@@ -139,7 +139,7 @@
 			<b class="arrow"></b>
 		</li>
 
-		<li class="">
+		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-calendar"></i>
 
@@ -155,7 +155,7 @@
 			<b class="arrow"></b>
 		</li>
 		
-		<li class="">
+		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-comment-o"></i>
 				<span class="menu-text"> Mensagens </span>
@@ -164,7 +164,7 @@
 			<b class="arrow"></b>
 		</li>
 
-		<li class="">
+		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-warning"></i>
 				<span class="menu-text"> Avisos </span>
@@ -173,7 +173,7 @@
 			<b class="arrow"></b>
 		</li>
 
-		<li class="">
+		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-comments"></i>
 				<span class="menu-text"> Enquetes </span>
@@ -182,7 +182,7 @@
 			<b class="arrow"></b>
 		</li>
 
-		<li class="">
+		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-files-o"></i>
 				<span class="menu-text"> Documentos </span>
@@ -191,7 +191,7 @@
 			<b class="arrow"></b>
 		</li>
 		
-		<li class="">
+		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-phone"></i>
 				<span class="menu-text"> Fornecedores </span>
