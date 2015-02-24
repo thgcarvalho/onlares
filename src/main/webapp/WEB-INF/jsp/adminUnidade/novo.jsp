@@ -62,7 +62,10 @@
 				<i class="ace-icon fa fa-user home-icon"></i>
 				<a href="${ctx}/admin/index">Admin</a>
 			</li>
-
+			<li>
+				<i class=""></i>
+				<a href="${ctx}/adminUnidade/lista">Unidades</a>
+			</li>
 			<li class="active">Nova Unidade</li>
 		</ul><!-- /.breadcrumb -->
 	</div>
@@ -83,7 +86,7 @@
 
 						<div class="col-sm-9">
 							<input type="text" required="required" id="unidade" name="unidade.localizacao" value="${unidade.localizacao}" 
-							placeholder="Unidade" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
+							placeholder="Unidade" maxlength="60" autofocus class="col-xs-10 col-sm-5 text-uppercase" />
 						</div>
 					</div>
 

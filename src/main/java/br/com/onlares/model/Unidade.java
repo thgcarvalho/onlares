@@ -33,7 +33,7 @@ public class Unidade implements Serializable {
 		return localizacao;
 	}
 	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
+		this.localizacao = (localizacao != null ? localizacao.toUpperCase() : null);
 	}
 	
 }
