@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import br.com.onlares.exception.RestricaoDeIntegridadeException;
 import br.com.onlares.model.Unidade;
 
 public class UnidadeDao {
@@ -37,6 +38,18 @@ public class UnidadeDao {
 		em.getTransaction().begin();
 		em.remove(busca(unidade));
 		em.getTransaction().commit();
+	}
+	
+	public void verificaIntegridade(long unidadeId) throws RestricaoDeIntegridadeException {
+		boolean temUsuario = !em.createQuery("select u from Usuario u where u.unidade.id = "
+				+ ":unidade_id").setParameter("unidade_id", unidadeId)
+				.getResultList().isEmpty();
+		
+		if (temUsuario) {
+			//throw new RestricaoDeIntegridadeException("Existe(m) usuário(s) relacionados com está unidade");
+		}
+		
+		System.out.println("WWWWWW"+temUsuario);
 	}
 
 	public Unidade busca(Unidade unidade) {

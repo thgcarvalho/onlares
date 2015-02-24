@@ -15,6 +15,7 @@ import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.UnidadeDao;
+import br.com.onlares.exception.RestricaoDeIntegridadeException;
 import br.com.onlares.model.Unidade;
 
 @Controller
@@ -103,11 +104,16 @@ public class AdminUnidadeController {
 	
 	@Admin
 	@Delete("/adminUnidade/{id}")
-	public void remove(long id){
-//		System.out.println("REMOVE usuarioID=" + email);
-//		Usuario usuario = usuarioDao.buscaPorEmail(email);
-//		usuarioDao.remove(usuario);
-//		result.nothing();
+	public void remove(long id) {
+		Unidade unidade = unidadeDao.buscaPorId(id);
+		try {
+			unidadeDao.verificaIntegridade(unidade.getId());
+			unidadeDao.remove(unidade);
+			result.nothing();
+		} catch (RestricaoDeIntegridadeException exp) {
+			// TODO Mostrar mensagem
+			System.out.println("RestricaoDeIntegridadeException:" + exp.getMessage());
+		}
 	}
 	
 	private String checkNull(String value) {

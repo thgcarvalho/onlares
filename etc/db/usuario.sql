@@ -18,6 +18,9 @@ CREATE TABLE usuario
   CONSTRAINT unique_usuario UNIQUE (email),
   CONSTRAINT fk_condominio FOREIGN KEY (condominio_id)
       REFERENCES condominio (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_unidade FOREIGN KEY (unidade_id)
+      REFERENCES unidade (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (

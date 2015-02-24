@@ -2,7 +2,10 @@ package br.com.onlares.controller;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.ValidationException;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.dao.UnidadeDao;
+import br.com.onlares.exception.RestricaoDeIntegridadeException;
 import br.com.onlares.model.Unidade;
 
 public class AdminUnidadeControllerTest {
@@ -189,5 +193,30 @@ public class AdminUnidadeControllerTest {
 	        assertTrue(errors.contains(new SimpleMessage("unidade.edita", "Unidade já existente")));
 	    }
 	}
+	
+	// Remover
+	
+	@Test
+	public void deveLancarValidationExceptionAoTentarRemoverUnidadeComUsuarioRelacionado() {
+		UnidadeDao unidadeDaoFalso = mock(UnidadeDao.class);
+		Validator validatorFalso = new MockValidator();
+		Result resultFalso = new MockResult();
+		AdminUnidadeController alteraUnidadeController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
+		
+		Unidade unidadeDB = new Unidade();
+		unidadeDB.setId(1L);
+		unidadeDB.setLocalizacao("Apartamento 603, Torre 1");
+		
+	    try {
+	    	when(unidadeDaoFalso.buscaPorId(1L)).thenReturn(unidadeDB);
+			doThrow(new RestricaoDeIntegridadeException("fdfd")).when(unidadeDaoFalso).verificaIntegridade(1L);
+			alteraUnidadeController.remove(1L);
+			verify(unidadeDaoFalso, never()).remove(unidadeDB);
+		} catch (RestricaoDeIntegridadeException e) {
+			System.out.println("Lançou");
+			assertTrue(e.getMessage() != null);
+		}
+	}
+	
 	
 }
