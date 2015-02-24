@@ -42,6 +42,10 @@ public class UnidadeDao {
 	public Unidade busca(Unidade unidade) {
 		return em.find(Unidade.class, unidade.getId());
 	}
+	
+	public Unidade buscaPorId(long id) {
+		return em.find(Unidade.class, id);
+	}
 
 	public boolean existe(Unidade unidade) {
 		return !em.createQuery("select u from Unidade u where u.localizacao = "

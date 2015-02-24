@@ -62,8 +62,11 @@
 				<i class="ace-icon fa fa-user home-icon"></i>
 				<a href="${ctx}/admin/index">Admin</a>
 			</li>
-
-			<li class="active">Novo Usuario</li>
+			<li>
+			<i class=""></i>
+				<a href="${ctx}/adminUsuario/lista">Usuários</a>
+			</li>
+			<li class="active">Edita Usuario</li>
 		</ul><!-- /.breadcrumb -->
 	</div>
 	

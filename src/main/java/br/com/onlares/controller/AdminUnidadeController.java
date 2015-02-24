@@ -67,13 +67,12 @@ public class AdminUnidadeController {
 	@Admin
 	@Get("/adminUnidade/edita/{id}")
 	public void edita(long id) {
-//		Usuario usuario = usuarioDao.buscaPorEmail(email);
-//		if (usuario == null) {
-//			result.notFound();
-//		} else {
-//			result.include("usuario", usuario);
-//			result.include("unidadeList", unidadeDao.lista());
-//		}
+		Unidade unidade = unidadeDao.buscaPorId(id);
+		if (unidade == null) {
+			result.notFound();
+		} else {
+			result.include("unidade", unidade);
+		}
 	}
 	
 	@Admin
