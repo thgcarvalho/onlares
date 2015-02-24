@@ -5,21 +5,24 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.exception.RestricaoDeIntegridadeException;
 import br.com.onlares.model.Unidade;
 
 public class UnidadeDao {
 
 	private final EntityManager em;
+	private final Long condominioId;
 	
 	@Inject
-	public UnidadeDao(EntityManager em) {
+	public UnidadeDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
+		this.condominioId = usuarioLogado.getUsuario().getCondominio().getId();
 	}
 	
 	@Deprecated
 	public UnidadeDao() {
-		this(null); // para uso do CDI
+		this(null, null); // para uso do CDI
 	}
 	
 	public void adiciona(Unidade unidade) {
@@ -48,8 +51,6 @@ public class UnidadeDao {
 		if (temUsuario) {
 			//throw new RestricaoDeIntegridadeException("Existe(m) usuário(s) relacionados com está unidade");
 		}
-		
-		System.out.println("WWWWWW"+temUsuario);
 	}
 
 	public Unidade busca(Unidade unidade) {
@@ -67,9 +68,11 @@ public class UnidadeDao {
 			.getResultList().isEmpty();
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Unidade> lista() {
-		return em.createQuery("select u from Unidade u").getResultList();
+		return em.createQuery("select u from Unidade u where u.condominioId = "
+			+ ":condominioId", Unidade.class)
+			.setParameter("condominioId", condominioId)
+			.getResultList();
 	}
 
 }

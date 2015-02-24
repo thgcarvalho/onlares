@@ -8,21 +8,34 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.util.MD5Hashing;
 
 public class UsuarioDao {
 
 	private final EntityManager em;
+	private final Long condominioId;
 	
 	@Inject
-	public UsuarioDao(EntityManager em) {
+	public UsuarioDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
+		this.condominioId = 1L;
+		//this.condominioId = (usuarioLogado != null ? usuarioLogado.getUsuario().getCondominio().getId() : null);
+		if (usuarioLogado != null) {
+			System.out.println("1="+usuarioLogado.getUsuario());	
+			if (usuarioLogado.getUsuario() != null) {
+				System.out.println("2="+usuarioLogado.getUsuario());	
+				if (usuarioLogado.getUsuario().getCondominio() != null) {
+					System.out.println("3="+usuarioLogado.getUsuario());	
+				}
+			}
+		}
 	}
 	
 	@Deprecated
 	public UsuarioDao() {
-		this(null); // para uso do CDI
+		this(null, null); // para uso do CDI
 	}
 	
 	@SuppressWarnings("unchecked")

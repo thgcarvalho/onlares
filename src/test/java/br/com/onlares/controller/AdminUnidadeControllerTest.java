@@ -209,7 +209,7 @@ public class AdminUnidadeControllerTest {
 		
 	    try {
 	    	when(unidadeDaoFalso.buscaPorId(1L)).thenReturn(unidadeDB);
-			doThrow(new RestricaoDeIntegridadeException("fdfd")).when(unidadeDaoFalso).verificaIntegridade(1L);
+			doThrow(new RestricaoDeIntegridadeException("")).when(unidadeDaoFalso).verificaIntegridade(1L);
 			alteraUnidadeController.remove(1L);
 			verify(unidadeDaoFalso, never()).remove(unidadeDB);
 		} catch (RestricaoDeIntegridadeException e) {

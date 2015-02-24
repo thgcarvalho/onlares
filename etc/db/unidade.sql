@@ -5,7 +5,8 @@
 CREATE TABLE unidade
 (
   id bigserial NOT NULL,
-  localizacao character varying(69),
+  localizacao character varying(60),
+  condominio_id bigint,
   CONSTRAINT unidade_pkey PRIMARY KEY (id)
 )
 WITH (

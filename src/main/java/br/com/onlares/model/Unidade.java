@@ -2,6 +2,7 @@ package br.com.onlares.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,8 @@ public class Unidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String localizacao;
+	@Column(name="condominio_id")
+	private Long condominioId;
 	
 	public Long getId() {
 		return id;
@@ -34,6 +37,12 @@ public class Unidade implements Serializable {
 	}
 	public void setLocalizacao(String localizacao) {
 		this.localizacao = (localizacao != null ? localizacao.toUpperCase() : null);
+	}
+	public Long getCondominioId() {
+		return condominioId;
+	}
+	public void setCondominioId(Long condominioId) {
+		this.condominioId = condominioId;
 	}
 	
 }
