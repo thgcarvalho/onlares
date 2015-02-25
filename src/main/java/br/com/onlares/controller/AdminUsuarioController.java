@@ -78,6 +78,7 @@ public class AdminUsuarioController {
 	@Get("/adminUsuario/edita/{email}")
 	public void edita(String email) {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
+		System.out.println("/adminUsuario/edita/{email} "+ usuario);
 		if (usuario == null) {
 			result.notFound();
 		} else {
@@ -89,27 +90,35 @@ public class AdminUsuarioController {
 	@Admin
 	@Put("/adminUsuario/{email}")
 	public void altera(Usuario usuario) {
+		boolean erro = false;
 		if (checkNull(usuario.getNome()).equals("")) {
+			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Nome"));
 		}
 		if (usuario.getUnidade() == null) {
+			erro=true;
 			validator.add(new SimpleMessage("usuario.edita", "Selecione a unidade"));
 		}
 		if (checkNull(usuario.getEmail()).equals("")) {
+			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Email"));
 			validator.onErrorUsePageOf(this).edita(usuario.getEmail());
 		}
 		
-		List<Usuario> usuarios = usuarioDao.lista(); // TODO essa lista deve carregar todos os usuarios do sistema
+		List<Usuario> usuarios = usuarioDao.listaTodos();
 		for (Usuario usuarioCadastrado : usuarios) {
 			if (usuarioCadastrado.getEmail().equals(usuario.getEmail())) {
 				if (!usuarioCadastrado.getId().equals(usuario.getId())) {
 					validator.add(new SimpleMessage("usuario.edita", "Email usado por outro usuário"));
+					erro=true;
 					break;
 				}
 			}
 		}
 		
+		if (erro) {
+			result.include("unidadeList", unidadeDao.lista());
+		}
 		validator.onErrorUsePageOf(this).edita(usuario.getEmail());
 		
 		usuarioDao.altera(usuario);

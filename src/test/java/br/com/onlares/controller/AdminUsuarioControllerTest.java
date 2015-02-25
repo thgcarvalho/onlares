@@ -356,13 +356,17 @@ public class AdminUsuarioControllerTest {
 		usuariosDB.add(usuarioDB2);
 		Usuario usuarioForm = new Usuario("fulano@onlares.com.br", "S3cr3t", "Thiago Carvalho");
 		usuarioForm.setId(1L);
+		usuarioForm.setUnidade(new Unidade());
 		
 	    try {
-			when(usuarioDaoFalso.lista()).thenReturn(usuariosDB);
+			when(usuarioDaoFalso.listaTodos()).thenReturn(usuariosDB);
 			alteraUsuarioController.altera(usuarioForm);
 	        fail();
 	    } catch (ValidationException e) {
 	        List<Message> errors = e.getErrors();
+	        for (Message message : errors) {
+				System.out.println(message);
+			}
 	        assertTrue(errors.contains(new SimpleMessage("usuario.edita", "Email usado por outro usuário")));
 	    }
 	}
