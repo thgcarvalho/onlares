@@ -83,6 +83,7 @@
 				<form class="form-horizontal" role="form" action="${ctx}/adminUnidade/" method="post">
 					<input type="hidden" name="_method" value="PUT">
 					<input type="hidden" name="unidade.id" value="${unidade.id}">
+					<input type="hidden" name="unidade.condominioId" value="${unidade.condominioId}">
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Unidade* </label>
 

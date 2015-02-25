@@ -26,45 +26,58 @@ public class UnidadeDao {
 	}
 	
 	public void adiciona(Unidade unidade) {
+		unidade.setCondominioId(condominioId);
 		em.getTransaction().begin();
 		em.persist(unidade);
 		em.getTransaction().commit();
 	}
 		
 	public void altera(Unidade unidade) {
-		em.getTransaction().begin();
-		em.merge(unidade);
-		em.getTransaction().commit();
+		if (mesmoCondominio(unidade)) {
+			em.getTransaction().begin();
+			em.merge(unidade);
+			em.getTransaction().commit();
+		}
 	}
 
 	public void remove(Unidade unidade) {
-		em.getTransaction().begin();
-		em.remove(busca(unidade));
-		em.getTransaction().commit();
+		if (mesmoCondominio(unidade)) {
+			em.getTransaction().begin();
+			em.remove(busca(unidade));
+			em.getTransaction().commit();
+		}
 	}
 	
 	public void verificaIntegridade(long unidadeId) throws RestricaoDeIntegridadeException {
-		boolean temUsuario = !em.createQuery("select u from Usuario u where u.unidade.id = "
-				+ ":unidade_id").setParameter("unidade_id", unidadeId)
+		boolean temUsuario = !em.createQuery("select u from Usuario u"
+				+ " where u.unidade.id = :unidade_id"
+				+ " and u.condominioId = :condominioId", Unidade.class)
+				.setParameter("unidade_id", unidadeId)
+				.setParameter("condominioId", condominioId)
 				.getResultList().isEmpty();
-		
 		if (temUsuario) {
 			//throw new RestricaoDeIntegridadeException("Existe(m) usuário(s) relacionados com está unidade");
 		}
 	}
 
 	public Unidade busca(Unidade unidade) {
-		return em.find(Unidade.class, unidade.getId());
+		return buscaPorId(unidade.getId());
 	}
 	
 	public Unidade buscaPorId(long id) {
-		return em.find(Unidade.class, id);
+		Unidade unidade = em.find(Unidade.class, id);
+		if (mesmoCondominio(unidade)) {
+			return unidade;
+		}
+		return null;
 	}
 
 	public boolean existe(Unidade unidade) {
-		return !em.createQuery("select u from Unidade u where u.localizacao = "
-			+ ":localizacao", Unidade.class)
+		return !em.createQuery("select u from Unidade u"
+				+ " where u.localizacao = :localizacao"
+				+ " and u.condominioId = :condominioId", Unidade.class)
 			.setParameter("localizacao", unidade.getLocalizacao())
+			.setParameter("condominioId", condominioId)
 			.getResultList().isEmpty();
 	}
 	
@@ -73,6 +86,15 @@ public class UnidadeDao {
 			+ ":condominioId", Unidade.class)
 			.setParameter("condominioId", condominioId)
 			.getResultList();
+	}
+	
+	private boolean mesmoCondominio(Unidade unidade) {
+		if (unidade.getCondominioId().compareTo(condominioId) == 0) {
+			return true;
+		} else {
+			System.out.println("CONDOMÍNIOS DIFERENTES: " + unidade.getCondominioId() + " != " + condominioId);
+			return false;
+		}
 	}
 
 }
