@@ -73,94 +73,19 @@
 					<div class="space-6"></div>
 
 					<div class="col-sm-12 infobox-container">
-						<div class="infobox infobox-green">
-							<div class="infobox-icon">
-								<i class="ace-icon fa fa-comments"></i>
-							</div>
-
-							<div class="infobox-data">
-								<span class="infobox-data-number">32</span>
-								<div class="infobox-content">comments + 2 reviews</div>
-							</div>
-						</div>
-
-						<div class="infobox infobox-blue">
-							<div class="infobox-icon">
-								<i class="ace-icon fa fa-twitter"></i>
-							</div>
-
-							<div class="infobox-data">
-								<span class="infobox-data-number">11</span>
-								<div class="infobox-content">new followers</div>
-							</div>
-						</div>
-
-						<div class="infobox infobox-pink">
+					
+						<c:forEach items="${anuncioList}" var="anuncio">
+							<div class="infobox infobox-pink">
 							<div class="infobox-icon">
 								<i class="ace-icon fa fa-shopping-cart"></i>
 							</div>
 
 							<div class="infobox-data">
-								<span class="infobox-data-number">8</span>
-								<div class="infobox-content">new orders</div>
+								<span class="infobox-data-number">${anuncio.id}</span>
+								<div class="infobox-content">${anuncio.titulo}</div>
 							</div>
 						</div>
-
-						<div class="infobox infobox-red">
-							<div class="infobox-icon">
-								<i class="ace-icon fa fa-flask"></i>
-							</div>
-
-							<div class="infobox-data">
-								<span class="infobox-data-number">7</span>
-								<div class="infobox-content">experiments</div>
-							</div>
-						</div>
-
-						<div class="infobox infobox-red">
-							<div class="infobox-icon">
-								<i class="ace-icon fa fa-flask"></i>
-							</div>
-
-							<div class="infobox-data">
-								<span class="infobox-data-number">7</span>
-								<div class="infobox-content">experiments</div>
-							</div>
-						</div>
-
-						<div class="infobox infobox-red">
-							<div class="infobox-icon">
-								<i class="ace-icon fa fa-flask"></i>
-							</div>
-
-							<div class="infobox-data">
-								<span class="infobox-data-number">7</span>
-								<div class="infobox-content">experiments</div>
-							</div>
-						</div>
-						
-						<div class="infobox infobox-red">
-							<div class="infobox-icon">
-								<i class="ace-icon fa fa-flask"></i>
-							</div>
-
-							<div class="infobox-data">
-								<span class="infobox-data-number">7</span>
-								<div class="infobox-content">experiments</div>
-							</div>
-						</div>
-						
-						<div class="infobox infobox-red">
-							<div class="infobox-icon">
-								<i class="ace-icon fa fa-flask"></i>
-							</div>
-
-							<div class="infobox-data">
-								<span class="infobox-data-number">7</span>
-								<div class="infobox-content">experiments</div>
-							</div>
-						</div>
-						
+						</c:forEach>
 						
 					</div>
 				</div><!-- /.row -->
