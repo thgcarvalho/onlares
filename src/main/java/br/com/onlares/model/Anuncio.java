@@ -2,18 +2,19 @@ package br.com.onlares.model;
 
 import java.io.Serializable;
 
-//import javax.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.Table;
+import javax.persistence.Table;
 
 /**
  * @author Thiago Carvalho
  * 
  */
-//@Entity
-//@Table(name = "anuncio")
+@Entity
+@Table(name = "anuncio")
 public class Anuncio implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -24,9 +25,12 @@ public class Anuncio implements Serializable {
 	private String atividade;
 	private String titulo;
 	private String descricao;
-	private String telefone;
+	private String fone1;
+	private String fone2;
 	private String email;
 	private String site;
+	@Column(name="condominio_id")
+	private Long condominioId;
 	
 	public Long getId() {
 		return id;
@@ -52,11 +56,17 @@ public class Anuncio implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public String getTelefone() {
-		return telefone;
+	public String getFone1() {
+		return fone1;
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setFone1(String fone1) {
+		this.fone1 = fone1;
+	}
+	public String getFone2() {
+		return fone2;
+	}
+	public void setFone2(String fone2) {
+		this.fone2 = fone2;
 	}
 	public String getEmail() {
 		return email;
@@ -70,4 +80,11 @@ public class Anuncio implements Serializable {
 	public void setSite(String site) {
 		this.site = site;
 	}
+	public Long getCondominioId() {
+		return condominioId;
+	}
+	public void setCondominioId(Long condominioId) {
+		this.condominioId = condominioId;
+	}
+	
 }

@@ -29,8 +29,8 @@ public class AnuncioDao {
 	}
 
 	public List<Anuncio> lista() {
-		return em.createQuery("select u from Usuario u"
-			+ " where u.condominioId = :condominioId", Anuncio.class)
+		return em.createQuery("select a from Anuncio a"
+			+ " where a.condominioId = :condominioId", Anuncio.class)
 			.setParameter("condominioId", condominioId).getResultList();
 	}
 
