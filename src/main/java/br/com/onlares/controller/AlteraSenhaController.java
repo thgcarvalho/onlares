@@ -1,7 +1,6 @@
 package br.com.onlares.controller;
 
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -12,6 +11,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.simplemail.Mailer;
+import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Severity;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
@@ -58,9 +58,12 @@ public class AlteraSenhaController {
 	@Public
 	@Post("/alteraSenha/enviaCodigo")
     public void enviaCodigo(String emailDoUsuario) {
-		try {
-			usuarioDao.buscaPorEmail(emailDoUsuario);
-		} catch (NoResultException e) {
+		if (checkNull(emailDoUsuario).equals("")) {
+			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Email"));
+			validator.onErrorUsePageOf(LoginController.class).login();
+		}
+		usuarioDao.buscaPorEmail(emailDoUsuario);
+		if (usuarioDao == null) {
 			validator.add(new SimpleMessage("alterasenha.solicita", "Email não cadastrado!", Severity.ERROR));
 			validator.onErrorUsePageOf(LoginController.class).login();
 		}
@@ -170,6 +173,14 @@ public class AlteraSenhaController {
 			valid = false;
 		}
 		return valid;
+	}
+	
+	private String checkNull(String value) {
+		if (value == null) {
+			return ("");
+		} else {
+			return (value.trim());
+		}
 	}
 	
 }

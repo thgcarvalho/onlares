@@ -56,69 +56,84 @@
 							<div class="space-6"></div>
 
 							<div class="position-relative">
-								<div id="login-box" class="login-box visible widget-box no-border">
+
+								<div id="signup-box" class="signup-box visible widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">
-											<h4 class="header blue lighter bigger">
-												Login
+											<h4 class="header green lighter bigger">
+												<i class="ace-icon fa fa-users blue"></i>
+												Registro de novo usuário
 											</h4>
 
 											<div class="space-6"></div>
+											<p> Insira os dados abaixo: </p>
 
-											<form action="<c:url value="auth" />" method="post">
+											<form>
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email"  name="usuario.email" autofocus />
+															<input type="email" required="required" id="email" name="usuario.email" value="${usuario.email}" 
+																placeholder="Email" maxlength="45" class="form-control" />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Senha"  name="usuario.senha" />
+															<input type="text" required="required" id="nome" name="usuario.nome" value="${usuario.nome}" 
+																placeholder="Nome" maxlength="60" class="form-control" />
+															<i class="ace-icon fa fa-user"></i>
+														</span>
+													</label>
+
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" required="required" class="form-control" placeholder="Senha" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
 
-													<div class="space"></div>
+													<label class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<input type="password" required="required" class="form-control" placeholder="Repita a Senha" />
+															<i class="ace-icon fa fa-retweet"></i>
+														</span>
+													</label>
+
+													<label class="block">
+														<input type="checkbox" class="ace" />
+														<span class="lbl">
+															Li e aceito os
+															<a href="#">Termos de uso</a>
+														</span>
+													</label>
+
+													<div class="space-24"></div>
 
 													<div class="clearfix">
-														<label class="inline">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"> Lembrar-me</span>
-														</label>
+														<button type="reset" class="width-30 pull-left btn btn-sm">
+															<i class="ace-icon fa fa-refresh"></i>
+															<span class="bigger-110">Limpar</span>
+														</button>
 
-														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
-															<i class="ace-icon fa fa-key"></i>
-															<span class="bigger-110">Entrar</span>
+														<button type="button" class="width-65 pull-right btn btn-sm btn-success">
+															<span class="bigger-110">Registrar</span>
+
+															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
 														</button>
 													</div>
-
-													<div class="space-4"></div>
 												</fieldset>
 											</form>
+										</div>
 
-										</div><!-- /.widget-main -->
-
-										<div class="toolbar clearfix">
-											<div>
-												<a href="${linkTo[LoginController].esqueci()}" class="forgot-password-link">
-													<i class="ace-icon fa fa-arrow-left"></i>
-													Equeci minha senha
-												</a>
-											</div>
-
-											<div>		
-												<a href="${linkTo[LoginController].registro()}" class="user-signup-link">
-													Primeiro acesso
-													<i class="ace-icon fa fa-arrow-right"></i>
-												</a>
-											</div>
+										<div class="toolbar center">
+											<a href="${linkTo[LoginController].login()}" class="back-to-login-link">
+												<i class="ace-icon fa fa-arrow-left"></i>
+												Voltar para o login
+											</a>
 										</div>
 									</div><!-- /.widget-body -->
-								</div><!-- /.login-box -->
-
+								</div><!-- /.signup-box -->
 							</div><!-- /.position-relative -->
 
 						</div>

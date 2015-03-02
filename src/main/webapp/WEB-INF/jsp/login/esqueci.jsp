@@ -56,68 +56,47 @@
 							<div class="space-6"></div>
 
 							<div class="position-relative">
-								<div id="login-box" class="login-box visible widget-box no-border">
+
+								<div id="forgot-box" class="forgot-box visible widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">
-											<h4 class="header blue lighter bigger">
-												Login
+											<h4 class="header red lighter bigger">
+												<i class="ace-icon fa fa-key"></i>
+												Recuperar senha
 											</h4>
 
 											<div class="space-6"></div>
+											<p>
+												Insira seu email para receber as instruções
+											</p>
 
-											<form action="<c:url value="auth" />" method="post">
+											<form action="${ctx}/alteraSenha/enviaCodigo" method="post" >
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email"  name="usuario.email" autofocus />
+															<input type="email" class="form-control" placeholder="Email" name="emailDoUsuario" autofocus />
 															<i class="ace-icon fa fa-envelope"></i>
 														</span>
 													</label>
 
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Senha"  name="usuario.senha" />
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-													</label>
-
-													<div class="space"></div>
-
 													<div class="clearfix">
-														<label class="inline">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"> Lembrar-me</span>
-														</label>
-
-														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
-															<i class="ace-icon fa fa-key"></i>
-															<span class="bigger-110">Entrar</span>
+														<button type="submit" class="width-35 pull-right btn btn-sm btn-danger">
+															<i class="ace-icon glyphicon glyphicon-ok"></i>
+															<span class="bigger-110">Enviar!</span>
 														</button>
 													</div>
-
-													<div class="space-4"></div>
 												</fieldset>
 											</form>
-
 										</div><!-- /.widget-main -->
 
-										<div class="toolbar clearfix">
-											<div>
-												<a href="${linkTo[LoginController].esqueci()}" class="forgot-password-link">
-													<i class="ace-icon fa fa-arrow-left"></i>
-													Equeci minha senha
-												</a>
-											</div>
-
-											<div>		
-												<a href="${linkTo[LoginController].registro()}" class="user-signup-link">
-													Primeiro acesso
-													<i class="ace-icon fa fa-arrow-right"></i>
-												</a>
-											</div>
+										<div class="toolbar center">
+											<a href="${linkTo[LoginController].login()}" class="back-to-login-link">
+												Voltar para o login
+												<i class="ace-icon fa fa-arrow-right"></i>
+											</a>
 										</div>
 									</div><!-- /.widget-body -->
-								</div><!-- /.login-box -->
+								</div><!-- /.forgot-box -->
 
 							</div><!-- /.position-relative -->
 

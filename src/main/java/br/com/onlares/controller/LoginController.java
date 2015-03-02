@@ -57,6 +57,14 @@ public class LoginController {
 		result.redirectTo(HomeController.class).index();
 	}
 	
+	@Get("/registro")
+	@Public
+	public void registro() { }
+	
+	@Get("/esqueci")
+	@Public
+	public void esqueci() { }
+	
 	@Get("/logout")
 	public void sair() {
 		usuarioLogado.logout();
