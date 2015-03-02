@@ -25,6 +25,6 @@ public class ColetorDeAnuncio {
 	public List<Anuncio> getAnuncios() {
 		List<Anuncio> anuncios = dao.lista();
 		Collections.shuffle(anuncios);
-		return anuncios;
+		return anuncios.subList(0, (anuncios.size() >= 6 ? 6 : anuncios.size()));
 	}
 }

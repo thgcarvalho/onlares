@@ -92,6 +92,7 @@
 									<th>Nome</th>
 									<th>Email</th>
 									<th>Unidade</th>
+									<th>Status</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -104,6 +105,11 @@
 										</td>
 										<td>${usuario.email}</td>
 										<td>${usuario.unidade.localizacao}</td>
+										<td>
+											<c:if test="${usuario.registrado}">
+												<span class="label label-sm label-success">Registrado</span>
+											</c:if>
+										</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
 												<a class="visualizar" href="${linkTo[PerfilController].visualiza(usuario.email)}">
@@ -220,7 +226,7 @@
 				bAutoWidth: false,
 				"aoColumns": [
 				  { "bSortable": false },
-				  null, null,
+				  null, null, null,
 				  { "bSortable": false }
 				],
 				"aaSorting": [],

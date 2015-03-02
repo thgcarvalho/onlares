@@ -116,6 +116,10 @@ public class Usuario implements Serializable {
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
+	
+	public boolean isRegistrado() {
+		return (!checkNull(senha).equals(""));
+	}
 
 	@Override
 	public int hashCode() {
@@ -157,6 +161,14 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "(" + this.id + ") " + this.email + " - " + this.nome;
+	}
+	
+	private String checkNull(String value) {
+		if (value == null) {
+			return ("");
+		} else {
+			return (value.trim());
+		}
 	}
 	
 	
