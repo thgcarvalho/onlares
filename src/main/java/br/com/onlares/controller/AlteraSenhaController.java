@@ -55,17 +55,22 @@ public class AlteraSenhaController {
 		this(null, null, null, null, null);
 	}
 	
+	@Get("/esqueci")
+	@Public
+	public void esqueci() { }
+	
 	@Public
 	@Post("/alteraSenha/enviaCodigo")
     public void enviaCodigo(String emailDoUsuario) {
 		if (checkNull(emailDoUsuario).equals("")) {
 			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Email"));
-			validator.onErrorUsePageOf(LoginController.class).login();
+			validator.onErrorUsePageOf(this).esqueci();
 		}
-		usuarioDao.buscaPorEmail(emailDoUsuario);
-		if (usuarioDao == null) {
-			validator.add(new SimpleMessage("alterasenha.solicita", "Email não cadastrado!", Severity.ERROR));
-			validator.onErrorUsePageOf(LoginController.class).login();
+		Usuario usuario = usuarioDao.buscaPorEmail(emailDoUsuario);
+		System.out.println("Usuario " + usuario);
+		if (usuario == null) {
+			validator.add(new SimpleMessage("alterasenha.solicita", "Email não cadastrado!"));
+			validator.onErrorUsePageOf(this).esqueci();
 		}
 		
 		GeradorDeCodigo geradorDeCodigo = new GeradorDeCodigo();
@@ -83,16 +88,16 @@ public class AlteraSenhaController {
 	        email.setSubject("Instruções para Nova Senha");
 	        email.addTo(emailDoUsuario);
 	        email.setMsg("Clique no link para realizar a alteração: "
-	        		+ "http://localhost:8080/onlares/alteraSenha/codigo/" + codigo );
+	        		+ "http://www.grandev.me/onlares/alteraSenha/codigo/" + codigo );
 	        mailer.send(email);
 		} catch(EmailException eExp) {
 			eExp.printStackTrace();	
 			validator.add(new SimpleMessage("alterasenha.solicita", "Erro ao enviar email!", Severity.ERROR));
-			validator.onErrorUsePageOf(LoginController.class).login();
+			validator.onErrorUsePageOf(this).esqueci();
 		}
 		
         result.include("notice", "Um email com as instruções foi enviado para " + emailDoUsuario);
-		result.redirectTo(LoginController.class).login();
+		result.redirectTo(this).esqueci();
     }
 	
 	@Public

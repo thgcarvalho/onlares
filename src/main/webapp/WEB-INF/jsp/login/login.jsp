@@ -103,14 +103,14 @@
 
 										<div class="toolbar clearfix">
 											<div>
-												<a href="${linkTo[LoginController].esqueci()}" class="forgot-password-link">
+												<a href="${linkTo[AlteraSenhaController].esqueci()}" class="forgot-password-link">
 													<i class="ace-icon fa fa-arrow-left"></i>
-													Equeci minha senha
+													Esqueci minha senha
 												</a>
 											</div>
 
 											<div>		
-												<a href="${linkTo[LoginController].registro()}" class="user-signup-link">
+												<a href="${linkTo[PrimeiroAcessoController].registro()}" class="user-signup-link">
 													Primeiro acesso
 													<i class="ace-icon fa fa-arrow-right"></i>
 												</a>

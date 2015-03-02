@@ -116,7 +116,7 @@
 															<span class="bigger-110">Limpar</span>
 														</button>
 
-														<button type="button" class="width-65 pull-right btn btn-sm btn-success">
+														<button type="submit" class="width-65 pull-right btn btn-sm btn-success">
 															<span class="bigger-110">Registrar</span>
 
 															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
