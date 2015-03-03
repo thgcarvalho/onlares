@@ -231,12 +231,12 @@
 						</a>
 					</li>  -->
 
-					<!-- <li>
-						<a href="profile.html">
+					<li>
+						<a href="${linkTo[PerfilController].edita()}">
 							<i class="ace-icon fa fa-user"></i>
 							Perfil
 						</a>
-					</li> -->
+					</li>
 
 					<li class="divider"></li>
 

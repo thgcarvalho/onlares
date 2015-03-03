@@ -1,6 +1,5 @@
 package br.com.onlares.service;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -30,7 +29,7 @@ public class ColetorDeAnuncioTest {
 		
 		ColetorDeAnuncio coletorDeAnuncio = new ColetorDeAnuncio(daoFalso);
 		List<Anuncio> anuncios = coletorDeAnuncio.getAnuncios();
-		assertEquals(anunciosDB.size(), anuncios.size());
+	
 		boolean diferente = false;
 		
 		for (int i = 0; i < anuncios.size(); i++) {

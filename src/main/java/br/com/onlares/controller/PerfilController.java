@@ -4,7 +4,9 @@ import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Usuario;
@@ -26,6 +28,19 @@ public class PerfilController {
 	
 	public PerfilController() {
 		this(null, null, null);
+	}
+	
+	@Get("/perfil/edita")
+	public void edita() {
+		System.out.println("public void edita() {");
+		
+	}
+	
+	@Post("/perfil/foto")
+	public void foto(Usuario usuario, UploadedFile capa) {
+		System.out.println("public void foto(Usuario usuario, UploadedFile capa) {");
+		System.out.println("getFileName =" + (capa == null ? "NULL" : capa.getFileName()));
+		result.nothing();
 	}
 	
 	@Get("/perfil/visualiza/{email}")
