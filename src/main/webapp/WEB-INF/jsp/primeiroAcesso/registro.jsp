@@ -75,56 +75,56 @@
 											<div class="space-6"></div>
 											<p> Insira os dados abaixo: </p>
 
-										<form id="validation-form" method="post">
-    										<fieldset>
-										        <label class="block clearfix"> <span class="block input-icon input-icon-right">
-										                <input type="text" id="email" name="email" value="" 
-										                placeholder="Email" maxlength="45" class="form-control" />
-										                <i class="ace-icon fa fa-envelope"></i>
-										            </span>
-										
-										        </label>
-										        <label class="block clearfix"> <span class="block input-icon input-icon-right">
-										                <input type="text" id="nome" name="nome" value="" 
-										                placeholder="Nome" maxlength="60" class="form-control" />
-										                <i class="ace-icon fa fa-user"></i>
-										            </span>
-										
-										        </label>
-										        <label class="block clearfix"> <span class="block input-icon input-icon-right">
-										                <input type="password" id="senha" name="senha" value=""
-										                class="form-control" placeholder="Senha" />
-										                <i class="ace-icon fa fa-lock"></i>
-										            </span>
-										
-										        </label>
-										        <label class="block clearfix"> <span class="block input-icon input-icon-right">
-										                <input type="password" id="confirmar_senha" name="confirmar_senha" 
-										                class="form-control" placeholder="Repita a Senha" />
-										                <i class="ace-icon fa fa-retweet"></i>
-										            </span>
-										
-										        </label>
-										        <label class="block">
-										            <input type="checkbox" class="ace" id="termos" name="termos" /> <span class="lbl">
-										                Li e aceito os
-										                <a href="#">Termos de uso</a>
-										            </span>
-										
-										        </label>
-										        <div class="space-24"></div>
-										        <div class="clearfix">
-										            <button type="reset" class="width-30 pull-left btn btn-sm"> <i class="ace-icon fa fa-refresh"></i>
-										 				<span class="bigger-110">Limpar</span>
-										
-										            </button>
-										            <button type="submit" class="width-65 pull-right btn btn-sm btn-success"> <span class="bigger-110">Registrar</span>
-										 				<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-										
-										            </button>
-										        </div>
-										    </fieldset>
-										</form>
+											<form action="<c:url value="registrar" />" id="validation-form" method="post">
+	    										<fieldset>
+											        <label class="block clearfix"> <span class="block input-icon input-icon-right">
+											                <input type="text" id="email" name="usuario.email" value="" 
+											                placeholder="Email" maxlength="45" class="form-control" />
+											                <i class="ace-icon fa fa-envelope"></i>
+											            </span>
+											
+											        </label>
+											        <label class="block clearfix"> <span class="block input-icon input-icon-right">
+											                <input type="text" id="nome" name="usuario.nome" value="" 
+											                placeholder="Nome" maxlength="60" class="form-control" />
+											                <i class="ace-icon fa fa-user"></i>
+											            </span>
+											
+											        </label>
+											        <label class="block clearfix"> <span class="block input-icon input-icon-right">
+											                <input type="password" id="senha" name="usuario.senha" value=""
+											                class="form-control" placeholder="Senha" />
+											                <i class="ace-icon fa fa-lock"></i>
+											            </span>
+											
+											        </label>
+											        <label class="block clearfix"> <span class="block input-icon input-icon-right">
+											                <input type="password" id="confirmar_senha" name="confirmar_senha" 
+											                class="form-control" placeholder="Repita a Senha" />
+											                <i class="ace-icon fa fa-retweet"></i>
+											            </span>
+											
+											        </label>
+											        <label class="block">
+											            <input type="checkbox" class="ace" id="termos" name="termos" /> <span class="lbl">
+											                Li e aceito os
+											                <a href="#">Termos de uso</a>
+											            </span>
+											
+											        </label>
+											        <div class="space-24"></div>
+											        <div class="clearfix">
+											            <button type="reset" class="width-30 pull-left btn btn-sm"> <i class="ace-icon fa fa-refresh"></i>
+											 				<span class="bigger-110">Limpar</span>
+											
+											            </button>
+											            <button type="submit" class="width-65 pull-right btn btn-sm btn-success"> <span class="bigger-110">Registrar</span>
+											 				<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+											
+											            </button>
+											        </div>
+											    </fieldset>
+											</form>
 										</div>
 
 										<div class="toolbar center">
@@ -232,8 +232,6 @@
 				//determine selected step
 				//wizard.selectedItem().step
 			
-			
-			
 				//hide or show the other form which requires validation
 				//this is for demo only, you usullay want just one form in your application
 				$('#skip-validation').removeAttr('checked').on('click', function(){
@@ -248,14 +246,7 @@
 					}
 				})
 			
-			
-			
 				//documentation : http://docs.jquery.com/Plugins/Validation/validate
-			
-			
-				jQuery.validator.addMethod("phone", function (value, element) {
-					return this.optional(element) || /^\(\d{3}\) \d{3}\-\d{4}( x\d{1,6})?$/.test(value);
-				}, "Enter a valid phone number.");
 			
 				$('#validation-form').validate({
 					errorElement: 'div',
@@ -263,11 +254,14 @@
 					focusInvalid: false,
 					ignore: "",
 					rules: {
-						email: {
+						"usuario.email": {
 							required: true,
 							email:true
 						},
-						senha: {
+						"usuario.nome": {
+							required: true
+						},
+						"usuario.senha": {
 							required: true,
 							minlength: 5
 						},
@@ -276,24 +270,21 @@
 							minlength: 5,
 							equalTo: "#senha"
 						},
-						nome: {
-							required: true
-						},
 						termos: {
 							required: true,
 						}
 					},
 			
 					messages: {
-						email: {
+						"usuario.email": {
 							required: "Email é obrigatório.",
 							email: "Insira um email válido."
 						},
-						nome: {
+						"usuario.nome": {
 							required: "Nome é obrigatório.",
 							email: "Insira um email válido."
 						},
-						senha: {
+						"usuario.senha": {
 							required: "Senha é obrigatória.",
 							minlength: "Insira uma senha segura."
 						},
@@ -327,36 +318,9 @@
 							error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
 						}
 						else error.insertAfter(element.parent());
-					},
-			
-					submitHandler: function (form) {
-					},
-					invalidHandler: function (form) {
 					}
 				});
-			
 				
-				
-				
-				$('#modal-wizard-container').ace_wizard();
-				$('#modal-wizard .wizard-actions .btn[data-dismiss=modal]').removeAttr('disabled');
-				
-				
-				/**
-				$('#date').datepicker({autoclose:true}).on('changeDate', function(ev) {
-					$(this).closest('form').validate().element($(this));
-				});
-				
-				$('#mychosen').chosen().on('change', function(ev) {
-					$(this).closest('form').validate().element($(this));
-				});
-				*/
-				
-				
-				$(document).one('ajaxloadstart.page', function(e) {
-					//in ajax mode, remove remaining elements before leaving page
-					$('[class*=select2]').remove();
-				});
 			})
 		</script>
 	</body>

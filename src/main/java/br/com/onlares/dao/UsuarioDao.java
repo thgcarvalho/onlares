@@ -25,7 +25,7 @@ public class UsuarioDao {
 				&& usuarioLogado.getUsuario().getCondominio() != null) {
 			this.condominioId = usuarioLogado.getUsuario().getCondominio().getId();
 		} else {
-			this.condominioId = null;
+			this.condominioId = -1L;
 		}
 	}
 	
@@ -84,6 +84,14 @@ public class UsuarioDao {
 		usuario.setCondominio(condominio);
 		em.getTransaction().begin();
 		em.persist(usuario);
+		em.getTransaction().commit();
+	}
+	
+	public void registra(Usuario usuario, String nome, String senha) {
+		em.getTransaction().begin();
+		usuario.setNome(nome);
+		usuario.setSenha(senha);
+		em.merge(usuario);
 		em.getTransaction().commit();
 	}
 	
