@@ -47,9 +47,9 @@ public class PerfilController {
 		
 	}
 	
-	@Get("/perfil/{id}/foto")
-	public Download foto(Long id) {
-		Usuario usuario = usuarioDao.buscaPorId(id);
+	@Get("/perfil/{email}/foto")
+	public Download foto(String email) {
+		Usuario usuario = usuarioDao.buscaPorEmail(email);
 		Arquivo foto = imagens.recupera(usuario.getFoto());
 		return new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
 	}

@@ -37,7 +37,8 @@ public class DiretorioDB implements Diretorio{
 			return null;
 		}
 		// scheme é o protocolo. No caso de db:// é o db
-		if (!chave.getScheme().equals("bd")) {
+		System.out.println("chave.getScheme()"+chave.getScheme());
+		if (!chave.getScheme().equals("db")) {
 			throw new IllegalArgumentException(chave + " não é uma URI de banco de dados");
 		}
 		// authority é o que vem depois do db://
