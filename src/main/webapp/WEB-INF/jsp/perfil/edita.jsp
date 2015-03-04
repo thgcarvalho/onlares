@@ -189,7 +189,7 @@
 														</form>
 													</div>
 												</div>
-												
+												<!--
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Foto </div>
 
@@ -207,7 +207,7 @@
 														</form>
 													</div>
 												</div>
-												
+												-->
 												
 												
 											</div>
@@ -620,6 +620,7 @@
 					allowMime: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif']
 				});
 		
+				/**
 				form.on('submit', function(){
 					console.log("submit");
 					if(!file.data('ace_input_files')) return false;
@@ -642,15 +643,15 @@
 		
 						working = false;
 					});
-					
+					console.log("setTimeout");
 					
 					setTimeout(function(){
 						deferred.resolve();
 					} , parseInt(Math.random() * 800 + 800));
-		
-					return false;
+					console.log("return true;");
+					return true;
 				});
-						
+				*/
 			});
 		
 			
