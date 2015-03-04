@@ -2,13 +2,13 @@ package br.com.onlares.controller;
 
 import java.net.URI;
 
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.onlares.model.Arquivo;
+import br.com.onlares.model.Diretorio;
 
-public class DiretorioDB {
+public class DiretorioDB implements Diretorio{
 	
 	private final EntityManager em;
 	
@@ -22,17 +22,27 @@ public class DiretorioDB {
 		this(null); // para uso do CDI
 	}
 
-	//@Override
+	@Override
 	public URI grava(Arquivo arquivo) {
 		System.out.println("GRAVA"); // TODO remover
 		em.getTransaction().begin();
 		em.persist(arquivo);
 		em.getTransaction().commit();
-		return URI.create("bd://" + arquivo.getId());
+		return URI.create("db://" + arquivo.getId());
 	}
 
-	//@Override
+	@Override
 	public Arquivo recupera(URI chave) {
-		return null;
+		if (chave == null) {
+			return null;
+		}
+		// scheme é o protocolo. No caso de db:// é o db
+		if (!chave.getScheme().equals("bd")) {
+			throw new IllegalArgumentException(chave + " não é uma URI de banco de dados");
+		}
+		// authority é o que vem depois do db://
+		Long id = Long.valueOf(chave.getAuthority());
+		return em.find(Arquivo.class, id);
 	}
+	
 }

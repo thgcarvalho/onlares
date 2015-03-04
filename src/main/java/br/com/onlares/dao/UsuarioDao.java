@@ -45,7 +45,11 @@ public class UsuarioDao {
 	}
 	
 	public Usuario busca(Usuario usuario) {
-		return em.find(Usuario.class, usuario.getId());
+		return buscaPorId(usuario.getId());
+	}
+	
+	public Usuario buscaPorId(Long id) {
+		return em.find(Usuario.class, id);
 	}
 	
 	public Usuario buscaPorEmail(String email) {

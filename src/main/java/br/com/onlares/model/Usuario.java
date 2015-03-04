@@ -1,6 +1,7 @@
 package br.com.onlares.model;
 
 import java.io.Serializable;
+import java.net.URI;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,7 +41,8 @@ public class Usuario implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "unidade_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private Unidade unidade;
-
+	private String foto;
+	
 	@Deprecated
 	public Usuario() {
 		this(null, null, null); // para uso do CDI
@@ -115,6 +117,17 @@ public class Usuario implements Serializable {
 	}
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
+	}
+	
+	public URI getFoto() {
+		if (foto == null) {
+			return null;
+		}
+		return URI.create(foto);
+	}
+
+	public void setFoto(URI foto) {
+		this.foto = foto == null ? null : foto.toString();
 	}
 	
 	public boolean isRegistrado() {

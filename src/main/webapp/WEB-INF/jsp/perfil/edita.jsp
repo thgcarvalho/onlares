@@ -183,7 +183,7 @@
 													<div class="profile-info-name"> Foto </div>
 
 													<div class="profile-info-value">
-														<form action="${linkTo[PerfilController].foto}" method="post" enctype="multipart/form-data">
+														<form action="${linkTo[PerfilController].armazenaFoto}" method="post" enctype="multipart/form-data">
 															Capa: <input type="file" name="capa" />
 															<input type="submit" value="enviar"/>
 														</form>
@@ -194,7 +194,7 @@
 													<div class="profile-info-name"> Foto </div>
 
 													<div class="profile-info-value">
-														<form class="no-margin" action="${linkTo[PerfilController].foto}" method="post" enctype="multipart/form-data">
+														<form class="no-margin" action="${linkTo[PerfilController].armazenaFoto}" method="post" enctype="multipart/form-data">
 														 <div class="modal-body">
 															<div class="space-4"></div>
 															<div style="width:75%;margin-left:12%;"><input type="file" name="capa" /></div>
@@ -581,8 +581,9 @@
 						<h4 class="blue">Alterar foto</h4>\
 					</div>\
 					\
-					<form class="no-margin" action="${linkTo[PerfilController].foto}" method="post" enctype="multipart/form-data">\
-					 <div class="modal-body">\
+					<form class="no-margin" action="${linkTo[PerfilController].armazenaFoto}" method="post" enctype="multipart/form-data">\
+					<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">\
+					<div class="modal-body">\
 						<div class="space-4"></div>\
 						<div style="width:75%;margin-left:12%;"><input type="file" name="capa" /></div>\
 					 </div>\
