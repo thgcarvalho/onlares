@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import br.com.caelum.vraptor.observer.download.Download;
 
 /**
  * @author Thiago Carvalho
@@ -42,13 +45,17 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "unidade_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private Unidade unidade;
 	private String foto;
+	@Transient
+	private Download fotoDownload;
 	
 	@Deprecated
 	public Usuario() {
 		this(null, null, null); // para uso do CDI
+		System.out.println("   ----- Usuario() ----");
 	}
 	
 	public Usuario(String email, String senha, String nome) {
+		System.out.println("   ----- (String email, String senha, String nome) ----");
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
@@ -128,6 +135,16 @@ public class Usuario implements Serializable {
 
 	public void setFoto(URI foto) {
 		this.foto = foto == null ? null : foto.toString();
+	}
+	
+	public Download getFotoDownload() {
+		System.out.println("USUARIO GET FOTO DOWNLOAD " + fotoDownload);
+		return fotoDownload;
+	}
+	
+	public void setFotoDownload(Download fotoDownload) {
+		System.out.println("USUARIO SET FOTO DOWNLOAD " + fotoDownload);
+		this.fotoDownload = fotoDownload;
 	}
 	
 	public boolean isRegistrado() {

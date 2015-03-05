@@ -24,27 +24,33 @@ import com.google.common.io.ByteStreams;
 public class PerfilController {
 
 	private final UsuarioDao usuarioDao;
+	private final UsuarioLogado usuarioLogado;
 	@SuppressWarnings("unused")
 	private final Validator validator;
 	private final Result result;
 	private final DiretorioDB imagens;
 
 	@Inject
-	public PerfilController(UsuarioDao usuarioDao, Validator validator, Result result, DiretorioDB imagens) {
+	public PerfilController(UsuarioDao usuarioDao, UsuarioLogado usuarioLogado, Validator validator, Result result, DiretorioDB imagens) {
 		this.usuarioDao = usuarioDao;
+		this.usuarioLogado = usuarioLogado;
 		this.validator = validator;
 		this.result = result;
 		this.imagens = imagens;
 	}
 	
 	public PerfilController() {
-		this(null, null, null, null);
+		this(null, null, null, null, null);
 	}
 	
 	@Get("/perfil/edita")
 	public void edita() {
-		System.out.println("public void edita() {");
-		
+	}
+	
+	@Get
+	public Download fotoDownload() {
+		System.out.println("PerfilController GET FOTO DOWNLOAD " + usuarioLogado.getUsuario().getNome());
+		return usuarioLogado.getUsuario().getFotoDownload();
 	}
 	
 	@Get("/perfil/{email}/foto")
@@ -55,19 +61,19 @@ public class PerfilController {
 	}
 	
 	@Post("/perfil/foto")
-	public void armazenaFoto(Usuario usuario, UploadedFile capa) throws IOException {
+	public void armazenaFoto(UploadedFile foto) throws IOException {
 		System.out.println("public void foto(Usuario usuario, UploadedFile capa) {");
-		System.out.println("getFileName =" + (capa == null ? "NULL" : capa.getFileName()));
-		Usuario usuarioDB = usuarioDao.busca(usuario);
-		if (capa != null) {
+		System.out.println("getFileName =" + (foto == null ? "NULL" : foto.getFileName()));
+		//Usuario usuarioDB = usuarioDao.busca(usuario);
+		if (foto != null) {
 			URI imagemURI = imagens.grava(new Arquivo(
-					capa.getFileName(), 
-					ByteStreams.toByteArray(capa.getFile()), 
-					capa.getContentType(), Calendar.getInstance()));
-			System.out.println("ID=" + usuarioDB.getId()); // TODO remover
-			System.out.println("NOME=" + usuarioDB.getNome()); // TODO remover
-			usuarioDB.setFoto(imagemURI);
-			usuarioDao.altera(usuarioDB);
+					foto.getFileName(), 
+					ByteStreams.toByteArray(foto.getFile()), 
+					foto.getContentType(), Calendar.getInstance()));
+			System.out.println("ID=" + usuarioLogado.getUsuario().getId()); // TODO remover
+			System.out.println("NOME=" + usuarioLogado.getUsuario().getNome()); // TODO remover
+			usuarioLogado.getUsuario().setFoto(imagemURI);
+			usuarioDao.altera(usuarioLogado.getUsuario());
 			System.out.println("FOTO=" + imagemURI); // TODO remover
 		}
 		

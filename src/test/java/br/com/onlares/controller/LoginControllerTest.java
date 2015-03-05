@@ -34,7 +34,7 @@ public class LoginControllerTest {
 		when(daoFalso.loginValido(usuarioForm)).thenReturn(true);
 		when(daoFalso.buscaPorEmail("tcarvalho@onlares.com.br")).thenReturn(usuarioDB);
 		
-		LoginController loginController = new LoginController(daoFalso, validatorFalso, resultFalso, new UsuarioLogado());
+		LoginController loginController = new LoginController(daoFalso, validatorFalso, resultFalso, new UsuarioLogado(), null);
 		loginController.auth(usuarioForm);
 		UsuarioLogado usuarioLogado = loginController.getUsuarioLogado();
 		
@@ -51,7 +51,7 @@ public class LoginControllerTest {
 		
 		when(daoFalso.existe(usuarioForm)).thenReturn(false);
 		
-		LoginController loginController = new LoginController(daoFalso, validatorFalso, resultFalso, new UsuarioLogado());
+		LoginController loginController = new LoginController(daoFalso, validatorFalso, resultFalso, new UsuarioLogado(), null);
 		loginController.auth(usuarioForm);
 		UsuarioLogado usuarioLogado = loginController.getUsuarioLogado();
 		
@@ -66,7 +66,7 @@ public class LoginControllerTest {
 		Usuario usuario = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", "Thiago Carvalho");
 		usuarioLogado.setUsuario(usuario);
 		
-		LoginController loginController = new LoginController(null, null, resultFalso, usuarioLogado);
+		LoginController loginController = new LoginController(null, null, resultFalso, usuarioLogado, null);
 		
 		assertNotNull(loginController.getUsuarioLogado().getUsuario());
 		loginController.sair();

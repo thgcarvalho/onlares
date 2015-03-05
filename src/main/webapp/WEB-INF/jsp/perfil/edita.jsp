@@ -186,31 +186,12 @@
 
 													<div class="profile-info-value">
 														<form action="${linkTo[PerfilController].armazenaFoto}" method="post" enctype="multipart/form-data">
-															Capa: <input type="file" name="capa" />
+															Capa: <input type="file" name="foto" />
+															<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
 															<input type="submit" value="enviar"/>
 														</form>
 													</div>
 												</div>
-												<!--
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Foto </div>
-
-													<div class="profile-info-value">
-														<form class="no-margin" action="${linkTo[PerfilController].armazenaFoto}" method="post" enctype="multipart/form-data">
-														 <div class="modal-body">
-															<div class="space-4"></div>
-															<div style="width:75%;margin-left:12%;"><input type="file" name="capa" /></div>
-														 </div>
-														
-														 <div class="modal-footer center">
-															<button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Submit</button>
-															<button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Cancel</button>
-														 </div>
-														</form>
-													</div>
-												</div>
-												-->
-												
 												
 											</div>
 										</div><!-- /.col -->
@@ -584,10 +565,9 @@
 					</div>\
 					\
 					<form class="no-margin" action="${linkTo[PerfilController].armazenaFoto}" method="post" enctype="multipart/form-data">\
-					<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">\
 					<div class="modal-body">\
 						<div class="space-4"></div>\
-						<div style="width:75%;margin-left:12%;"><input type="file" name="capa" /></div>\
+						<div style="width:75%;margin-left:12%;"><input type="file" name="foto" /></div>\
 					 </div>\
 					\
 					 <div class="modal-footer center">\
