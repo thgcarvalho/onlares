@@ -107,30 +107,34 @@
 										<div class="col-xs-12 col-sm-9">
 
 											<div class="profile-user-info">
+												
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Nome </div>
-
+													<div class="profile-info-name"> Nome* </div>
+							
 													<div class="profile-info-value">
-														<span>${usuarioLogado.usuario.nome}</span>
+														<input type="text" required="required" id="nome" name="usuario.nome" value="${usuarioLogado.usuario.nome}" 
+														placeholder="Nome" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
-											
+												
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Email </div>
-
+													<div class="profile-info-name"> Email* </div>
+							
 													<div class="profile-info-value">
-														<span>${usuarioLogado.usuario.email}</span>
+														<input type="email" required="required" id="email" name="usuario.email" value="${usuarioLogado.usuario.email}" 
+														placeholder="Email" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
 												
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Profissão </div>
-
+							
 													<div class="profile-info-value">
-														<span></span>
+														<input type="text" required="required" id="profissao" name="profissao" value="" 
+														placeholder="Profissão" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
-
+											
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Unidade </div>
 
@@ -140,14 +144,16 @@
 													</div>
 												</div>
 
+
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Idade </div>
-
+							
 													<div class="profile-info-value">
-														<span>38</span>
+														<input type="text" required="required" id="idade" name="idade" value="" 
+														placeholder="Idade" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
-
+												
 											</div>
 
 											<div class="hr hr-8 dotted"></div>
@@ -155,9 +161,10 @@
 											<div class="profile-user-info">
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Website </div>
-
+							
 													<div class="profile-info-value">
-														<a href="#" target="_blank">www.grandev.com</a>
+														<input type="text" required="required" id="site" name="site" value="" 
+														placeholder="Website" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
 
@@ -167,7 +174,8 @@
 													</div>
 
 													<div class="profile-info-value">
-														<a href="#">Siga-me no Facebook</a>
+														<input type="text" required="required" id="site" name="facebook" value="" 
+														placeholder="Facebook" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
 
@@ -177,19 +185,8 @@
 													</div>
 
 													<div class="profile-info-value">
-														<a href="#">Siga-me no Twitter</a>
-													</div>
-												</div>
-												
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Foto </div>
-
-													<div class="profile-info-value">
-														<form action="${linkTo[PerfilController].armazenaFoto}" method="post" enctype="multipart/form-data">
-															Capa: <input type="file" name="foto" />
-															<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
-															<input type="submit" value="enviar"/>
-														</form>
+														<input type="text" required="required" id="site" name="rwitter" value="" 
+														placeholder="Twitter" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
 												
@@ -199,32 +196,15 @@
 
 									<div class="space-20"></div>
 									
-									<div class="row">
-										<div class="col-xs-12 col-sm-6">
-											<div class="widget-box transparent">
-												<div class="widget-header widget-header-small">
-													<h4 class="widget-title smaller">
-														<i class="ace-icon fa fa-check-square-o bigger-110"></i>
-														Sobre
-													</h4>
-												</div>
-
-												<div class="widget-body">
-													<div class="widget-main">
-														<p>
-															
-														</p>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-xs-12 col-sm-6">
-											<div class="widget-box transparent">
-											
-											</div>
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-5 col-md-10">
+											<button class="btn btn-info" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Salvar
+											</button>
 										</div>
 									</div>
+									
 								</div><!-- /#home -->
 
 							</div>

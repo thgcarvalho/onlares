@@ -51,11 +51,9 @@ public class Usuario implements Serializable {
 	@Deprecated
 	public Usuario() {
 		this(null, null, null); // para uso do CDI
-		System.out.println("   ----- Usuario() ----");
 	}
 	
 	public Usuario(String email, String senha, String nome) {
-		System.out.println("   ----- (String email, String senha, String nome) ----");
 		this.email = email;
 		this.senha = senha;
 		this.nome = nome;

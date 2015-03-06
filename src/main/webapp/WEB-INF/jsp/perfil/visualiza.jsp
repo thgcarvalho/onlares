@@ -6,49 +6,49 @@
 
 <head>
 
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<title>User Profile Page - Ace Admin</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8" />
+	<title>User Profile Page - Ace Admin</title>
 
-		<meta name="description" content="3 styles with inline editable feature" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<meta name="description" content="3 styles with inline editable feature" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="${ctx}/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
+	<!-- bootstrap & fontawesome -->
+	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
 
-		<!-- page specific plugin styles -->
-		<link rel="stylesheet" href="${ctx}/assets/css/jquery-ui.custom.min.css" />
-		<link rel="stylesheet" href="${ctx}/assets/css/jquery.gritter.min.css" />
-		<link rel="stylesheet" href="${ctx}/assets/css/select2.min.css" />
-		<link rel="stylesheet" href="${ctx}/assets/css/datepicker.min.css" />
-		<link rel="stylesheet" href="${ctx}/assets/css/bootstrap-editable.min.css" />
+	<!-- page specific plugin styles -->
+	<link rel="stylesheet" href="${ctx}/assets/css/jquery-ui.custom.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/jquery.gritter.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/select2.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/datepicker.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap-editable.min.css" />
 
-		<!-- text fonts -->
-		<link rel="stylesheet" href="${ctx}/assets/fonts/fonts.googleapis.com.css" />
+	<!-- text fonts -->
+	<link rel="stylesheet" href="${ctx}/assets/fonts/fonts.googleapis.com.css" />
 
-		<!-- ace styles -->
-		<link rel="stylesheet" href="${ctx}/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+	<!-- ace styles -->
+	<link rel="stylesheet" href="${ctx}/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 
-		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="${ctx}/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
-		<![endif]-->
+	<!--[if lte IE 9]>
+		<link rel="stylesheet" href="${ctx}/assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+	<![endif]-->
 
-		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="${ctx}/assets/css/ace-ie.min.css" />
-		<![endif]-->
+	<!--[if lte IE 9]>
+	  <link rel="stylesheet" href="${ctx}/assets/css/ace-ie.min.css" />
+	<![endif]-->
 
-		<!-- inline styles related to this page -->
+	<!-- inline styles related to this page -->
 
-		<!-- ace settings handler -->
-		<script src="${ctx}/assets/js/ace-extra.min.js"></script>
+	<!-- ace settings handler -->
+	<script src="${ctx}/assets/js/ace-extra.min.js"></script>
 
-		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+	<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
-		<!--[if lte IE 8]>
-		<script src="${ctx}/assets/js/html5shiv.min.js"></script>
-		<script src="${ctx}/assets/js/respond.min.js"></script>
-		<![endif]-->
+	<!--[if lte IE 8]>
+	<script src="${ctx}/assets/js/html5shiv.min.js"></script>
+	<script src="${ctx}/assets/js/respond.min.js"></script>
+	<![endif]-->
 
 </head>
 
@@ -90,15 +90,6 @@
 									</a>
 								</li>
 
-								<li>
-
-								<li>
-									<a data-toggle="tab" href="#friends">
-										<i class="blue ace-icon fa fa-users bigger-120"></i>
-										Amigos
-									</a>
-								</li>
-
 							</ul>
 
 							<div class="tab-content no-border padding-24">
@@ -123,16 +114,16 @@
 										</div><!-- /.col -->
 
 										<div class="col-xs-12 col-sm-9">
-											<h4 class="blue">
-												<span class="middle">${usuario.nome}</span>
-
-												<span class="label label-purple arrowed-in-right">
-													<i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
-													online
-												</span>
-											</h4>
 
 											<div class="profile-user-info">
+												<div class="profile-info-row">
+													<div class="profile-info-name"> Nome </div>
+
+													<div class="profile-info-value">
+														<span>${usuario.nome}</span>
+													</div>
+												</div>
+											
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Email </div>
 
@@ -202,444 +193,7 @@
 										</div><!-- /.col -->
 									</div><!-- /.row -->
 
-									<div class="space-20"></div>
-
-									<div class="row">
-										<div class="col-xs-12 col-sm-6">
-											<div class="widget-box transparent">
-												<div class="widget-header widget-header-small">
-													<h4 class="widget-title smaller">
-														<i class="ace-icon fa fa-check-square-o bigger-110"></i>
-														Sobre
-													</h4>
-												</div>
-
-												<div class="widget-body">
-													<div class="widget-main">
-														<p>
-															My job is mostly lorem ipsuming and dolor sit ameting as long as consectetur adipiscing elit.
-														</p>
-														<p>
-															Sometimes quisque commodo massa gets in the way and sed ipsum porttitor facilisis.
-														</p>
-														<p>
-															The best thing about my job is that vestibulum id ligula porta felis euismod and nullam quis risus eget urna mollis ornare.
-														</p>
-														<p>
-															Thanks for visiting my profile.
-														</p>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="col-xs-12 col-sm-6">
-											<div class="widget-box transparent">
-											
-											</div>
-										</div>
-									</div>
 								</div><!-- /#home -->
-
-								<div id="friends" class="tab-pane">
-									<div class="profile-users clearfix">
-										<div class="itemdiv memberdiv">
-											<div class="inline pos-rel">
-												<div class="user">
-													<a href="#">
-														<img src="${ctx}/assets/avatars/avatar4.png" alt="Bob Doe's avatar" />
-													</a>
-												</div>
-
-												<div class="body">
-													<div class="name">
-														<a href="#">
-															<span class="user-status status-online"></span>
-															Bob Doe
-														</a>
-													</div>
-												</div>
-
-												<div class="popover">
-													<div class="arrow"></div>
-
-													<div class="popover-content">
-														<div class="bolder">Content Editor</div>
-
-														<div class="time">
-															<i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
-															<span class="green"> 20 mins ago </span>
-														</div>
-
-														<div class="hr dotted hr-8"></div>
-
-														<div class="tools action-buttons">
-															<a href="#">
-																<i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="itemdiv memberdiv">
-											<div class="inline pos-rel">
-												<div class="user">
-													<a href="#">
-														<img src="${ctx}/assets/avatars/avatar1.png" alt="Rose Doe's avatar" />
-													</a>
-												</div>
-
-												<div class="body">
-													<div class="name">
-														<a href="#">
-															<span class="user-status status-offline"></span>
-															Rose Doe
-														</a>
-													</div>
-												</div>
-
-												<div class="popover">
-													<div class="arrow"></div>
-
-													<div class="popover-content">
-														<div class="bolder">Graphic Designer</div>
-
-														<div class="time">
-															<i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
-															<span class="grey"> 30 min ago </span>
-														</div>
-
-														<div class="hr dotted hr-8"></div>
-
-														<div class="tools action-buttons">
-															<a href="#">
-																<i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="itemdiv memberdiv">
-											<div class="inline pos-rel">
-												<div class="user">
-													<a href="#">
-														<img src="${ctx}/assets/avatars/avatar.png" alt="Jim Doe's avatar" />
-													</a>
-												</div>
-
-												<div class="body">
-													<div class="name">
-														<a href="#">
-															<span class="user-status status-busy"></span>
-															Jim Doe
-														</a>
-													</div>
-												</div>
-
-												<div class="popover">
-													<div class="arrow"></div>
-
-													<div class="popover-content">
-														<div class="bolder">SEO &amp; Advertising</div>
-
-														<div class="time">
-															<i class="ace-icon fa fa-clock-o middle bigger-120 red"></i>
-															<span class="grey"> 1 hour ago </span>
-														</div>
-
-														<div class="hr dotted hr-8"></div>
-
-														<div class="tools action-buttons">
-															<a href="#">
-																<i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="itemdiv memberdiv">
-											<div class="inline pos-rel">
-												<div class="user">
-													<a href="#">
-														<img src="${ctx}/assets/avatars/avatar5.png" alt="Alex Doe's avatar" />
-													</a>
-												</div>
-
-												<div class="body">
-													<div class="name">
-														<a href="#">
-															<span class="user-status status-idle"></span>
-															Alex Doe
-														</a>
-													</div>
-												</div>
-
-												<div class="popover">
-													<div class="arrow"></div>
-
-													<div class="popover-content">
-														<div class="bolder">Marketing</div>
-
-														<div class="time">
-															<i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
-															<span class=""> 40 minutes idle </span>
-														</div>
-
-														<div class="hr dotted hr-8"></div>
-
-														<div class="tools action-buttons">
-															<a href="#">
-																<i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="itemdiv memberdiv">
-											<div class="inline pos-rel">
-												<div class="user">
-													<a href="#">
-														<img src="${ctx}/assets/avatars/avatar2.png" alt="Phil Doe's avatar" />
-													</a>
-												</div>
-
-												<div class="body">
-													<div class="name">
-														<a href="#">
-															<span class="user-status status-online"></span>
-															Phil Doe
-														</a>
-													</div>
-												</div>
-
-												<div class="popover">
-													<div class="arrow"></div>
-
-													<div class="popover-content">
-														<div class="bolder">Public Relations</div>
-
-														<div class="time">
-															<i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
-															<span class="green"> 2 hours ago </span>
-														</div>
-
-														<div class="hr dotted hr-8"></div>
-
-														<div class="tools action-buttons">
-															<a href="#">
-																<i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="itemdiv memberdiv">
-											<div class="inline pos-rel">
-												<div class="user">
-													<a href="#">
-														<img src="${ctx}/assets/avatars/avatar3.png" alt="Susan Doe's avatar" />
-													</a>
-												</div>
-
-												<div class="body">
-													<div class="name">
-														<a href="#">
-															<span class="user-status status-online"></span>
-															Susan Doe
-														</a>
-													</div>
-												</div>
-
-												<div class="popover">
-													<div class="arrow"></div>
-
-													<div class="popover-content">
-														<div class="bolder">HR Management</div>
-
-														<div class="time">
-															<i class="ace-icon fa fa-clock-o middle bigger-120 orange"></i>
-															<span class="green"> 20 mins ago </span>
-														</div>
-
-														<div class="hr dotted hr-8"></div>
-
-														<div class="tools action-buttons">
-															<a href="#">
-																<i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="itemdiv memberdiv">
-											<div class="inline pos-rel">
-												<div class="user">
-													<a href="#">
-														<img src="${ctx}/assets/avatars/avatar1.png" alt="Jennifer Doe's avatar" />
-													</a>
-												</div>
-
-												<div class="body">
-													<div class="name">
-														<a href="#">
-															<span class="user-status status-offline"></span>
-															Jennifer Doe
-														</a>
-													</div>
-												</div>
-
-												<div class="popover">
-													<div class="arrow"></div>
-
-													<div class="popover-content">
-														<div class="bolder">Graphic Designer</div>
-
-														<div class="time">
-															<i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
-															<span class="grey"> 2 hours ago </span>
-														</div>
-
-														<div class="hr dotted hr-8"></div>
-
-														<div class="tools action-buttons">
-															<a href="#">
-																<i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-										<div class="itemdiv memberdiv">
-											<div class="inline pos-rel">
-												<div class="user">
-													<a href="#">
-														<img src="${ctx}/assets/avatars/avatar3.png" alt="Alexa Doe's avatar" />
-													</a>
-												</div>
-
-												<div class="body">
-													<div class="name">
-														<a href="#">
-															<span class="user-status status-offline"></span>
-															Alexa Doe
-														</a>
-													</div>
-												</div>
-
-												<div class="popover">
-													<div class="arrow"></div>
-
-													<div class="popover-content">
-														<div class="bolder">Accounting</div>
-
-														<div class="time">
-															<i class="ace-icon fa fa-clock-o middle bigger-120 grey"></i>
-															<span class="grey"> 4 hours ago </span>
-														</div>
-
-														<div class="hr dotted hr-8"></div>
-
-														<div class="tools action-buttons">
-															<a href="#">
-																<i class="ace-icon fa fa-facebook-square blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-															</a>
-
-															<a href="#">
-																<i class="ace-icon fa fa-google-plus-square red bigger-150"></i>
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="hr hr10 hr-double"></div>
-
-									<ul class="pager pull-right">
-										<li class="previous disabled">
-											<a href="#">&larr; Prev</a>
-										</li>
-
-										<li class="next">
-											<a href="#">Next &rarr;</a>
-										</li>
-									</ul>
-								</div><!-- /#friends -->
 
 							</div>
 						</div>

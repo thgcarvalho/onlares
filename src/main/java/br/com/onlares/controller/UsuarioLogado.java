@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.observer.download.Download;
 import br.com.onlares.model.Usuario;
 
 @SessionScoped
@@ -26,6 +28,12 @@ public class UsuarioLogado implements Serializable {
 	
 	public void logout() {
 		this.usuario = null;
+	}
+	
+	@Get
+	public Download getFotoDownload() {
+		System.out.println(" XXXXXXX UsuarioLogado GET FOTO DOWNLOAD " + usuario.getFotoDownload());
+		return usuario.getFotoDownload();
 	}
 	
 }

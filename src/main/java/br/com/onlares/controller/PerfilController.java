@@ -49,7 +49,7 @@ public class PerfilController {
 	
 	@Get
 	public Download fotoDownload() {
-		System.out.println("PerfilController GET FOTO DOWNLOAD " + usuarioLogado.getUsuario().getNome());
+		System.out.println("   PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP PerfilController GET FOTO DOWNLOAD " + usuarioLogado.getUsuario().getNome());
 		return usuarioLogado.getUsuario().getFotoDownload();
 	}
 	
