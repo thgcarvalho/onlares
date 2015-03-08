@@ -77,6 +77,10 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
+				<form action="${ctx }/perfil/" method="post">
+				<input type="hidden" name="_method" value="PUT">
+				<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
+				<input type="hidden" name="usuario.condominio.id" value="${usuarioLogado.usuario.condominio.id}">
 				<div>
 					<div id="user-profile-2" class="user-profile">
 						<div class="tabbable">
@@ -121,7 +125,7 @@
 													<div class="profile-info-name"> Email* </div>
 							
 													<div class="profile-info-value">
-														<input type="email" required="required" id="email" name="usuario.email" value="${usuarioLogado.usuario.email}" 
+														<input type="email" required="require" id="email" name="usuario.email" value="${usuarioLogado.usuario.email}" 
 														placeholder="Email" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
@@ -130,7 +134,7 @@
 													<div class="profile-info-name"> Profissão </div>
 							
 													<div class="profile-info-value">
-														<input type="text" required="required" id="profissao" name="profissao" value="" 
+														<input type="text" id="profissao" name="profissao" value="" 
 														placeholder="Profissão" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
@@ -146,11 +150,11 @@
 
 
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Idade </div>
+													<div class="profile-info-name"> Aniversário </div>
 							
 													<div class="profile-info-value">
-														<input type="text" required="required" id="idade" name="idade" value="" 
-														placeholder="Idade" maxlength="45" class="col-xs-10 col-sm-5" />
+														<input type="text"  id="niver" name="idade" value="" 
+														placeholder="DD/MM" class="col-xs-10 col-sm-5 input-mask-date" />
 													</div>
 												</div>
 												
@@ -163,7 +167,7 @@
 													<div class="profile-info-name"> Website </div>
 							
 													<div class="profile-info-value">
-														<input type="text" required="required" id="site" name="site" value="" 
+														<input type="text" id="site" name="site" value="" 
 														placeholder="Website" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
@@ -174,7 +178,7 @@
 													</div>
 
 													<div class="profile-info-value">
-														<input type="text" required="required" id="site" name="facebook" value="" 
+														<input type="text" id="site" name="facebook" value="" 
 														placeholder="Facebook" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
@@ -211,6 +215,7 @@
 						</div>
 					</div>
 				</div>
+				</form>
 				<!-- PAGE CONTENT ENDS -->
 			</div> <!-- div class="col-xs-12" -->
 		</div> <!-- div class="row" -->
@@ -686,6 +691,7 @@
 				$(this).prev().focus();
 			})
 			$('.input-mask-phone').mask('(999) 999-9999');
+			$('.input-mask-date').mask('99/99');
 		
 			$('#user-profile-3').find('input[type=file]').ace_file_input('show_file_list', [{type: 'image', name: $('#avatar').attr('src')}]);
 		

@@ -32,7 +32,7 @@
 		
 			<li class="light-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-					<!-- <img class="nav-user-photo" src="${ctx}/assets/avatars/avatar2.png" alt="Usuário" />  -->
+					<img class="nav-user-photo"	src="${linkTo[PerfilController].foto(usuarioLogado.usuario.email)}" />
 					<span class="user-info">
 						<small>Bem vindo,</small>
 						${usuarioLogado.usuario.nome}
@@ -49,12 +49,12 @@
 						</a>
 					</li>  -->
 
-					<!-- <li>
-						<a href="profile.html">
+					<li>
+						<a href="${linkTo[PerfilController].edita()}">
 							<i class="ace-icon fa fa-user"></i>
 							Perfil
 						</a>
-					</li>  -->
+					</li>
 
 					<li class="divider"></li>
 

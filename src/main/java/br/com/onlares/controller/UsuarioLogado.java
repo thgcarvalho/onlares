@@ -4,9 +4,8 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.persistence.Transient;
 
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.observer.download.Download;
 import br.com.onlares.model.Usuario;
 
 @SessionScoped
@@ -22,7 +21,7 @@ public class UsuarioLogado implements Serializable {
 	}
 
 	public void setUsuario(Usuario usuario) {
-		System.out.println(" UsuarioLogado USUARIO LOGADO = " +usuario.getNome());
+		System.out.println(" UsuarioLogado USUARIO LOGADO = " + usuario.getNome());
 		this.usuario = usuario;
 	}
 	
@@ -30,10 +29,14 @@ public class UsuarioLogado implements Serializable {
 		this.usuario = null;
 	}
 	
-	@Get
-	public Download getFotoDownload() {
-		System.out.println(" XXXXXXX UsuarioLogado GET FOTO DOWNLOAD " + usuario.getFotoDownload());
-		return usuario.getFotoDownload();
+	@Transient
+	public int getNotificacoes() {
+		return 0;
+	}
+	
+	@Transient
+	public int getMensagens() {
+		return 0;
 	}
 	
 }

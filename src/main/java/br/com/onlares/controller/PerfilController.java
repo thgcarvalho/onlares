@@ -3,17 +3,22 @@ package br.com.onlares.controller;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.observer.download.ByteArrayDownload;
 import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
+import br.com.caelum.vraptor.validator.I18nMessage;
+import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Arquivo;
 import br.com.onlares.model.Usuario;
@@ -25,7 +30,6 @@ public class PerfilController {
 
 	private final UsuarioDao usuarioDao;
 	private final UsuarioLogado usuarioLogado;
-	@SuppressWarnings("unused")
 	private final Validator validator;
 	private final Result result;
 	private final DiretorioDB imagens;
@@ -80,6 +84,34 @@ public class PerfilController {
 		result.forwardTo(this).edita();
 	}
 	
+	@Admin
+	@Put("/perfil/{email}")
+	public void altera(Usuario usuario) {
+		if (checkNull(usuario.getNome()).equals("")) {
+			validator.add(new I18nMessage("perfil.edita", "campo.obrigatorio", "Nome"));
+		}
+		if (checkNull(usuario.getEmail()).equals("")) {
+			validator.add(new I18nMessage("perfil.edita", "campo.obrigatorio", "Email"));
+			validator.onErrorUsePageOf(this).edita();
+		}
+		
+		List<Usuario> usuarios = usuarioDao.listaTodos();
+		for (Usuario usuarioCadastrado : usuarios) {
+			if (usuarioCadastrado.getEmail().equals(usuario.getEmail())) {
+				if (!usuarioCadastrado.getId().equals(usuario.getId())) {
+					validator.add(new SimpleMessage("usuario.edita", "Email usado por outro usuário"));
+					break;
+				}
+			}
+		}
+		
+		validator.onErrorUsePageOf(this).edita();
+		
+		usuarioDao.altera(usuario);
+		result.include("notice", "Perfil atualizado com sucesso!");
+		result.redirectTo(this).edita();
+	}
+	
 	@Get("/perfil/visualiza/{email}")
 	public void visualiza(String email) {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
@@ -87,6 +119,14 @@ public class PerfilController {
 			result.notFound();
 		} else {
 			result.include("usuario", usuario);
+		}
+	}
+	
+	private String checkNull(String value) {
+		if (value == null) {
+			return ("");
+		} else {
+			return (value.trim());
 		}
 	}
 	
