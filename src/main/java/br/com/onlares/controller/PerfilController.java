@@ -23,7 +23,6 @@ import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.FotoDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Foto;
@@ -72,7 +71,9 @@ public class PerfilController implements Serializable{
 	@Get("/perfil/{email}/foto")
 	public Download foto(String email, ServletContext context) throws FileNotFoundException {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
+		// TODO check antes de recuperar
 		Foto foto = fotoDao.recupera(usuario.getFoto());
+		System.out.println("@Get(/perfil/{email}/foto)"+foto);
 		if (foto != null) {
 			return new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
 		} else {
@@ -82,27 +83,26 @@ public class PerfilController implements Serializable{
 	}
 	
 	@Post("/perfil/foto")
-	public void armazenaFoto(UploadedFile foto) throws IOException {
+	public void armazenaFoto(UploadedFile foto) {
 		System.out.println("public void armazenaFoto(Usuario usuario, UploadedFile capa) {");
 		System.out.println("getFileName =" + (foto == null ? "NULL" : foto.getFileName()));
 		if (foto != null) {
-			URI imagemURI = fotoDao.grava(new Foto(
-					foto.getFileName(), 
-					ByteStreams.toByteArray(foto.getFile()), 
-					foto.getContentType(), Calendar.getInstance()));
-			System.out.println("ID=" + usuarioLogado.getUsuario().getId()); // TODO remover
-			System.out.println("NOME=" + usuarioLogado.getUsuario().getNome()); // TODO remover
-			usuarioLogado.getUsuario().setFoto(imagemURI);
-			usuarioDao.altera(usuarioLogado.getUsuario());
-			System.out.println("FOTO=" + imagemURI); // TODO remover
+			usuarioLogado.getUsuario().setUploadedFile(foto);
+//			try {
+//				URI imagemURI = fotoDao.grava(new Foto(
+//						foto.getFileName(), 
+//						ByteStreams.toByteArray(foto.getFile()), 
+//						foto.getContentType(), Calendar.getInstance()));
+//				usuarioLogado.getUsuario().setFoto(imagemURI);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 		}
-		
 		result.forwardTo(this).edita();
 	}
 	
-	@Admin
-	@Put("/perfil/{email}")
-	public void altera(Usuario usuario) {
+	@Put("/perfil/") 
+	public void altera(Usuario usuario) throws IOException {
 		if (checkNull(usuario.getNome()).equals("")) {
 			validator.add(new I18nMessage("perfil.edita", "campo.obrigatorio", "Nome"));
 		}
@@ -123,7 +123,19 @@ public class PerfilController implements Serializable{
 		
 		validator.onErrorUsePageOf(this).edita();
 		
+		// Obtém a alteração de foto do usuário logado do método armazenaFoto(UploadedFile foto) 
+		UploadedFile foto = usuarioLogado.getUsuario().getUploadedFile();
+		if (foto != null) {
+			URI imagemURI = fotoDao.grava(new Foto(
+			foto.getFileName(), 
+			ByteStreams.toByteArray(foto.getFile()), 
+			foto.getContentType(), Calendar.getInstance()));
+			usuario.setFoto(imagemURI);
+		}
+		usuarioLogado.getUsuario().setUploadedFile(null);
+		
 		usuarioDao.altera(usuario);
+		//usuarioLogado.setUsuario(usuario);
 		result.include("notice", "Perfil atualizado com sucesso!");
 		result.redirectTo(this).edita();
 	}

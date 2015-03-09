@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.caelum.vraptor.observer.download.Download;
+import br.com.caelum.vraptor.observer.upload.UploadedFile;
 
 /**
  * @author Thiago Carvalho
@@ -47,6 +48,8 @@ public class Usuario implements Serializable {
 	private String foto;
 	@Transient
 	private Download fotoDownload;
+	@Transient
+	UploadedFile uploadedFile;
 	
 	@Deprecated
 	public Usuario() {
@@ -133,6 +136,14 @@ public class Usuario implements Serializable {
 
 	public void setFoto(URI foto) {
 		this.foto = foto == null ? null : foto.toString();
+	}
+	
+	public UploadedFile getUploadedFile() {
+		return uploadedFile;
+	}
+	
+	public void setUploadedFile(UploadedFile uploadedFile) {
+		this.uploadedFile = uploadedFile;
 	}
 	
 	@Deprecated // chamada no header

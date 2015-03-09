@@ -28,9 +28,13 @@ public class FotoDao implements Diretorio {
 		em.getTransaction().begin();
 		em.persist(arquivo);
 		em.getTransaction().commit();
+		return getURI(arquivo);
+	}
+	
+	public URI getURI(Foto arquivo) {
 		return URI.create("db://" + arquivo.getId());
 	}
-
+	
 	@Override
 	public Foto recupera(URI chave) {
 		if (chave == null) {
