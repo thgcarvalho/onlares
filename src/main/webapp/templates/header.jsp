@@ -36,13 +36,13 @@
 			<li class="purple">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<i class="ace-icon fa fa-bell icon-animated-bell"></i>
-					<span class="badge badge-important">${usuarioLogado.notificacoes}</span>
+					<span class="badge badge-important">${usuarioLogado.usuario.notificacoes}</span>
 				</a>
 
 				<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
 					<li class="dropdown-header">
 						<i class="ace-icon fa fa-exclamation-triangle"></i>
-						${usuarioLogado.notificacoes} Notificações
+						${usuarioLogado.usuario.notificacoes} Notificações
 					</li>
 
 					<li class="dropdown-footer">
@@ -57,13 +57,13 @@
 			<li class="green">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
-					<span class="badge badge-success">${usuarioLogado.mensagens}</span>
+					<span class="badge badge-success">${usuarioLogado.usuario.mensagens}</span>
 				</a>
 
 				<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
 					<li class="dropdown-header">
 						<i class="ace-icon fa fa-envelope-o"></i>
-						${usuarioLogado.mensagens} Mensagens
+						${usuarioLogado.usuario.mensagens} Mensagens
 					</li>
 
 					<li class="dropdown-footer">
@@ -77,7 +77,7 @@
 
 			<li class="light-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-					<img class="nav-user-photo"	src="${linkTo[PerfilController].foto(usuarioLogado.usuario.email)}" />
+					<!-- <img class="nav-user-photo"	src="${linkTo[PerfilController].fotoDownload()}" /> -->
 					<span class="user-info">
 						<small>Bem vindo,</small>
 						${usuarioLogado.usuario.nome}

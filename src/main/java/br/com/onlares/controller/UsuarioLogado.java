@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.persistence.Transient;
 
 import br.com.onlares.model.Usuario;
 
@@ -27,16 +26,6 @@ public class UsuarioLogado implements Serializable {
 	
 	public void logout() {
 		this.usuario = null;
-	}
-	
-	@Transient
-	public int getNotificacoes() {
-		return 0;
-	}
-	
-	@Transient
-	public int getMensagens() {
-		return 0;
 	}
 	
 }

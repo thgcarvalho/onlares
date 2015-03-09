@@ -1,6 +1,7 @@
 package br.com.onlares.controller;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URI;
 import java.util.Calendar;
 import java.util.List;
@@ -26,8 +27,9 @@ import br.com.onlares.model.Usuario;
 import com.google.common.io.ByteStreams;
 
 @Controller
-public class PerfilController {
+public class PerfilController implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private final UsuarioDao usuarioDao;
 	private final UsuarioLogado usuarioLogado;
 	private final Validator validator;
@@ -51,12 +53,17 @@ public class PerfilController {
 	public void edita() {
 	}
 	
+    @Deprecated
 	@Get
 	public Download fotoDownload() {
-		System.out.println("   PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP PerfilController GET FOTO DOWNLOAD " + usuarioLogado.getUsuario().getNome());
+		System.out.println("   PPPPPPPPPPPPPP GET PPPPPPPPPPPPPPP PerfilController GET FOTO DOWNLOAD "
+						+ usuarioLogado.getUsuario().getNome()
+						+ "  "
+						+ usuarioLogado.getUsuario().getFotoDownload());
 		return usuarioLogado.getUsuario().getFotoDownload();
 	}
 	
+	@Deprecated
 	@Get("/perfil/{email}/foto")
 	public Download foto(String email) {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);

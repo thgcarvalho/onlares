@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import br.com.onlares.model.Arquivo;
 import br.com.onlares.model.Diretorio;
 
-public class DiretorioDB implements Diretorio{
+public class DiretorioDB implements Diretorio {
 	
 	private final EntityManager em;
 	

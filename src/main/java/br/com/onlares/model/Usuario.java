@@ -145,6 +145,16 @@ public class Usuario implements Serializable {
 		this.fotoDownload = fotoDownload;
 	}
 	
+	@Transient
+	public int getNotificacoes() {
+		return 0;
+	}
+	
+	@Transient
+	public int getMensagens() {
+		return 0;
+	}
+	
 	public boolean isRegistrado() {
 		return (!checkNull(senha).equals(""));
 	}
