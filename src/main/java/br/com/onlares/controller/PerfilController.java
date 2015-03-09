@@ -20,6 +20,7 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
+import br.com.onlares.dao.FotoDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Arquivo;
 import br.com.onlares.model.Usuario;
@@ -31,18 +32,18 @@ public class PerfilController implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private final UsuarioDao usuarioDao;
+	private final FotoDao fotoDao;
 	private final UsuarioLogado usuarioLogado;
 	private final Validator validator;
 	private final Result result;
-	private final DiretorioDB imagens;
 
 	@Inject
-	public PerfilController(UsuarioDao usuarioDao, UsuarioLogado usuarioLogado, Validator validator, Result result, DiretorioDB imagens) {
+	public PerfilController(UsuarioDao usuarioDao, FotoDao fotoDao, UsuarioLogado usuarioLogado, Validator validator, Result result) {
 		this.usuarioDao = usuarioDao;
+		this.fotoDao = fotoDao;
 		this.usuarioLogado = usuarioLogado;
 		this.validator = validator;
 		this.result = result;
-		this.imagens = imagens;
 	}
 	
 	public PerfilController() {
@@ -67,7 +68,7 @@ public class PerfilController implements Serializable{
 	@Get("/perfil/{email}/foto")
 	public Download foto(String email) {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
-		Arquivo foto = imagens.recupera(usuario.getFoto());
+		Arquivo foto = fotoDao.recupera(usuario.getFoto());
 		return new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
 	}
 	
@@ -75,9 +76,8 @@ public class PerfilController implements Serializable{
 	public void armazenaFoto(UploadedFile foto) throws IOException {
 		System.out.println("public void foto(Usuario usuario, UploadedFile capa) {");
 		System.out.println("getFileName =" + (foto == null ? "NULL" : foto.getFileName()));
-		//Usuario usuarioDB = usuarioDao.busca(usuario);
 		if (foto != null) {
-			URI imagemURI = imagens.grava(new Arquivo(
+			URI imagemURI = fotoDao.grava(new Arquivo(
 					foto.getFileName(), 
 					ByteStreams.toByteArray(foto.getFile()), 
 					foto.getContentType(), Calendar.getInstance()));

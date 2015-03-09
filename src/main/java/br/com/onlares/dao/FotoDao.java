@@ -1,4 +1,4 @@
-package br.com.onlares.controller;
+package br.com.onlares.dao;
 
 import java.net.URI;
 
@@ -8,17 +8,17 @@ import javax.persistence.EntityManager;
 import br.com.onlares.model.Arquivo;
 import br.com.onlares.model.Diretorio;
 
-public class DiretorioDB implements Diretorio {
+public class FotoDao implements Diretorio {
 	
 	private final EntityManager em;
 	
 	@Inject
-	public DiretorioDB(EntityManager em) {
+	public FotoDao(EntityManager em) {
 		this.em = em;
 	}
 	
 	@Deprecated
-	public DiretorioDB() {
+	public FotoDao() {
 		this(null); // para uso do CDI
 	}
 

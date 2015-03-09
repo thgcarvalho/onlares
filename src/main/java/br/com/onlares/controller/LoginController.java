@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Public;
+import br.com.onlares.dao.FotoDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Arquivo;
 import br.com.onlares.model.Usuario;
@@ -19,19 +20,19 @@ import br.com.onlares.model.Usuario;
 @Controller
 public class LoginController {
 	
-	private final UsuarioDao dao;
+	private final UsuarioDao usuariodao;
 	private final Validator validator;
 	private final Result result;
 	private final UsuarioLogado usuarioLogado;
-	private final DiretorioDB diretorioDB;
+	private final FotoDao fotoDao;
 	
 	@Inject
-	public LoginController(UsuarioDao dao, Validator validator, Result result, UsuarioLogado usuarioLogado, DiretorioDB diretorioDB) {
-		this.dao = dao;
+	public LoginController(UsuarioDao usuariodao, FotoDao fotoDao, Validator validator, Result result, UsuarioLogado usuarioLogado) {
+		this.usuariodao = usuariodao;
+		this.fotoDao = fotoDao;
 		this.validator = validator;
 		this.result = result;
 		this.usuarioLogado = usuarioLogado;
-		this.diretorioDB = diretorioDB;
 	}
 	
 	@Deprecated
@@ -47,7 +48,7 @@ public class LoginController {
 	@Public
 	public void auth(Usuario usuario) {
 		try {
-			if (!dao.loginValido(usuario)) {
+			if (!usuariodao.loginValido(usuario)) {
 				validator.add(new I18nMessage("login", "login.invalido"));
 				validator.onErrorUsePageOf(this).login();
 			}
@@ -56,7 +57,7 @@ public class LoginController {
 			validator.add(new SimpleMessage("login", e.getMessage()));
 			validator.onErrorUsePageOf(this).login();
 		} 
-		Usuario usuarioDB = dao.buscaPorEmail(usuario.getEmail());
+		Usuario usuarioDB = usuariodao.buscaPorEmail(usuario.getEmail());
 		adicionaFotoDoPerfilEmMemoria(usuarioDB);
 		System.out.println("+++++++++usuarioDB.getFotoDownload()" + usuarioDB.getFotoDownload());
 		usuarioLogado.setUsuario(usuarioDB);
@@ -74,7 +75,7 @@ public class LoginController {
 	}
 	
 	public void adicionaFotoDoPerfilEmMemoria(Usuario usuario) {
-		Arquivo foto = diretorioDB.recupera(usuario.getFoto());
+		Arquivo foto = fotoDao.recupera(usuario.getFoto());
 		System.out.println("AdicionaFotoDoPerfilEmMemoria foto " + foto.getNome());
 		Download fotoDownload = new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
 		usuario.setFotoDownload(fotoDownload);
