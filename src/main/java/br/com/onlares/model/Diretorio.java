@@ -4,7 +4,7 @@ import java.net.URI;
 
 public interface Diretorio {
 
-	URI grava(Arquivo arquivo);
+	URI grava(Foto arquivo);
 
-	Arquivo recupera(URI chave);
+	Foto recupera(URI chave);
 }

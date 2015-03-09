@@ -6,15 +6,11 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.observer.download.ByteArrayDownload;
-import br.com.caelum.vraptor.observer.download.Download;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Public;
-import br.com.onlares.dao.FotoDao;
 import br.com.onlares.dao.UsuarioDao;
-import br.com.onlares.model.Arquivo;
 import br.com.onlares.model.Usuario;
 
 @Controller
@@ -24,12 +20,10 @@ public class LoginController {
 	private final Validator validator;
 	private final Result result;
 	private final UsuarioLogado usuarioLogado;
-	private final FotoDao fotoDao;
 	
 	@Inject
-	public LoginController(UsuarioDao usuariodao, FotoDao fotoDao, Validator validator, Result result, UsuarioLogado usuarioLogado) {
+	public LoginController(UsuarioDao usuariodao, Validator validator, Result result, UsuarioLogado usuarioLogado) {
 		this.usuariodao = usuariodao;
-		this.fotoDao = fotoDao;
 		this.validator = validator;
 		this.result = result;
 		this.usuarioLogado = usuarioLogado;
@@ -37,7 +31,7 @@ public class LoginController {
 	
 	@Deprecated
 	public LoginController() {
-		this(null, null, null, null, null);
+		this(null, null, null, null);
 	}
 
 	@Get("/login")
@@ -58,8 +52,7 @@ public class LoginController {
 			validator.onErrorUsePageOf(this).login();
 		} 
 		Usuario usuarioDB = usuariodao.buscaPorEmail(usuario.getEmail());
-		adicionaFotoDoPerfilEmMemoria(usuarioDB);
-		System.out.println("+++++++++usuarioDB.getFotoDownload()" + usuarioDB.getFotoDownload());
+//		adicionaFotoDoPerfilEmMemoria(usuarioDB);
 		usuarioLogado.setUsuario(usuarioDB);
 		result.redirectTo(HomeController.class).index();
 	}
@@ -74,11 +67,10 @@ public class LoginController {
 		return usuarioLogado;
 	}
 	
-	public void adicionaFotoDoPerfilEmMemoria(Usuario usuario) {
-		Arquivo foto = fotoDao.recupera(usuario.getFoto());
-		System.out.println("AdicionaFotoDoPerfilEmMemoria foto " + foto.getNome());
-		Download fotoDownload = new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
-		usuario.setFotoDownload(fotoDownload);
-	}
+//	public void adicionaFotoDoPerfilEmMemoria(Usuario usuario) {
+//		Foto foto = fotoDao.recupera(usuario.getFoto());
+//		Download fotoDownload = new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
+//		usuario.setFotoDownload(fotoDownload);
+//	}
 
 }

@@ -189,7 +189,7 @@
 													</div>
 
 													<div class="profile-info-value">
-														<input type="text" required="required" id="site" name="rwitter" value="" 
+														<input type="text" id="site" name="rwitter" value="" 
 														placeholder="Twitter" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>
@@ -453,7 +453,7 @@
 					value: null,
 					image: {
 						//specify ace file input plugin's options here
-						btn_choose: 'Change Avatar',
+						btn_choose: 'Alterar foto',
 						droppable: true,
 						maxSize: 110000,//~100Kb
 		
@@ -463,14 +463,14 @@
 							if(last_gritter) $.gritter.remove(last_gritter);
 							if(error_type == 1) {//file format error
 								last_gritter = $.gritter.add({
-									title: 'File is not an image!',
-									text: 'Please choose a jpg|gif|png image!',
+									title: 'Arquivo não é uma imagem!',
+									text: 'Insira uma imagem do tipo jpg|gif|png',
 									class_name: 'gritter-error gritter-center'
 								});
 							} else if(error_type == 2) {//file size rror
 								last_gritter = $.gritter.add({
-									title: 'File too big!',
-									text: 'Image size should not exceed 100Kb!',
+									title: 'Imagem é muito grande!',
+									text: 'Imagem não pode exceder 100Kb!',
 									class_name: 'gritter-error gritter-center'
 								});
 							}
@@ -507,8 +507,8 @@
 		
 							if(last_gritter) $.gritter.remove(last_gritter);
 							last_gritter = $.gritter.add({
-								title: 'Avatar Updated!',
-								text: 'Uploading to server can be easily implemented. A working example is included with the template.',
+								title: 'Foto atualizada!',
+								text: 'Perfil foi alterado.',
 								class_name: 'gritter-info gritter-center'
 							});
 							
@@ -556,8 +556,8 @@
 					 </div>\
 					\
 					 <div class="modal-footer center">\
-						<button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Submit</button>\
-						<button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Cancel</button>\
+						<button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Enviar</button>\
+						<button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Cancelar</button>\
 					 </div>\
 					</form>\
 				  </div>\

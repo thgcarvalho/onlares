@@ -135,13 +135,15 @@ public class Usuario implements Serializable {
 		this.foto = foto == null ? null : foto.toString();
 	}
 	
+	@Deprecated // chamada no header
 	public Download getFotoDownload() {
-		System.out.println("USUARIO GET FOTO DOWNLOAD " + fotoDownload);
+		System.out.println("@Deprecated USUARIO GET FOTO DOWNLOAD " + fotoDownload);
 		return fotoDownload;
 	}
 	
+	@Deprecated // chamada em LoginController.adicionaFotoDoPerfilEmMemoria
 	public void setFotoDownload(Download fotoDownload) {
-		System.out.println("USUARIO SET FOTO DOWNLOAD " + fotoDownload);
+		System.out.println("@Deprecated USUARIO SET FOTO DOWNLOAD " + fotoDownload);
 		this.fotoDownload = fotoDownload;
 	}
 	

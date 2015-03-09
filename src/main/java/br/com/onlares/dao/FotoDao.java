@@ -5,7 +5,7 @@ import java.net.URI;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import br.com.onlares.model.Arquivo;
+import br.com.onlares.model.Foto;
 import br.com.onlares.model.Diretorio;
 
 public class FotoDao implements Diretorio {
@@ -23,7 +23,7 @@ public class FotoDao implements Diretorio {
 	}
 
 	@Override
-	public URI grava(Arquivo arquivo) {
+	public URI grava(Foto arquivo) {
 		System.out.println("GRAVA"); // TODO remover
 		em.getTransaction().begin();
 		em.persist(arquivo);
@@ -32,18 +32,17 @@ public class FotoDao implements Diretorio {
 	}
 
 	@Override
-	public Arquivo recupera(URI chave) {
+	public Foto recupera(URI chave) {
 		if (chave == null) {
 			return null;
 		}
 		// scheme é o protocolo. No caso de db:// é o db
-		System.out.println("chave.getScheme()"+chave.getScheme());
 		if (!chave.getScheme().equals("db")) {
 			throw new IllegalArgumentException(chave + " não é uma URI de banco de dados");
 		}
 		// authority é o que vem depois do db://
 		Long id = Long.valueOf(chave.getAuthority());
-		return em.find(Arquivo.class, id);
+		return em.find(Foto.class, id);
 	}
 	
 }

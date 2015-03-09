@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
-public class Arquivo {
+public class Foto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Arquivo {
 	@Column(name="data_modificacao")
 	private Calendar dataModificacao;
 
-	public Arquivo(String nome, byte[] conteudo, String contentType, Calendar dataModificacao) {
+	public Foto(String nome, byte[] conteudo, String contentType, Calendar dataModificacao) {
 		this.nome = nome;
 		this.conteudo = conteudo;
 		this.contentType = contentType;
@@ -31,7 +31,7 @@ public class Arquivo {
 	}
 	
 	// para a JPA não reclamar
-	public Arquivo() {}
+	public Foto() {}
 
 	public Long getId() {
 		return id;

@@ -15,8 +15,6 @@ import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.util.test.MockValidator;
 import br.com.caelum.vraptor.validator.ValidationException;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.onlares.controller.LoginController;
-import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Usuario;
 
@@ -34,7 +32,7 @@ public class LoginControllerTest {
 		when(daoFalso.loginValido(usuarioForm)).thenReturn(true);
 		when(daoFalso.buscaPorEmail("tcarvalho@onlares.com.br")).thenReturn(usuarioDB);
 		
-		LoginController loginController = new LoginController(daoFalso, validatorFalso, resultFalso, new UsuarioLogado(), null);
+		LoginController loginController = new LoginController(daoFalso, validatorFalso, resultFalso, new UsuarioLogado());
 		loginController.auth(usuarioForm);
 		UsuarioLogado usuarioLogado = loginController.getUsuarioLogado();
 		
@@ -51,7 +49,7 @@ public class LoginControllerTest {
 		
 		when(daoFalso.existe(usuarioForm)).thenReturn(false);
 		
-		LoginController loginController = new LoginController(daoFalso, validatorFalso, resultFalso, new UsuarioLogado(), null);
+		LoginController loginController = new LoginController(daoFalso, validatorFalso, resultFalso, new UsuarioLogado());
 		loginController.auth(usuarioForm);
 		UsuarioLogado usuarioLogado = loginController.getUsuarioLogado();
 		
@@ -66,7 +64,7 @@ public class LoginControllerTest {
 		Usuario usuario = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", "Thiago Carvalho");
 		usuarioLogado.setUsuario(usuario);
 		
-		LoginController loginController = new LoginController(null, null, resultFalso, usuarioLogado, null);
+		LoginController loginController = new LoginController(null, null, resultFalso, usuarioLogado);
 		
 		assertNotNull(loginController.getUsuarioLogado().getUsuario());
 		loginController.sair();

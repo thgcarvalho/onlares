@@ -1,5 +1,7 @@
 package br.com.onlares.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URI;
@@ -7,6 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
@@ -15,6 +18,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.observer.download.ByteArrayDownload;
 import br.com.caelum.vraptor.observer.download.Download;
+import br.com.caelum.vraptor.observer.download.FileDownload;
 import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
@@ -22,7 +26,7 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.FotoDao;
 import br.com.onlares.dao.UsuarioDao;
-import br.com.onlares.model.Arquivo;
+import br.com.onlares.model.Foto;
 import br.com.onlares.model.Usuario;
 
 import com.google.common.io.ByteStreams;
@@ -66,18 +70,23 @@ public class PerfilController implements Serializable{
 	
 	@Deprecated
 	@Get("/perfil/{email}/foto")
-	public Download foto(String email) {
+	public Download foto(String email, ServletContext context) throws FileNotFoundException {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
-		Arquivo foto = fotoDao.recupera(usuario.getFoto());
-		return new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
+		Foto foto = fotoDao.recupera(usuario.getFoto());
+		if (foto != null) {
+			return new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
+		} else {
+			File semFoto = new File(context.getRealPath("/resources/images/sem_foto.jpg"));
+			return new FileDownload(semFoto, "image/jpg", "sem_foto.jpg");
+		}
 	}
 	
 	@Post("/perfil/foto")
 	public void armazenaFoto(UploadedFile foto) throws IOException {
-		System.out.println("public void foto(Usuario usuario, UploadedFile capa) {");
+		System.out.println("public void armazenaFoto(Usuario usuario, UploadedFile capa) {");
 		System.out.println("getFileName =" + (foto == null ? "NULL" : foto.getFileName()));
 		if (foto != null) {
-			URI imagemURI = fotoDao.grava(new Arquivo(
+			URI imagemURI = fotoDao.grava(new Foto(
 					foto.getFileName(), 
 					ByteStreams.toByteArray(foto.getFile()), 
 					foto.getContentType(), Calendar.getInstance()));
