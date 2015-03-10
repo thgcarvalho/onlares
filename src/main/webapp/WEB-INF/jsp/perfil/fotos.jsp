@@ -69,21 +69,13 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Perfil
+				TESTE
 			</h1>
 		</div><!-- /.page-header -->
 	
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				<form action="${ctx }/perfil/" method="post">
-				<input type="hidden" name="_method" value="PUT">
-				<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
-				<input type="hidden" name="usuario.senha" value="${usuarioLogado.usuario.senha}">
-				<input type="hidden" name="usuario.fone1" value="${usuarioLogado.usuario.fone1}">
-				<input type="hidden" name="usuario.fone2" value="${usuarioLogado.usuario.fone2}">
-				<input type="hidden" name="usuario.unidade.id" value="${usuarioLogado.usuario.unidade.id}">
-				<input type="hidden" name="usuario.condominio.id" value="${usuarioLogado.usuario.condominio.id}">
 				<div>
 					<div id="user-profile-2" class="user-profile">
 						<div class="tabbable">
@@ -91,7 +83,7 @@
 								<li class="active">
 									<a data-toggle="tab" href="#perfil">
 										<i class="green ace-icon fa fa-user bigger-120"></i>
-										Perfil
+										TESTE
 									</a>
 								</li>
 
@@ -102,123 +94,24 @@
 							<div class="tab-content no-border padding-24">
 								<div id="perfil" class="tab-pane in active">
 									<div class="row">
-										<div class="col-xs-12 col-sm-3 center">
-											<span class="profile-picture">
-												<!-- <img class="editable img-responsive" alt="Avatar" id="avatar2" src="${ctx}/assets/avatars/profile-pic.jpg" /> -->
-												<img class="editable img-responsive" alt="Avatar" id="avatar2" 
-													src="${linkTo[PerfilController].foto(usuarioLogado.usuario.email)}" />
-											</span>
-
-										</div><!-- /.col -->
-
-										<div class="col-xs-12 col-sm-9">
-
-											<div class="profile-user-info">
-												
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Nome* </div>
-							
-													<div class="profile-info-value">
-														<input type="text" required="required" id="nome" name="usuario.nome" value="${usuarioLogado.usuario.nome}" 
-														placeholder="Nome" maxlength="45" class="col-xs-10 col-sm-5" />
-													</div>
-												</div>
-												
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Email* </div>
-							
-													<div class="profile-info-value">
-														<input type="email" required="require" id="email" name="usuario.email" value="${usuarioLogado.usuario.email}" 
-														placeholder="Email" maxlength="45" class="col-xs-10 col-sm-5" />
-													</div>
-												</div>
-												
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Profissão </div>
-							
-													<div class="profile-info-value">
-														<input type="text" id="profissao" name="profissao" value="" 
-														placeholder="Profissão" maxlength="45" class="col-xs-10 col-sm-5" />
-													</div>
-												</div>
-											
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Unidade </div>
-
-													<div class="profile-info-value">
-														<i class="fa fa-map-marker light-orange bigger-110"></i>
-														<span>${usuarioLogado.usuario.unidade.localizacao}</span>
-													</div>
-												</div>
-
-
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Aniversário </div>
-							
-													<div class="profile-info-value">
-														<input type="text"  id="niver" name="idade" value="" 
-														placeholder="DD/MM" class="col-xs-10 col-sm-5 input-mask-date" />
-													</div>
-												</div>
-												
-											</div>
-
-											<div class="hr hr-8 dotted"></div>
-
-											<div class="profile-user-info">
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Website </div>
-							
-													<div class="profile-info-value">
-														<input type="text" id="site" name="site" value="" 
-														placeholder="Website" maxlength="45" class="col-xs-10 col-sm-5" />
-													</div>
-												</div>
-
-												<div class="profile-info-row">
-													<div class="profile-info-name">
-														<i class="middle ace-icon fa fa-facebook-square bigger-150 blue"></i>
-													</div>
-
-													<div class="profile-info-value">
-														<input type="text" id="site" name="facebook" value="" 
-														placeholder="Facebook" maxlength="45" class="col-xs-10 col-sm-5" />
-													</div>
-												</div>
-
-												<div class="profile-info-row">
-													<div class="profile-info-name">
-														<i class="middle ace-icon fa fa-twitter-square bigger-150 light-blue"></i>
-													</div>
-
-													<div class="profile-info-value">
-														<input type="text" id="site" name="rwitter" value="" 
-														placeholder="Twitter" maxlength="45" class="col-xs-10 col-sm-5" />
-													</div>
-												</div>
-												
-											</div>
-										</div><!-- /.col -->
+										<img src="${linkTo[PerfilController].ver(7)}" />
+										<img src="${linkTo[PerfilController].ver(8)}" />
+										<img src="${linkTo[PerfilController].ver(9)}" />
+										<img src="${linkTo[PerfilController].ver(10)}" />
+										<img src="${linkTo[PerfilController].ver(11)}" />
+										<img src="${linkTo[PerfilController].ver(12)}" />
+										<img src="${linkTo[PerfilController].ver(13)}" />
+										<img src="${linkTo[PerfilController].ver(14)}" />
+										<img src="${linkTo[PerfilController].ver(15)}" />
+										<img src="${linkTo[PerfilController].ver(16)}" />
+										<img src="${linkTo[PerfilController].ver(17)}" />
+										<img src="${linkTo[PerfilController].ver(18)}" />
 									</div><!-- /.row -->
-
-									<div class="space-20"></div>
-									
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-5 col-md-10">
-											<button class="btn btn-info" type="submit">
-												<i class="ace-icon fa fa-check bigger-110"></i>
-												Salvar
-											</button>
-										</div>
-									</div>
-									
 								</div><!-- /#home -->
-
 							</div>
 						</div>
 					</div>
 				</div>
-				</form>
 				<!-- PAGE CONTENT ENDS -->
 			</div> <!-- div class="col-xs-12" -->
 		</div> <!-- div class="row" -->
