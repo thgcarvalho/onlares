@@ -6,9 +6,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.onlares.model.Foto;
-import br.com.onlares.model.Diretorio;
 
-public class FotoDao implements Diretorio {
+public class FotoDao {
 	
 	private final EntityManager em;
 	
@@ -22,7 +21,6 @@ public class FotoDao implements Diretorio {
 		this(null); // para uso do CDI
 	}
 
-	@Override
 	public URI grava(Foto arquivo) {
 		em.getTransaction().begin();
 		em.persist(arquivo);
@@ -34,7 +32,6 @@ public class FotoDao implements Diretorio {
 		return URI.create("db://" + arquivo.getId());
 	}
 	
-	@Override
 	public Foto recupera(URI chave) {
 		if (chave == null) {
 			return null;
@@ -46,6 +43,12 @@ public class FotoDao implements Diretorio {
 		// authority é o que vem depois do db://
 		Long id = Long.valueOf(chave.getAuthority());
 		return em.find(Foto.class, id);
+	}
+	
+	public void deleta(Foto arquivo) {
+		em.getTransaction().begin();
+		em.remove(arquivo);
+		em.getTransaction().commit();
 	}
 	
 }
