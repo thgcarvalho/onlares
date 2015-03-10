@@ -6,7 +6,7 @@ CREATE TABLE foto
 (
   id bigserial NOT NULL,
   nome character varying(60),
-  conteudo oid,
+  conteudo bytea,
   content_type character varying(60),
   data_modificacao date,
   CONSTRAINT foto_pkey PRIMARY KEY (id)

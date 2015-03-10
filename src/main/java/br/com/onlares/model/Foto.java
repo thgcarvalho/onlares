@@ -16,7 +16,7 @@ public class Foto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	@Lob
+	// @Lob
 	private byte[] conteudo;
 	@Column(name="content_type")
 	private String contentType;
