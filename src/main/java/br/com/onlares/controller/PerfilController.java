@@ -60,20 +60,32 @@ public class PerfilController implements Serializable{
     @Deprecated
 	@Get
 	public Download fotoDownload() {
-		System.out.println("   PPPPPPPPPPPPPP GET PPPPPPPPPPPPPPP PerfilController GET FOTO DOWNLOAD "
-						+ usuarioLogado.getUsuario().getNome()
-						+ "  "
-						+ usuarioLogado.getUsuario().getFotoDownload());
 		return usuarioLogado.getUsuario().getFotoDownload();
 	}
 	
-	@Deprecated
 	@Get("/perfil/{email}/foto")
 	public Download foto(String email, ServletContext context) throws FileNotFoundException {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
 		// TODO check antes de recuperar
-		Foto foto = fotoDao.recupera(usuario.getFoto());
-		System.out.println("@Get(/perfil/{email}/foto)"+foto);
+		Foto foto = null;
+		
+		UploadedFile uploadedFile = usuarioLogado.getUsuario().getUploadedFile();
+		// Verifica se existe upload realizado na alteração de foto do perfil
+		if (uploadedFile != null) {
+			System.out.println("       uploadedFile != null " + uploadedFile);
+			try {
+				// Foto carregada somente para vizualização
+				foto = new Foto(uploadedFile.getFileName(),
+						ByteStreams.toByteArray(uploadedFile.getFile()),
+						uploadedFile.getContentType(), Calendar.getInstance());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			foto = fotoDao.recupera(usuario.getFoto());
+			System.out.println("               @Get(/perfil/{email}/foto)" + foto);
+		}
+		
 		if (foto != null) {
 			return new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
 		} else {
@@ -84,19 +96,9 @@ public class PerfilController implements Serializable{
 	
 	@Post("/perfil/foto")
 	public void armazenaFoto(UploadedFile foto) {
-		System.out.println("public void armazenaFoto(Usuario usuario, UploadedFile capa) {");
-		System.out.println("getFileName =" + (foto == null ? "NULL" : foto.getFileName()));
+		System.out.println("                             setFileName =" + (foto == null ? "NULL" : foto.getFileName()));
 		if (foto != null) {
 			usuarioLogado.getUsuario().setUploadedFile(foto);
-//			try {
-//				URI imagemURI = fotoDao.grava(new Foto(
-//						foto.getFileName(), 
-//						ByteStreams.toByteArray(foto.getFile()), 
-//						foto.getContentType(), Calendar.getInstance()));
-//				usuarioLogado.getUsuario().setFoto(imagemURI);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
 		}
 		result.forwardTo(this).edita();
 	}
@@ -124,12 +126,13 @@ public class PerfilController implements Serializable{
 		validator.onErrorUsePageOf(this).edita();
 		
 		// Obtém a alteração de foto do usuário logado do método armazenaFoto(UploadedFile foto) 
-		UploadedFile foto = usuarioLogado.getUsuario().getUploadedFile();
-		if (foto != null) {
+		UploadedFile uploadedFile = usuarioLogado.getUsuario().getUploadedFile();
+		if (uploadedFile != null) {
 			URI imagemURI = fotoDao.grava(new Foto(
-			foto.getFileName(), 
-			ByteStreams.toByteArray(foto.getFile()), 
-			foto.getContentType(), Calendar.getInstance()));
+				uploadedFile.getFileName(), 
+				ByteStreams.toByteArray(uploadedFile.getFile()), 
+				uploadedFile.getContentType(), Calendar.getInstance()));
+			System.out.println("                             usuario.setFoto(imagemURI); =" + imagemURI);
 			usuario.setFoto(imagemURI);
 		}
 		usuarioLogado.getUsuario().setUploadedFile(null);
