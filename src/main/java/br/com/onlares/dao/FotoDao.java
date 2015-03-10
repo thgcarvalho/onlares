@@ -24,7 +24,6 @@ public class FotoDao implements Diretorio {
 
 	@Override
 	public URI grava(Foto arquivo) {
-		System.out.println("GRAVA"); // TODO remover
 		em.getTransaction().begin();
 		em.persist(arquivo);
 		em.getTransaction().commit();
