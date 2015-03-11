@@ -121,7 +121,14 @@ public class AdminUsuarioController {
 		}
 		validator.onErrorUsePageOf(this).edita(usuario.getEmail());
 		
-		usuarioDao.altera(usuario);
+		Usuario usuarioDB = usuarioDao.busca(usuario);
+		usuarioDB.setNome(usuario.getNome());
+		usuarioDB.setUnidade(usuario.getUnidade());
+		usuarioDB.setFoneResidencial(usuario.getFoneResidencial());
+		usuarioDB.setFoneCelular(usuario.getFoneCelular());
+		usuarioDB.setEmail(usuario.getEmail());
+		
+		usuarioDao.altera(usuarioDB);
 		result.include("notice", "Usuário atualizado com sucesso!");
 		result.redirectTo(this).lista();
 	}

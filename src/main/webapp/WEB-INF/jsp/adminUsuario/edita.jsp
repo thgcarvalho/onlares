@@ -83,7 +83,6 @@
 				<form class="form-horizontal" role="form" action="${ctx }/adminUsuario/" method="post">
 					<input type="hidden" name="_method" value="PUT">
 					<input type="hidden" name="usuario.id" value="${usuario.id}">
-					<input type="hidden" name="usuario.condominio.id" value="${usuario.condominio.id}">
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Nome* </label>
 

@@ -79,11 +79,6 @@
 				<form action="${ctx }/perfil/" method="post">
 				<input type="hidden" name="_method" value="PUT">
 				<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
-				<input type="hidden" name="usuario.senha" value="${usuarioLogado.usuario.senha}">
-				<input type="hidden" name="usuario.foneResidencial" value="${usuarioLogado.usuario.foneResidencial}">
-				<input type="hidden" name="usuario.foneCelular" value="${usuarioLogado.usuario.foneCelular}">
-				<input type="hidden" name="usuario.unidade.id" value="${usuarioLogado.usuario.unidade.id}">
-				<input type="hidden" name="usuario.condominio.id" value="${usuarioLogado.usuario.condominio.id}">
 				<div>
 					<div id="user-profile-2" class="user-profile">
 						<div class="tabbable">
@@ -125,10 +120,10 @@
 												</div>
 												
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Email* </div>
+													<div class="profile-info-name"> Email </div>
 							
 													<div class="profile-info-value">
-														<input type="email" required="require" id="email" name="usuario.email" value="${usuarioLogado.usuario.email}" 
+														<input type="email" readonly="readonly" id="email" name="usuario.email" value="${usuarioLogado.usuario.email}" 
 														placeholder="Email" maxlength="45" class="col-xs-10 col-sm-5" />
 													</div>
 												</div>

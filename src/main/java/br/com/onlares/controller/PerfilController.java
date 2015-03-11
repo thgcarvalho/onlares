@@ -114,10 +114,10 @@ public class PerfilController implements Serializable{
 		if (checkNull(usuario.getNome()).equals("")) {
 			validator.add(new I18nMessage("perfil.edita", "campo.obrigatorio", "Nome"));
 		}
-		if (checkNull(usuario.getEmail()).equals("")) {
-			validator.add(new I18nMessage("perfil.edita", "campo.obrigatorio", "Email"));
-			validator.onErrorUsePageOf(this).edita();
-		}
+//		if (checkNull(usuario.getEmail()).equals("")) {
+//			validator.add(new I18nMessage("perfil.edita", "campo.obrigatorio", "Email"));
+//			validator.onErrorUsePageOf(this).edita();
+//		}
 		
 		List<Usuario> usuarios = usuarioDao.listaTodos();
 		for (Usuario usuarioCadastrado : usuarios) {
@@ -131,16 +131,20 @@ public class PerfilController implements Serializable{
 		
 		validator.onErrorUsePageOf(this).edita();
 		
+		Usuario usuarioDB = usuarioDao.busca(usuario);
+		usuarioDB.setNome(usuario.getNome());
+		//usuarioDB.setEmail(usuario.getEmail());
+		
 		URI fotoTemp = usuarioLogado.getUsuario().getFotoTemp();
 		if (fotoTemp != null) {
-			URI fotoAntigaURI = usuario.getFoto();
+			URI fotoAntigaURI = usuarioDB.getFoto();
 			System.out.println(" 1 fotoAntigaURI" + fotoAntigaURI);
 			// recupera foto temp
 			Temp temp = tempDao.recupera(fotoTemp); 
 			Foto foto = new Foto(temp.getNome(), temp.getConteudo(), temp.getContentType(), temp.getDataModificacao());
 			// grava foto
 			URI imagemURI = fotoDao.grava(foto);
-			usuario.setFoto(imagemURI);
+			usuarioDB.setFoto(imagemURI);
 			// deleta foto temp
 			tempDao.deleta(fotoTemp);
 			// deleta foto antiga
@@ -151,7 +155,8 @@ public class PerfilController implements Serializable{
 		}
 		usuarioLogado.getUsuario().setFotoTemp(null);
 		
-		usuarioDao.altera(usuario);
+		usuarioDao.altera(usuarioDB);
+		usuarioLogado.setUsuario(usuarioDB);
 		result.include("notice", "Perfil atualizado com sucesso!");
 		result.redirectTo(this).edita();
 	}
