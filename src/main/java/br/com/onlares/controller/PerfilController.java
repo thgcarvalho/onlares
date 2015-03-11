@@ -24,8 +24,10 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.dao.FotoDao;
+import br.com.onlares.dao.TempDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Foto;
+import br.com.onlares.model.Temp;
 import br.com.onlares.model.Usuario;
 
 import com.google.common.io.ByteStreams;
@@ -36,21 +38,23 @@ public class PerfilController implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private final UsuarioDao usuarioDao;
 	private final FotoDao fotoDao;
+	private final TempDao tempDao;
 	private final UsuarioLogado usuarioLogado;
 	private final Validator validator;
 	private final Result result;
 
 	@Inject
-	public PerfilController(UsuarioDao usuarioDao, FotoDao fotoDao, UsuarioLogado usuarioLogado, Validator validator, Result result) {
+	public PerfilController(UsuarioDao usuarioDao, FotoDao fotoDao, TempDao tempDao, UsuarioLogado usuarioLogado, Validator validator, Result result) {
 		this.usuarioDao = usuarioDao;
 		this.fotoDao = fotoDao;
+		this.tempDao = tempDao;
 		this.usuarioLogado = usuarioLogado;
 		this.validator = validator;
 		this.result = result;
 	}
 	
 	public PerfilController() {
-		this(null, null, null, null, null);
+		this(null, null, null, null, null, null);
 	}
 	
 	@Get("/perfil/edita")
@@ -68,10 +72,11 @@ public class PerfilController implements Serializable{
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
 		Foto foto = null;
 		System.out.println("OBTEM");
-		URI fotoTemp = usuarioLogado.getUsuario().getFotoTemp();
-		if (fotoTemp != null) {
-			foto = fotoDao.recupera(fotoTemp); 
-			System.out.println("       FOTO TEMP= " + fotoTemp + " =" + foto);
+		URI fotoTempURI = usuarioLogado.getUsuario().getFotoTemp();
+		if (fotoTempURI != null) {
+			Temp temp = tempDao.recupera(fotoTempURI); 
+			foto = new Foto(temp.getNome(), temp.getConteudo(), temp.getContentType(), temp.getDataModificacao());
+			System.out.println("       FOTO TEMP= " + fotoTempURI + " =" + foto);
 		} else {
 			foto = fotoDao.recupera(usuario.getFoto());
 			System.out.println("       FOTO REAL=" + foto);
@@ -90,7 +95,7 @@ public class PerfilController implements Serializable{
 		System.out.println("ARMAZENA");
 		if (foto != null) {
 			try {
-				URI imagemURI = fotoDao.grava(new Foto(
+				URI imagemURI = tempDao.grava(new Temp(
 						foto.getFileName(), 
 						ByteStreams.toByteArray(foto.getFile()), 
 						foto.getContentType(), Calendar.getInstance()));
@@ -128,12 +133,25 @@ public class PerfilController implements Serializable{
 		
 		URI fotoTemp = usuarioLogado.getUsuario().getFotoTemp();
 		if (fotoTemp != null) {
-			usuario.setFoto(fotoTemp);
+			URI fotoAntigaURI = usuario.getFoto();
+			System.out.println(" 1 fotoAntigaURI" + fotoAntigaURI);
+			// recupera foto temp
+			Temp temp = tempDao.recupera(fotoTemp); 
+			Foto foto = new Foto(temp.getNome(), temp.getConteudo(), temp.getContentType(), temp.getDataModificacao());
+			// grava foto
+			URI imagemURI = fotoDao.grava(foto);
+			usuario.setFoto(imagemURI);
+			// deleta foto temp
+			tempDao.deleta(fotoTemp);
+			// deleta foto antiga
+			System.out.println(" 2 fotoAntigaURI" + fotoAntigaURI);
+			if (fotoAntigaURI != null) {
+				fotoDao.deleta(fotoAntigaURI);
+			}
 		}
-		usuarioLogado.getUsuario().setFotoTemp(null);;
+		usuarioLogado.getUsuario().setFotoTemp(null);
 		
 		usuarioDao.altera(usuario);
-		//usuarioLogado.setUsuario(usuario);
 		result.include("notice", "Perfil atualizado com sucesso!");
 		result.redirectTo(this).edita();
 	}
