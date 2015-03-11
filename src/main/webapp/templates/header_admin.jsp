@@ -32,7 +32,6 @@
 		
 			<li class="light-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-					<img class="nav-user-photo"	src="${linkTo[PerfilController].foto(usuarioLogado.usuario.email)}" />
 					<span class="user-info">
 						<small>Bem vindo,</small>
 						${usuarioLogado.usuario.nome}
