@@ -80,8 +80,8 @@
 				<input type="hidden" name="_method" value="PUT">
 				<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
 				<input type="hidden" name="usuario.senha" value="${usuarioLogado.usuario.senha}">
-				<input type="hidden" name="usuario.fone1" value="${usuarioLogado.usuario.fone1}">
-				<input type="hidden" name="usuario.fone2" value="${usuarioLogado.usuario.fone2}">
+				<input type="hidden" name="usuario.foneResidencial" value="${usuarioLogado.usuario.foneResidencial}">
+				<input type="hidden" name="usuario.foneCelular" value="${usuarioLogado.usuario.foneCelular}">
 				<input type="hidden" name="usuario.unidade.id" value="${usuarioLogado.usuario.unidade.id}">
 				<input type="hidden" name="usuario.condominio.id" value="${usuarioLogado.usuario.condominio.id}">
 				<div>

@@ -107,22 +107,22 @@
 					<div class="space-4"></div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="fone1"> Fone 1 </label>
+						<label class="col-sm-3 control-label no-padding-right" for="foneResidencial"> Fone Residencial </label>
 
 						<div class="col-sm-9">
-							<input type="text" name="usuario.fone1" value="${usuario.fone1}" 
-							placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="fone1" />
+							<input type="text" name="usuario.foneResidencial" value="${usuario.foneResidencial}" 
+							placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="foneResidencial" />
 						</div>
 					</div>
 					
 					<div class="space-4"></div>
 					
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="fone2"> Fone 2 </label>
+						<label class="col-sm-3 control-label no-padding-right" for="foneCelular"> Fone Celular </label>
 
 						<div class="col-sm-9">
-							<input type="text" name="usuario.fone2" value="${usuario.fone2}" 
-							placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="fone2" />
+							<input type="text" name="usuario.foneCelular" value="${usuario.foneCelular}" 
+							placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="foneCelular" />
 						</div>
 					</div>
 					

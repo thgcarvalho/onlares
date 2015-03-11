@@ -33,8 +33,12 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	private String nome;
-	private String fone1;
-	private String fone2;
+	@Column(name="fone_residencial")
+	private String foneResidencial;
+	@Column(name="fone_celular")
+	private String foneCelular;
+	@Column(name="fone_comercial")
+	private String foneComercial;
 	private String tipo;
 	@Column(name="alertas_por_email")
 	private boolean alertasPorEmail;
@@ -47,8 +51,6 @@ public class Usuario implements Serializable {
 	private String foto;
 	@Transient
 	private Download fotoDownload;
-//	@Transient
-//	UploadedFile uploadedFile;
 	@Transient
 	private String fotoTemp;
 
@@ -88,17 +90,23 @@ public class Usuario implements Serializable {
 	public String getNome() {
 		return nome;
 	}
-	public String getFone1() {
-		return fone1;
+	public String getFoneResidencial() {
+		return foneResidencial;
 	}
-	public void setFone1(String fone1) {
-		this.fone1 = fone1;
+	public void setFoneResidencial(String foneResidencial) {
+		this.foneResidencial = foneResidencial;
 	}
-	public String getFone2() {
-		return fone2;
+	public String getFoneCelular() {
+		return foneCelular;
 	}
-	public void setFone2(String fone2) {
-		this.fone2 = fone2;
+	public void setFoneCelular(String foneCelular) {
+		this.foneCelular = foneCelular;
+	}
+	public String getFoneComercial() {
+		return foneComercial;
+	}
+	public void setFoneComercial(String foneComercial) {
+		this.foneComercial = foneComercial;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -149,14 +157,6 @@ public class Usuario implements Serializable {
 	public void setFotoTemp(URI fotoTemp) {
 		this.fotoTemp = fotoTemp == null ? null : fotoTemp.toString();
 	}
-	
-//	public UploadedFile getUploadedFile() {
-//		return uploadedFile;
-//	}
-//	
-//	public void setUploadedFile(UploadedFile uploadedFile) {
-//		this.uploadedFile = uploadedFile;
-//	}
 	
 	@Deprecated // chamada no header
 	public Download getFotoDownload() {
