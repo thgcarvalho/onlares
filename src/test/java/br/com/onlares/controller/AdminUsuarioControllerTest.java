@@ -201,6 +201,7 @@ public class AdminUsuarioControllerTest {
 		usuarioForm.setUnidade(unidade2);
 		
 		when(usuarioDaoFalso.lista()).thenReturn(usuarios);
+		when(usuarioDaoFalso.busca(usuarioForm)).thenReturn(usuarioDB);
 		
 		AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
 		adminUsuarioController.altera(usuarioForm);
@@ -234,6 +235,7 @@ public class AdminUsuarioControllerTest {
 		usuarioForm.setUnidade(unidade2);
 		
 		when(usuarioDaoFalso.lista()).thenReturn(usuarios);
+		when(usuarioDaoFalso.busca(usuarioForm)).thenReturn(usuarioDB);
 		
 		AdminUsuarioController adminUsuarioController = new AdminUsuarioController(usuarioDaoFalso, unidadeDaoFalso, validatorFalso, resultFalso);
 		adminUsuarioController.altera(usuarioForm);
