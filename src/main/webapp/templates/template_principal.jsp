@@ -43,7 +43,7 @@
 		jQuery(function($) {
 			$("#bootbox-suport").on(ace.click_event, function() {
 				bootbox.dialog({
-					message: "<span class='bigger-110'>SUPORTE</span>",
+					message: "<span class='bigger-110 blue bolder'>SUPORTE</span><br /><span class='blue bolder'>Email: contato@onlares.com</span><br /><span class='blue bolder'>Fone: (85) 8787.8740</span>",
 					buttons: 			
 					{
 						"success" :
