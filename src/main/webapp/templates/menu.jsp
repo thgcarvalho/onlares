@@ -146,7 +146,7 @@
 				<span class="menu-text">
 					Calendário
 
-					<span class="badge badge-transparent tooltip-error" title="2 Important Events">
+					<span class="badge badge-transparent tooltip-error" title="0 Eventos Importantes">
 						<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
 					</span>
 				</span>
@@ -195,6 +195,15 @@
 			<a href="#">
 				<i class="menu-icon fa fa-phone"></i>
 				<span class="menu-text"> Fornecedores </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
+		
+		<li>
+			<a href="#" id="bootbox-suport">
+				<i class="menu-icon fa fa-headphones"></i>
+				<span class="menu-text"> Suporte </span>
 			</a>
 
 			<b class="arrow"></b>

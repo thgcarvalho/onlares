@@ -37,6 +37,6 @@
 	</div>
 	
 	<decorator:getProperty property="page.local_script"></decorator:getProperty>
-
+	
 </body>
 </html>

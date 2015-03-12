@@ -8,7 +8,7 @@
 	<%@ include file="/templates/head.jsp"%>
 	<!-- grandev -->
 	<link rel="stylesheet" href="${ctx}/resources/css/style.css" />
-
+	
 	<link rel="icon" href="${ctx}/resources/images/favicon-16.png" />
 	<link rel="shortcut icon" href="${ctx}/resources/onlares.ico" />
 	<link rel="shortcut icon" href="${ctx}/resources/images/favicon-32.png" />
@@ -37,6 +37,28 @@
 	</div>
 	
 	<decorator:getProperty property="page.local_script"></decorator:getProperty>
+	
+	<script src="${ctx}/assets/js/bootbox.min.js"></script>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$("#bootbox-suport").on(ace.click_event, function() {
+				bootbox.dialog({
+					message: "<span class='bigger-110'>SUPORTE</span>",
+					buttons: 			
+					{
+						"success" :
+						 {
+							"label" : "<i class='ace-icon fa fa-check'></i> OK",
+							"className" : "btn-sm btn-success",
+							"callback": function() {
+								//Example.show("great success");
+							}
+						}
+					}
+				});
+			});
+		});
+	</script>
 
 </body>
 </html>

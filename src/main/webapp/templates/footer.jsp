@@ -22,8 +22,8 @@
 				<a href="https://www.linkedin.com/company/onlares">
 					<i class="ace-icon fa fa-linkedin-square text-primary bigger-150"></i>
 				</a>
-				
 			</span>
+			
 		</div>
 	</div>
 </div>

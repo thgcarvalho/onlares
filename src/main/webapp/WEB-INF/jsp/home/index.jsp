@@ -89,6 +89,7 @@
 						</c:forEach>
 						
 					</div>
+					
 				</div><!-- /.row -->
 				<!-- PAGE CONTENT ENDS -->
 			</div><!-- /.col -->
@@ -132,7 +133,6 @@
 	<script src="${ctx}/assets/js/ace.min.js"></script>
 	
 	<!-- inline scripts related to this page -->
-	
 	
 	<!-- menu script -->
 	<script type="text/javascript">
