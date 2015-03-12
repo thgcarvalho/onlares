@@ -71,15 +71,12 @@ public class PerfilController implements Serializable{
 	public Download foto(String email, ServletContext context) throws FileNotFoundException {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
 		Foto foto = null;
-		System.out.println("OBTEM");
 		URI fotoTempURI = usuarioLogado.getUsuario().getFotoTemp();
 		if (fotoTempURI != null) {
 			Temp temp = tempDao.recupera(fotoTempURI); 
 			foto = new Foto(temp.getNome(), temp.getConteudo(), temp.getContentType(), temp.getDataModificacao());
-			System.out.println("       FOTO TEMP= " + fotoTempURI + " =" + foto);
 		} else {
 			foto = fotoDao.recupera(usuario.getFoto());
-			System.out.println("       FOTO REAL=" + foto);
 		}
 		
 		if (foto != null) {

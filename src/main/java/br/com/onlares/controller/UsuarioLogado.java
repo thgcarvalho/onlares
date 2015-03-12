@@ -20,7 +20,7 @@ public class UsuarioLogado implements Serializable {
 	}
 
 	public void setUsuario(Usuario usuario) {
-		System.out.println(" UsuarioLogado USUARIO LOGADO = " + usuario.getNome());
+		System.out.println("USUARIO LOGADO = " + usuario.getNome());
 		this.usuario = usuario;
 	}
 	
