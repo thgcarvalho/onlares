@@ -92,7 +92,6 @@ public class PerfilController implements Serializable{
 	
 	@Post("/perfil/foto")
 	public void armazenaFoto(UploadedFile foto) {
-		System.out.println("ARMAZENA");
 		if (foto != null) {
 			try {
 				URI imagemURI = tempDao.grava(new Temp(
@@ -100,7 +99,6 @@ public class PerfilController implements Serializable{
 						ByteStreams.toByteArray(foto.getFile()), 
 						foto.getContentType(), Calendar.getInstance()));
 				usuarioLogado.getUsuario().setFotoTemp(imagemURI);
-				System.out.println("         amarzenafoto  " + imagemURI + " "+ (foto == null ? "NULL" : foto+" "+foto.getFileName()));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -110,7 +108,6 @@ public class PerfilController implements Serializable{
 	
 	@Put("/perfil/") 
 	public void altera(Usuario usuario) throws IOException {
-		System.out.println("SALVA");
 		if (checkNull(usuario.getNome()).equals("")) {
 			validator.add(new I18nMessage("perfil.edita", "campo.obrigatorio", "Nome"));
 		}
@@ -134,11 +131,15 @@ public class PerfilController implements Serializable{
 		Usuario usuarioDB = usuarioDao.busca(usuario);
 		usuarioDB.setNome(usuario.getNome());
 		//usuarioDB.setEmail(usuario.getEmail());
+		usuarioDB.setProfissao(usuario.getProfissao());
+		usuarioDB.setAniversario(usuario.getAniversario());
+		usuarioDB.setFoneResidencial(usuario.getFoneResidencial());
+		usuarioDB.setFoneCelular(usuario.getFoneCelular());
+		usuarioDB.setFoneComercial(usuario.getFoneComercial());
 		
 		URI fotoTemp = usuarioLogado.getUsuario().getFotoTemp();
 		if (fotoTemp != null) {
 			URI fotoAntigaURI = usuarioDB.getFoto();
-			System.out.println(" 1 fotoAntigaURI" + fotoAntigaURI);
 			// recupera foto temp
 			Temp temp = tempDao.recupera(fotoTemp); 
 			Foto foto = new Foto(temp.getNome(), temp.getConteudo(), temp.getContentType(), temp.getDataModificacao());
@@ -148,7 +149,6 @@ public class PerfilController implements Serializable{
 			// deleta foto temp
 			tempDao.deleta(fotoTemp);
 			// deleta foto antiga
-			System.out.println(" 2 fotoAntigaURI" + fotoAntigaURI);
 			if (fotoAntigaURI != null) {
 				fotoDao.deleta(fotoAntigaURI);
 			}

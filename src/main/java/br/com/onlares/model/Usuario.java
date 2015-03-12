@@ -33,6 +33,8 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	private String nome;
+	private String profissao;
+	private String aniversario;
 	@Column(name="fone_residencial")
 	private String foneResidencial;
 	@Column(name="fone_celular")
@@ -89,6 +91,18 @@ public class Usuario implements Serializable {
 	}
 	public String getNome() {
 		return nome;
+	}
+	public String getProfissao() {
+		return profissao;
+	}
+	public void setProfissao(String profissao) {
+		this.profissao = profissao;
+	}
+	public String getAniversario() {
+		return aniversario;
+	}
+	public void setAniversario(String aniversario) {
+		this.aniversario = aniversario;
 	}
 	public String getFoneResidencial() {
 		return foneResidencial;

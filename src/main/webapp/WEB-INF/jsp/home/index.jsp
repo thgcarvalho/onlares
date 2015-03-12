@@ -5,6 +5,7 @@
 <html>
 
 <head>
+
 	<meta name="description" content="" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
@@ -58,7 +59,7 @@
 		</ul><!-- /.breadcrumb -->
 		
 		<div class="nav-search" id="nav-search">
-			<span class="">
+			<span class="condominium">
 				${usuarioLogado.usuario.condominio.nome}
 			</span>
 		</div><!-- /.nav-search -->

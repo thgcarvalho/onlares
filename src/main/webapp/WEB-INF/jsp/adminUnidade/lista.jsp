@@ -61,6 +61,12 @@
 
 			<li class="active">Unidades</li>
 		</ul><!-- /.breadcrumb -->
+				
+		<div class="nav-search" id="nav-search">
+			<span class="condominium">
+				${usuarioLogado.usuario.condominio.nome}
+			</span>
+		</div><!-- /.nav-search -->
 	</div>
 	
 	<div class="page-content">

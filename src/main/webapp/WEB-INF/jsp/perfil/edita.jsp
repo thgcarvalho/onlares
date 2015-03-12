@@ -64,6 +64,12 @@
 
 			<li class="active">Perfil</li>
 		</ul><!-- /.breadcrumb -->
+		
+		<div class="nav-search" id="nav-search">
+			<span class="condominium">
+				${usuarioLogado.usuario.condominio.nome}
+			</span>
+		</div><!-- /.nav-search -->
 	</div>
 	
 	<div class="page-content">
@@ -129,15 +135,6 @@
 												</div>
 												
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Profissão </div>
-							
-													<div class="profile-info-value">
-														<input type="text" id="profissao" name="profissao" value="" 
-														placeholder="Profissão" maxlength="45" class="col-xs-10 col-sm-5" />
-													</div>
-												</div>
-											
-												<div class="profile-info-row">
 													<div class="profile-info-name"> Unidade </div>
 
 													<div class="profile-info-value">
@@ -145,50 +142,49 @@
 														<span>${usuarioLogado.usuario.unidade.localizacao}</span>
 													</div>
 												</div>
-
+												
+												<div class="profile-info-row">
+													<div class="profile-info-name"> Profissão </div>
+							
+													<div class="profile-info-value">
+														<input type="text" id="profissao" name="usuario.profissao" value="${usuarioLogado.usuario.profissao}"
+														placeholder="Profissão" maxlength="45" class="col-xs-10 col-sm-5" />
+													</div>
+												</div>
 
 												<div class="profile-info-row">
 													<div class="profile-info-name"> Aniversário </div>
 							
 													<div class="profile-info-value">
-														<input type="text"  id="niver" name="idade" value="" 
-														placeholder="DD/MM" class="col-xs-10 col-sm-5 input-mask-date" />
+														<input type="text"  id="aniversario" name="usuario.aniversario" value="${usuarioLogado.usuario.aniversario}"
+														placeholder="DD/MM" maxlength="5" class="col-xs-10 col-sm-5 input-mask-date" />
 													</div>
 												</div>
 												
-											</div>
-
-											<div class="hr hr-8 dotted"></div>
-
-											<div class="profile-user-info">
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Website </div>
+													<div class="profile-info-name"> Fone Residencial </div>
 							
 													<div class="profile-info-value">
-														<input type="text" id="site" name="site" value="" 
-														placeholder="Website" maxlength="45" class="col-xs-10 col-sm-5" />
+														<input type="text" name="usuario.foneResidencial" value="${usuarioLogado.usuario.foneResidencial}" 
+														placeholder="(99) 9999-9999" maxlength="14" class="ol-xs-10 col-sm-5 input-mask-phone" id="foneResidencial" />
 													</div>
 												</div>
 
 												<div class="profile-info-row">
-													<div class="profile-info-name">
-														<i class="middle ace-icon fa fa-facebook-square bigger-150 blue"></i>
-													</div>
-
+													<div class="profile-info-name"> Fone Celular </div>
+							
 													<div class="profile-info-value">
-														<input type="text" id="site" name="facebook" value="" 
-														placeholder="Facebook" maxlength="45" class="col-xs-10 col-sm-5" />
+														<input type="text" name="usuario.foneCelular" value="${usuarioLogado.usuario.foneCelular}" 
+														placeholder="(99) 9999-9999" maxlength="14" class="ol-xs-10 col-sm-5 input-mask-phone" id="foneResidencial" />
 													</div>
 												</div>
-
+												
 												<div class="profile-info-row">
-													<div class="profile-info-name">
-														<i class="middle ace-icon fa fa-twitter-square bigger-150 light-blue"></i>
-													</div>
-
+													<div class="profile-info-name"> Fone Comercial </div>
+							
 													<div class="profile-info-value">
-														<input type="text" id="site" name="rwitter" value="" 
-														placeholder="Twitter" maxlength="45" class="col-xs-10 col-sm-5" />
+														<input type="text" name="usuario.foneComercial" value="${usuarioLogado.usuario.foneComercial}" 
+														placeholder="(99) 9999-9999" maxlength="14" class="ol-xs-10 col-sm-5 input-mask-phone" id="foneResidencial" />
 													</div>
 												</div>
 												
@@ -688,7 +684,7 @@
 			.end().find('.date-picker').datepicker().next().on(ace.click_event, function(){
 				$(this).prev().focus();
 			})
-			$('.input-mask-phone').mask('(999) 999-9999');
+			$('.input-mask-phone').mask('(99) 999-9999');
 			$('.input-mask-date').mask('99/99');
 		
 			$('#user-profile-3').find('input[type=file]').ace_file_input('show_file_list', [{type: 'image', name: $('#avatar').attr('src')}]);

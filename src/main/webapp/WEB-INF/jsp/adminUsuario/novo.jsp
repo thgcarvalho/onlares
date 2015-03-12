@@ -9,9 +9,6 @@
 	<meta name="description" content="Common form elements and layouts" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 		
-	<!-- grandev -->
-	<link rel="stylesheet" href="${ctx}/resources/css/style.css" />
-
 	<!-- bootstrap & fontawesome -->
 	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="${ctx}/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
@@ -110,7 +107,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="foneResidencial"> Fone Residencial </label>
 
 						<div class="col-sm-9">
-							<input type="text" name="usuario.fone1" value="${usuario.fone1}" 
+							<input type="text" name="usuario.foneResidencial" value="${usuario.foneResidencial}" 
 							placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="fone1" />
 						</div>
 					</div>
