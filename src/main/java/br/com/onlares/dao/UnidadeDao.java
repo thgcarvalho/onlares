@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.exception.RestricaoDeIntegridadeException;
 import br.com.onlares.model.Unidade;
+import br.com.onlares.model.Usuario;
 
 public class UnidadeDao {
 
@@ -50,9 +51,9 @@ public class UnidadeDao {
 	
 	public void verificaIntegridade(long unidadeId) throws RestricaoDeIntegridadeException {
 		boolean temUsuario = !em.createQuery("select u from Usuario u"
-				+ " where u.unidade.id = :unidade_id"
-				+ " and u.condominioId = :condominioId", Unidade.class)
-				.setParameter("unidade_id", unidadeId)
+				+ " where u.unidade.id = :unidadeId"
+				+ " and u.condominio.id = :condominioId", Usuario.class)
+				.setParameter("unidadeId", unidadeId)
 				.setParameter("condominioId", condominioId)
 				.getResultList().isEmpty();
 		if (temUsuario) {

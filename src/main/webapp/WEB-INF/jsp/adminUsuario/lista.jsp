@@ -104,7 +104,8 @@
 
 													<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 														<li>
-															<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+															<a href="${linkTo[PerfilController].visualiza(usuario.email)}" 
+																class="tooltip-info" data-rel="tooltip" title="Visualizar">
 																<span class="blue">
 																	<i class="ace-icon fa fa-search-plus bigger-120"></i>
 																</span>
@@ -112,7 +113,8 @@
 														</li>
 
 														<li>
-															<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+															<a href="${linkTo[AdminUsuarioController].edita(usuario.email)}" 
+																class="tooltip-success" data-rel="tooltip" title="Editar">
 																<span class="green">
 																	<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																</span>
@@ -120,9 +122,8 @@
 														</li>
 
 														<li>
-															<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete"></a>
-															<a class="tooltip-error"  href="<c:url value="/adminUsuario/deleta/${item.ID}" />" 
-                    											title="Edit '${item.name}'.">
+															<a href="${linkTo[AdminUsuarioController].remove(usuario.email)}" 
+																class="deletar tooltip-error" data-rel="tooltip" title="Remover" >
 																<span class="red">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																</span>
@@ -378,8 +379,8 @@
 	<!-- delete script -->
 	<script type="text/javascript">
 		$(".deletar").on("click", function(event) {
+			event.preventDefault();
 			if (confirm('Você realmente deseja exlucir esse registro?')) {
-				event.preventDefault();
 				$.ajax({
 					url: $(this).attr("href"),
 					type: 'POST',

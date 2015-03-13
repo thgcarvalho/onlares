@@ -88,7 +88,8 @@
 
 													<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 														<li>
-															<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+															<a href="${linkTo[AdminUnidadeController].edita(unidade.id)}" 
+																class="tooltip-success" data-rel="tooltip" title="Editar">
 																<span class="green">
 																	<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
 																</span>
@@ -96,7 +97,8 @@
 														</li>
 
 														<li>
-															<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+															<a href="${linkTo[AdminUnidadeController].remove(unidade.id)}" 
+																class="deletar tooltip-error" data-rel="tooltip" title="Remover" >
 																<span class="red">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																</span>
@@ -351,8 +353,8 @@
 	<!-- delete script -->
 	<script type="text/javascript">
 		$(".deletar").on("click", function(event) {
+			event.preventDefault();
 			if (confirm('Você realmente deseja exlucir esse registro?')) {
-				event.preventDefault();
 				$.ajax({
 					url: $(this).attr("href"),
 					type: 'POST',
