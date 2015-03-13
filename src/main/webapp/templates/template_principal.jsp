@@ -36,8 +36,43 @@
 		<%@ include file="/templates/footer.jsp"%>
 	</div>
 	
+	<!-- basic scripts -->
+	
+	<!--[if !IE]> -->
+	<script src="${ctx}/assets/js/jquery.2.1.1.min.js"></script>
+	
+	<!-- <![endif]-->
+	
+	<!--[if IE]>
+	<script src="${ctx}/assets/js/jquery.1.11.1.min.js"></script>
+	<![endif]-->
+	
+	<!--[if !IE]> -->
+	<script type="text/javascript">
+		window.jQuery || document.write("<script src='${ctx}/assets/js/jquery.min.js'>"+"<"+"/script>");
+	</script>
+	
+	<!-- <![endif]-->
+	
+	<!--[if IE]>
+	<script type="text/javascript">
+	window.jQuery || document.write("<script src='${ctx}/assets/js/jquery1x.min.js'>"+"<"+"/script>");
+	</script>
+	<![endif]-->
+	<script type="text/javascript">
+		if('ontouchstart' in document.documentElement) document.write("<script src='${ctx}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+	</script>
+	<script src="${ctx}/assets/js/bootstrap.min.js"></script>
+	
+	<!-- ace scripts -->
+	<script src="${ctx}/assets/js/ace-elements.min.js"></script>
+	<script src="${ctx}/assets/js/ace.min.js"></script>
+	
+	<!-- page specific plugin scripts -->
+	<!-- inline scripts related to this page -->
 	<decorator:getProperty property="page.local_script"></decorator:getProperty>
 	
+	<!-- bootbox suport modal script -->
 	<script src="${ctx}/assets/js/bootbox.min.js"></script>
 	<script type="text/javascript">
 		jQuery(function($) {

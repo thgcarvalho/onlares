@@ -119,43 +119,11 @@
 </div>
 	
 <content tag="local_script">
-	<!-- basic scripts -->
-	
-	<!--[if !IE]> -->
-	<script src="${ctx}/assets/js/jquery.2.1.1.min.js"></script>
-	
-	<!-- <![endif]-->
-	
-	<!--[if IE]>
-	<script src="${ctx}/assets/js/jquery.1.11.1.min.js"></script>
-	<![endif]-->
-	
-	<!--[if !IE]> -->
-	<script type="text/javascript">
-		window.jQuery || document.write("<script src='${ctx}/assets/js/jquery.min.js'>"+"<"+"/script>");
-	</script>
-	
-	<!-- <![endif]-->
-	
-	<!--[if IE]>
-	<script type="text/javascript">
-	 window.jQuery || document.write("<script src='${ctx}/assets/js/jquery1x.min.js'>"+"<"+"/script>");
-	</script>
-	<![endif]-->
-	<script type="text/javascript">
-		if('ontouchstart' in document.documentElement) document.write("<script src='${ctx}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-	</script>
-	<script src="${ctx}/assets/js/bootstrap.min.js"></script>
-	
 	<!-- page specific plugin scripts -->
 	<script src="${ctx}/assets/js/jquery.dataTables.min.js"></script>
 	<script src="${ctx}/assets/js/jquery.dataTables.bootstrap.min.js"></script>
 	<script src="${ctx}/assets/js/dataTables.tableTools.min.js"></script>
 	<script src="${ctx}/assets/js/dataTables.colVis.min.js"></script>
-	
-	<!-- ace scripts -->
-	<script src="${ctx}/assets/js/ace-elements.min.js"></script>
-	<script src="${ctx}/assets/js/ace.min.js"></script>
 	
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
