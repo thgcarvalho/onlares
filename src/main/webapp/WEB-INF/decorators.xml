@@ -6,6 +6,8 @@
 		<pattern>/home/*</pattern>
 		<pattern>/morador/*</pattern>
 		<pattern>/perfil/*</pattern>
+		
+		<pattern>/preco</pattern>
 	</decorator>
 
 	<decorator name="admin" page="template_admin.jsp">

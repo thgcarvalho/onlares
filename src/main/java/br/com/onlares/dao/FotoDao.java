@@ -29,7 +29,7 @@ public class FotoDao {
 	}
 	
 	public Foto recupera(URI chave) {
-		if (chave == null) {
+		if (chave == null || chave.equals("")) {
 			return null;
 		}
 		// scheme é o protocolo. No caso de foto:// ou temp://
