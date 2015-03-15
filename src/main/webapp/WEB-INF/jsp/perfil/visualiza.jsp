@@ -59,9 +59,10 @@
 									<div class="row">
 										<div class="col-xs-12 col-sm-3 center">
 											<span class="profile-picture">
-												<img alt="Alex's Avatar" id="avatar2" src="${ctx}/assets/avatars/profile-pic.jpg" />
+												<img class="editable img-responsive" alt="Avatar" id="avatar2" 
+													src="${linkTo[PerfilController].foto(usuario.email)}" />
 											</span>
-
+											<!--
 											<div class="space space-4"></div>
 
 											<a href="#" class="btn btn-sm btn-block btn-success">
@@ -73,6 +74,7 @@
 												<i class="ace-icon fa fa-envelope-o bigger-110"></i>
 												<span class="bigger-110">Enviar uma mensagem</span>
 											</a>
+											-->
 										</div><!-- /.col -->
 
 										<div class="col-xs-12 col-sm-9">
@@ -95,14 +97,6 @@
 												</div>
 												
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Profissão </div>
-
-													<div class="profile-info-value">
-														<span></span>
-													</div>
-												</div>
-
-												<div class="profile-info-row">
 													<div class="profile-info-name"> Unidade </div>
 
 													<div class="profile-info-value">
@@ -110,47 +104,47 @@
 														<span>${usuario.unidade.localizacao}</span>
 													</div>
 												</div>
-
+												
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Idade </div>
+													<div class="profile-info-name"> Profissão </div>
 
 													<div class="profile-info-value">
-														<span>38</span>
-													</div>
-												</div>
-
-											</div>
-
-											<div class="hr hr-8 dotted"></div>
-
-											<div class="profile-user-info">
-												<div class="profile-info-row">
-													<div class="profile-info-name"> Website </div>
-
-													<div class="profile-info-value">
-														<a href="#" target="_blank">www.grandev.com</a>
+														<span>${usuario.profissao}</span>
 													</div>
 												</div>
 
 												<div class="profile-info-row">
-													<div class="profile-info-name">
-														<i class="middle ace-icon fa fa-facebook-square bigger-150 blue"></i>
-													</div>
+													<div class="profile-info-name"> Aniversário </div>
 
 													<div class="profile-info-value">
-														<a href="#">Siga-me no Facebook</a>
+														<span>${usuario.aniversario}</span>
 													</div>
 												</div>
-
+												
 												<div class="profile-info-row">
-													<div class="profile-info-name">
-														<i class="middle ace-icon fa fa-twitter-square bigger-150 light-blue"></i>
-													</div>
+													<div class="profile-info-name"> Fone Residencial </div>
 
 													<div class="profile-info-value">
-														<a href="#">Siga-me no Twitter</a>
+														<span>${usuario.foneResidencial}</span>
 													</div>
 												</div>
+												
+												<div class="profile-info-row">
+													<div class="profile-info-name"> Fone Celular </div>
+
+													<div class="profile-info-value">
+														<span>${usuario.foneCelular}</span>
+													</div>
+												</div>
+												
+												<div class="profile-info-row">
+													<div class="profile-info-name"> Fone Comercial </div>
+
+													<div class="profile-info-value">
+														<span>${usuario.foneComercial}</span>
+													</div>
+												</div>
+
 											</div>
 										</div><!-- /.col -->
 									</div><!-- /.row -->
