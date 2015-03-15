@@ -36,27 +36,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				<div class="row">
-					<div class="space-6"></div>
-
-					<div class="col-sm-12 infobox-container">
-					
-						<c:forEach items="${anuncioList}" var="anuncio">
-							<div class="infobox infobox-pink">
-							<div class="infobox-icon">
-								<i class="ace-icon fa fa-shopping-cart"></i>
-							</div>
-
-							<div class="infobox-data">
-								<span class="infobox-data-number">${anuncio.id}</span>
-								<div class="infobox-content">${anuncio.titulo}</div>
-							</div>
-						</div>
-						</c:forEach>
-						
-					</div>
-					
-				</div><!-- /.row -->
+				
 				<!-- PAGE CONTENT ENDS -->
 			</div><!-- /.col -->
 		</div><!-- /.row -->
