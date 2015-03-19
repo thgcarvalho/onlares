@@ -1,4 +1,4 @@
-# OnLares project
+# **OnLares - Sistema para Condomínios**
 
 Projeto você pode rodar com um tomcat7 ou +:
 
