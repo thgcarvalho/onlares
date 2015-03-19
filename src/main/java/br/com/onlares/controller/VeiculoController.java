@@ -11,7 +11,6 @@ import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.VeiculoDao;
-import br.com.onlares.model.Unidade;
 import br.com.onlares.model.Veiculo;
 
 @Controller
@@ -62,9 +61,8 @@ public class VeiculoController {
 		
 		validator.onErrorUsePageOf(this).novo();
 	
-//		Unidade unidade = new Unidade();
-//		unidade.setId(unidadeId);
-//		veiculo.setUnidade(unidade);
+		veiculo.setTipo(veiculo.getTipo().toUpperCase());
+		veiculo.setPlaca(veiculo.getPlaca().toUpperCase());
 		dao.adiciona(veiculo);
 		result.include("notice", "Veículo adicionado com sucesso!");
 		result.redirectTo(this).lista();

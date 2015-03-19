@@ -47,7 +47,7 @@
 
 						<div class="col-sm-9">
 							<input type="text" required="required" id="nome" name="veiculo.tipo" value="${veiculo.tipo}" 
-							placeholder="Tipo" maxlength="45" autofocus class="col-xs-10 col-sm-5" />
+							placeholder="Tipo" maxlength="45" autofocus class="col-xs-10 col-sm-5 text-uppercase" />
 						</div>
 					</div>
 
@@ -58,7 +58,7 @@
 
 						<div class="col-sm-9">
 							<input type="text" required="required" name="veiculo.placa" value="${veiculo.placa}" 
-							placeholder="Placa" maxlength="8" class="col-xs-10 col-sm-5" id="placa" />
+							placeholder="Placa" maxlength="8" class="col-xs-10 col-sm-5 input-mask-plaque text-uppercase" id="placa" />
 						</div>
 					</div>
 					
@@ -190,6 +190,8 @@
 			});
 		
 			$.mask.definitions['~']='[+-]';
+			$('.input-mask-plaque').mask('aaa-9999');
+			
 			$('.input-mask-date').mask('99/99/9999');
 			$('.input-mask-phone').mask('(99) 9999-9999');
 			$('.input-mask-eyescript').mask('~9.99 ~9.99 999');
