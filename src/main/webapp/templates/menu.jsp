@@ -58,6 +58,15 @@
 
 			<b class="arrow"></b>
 		</li>
+		
+		<li id="menu_veiculos" class="">
+			<a href="${ctx}/veiculo/lista">
+				<i class="menu-icon fa fa-car"></i>
+				<span class="menu-text"> Veiculos </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
 
 		<li class="disabled">
 			<a href="#" class="dropdown-toggle">

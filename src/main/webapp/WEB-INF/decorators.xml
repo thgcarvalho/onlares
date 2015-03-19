@@ -5,6 +5,7 @@
 	<decorator name="main" page="template_principal.jsp">
 		<pattern>/home/*</pattern>
 		<pattern>/morador/*</pattern>
+		<pattern>/veiculo/*</pattern>
 		<pattern>/perfil/*</pattern>
 	</decorator>
 
