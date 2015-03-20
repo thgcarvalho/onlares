@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import br.com.onlares.model.Veiculo;
 
@@ -34,6 +36,27 @@ public class VeiculoDao {
 		em.getTransaction().begin();
 		em.persist(veiculo);
 		em.getTransaction().commit();
+	}
+	
+	public void altera(Veiculo veiculo) {
+		em.getTransaction().begin();
+		em.merge(veiculo);
+		em.getTransaction().commit();
+	}
+	
+	public Veiculo buscaNaUnidade(Long unidadeId, String placa) {
+		Veiculo veiculo;
+		String strQuery = "SELECT v FROM Veiculo v"
+				+ " WHERE v.unidade.id = :unidadeId AND v.placa = :placa";
+		try {
+			Query query = em.createQuery(strQuery, Veiculo.class);
+			query.setParameter("unidadeId", unidadeId);
+			query.setParameter("placa", placa);
+			veiculo = (Veiculo) query.getSingleResult();
+		} catch (NoResultException nrExp) {
+			veiculo = null;
+		}
+		return veiculo;
 	}
 	
 	public List<Veiculo> listaDaUnidade(Long unidadeId) {

@@ -1,15 +1,17 @@
 package br.com.onlares.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.VeiculoDao;
 import br.com.onlares.model.Veiculo;
 
@@ -46,7 +48,6 @@ public class VeiculoController {
 	public void novo() {
 	}
 	
-	@Admin
 	@Post("/veiculo")
 	public void adiciona(Veiculo veiculo) {
 		if (checkNull(veiculo.getTipo()).equals("")) {
@@ -65,6 +66,44 @@ public class VeiculoController {
 		veiculo.setPlaca(veiculo.getPlaca().toUpperCase());
 		dao.adiciona(veiculo);
 		result.include("notice", "Veículo adicionado com sucesso!");
+		result.redirectTo(this).lista();
+	}
+	
+	@Get("/veiculo/edita/{placa}")
+	public void edita(String placa) {
+		Veiculo veiculo = dao.buscaNaUnidade(this.unidadeId, placa);
+		if (veiculo == null) {
+			result.notFound();
+		} else {
+			result.include("veiculo", veiculo);
+		}
+	}
+	
+	@Put("/veiculo")
+	public void altera(Veiculo veiculo) {
+		if (checkNull(veiculo.getTipo()).equals("")) {
+			validator.add(new I18nMessage("veiculo.edita", "campo.obrigatorio", "Tipo"));
+		}
+		if (checkNull(veiculo.getPlaca()).equals("")) {
+			validator.add(new I18nMessage("veiculo.edita", "campo.obrigatorio", "Placa"));
+		}
+		
+		List<Veiculo> veiculos = dao.listaDaUnidade(this.unidadeId);
+		for (Veiculo veiculoCadastrado : veiculos) {
+			if (veiculoCadastrado.getPlaca().equals(veiculo.getPlaca())) {
+				if (!veiculoCadastrado.getId().equals(veiculo.getId())) {
+					validator.add(new SimpleMessage("veiculo.edita", "Veículo já cadastrado"));
+					break;
+				}
+			}
+		}
+		
+		validator.onErrorUsePageOf(this).edita(veiculo.getPlaca());
+		
+		veiculo.setTipo(veiculo.getTipo().toUpperCase());
+		veiculo.setPlaca(veiculo.getPlaca().toUpperCase());
+		dao.altera(veiculo);
+		result.include("notice", "Veículo atualizado com sucesso!");
 		result.redirectTo(this).lista();
 	}
 	
