@@ -73,5 +73,11 @@ public class VeiculoDao {
 			.setParameter("unidadeId", unidadeId)
 			.getResultList().isEmpty();
 	}
+	
+	public void remove(Veiculo veiculo) {
+		em.getTransaction().begin();
+		em.remove(busca(veiculo));
+		em.getTransaction().commit();
+	}
 
 }

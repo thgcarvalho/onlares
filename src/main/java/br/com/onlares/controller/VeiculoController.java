@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
@@ -105,6 +106,14 @@ public class VeiculoController {
 		dao.altera(veiculo);
 		result.include("notice", "Veículo atualizado com sucesso!");
 		result.redirectTo(this).lista();
+	}
+	
+	@Delete("/veiculo/{placa}")
+	public void remove(String placa){
+		System.out.println("Veículo = " + placa + " FOI REMOVIDO!");
+		Veiculo usuario = dao.buscaNaUnidade(this.unidadeId, placa);
+		dao.remove(usuario);
+		result.nothing();
 	}
 	
 	private String checkNull(String value) {
