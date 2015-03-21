@@ -25,6 +25,6 @@ public class MoradorController {
 
 	@Get
 	public void lista() {
-		result.include("moradorList", dao.lista());
+		result.include("moradorList", dao.listaRegistrados());
 	}
 }
