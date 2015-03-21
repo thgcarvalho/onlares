@@ -20,20 +20,20 @@
 		<ul class="breadcrumb">
 			<li>
 				<i class="ace-icon fa fa-user home-icon"></i>
-				<a href="${ctx}/admin/index">Admin</a>
+				<a href="${ctx}/home/index">Home</a>
 			</li>
 			<li>
 			<i class=""></i>
-				<a href="${ctx}/adminUsuario/lista">Usuários</a>
+				<a href="${ctx}/veiculo/lista">Veiculos</a>
 			</li>
-			<li class="active">Novo Veículo</li>
+			<li class="active">Edita Veículo</li>
 		</ul><!-- /.breadcrumb -->
 	</div>
 	
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Novo Veículo
+				Edita Veículo
 			</h1>
 		</div><!-- /.page-header -->
 	
