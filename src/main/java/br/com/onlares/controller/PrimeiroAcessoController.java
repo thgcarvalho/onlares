@@ -65,7 +65,7 @@ public class PrimeiroAcessoController {
 			}
 			dao.registra(usuarioDB, usuario.getNome(), MD5Hashing.convertStringToMd5(usuario.getSenha()));
 			result.include("notice", "Usuário registrado com sucesso!");
-			result.redirectTo(this).registro();
+			result.redirectTo(LoginController.class).login();
 		} catch (Exception e) {
 			e.printStackTrace();
 			validator.add(new SimpleMessage("registro", e.getMessage()));

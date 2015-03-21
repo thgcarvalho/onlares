@@ -52,7 +52,6 @@ public class LoginController {
 			validator.onErrorUsePageOf(this).login();
 		} 
 		Usuario usuarioDB = usuariodao.buscaPorEmail(usuario.getEmail());
-//		adicionaFotoDoPerfilEmMemoria(usuarioDB);
 		usuarioLogado.setUsuario(usuarioDB);
 		result.redirectTo(HomeController.class).index();
 	}
@@ -67,10 +66,4 @@ public class LoginController {
 		return usuarioLogado;
 	}
 	
-//	public void adicionaFotoDoPerfilEmMemoria(Usuario usuario) {
-//		Foto foto = fotoDao.recupera(usuario.getFoto());
-//		Download fotoDownload = new ByteArrayDownload(foto.getConteudo(), foto.getContentType(), foto.getNome());
-//		usuario.setFotoDownload(fotoDownload);
-//	}
-
 }

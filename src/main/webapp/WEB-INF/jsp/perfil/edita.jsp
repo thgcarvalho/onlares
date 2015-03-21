@@ -533,7 +533,7 @@
 			.end().find('.date-picker').datepicker().next().on(ace.click_event, function(){
 				$(this).prev().focus();
 			})
-			$('.input-mask-phone').mask('(99) 999-9999');
+			$('.input-mask-phone').mask('(99) 9999-9999');
 			$('.input-mask-date').mask('99/99');
 		
 			$('#user-profile-3').find('input[type=file]').ace_file_input('show_file_list', [{type: 'image', name: $('#avatar').attr('src')}]);
