@@ -24,7 +24,7 @@
 			</li>
 			<li>
 			<i class=""></i>
-				<a href="${ctx}/veiculo/lista">Veiculos</a>
+				<a href="${ctx}/veiculo/lista">Veículos</a>
 			</li>
 			<li class="active">Edita Veículo</li>
 		</ul><!-- /.breadcrumb -->
