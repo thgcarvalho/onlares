@@ -10,6 +10,7 @@ CREATE TABLE veiculo
   marca character varying(45),
   modelo character varying(45),
   cor character varying(45),
+  unidade_id bigint,
   CONSTRAINT veiculo_pkey PRIMARY KEY (id)
 )
 WITH (

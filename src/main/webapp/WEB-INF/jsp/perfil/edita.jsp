@@ -419,7 +419,7 @@
 				var file = form.find('input[type=file]').eq(0);
 				file.ace_file_input({
 					style:'well',
-					btn_choose:'Click to choose new avatar',
+					btn_choose:'Clique para alterar sua foto',
 					btn_change:null,
 					no_icon:'ace-icon fa fa-picture-o',
 					thumbnail:'small',
