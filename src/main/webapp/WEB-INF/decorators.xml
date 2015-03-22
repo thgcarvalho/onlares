@@ -7,6 +7,7 @@
 		<pattern>/morador/*</pattern>
 		<pattern>/veiculo/*</pattern>
 		<pattern>/perfil/*</pattern>
+		<pattern>/configuracao/*</pattern>
 	</decorator>
 
 	<decorator name="admin" page="template_admin.jsp">

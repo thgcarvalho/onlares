@@ -41,12 +41,12 @@
 				</a>
 
 				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-					<!-- <li>
-						<a href="#">
+					<li>
+						<a href="${linkTo[ConfiguracaoController].email()}">
 							<i class="ace-icon fa fa-cog"></i>
 							Configurações
 						</a>
-					</li>  -->
+					</li>
 
 					<li>
 						<a href="${linkTo[PerfilController].edita()}">
