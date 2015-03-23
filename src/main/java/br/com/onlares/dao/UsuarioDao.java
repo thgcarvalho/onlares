@@ -116,12 +116,13 @@ public class UsuarioDao {
 	}
 	
 	private boolean mesmoCondominio(Usuario usuario) {
-		if (usuario.getCondominio().getId().compareTo(condominioId) == 0) {
-			return true;
-		} else {
-			System.out.println("CONDOMÍNIOS DIFERENTES: " + usuario.getCondominio().getId() + " != " + condominioId);
-			return false;
-		}
+		return true; // TODO reavaliar metodo
+//		if (usuario.getCondominio().getId().compareTo(condominioId) == 0) {
+//			return true;
+//		} else {
+//			System.out.println("CONDOMÍNIOS DIFERENTES: " + usuario.getCondominio().getId() + " != " + condominioId);
+//			return false;
+//		}
 	}
 
 }

@@ -75,7 +75,40 @@
 								</li>
 
 							</ul>
-
+						</div>
+						
+						<div class="tab-content no-border padding-24">
+						
+							<div class="alert alert-warning">
+								<button type="button" class="close" data-dismiss="alert">
+									<i class="ace-icon fa fa-times"></i>
+								</button>
+								<strong>Atenção!</strong>
+								Este é o mesmo email que você efetuará o login no OnLares e também o que você receberá informações sobre a sua conta.
+								<br />
+							</div>
+						
+							<form class="form-horizontal" role="form" action="${ctx}/configuracao/email" method="post">
+								<input type="hidden" name="_method" value="PUT">
+								<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" for="nome"> Email* </label>
+			
+									<div class="col-sm-9">
+										<input type="text" required="required" id="email" name="usuario.email" value="${usuarioLogado.usuario.email}" 
+										placeholder="Unidade" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
+									</div>
+								</div>
+			
+								<div class="clearfix form-actions">
+									<div class="col-md-offset-5">
+										<button class="btn btn-info" type="submit">
+											<i class="ace-icon fa fa-check bigger-110"></i>
+											Salvar
+										</button>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>

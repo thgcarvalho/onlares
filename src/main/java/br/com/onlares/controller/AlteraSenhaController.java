@@ -19,6 +19,7 @@ import br.com.onlares.annotations.Public;
 import br.com.onlares.dao.AlteraSenhaDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.AlteraSenha;
+import br.com.onlares.model.Status;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.service.GeradorDeCodigo;
 import br.com.onlares.util.MD5Hashing;
@@ -31,8 +32,6 @@ import br.com.onlares.util.MD5Hashing;
 public class AlteraSenhaController {
 	
 	private final int TAMANHO_DO_CODIGO = 8;
-	private final String STATUS_SENHA_NAO_ALTERADA = "0";
-	private final String STATUS_SENHA_ALTERADA = "1";
 	
 	private final Mailer mailer;
 	private final UsuarioDao usuarioDao;
@@ -79,7 +78,7 @@ public class AlteraSenhaController {
 		AlteraSenha alteraSenha = new AlteraSenha();
 		alteraSenha.setCodigo(codigo);
 		alteraSenha.setEmail(emailDoUsuario);
-		alteraSenha.setStatus(STATUS_SENHA_NAO_ALTERADA);
+		alteraSenha.setStatus(Status.PENDENTE.getCodigo());
 		alteraSenhaDao.adiciona(alteraSenha);
 		// Envia email
 		try {
@@ -159,7 +158,7 @@ public class AlteraSenhaController {
 				usuarioDB.setSenha(MD5Hashing.convertStringToMd5(novaSenha));
 				usuarioDao.altera(usuarioDB);
 				// Atualiza alteraSenha
-				alteraSenhaDB.setStatus(STATUS_SENHA_ALTERADA);
+				alteraSenhaDB.setStatus(Status.ALTERADO.getCodigo());
 				alteraSenhaDao.edita(alteraSenhaDB);
 			}
 		} catch (Exception e) {

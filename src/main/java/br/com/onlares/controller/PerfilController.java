@@ -167,47 +167,6 @@ public class PerfilController implements Serializable{
 		}
 	}
 	
-//	public void solicitarAlteracaoDeEmail() {
-//		boolean erro = false;
-//		String erroMsg = null;
-//		User user = null;
-//		String strEmailAntigo = null;
-//		String strEmailNovo = null;
-//		AlteraEmailDao alteraEmailDao = new AlteraEmailDao();
-//		try {
-//			strEmailAntigo = usuarioLogado.getUsuario().getEmail();
-//			strEmailNovo = usuario.getNovoEmail();
-//			user = userBean.getUser(strEmailNovo);
-//			if (user == null) {
-//				GeradorDeCodigo geradorDeCodigo = new GeradorDeCodigo();
-//				String codigo = geradorDeCodigo.gerar(16);
-//				AlteraEmail alteraEmail = new AlteraEmail();
-//				alteraEmail.setCodigo(codigo);
-//				alteraEmail.setEmailAntigo(strEmailAntigo);
-//				alteraEmail.setEmailNovo(strEmailNovo);
-//				alteraEmail.setStatus(Status.PENDENTE.getCodigo());
-//				alteraEmailDao.criar(alteraEmail);
-//				
-//				// envia confirmacao
-////				ConfirmarAlteracaoDeEmail confAlteEmal = new ConfirmarAlteracaoDeEmail(strEmailNovo, codigo);
-////				confAlteEmal.enviar();
-//			} else {
-//				erro = true; 
-//				erroMsg = "Email já cadastrado.";
-//			}
-//		} catch (Exception e) {
-//			erro = true;
-//			erroMsg = e.getMessage();
-//			e.printStackTrace();
-//		}
-//		if (erro) {
-//			validator.add(new SimpleMessage("usuario.edita", erroMsg));
-//		} else {
-//			result.include("notice", "Um email de confirmação foi enviado."
-//					+ " Verifique em sua caixa de entrada e clique no link para confirmar a alteração.");
-//		}
-//	}
-	
 	private String checkNull(String value) {
 		if (value == null) {
 			return ("");
