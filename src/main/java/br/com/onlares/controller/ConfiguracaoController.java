@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.environment.Environment;
 import br.com.caelum.vraptor.simplemail.Mailer;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
@@ -27,6 +28,7 @@ import br.com.onlares.service.GeradorDeCodigo;
 public class ConfiguracaoController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private final Environment environment;
 	private final int TAMANHO_DO_CODIGO = 16;
 	private final Mailer mailer;
 	private final UsuarioDao usuarioDao;
@@ -37,8 +39,9 @@ public class ConfiguracaoController implements Serializable {
 	private final Result result;
 
 	@Inject
-	public ConfiguracaoController(Mailer mailer, UsuarioDao usuarioDao, AlteraEmailDao alteraEmailDao, UsuarioLogado usuarioLogado, Validator validator, Result result) {
+	public ConfiguracaoController(Mailer mailer, Environment environment, UsuarioDao usuarioDao, AlteraEmailDao alteraEmailDao, UsuarioLogado usuarioLogado, Validator validator, Result result) {
 		this.mailer = mailer;
+		this.environment = environment;
 		this.usuarioDao = usuarioDao;
 		this.alteraEmailDao = alteraEmailDao;
 		this.usuarioLogado = usuarioLogado;
@@ -46,8 +49,9 @@ public class ConfiguracaoController implements Serializable {
 		this.result = result;
 	}
 	
+	@Deprecated
 	public ConfiguracaoController() {
-		this(null, null, null, null, null, null);
+		this(null, null, null, null, null, null, null);
 	}
 	
 	@Get
@@ -111,7 +115,7 @@ public class ConfiguracaoController implements Serializable {
         email.setSubject("Confirmação de Email");
         email.addTo(emailNovo);
         email.setMsg("Clique no link para realizar a alteração: "
-        		+ "http://www.grandev.me/onlares/alteraEmail/codigo/" + codigo );
+        		+ environment.get("context") + "alteraEmail/codigo/" + codigo );
         mailer.send(email);
 	
 	}

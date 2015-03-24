@@ -10,6 +10,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.environment.Environment;
 import br.com.caelum.vraptor.simplemail.Mailer;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Severity;
@@ -34,15 +35,17 @@ public class AlteraSenhaController {
 	private final int TAMANHO_DO_CODIGO = 8;
 	
 	private final Mailer mailer;
+	private final Environment environment;
 	private final UsuarioDao usuarioDao;
 	private final AlteraSenhaDao alteraSenhaDao;
 	private final Validator validator;
 	private final Result result;
 
 	@Inject
-	public AlteraSenhaController(Mailer mailer, UsuarioDao usuarioDao, AlteraSenhaDao alteraSenhaDao, 
+	public AlteraSenhaController(Mailer mailer, Environment environment, UsuarioDao usuarioDao, AlteraSenhaDao alteraSenhaDao, 
 			Validator validator, Result result) {
 		this.mailer = mailer;
+		this.environment = environment;
 		this.usuarioDao = usuarioDao;
 		this.alteraSenhaDao = alteraSenhaDao;
 		this.validator = validator;
@@ -51,7 +54,7 @@ public class AlteraSenhaController {
 	
 	@Deprecated
 	public AlteraSenhaController() {
-		this(null, null, null, null, null);
+		this(null, null, null, null, null, null);
 	}
 	
 	@Get("/esqueci")
@@ -87,11 +90,11 @@ public class AlteraSenhaController {
 	        email.setSubject("Instruções para Nova Senha");
 	        email.addTo(emailDoUsuario);
 	        email.setMsg("Clique no link para realizar a alteração: "
-	        		+ "http://www.grandev.me/onlares/alteraSenha/codigo/" + codigo );
+	        		+ environment.get("context") + "alteraSenha/codigo/" + codigo );
 	        mailer.send(email);
 		} catch(EmailException eExp) {
 			eExp.printStackTrace();	
-			validator.add(new SimpleMessage("alterasenha.solicita", "Erro ao enviar email!", Severity.ERROR));
+			validator.add(new SimpleMessage("alterasenha.solicita", "Erro ao enviar email!"));
 			validator.onErrorUsePageOf(this).esqueci();
 		}
 		
@@ -108,7 +111,7 @@ public class AlteraSenhaController {
 	@Get("/alteraSenha/codigo/{codigo}")
 	public void codigo(String codigo) { 
 		if (!checkValidPatern(codigo)) {
-			validator.add(new SimpleMessage("alterasenha.codigo", "Código inválido!", Severity.ERROR));
+			validator.add(new SimpleMessage("alterasenha.codigo", "Código inválido!"));
 			validator.onErrorUsePageOf(this).index();
 		}
 		result.forwardTo(this).form(codigo);
@@ -134,7 +137,7 @@ public class AlteraSenhaController {
 		
 		if (!novaSenha.equals(confirmacaoDeNovaSenha)) {
 			result.include("codigo", codigo);
-			validator.add(new SimpleMessage("alterasenha.altera", "Senhas não conferem!", Severity.ERROR));
+			validator.add(new SimpleMessage("alterasenha.altera", "Senhas não conferem!"));
 			validator.onErrorUsePageOf(this).form(codigo);
 		}
 		
@@ -145,11 +148,11 @@ public class AlteraSenhaController {
 			alteraSenhaDB = alteraSenhaDao.buscaPorCodigo(codigo);
 			if (alteraSenhaDB == null) {
 				result.include("codigo", codigo);
-				validator.add(new SimpleMessage("alterasenha.altera", "Código não localizado!", Severity.ERROR));
+				validator.add(new SimpleMessage("alterasenha.altera", "Código não localizado!"));
 				validator.onErrorUsePageOf(this).form(codigo);
 			} else if (alteraSenhaDB.getStatus().equals("1")){
 				result.include("codigo", codigo);
-				validator.add(new SimpleMessage("alterasenha.altera", "Solicitação já realizada!", Severity.ERROR));
+				validator.add(new SimpleMessage("alterasenha.altera", "Solicitação já realizada!"));
 				validator.onErrorUsePageOf(this).form(codigo);
 			} else {
 				email = alteraSenhaDB.getEmail();
@@ -163,7 +166,7 @@ public class AlteraSenhaController {
 			}
 		} catch (Exception e) {
 			result.include("codigo", codigo);
-			validator.add(new SimpleMessage("alterasenha.altera", "Solicitação inválida!", Severity.ERROR));
+			validator.add(new SimpleMessage("alterasenha.altera", "Solicitação inválida!"));
 			validator.onErrorUsePageOf(this).form(codigo);
 		}
 		
