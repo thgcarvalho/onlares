@@ -4,38 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<%@ include file="/templates/head.jsp"%>
+	<!-- grandev -->
+	<link rel="stylesheet" href="${ctx}/resources/css/style.css" />
+	
 	<link rel="icon" href="${ctx}/resources/images/favicon-16.png" />
 	<link rel="shortcut icon" href="${ctx}/resources/onlares.ico" />
 	<link rel="shortcut icon" href="${ctx}/resources/images/favicon-32.png" />
-	
-	<meta name="description" content="" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
-	<!-- bootstrap & fontawesome -->
-	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="${ctx}/assets/font-awesome/4.2.0/css/font-awesome.min.css" />
-
-	<!-- text fonts -->
-	<link rel="stylesheet" href="${ctx}/assets/fonts/fonts.googleapis.com.css" />
-
-	<!-- ace styles -->
-	<link rel="stylesheet" href="${ctx}/assets/css/ace.min.css" />
-
-	<!--[if lte IE 9]>
-		<link rel="stylesheet" href="${ctx}/assets/css/ace-part2.min.css" />
-	<![endif]-->
-	<link rel="stylesheet" href="${ctx}/assets/css/ace-rtl.min.css" />
-
-	<!--[if lte IE 9]>
-	  <link rel="stylesheet" href="${ctx}/assets/css/ace-ie.min.css" />
-	<![endif]-->
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-	<!--[if lt IE 9]>
-	<script src="${ctx}/assets/js/html5shiv.min.js"></script>
-	<script src="${ctx}/assets/js/respond.min.js"></script>
-	<![endif]-->
 </head>
 
 	<body class="login-layout light-login">
@@ -106,45 +81,63 @@
 			</div><!-- /.main-content -->
 		</div><!-- /.main-container -->
 
-		<!-- basic scripts -->
-
-		<!--[if !IE]> -->
-		<script src="${ctx}/assets/js/jquery.2.1.1.min.js"></script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script src="${ctx}/assets/js/jquery.1.11.1.min.js"></script>
-<![endif]-->
-
-		<!--[if !IE]> -->
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='${ctx}/assets/js/jquery.min.js'>"+"<"+"/script>");
-		</script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='${ctx}/assets/js/jquery1x.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='${ctx}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-			jQuery(function($) {
-			 $(document).on('click', '.toolbar a[data-target]', function(e) {
-				e.preventDefault();
-				var target = $(this).data('target');
-				$('.widget-box.visible').removeClass('visible');//hide others
-				$(target).addClass('visible');//show target
-			 });
+			<!-- basic scripts -->
+	
+	<!--[if !IE]> -->
+	<script src="${ctx}/assets/js/jquery.2.1.1.min.js"></script>
+	
+	<!-- <![endif]-->
+	
+	<!--[if IE]>
+	<script src="${ctx}/assets/js/jquery.1.11.1.min.js"></script>
+	<![endif]-->
+	
+	<!--[if !IE]> -->
+	<script type="text/javascript">
+		window.jQuery || document.write("<script src='${ctx}/assets/js/jquery.min.js'>"+"<"+"/script>");
+	</script>
+	
+	<!-- <![endif]-->
+	
+	<!--[if IE]>
+	<script type="text/javascript">
+	window.jQuery || document.write("<script src='${ctx}/assets/js/jquery1x.min.js'>"+"<"+"/script>");
+	</script>
+	<![endif]-->
+	<script type="text/javascript">
+		if('ontouchstart' in document.documentElement) document.write("<script src='${ctx}/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+	</script>
+	<script src="${ctx}/assets/js/bootstrap.min.js"></script>
+	
+	<!-- ace scripts -->
+	<script src="${ctx}/assets/js/ace-elements.min.js"></script>
+	<script src="${ctx}/assets/js/ace.min.js"></script>
+	
+	<!-- page specific plugin scripts -->
+	<!-- inline scripts related to this page -->
+	
+	<!-- bootbox suport modal script -->
+	<script src="${ctx}/assets/js/bootbox.min.js"></script>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$("#bootbox-suport").on(ace.click_event, function() {
+				bootbox.dialog({
+					message: "<span class='bigger-110 blue bolder'>SUPORTE</span><br /><span class='blue bolder'>Email: contato@onlares.com</span><br /><span class='blue bolder'>Fone: (85) 8787.8740</span>",
+					buttons: 			
+					{
+						"success" :
+						 {
+							"label" : "<i class='ace-icon fa fa-check'></i> OK",
+							"className" : "btn-sm btn-success",
+							"callback": function() {
+								//Example.show("great success");
+							}
+						}
+					}
+				});
 			});
-			
-		</script>
+		});
+	</script>
 	</body>
 </html>
 
