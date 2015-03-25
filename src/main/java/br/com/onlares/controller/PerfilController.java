@@ -151,7 +151,9 @@ public class PerfilController implements Serializable{
 		}
 		usuarioLogado.getUsuario().setFotoTemp(null);
 		
-		usuarioDao.altera(usuarioDB);
+		if (mesmoCondominio(usuarioDB)) {
+			usuarioDao.altera(usuarioDB);
+		}
 		usuarioLogado.setUsuario(usuarioDB);
 		result.include("notice", "Perfil atualizado com sucesso!");
 		result.redirectTo(this).edita();
@@ -164,6 +166,16 @@ public class PerfilController implements Serializable{
 			result.notFound();
 		} else {
 			result.include("usuario", usuario);
+		}
+	}
+	
+	private boolean mesmoCondominio(Usuario usuario) {
+		if (usuario.getCondominio().getId().compareTo(usuarioLogado.getUsuario().getCondominio().getId()) == 0) {
+			return true;
+		} else {
+			System.out.println("CONDOMÍNIOS DIFERENTES: " + usuario.getCondominio().getId() 
+					+ " != " + usuarioLogado.getUsuario().getCondominio().getId());
+			return false;
 		}
 	}
 	

@@ -100,29 +100,15 @@ public class UsuarioDao {
 	}
 	
 	public void altera(Usuario usuario) {
-		if (mesmoCondominio(usuario)) {
-			em.getTransaction().begin();
-			em.merge(usuario);
-			em.getTransaction().commit();
-		}
+		em.getTransaction().begin();
+		em.merge(usuario);
+		em.getTransaction().commit();
 	}
 	
 	public void remove(Usuario usuario) {
-		if (mesmoCondominio(usuario)) {
-			em.getTransaction().begin();
-			em.remove(busca(usuario));
-			em.getTransaction().commit();
-		}
-	}
-	
-	private boolean mesmoCondominio(Usuario usuario) {
-		return true; // TODO reavaliar metodo
-//		if (usuario.getCondominio().getId().compareTo(condominioId) == 0) {
-//			return true;
-//		} else {
-//			System.out.println("CONDOMÍNIOS DIFERENTES: " + usuario.getCondominio().getId() + " != " + condominioId);
-//			return false;
-//		}
+		em.getTransaction().begin();
+		em.remove(busca(usuario));
+		em.getTransaction().commit();
 	}
 
 }
