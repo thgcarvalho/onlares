@@ -1,6 +1,7 @@
 package br.com.onlares.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -62,8 +63,19 @@ public class ConfiguracaoController implements Serializable {
 	public void email(Usuario usuario) {
 		if (checkNull(usuario.getEmail()).equals("")) {
 			validator.add(new I18nMessage("campo.obrigatorio", "Email"));
-			validator.onErrorUsePageOf(this).email();
+		} else {
+			List<Usuario> usuarios = usuarioDao.listaTodos();
+			for (Usuario usuarioCadastrado : usuarios) {
+				if (usuarioCadastrado.getEmail().equals(usuario.getEmail())) {
+					if (!usuarioCadastrado.getId().equals(usuario.getId())) {
+						validator.add(new SimpleMessage("email.edita", "Email usado por outro usuário"));
+						break;
+					}
+				}
+			}
 		}
+		
+		validator.onErrorUsePageOf(this).email();
 		
 		Long id = usuario.getId();
 		Usuario usuarioDB = usuarioDao.buscaPorId(id);
