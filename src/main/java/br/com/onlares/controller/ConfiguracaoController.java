@@ -30,11 +30,10 @@ public class ConfiguracaoController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private final Environment environment;
-	private final int TAMANHO_DO_CODIGO = 16;
+	private final int TAMANHO_DO_CODIGO = 8;
 	private final Mailer mailer;
 	private final UsuarioDao usuarioDao;
 	private final AlteraEmailDao alteraEmailDao;
-	@SuppressWarnings("unused")
 	private final UsuarioLogado usuarioLogado;
 	private final Validator validator;
 	private final Result result;
@@ -54,6 +53,8 @@ public class ConfiguracaoController implements Serializable {
 	public ConfiguracaoController() {
 		this(null, null, null, null, null, null, null);
 	}
+	
+	// EMAIL
 	
 	@Get
 	public void email() {
@@ -100,8 +101,21 @@ public class ConfiguracaoController implements Serializable {
 		result.redirectTo(this).email();
 	}
 	
+	// NOTIFICACOES
+	
 	@Get
 	public void notificacoes() {
+	}
+	
+	@Put
+	public void notificacoes(Usuario usuario) {
+		Long id = usuario.getId();
+		boolean alertasPorEmail = usuario.isAlertasPorEmail();
+		Usuario usuarioDB = usuarioDao.buscaPorId(id);
+		usuarioDB.setAlertasPorEmail(alertasPorEmail);
+		usuarioDao.altera(usuarioDB);
+		usuarioLogado.setUsuario(usuarioDB);
+		result.redirectTo(this).notificacoes();
 	}
 	
 	@Get

@@ -22,7 +22,7 @@ import br.com.onlares.model.Usuario;
 @Controller
 public class AlteraEmailController {
 	
-	private final int TAMANHO_DO_CODIGO = 16;
+	private final int TAMANHO_DO_CODIGO = 8;
 	
 	@SuppressWarnings("unused")
 	private final Mailer mailer;

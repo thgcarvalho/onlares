@@ -75,8 +75,35 @@
 								</li>
 
 							</ul>
-
 						</div>
+						
+						<div class="tab-content no-border padding-24">
+						
+							<form class="form-horizontal" role="form" action="${ctx}/configuracao/notificacoes" method="post">
+								<input type="hidden" name="_method" value="PUT">
+								<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right"> Receber notificações por email: </label>
+		
+									<div class="col-sm-9">
+										<label>
+											<input name="usuario.alertasPorEmail" class="ace ace-switch" type="checkbox" ${usuarioLogado.usuario.alertasPorEmail ? 'checked' : ''}/>
+											<span class="lbl" data-lbl="SIM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NÂO"></span>
+										</label>
+									</div>
+								</div>
+			
+								<div class="clearfix form-actions">
+									<div class="col-md-offset-5">
+										<button class="btn btn-info" type="submit">
+											<i class="ace-icon fa fa-check bigger-110"></i>
+											Salvar
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						
 					</div>
 				</div>
 				<!-- PAGE CONTENT ENDS -->
