@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.simplemail.Mailer;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Public;
@@ -24,17 +23,14 @@ public class AlteraEmailController {
 	
 	private final int TAMANHO_DO_CODIGO = 8;
 	
-	@SuppressWarnings("unused")
-	private final Mailer mailer;
 	private final UsuarioDao usuarioDao;
 	private final AlteraEmailDao alteraEmailDao;
 	private final Validator validator;
 	private final Result result;
 
 	@Inject
-	public AlteraEmailController(Mailer mailer, UsuarioDao usuarioDao, AlteraEmailDao alteraEmailDao, 
+	public AlteraEmailController(UsuarioDao usuarioDao, AlteraEmailDao alteraEmailDao, 
 			Validator validator, Result result) {
-		this.mailer = mailer;
 		this.usuarioDao = usuarioDao;
 		this.alteraEmailDao = alteraEmailDao;
 		this.validator = validator;
@@ -43,7 +39,7 @@ public class AlteraEmailController {
 	
 	@Deprecated
 	public AlteraEmailController() {
-		this(null, null, null, null, null);
+		this(null, null, null, null);
 	}
 	
 	@Public

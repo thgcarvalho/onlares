@@ -19,8 +19,10 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.dao.AlteraEmailDao;
+import br.com.onlares.dao.ExcluiContaDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.AlteraEmail;
+import br.com.onlares.model.ExcluiConta;
 import br.com.onlares.model.Status;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.service.GeradorDeCodigo;
@@ -35,16 +37,18 @@ public class ConfiguracaoController implements Serializable {
 	private final Mailer mailer;
 	private final UsuarioDao usuarioDao;
 	private final AlteraEmailDao alteraEmailDao;
+	private final ExcluiContaDao excluiContaDao;
 	private final UsuarioLogado usuarioLogado;
 	private final Validator validator;
 	private final Result result;
 
 	@Inject
-	public ConfiguracaoController(Mailer mailer, Environment environment, UsuarioDao usuarioDao, AlteraEmailDao alteraEmailDao, UsuarioLogado usuarioLogado, Validator validator, Result result) {
+	public ConfiguracaoController(Mailer mailer, Environment environment, UsuarioDao usuarioDao, ExcluiContaDao excluiContaDao, AlteraEmailDao alteraEmailDao, UsuarioLogado usuarioLogado, Validator validator, Result result) {
 		this.mailer = mailer;
 		this.environment = environment;
 		this.usuarioDao = usuarioDao;
 		this.alteraEmailDao = alteraEmailDao;
+		this.excluiContaDao = excluiContaDao;
 		this.usuarioLogado = usuarioLogado;
 		this.validator = validator;
 		this.result = result;
@@ -52,7 +56,7 @@ public class ConfiguracaoController implements Serializable {
 	
 	@Deprecated
 	public ConfiguracaoController() {
-		this(null, null, null, null, null, null, null);
+		this(null, null, null, null, null, null, null, null);
 	}
 	
 	// EMAIL
@@ -90,7 +94,7 @@ public class ConfiguracaoController implements Serializable {
 			String codigo = geradorDeCodigo.gerar(TAMANHO_DO_CODIGO);
 			try {
 				solicitarAlteracaoDeEmail(emailAntigo, emailNovo, codigo);
-				enviaConfirmacaoPorEmail(emailNovo, codigo);
+				enviaConfirmacaoDeAlteracaoPorEmail(emailNovo, codigo);
 			} catch(EmailException eExp) {
 				eExp.printStackTrace();	
 				validator.add(new SimpleMessage("configuracao.email", "Erro ao enviar email de confirmação!"));
@@ -111,7 +115,7 @@ public class ConfiguracaoController implements Serializable {
 		alteraEmailDao.adiciona(alteraEmail);
 	} 
 	
-	public void enviaConfirmacaoPorEmail(String emailNovo, String codigo) throws EmailException {
+	public void enviaConfirmacaoDeAlteracaoPorEmail(String emailNovo, String codigo) throws EmailException {
 		// TODO adicionar html content e context path
         Email email = new SimpleEmail();
         email.setSubject("Confirmação de Email");
@@ -174,6 +178,43 @@ public class ConfiguracaoController implements Serializable {
 	public void conta() {
 	}
 	
+	@Put
+	public void conta(Usuario usuario) {
+		Long id = usuario.getId();
+		Usuario usuarioDB = usuarioDao.buscaPorId(id);
+		String emailDeConfirmacao = usuarioDB.getEmail();
+		GeradorDeCodigo geradorDeCodigo = new GeradorDeCodigo();
+		String codigo = geradorDeCodigo.gerar(TAMANHO_DO_CODIGO);
+		solicitarExclusaoDeConta(emailDeConfirmacao, codigo);
+		try {
+			enviaConfirmacaoDeExclusaoPorEmail(emailDeConfirmacao, codigo);
+		} catch(EmailException eExp) {
+			eExp.printStackTrace();	
+			validator.add(new SimpleMessage("configuracao.email", "Erro ao enviar email de confirmação!"));
+			validator.onErrorUsePageOf(this).email();
+		}
+		result.include("notice", "Um email de confirmação foi enviado para " + emailDeConfirmacao + "."
+				+ " Verifique em sua caixa de entrada e clique no link para confirmar a alteração.");
+		result.redirectTo(this).email();
+	}
+	
+	public void solicitarExclusaoDeConta(String emailDeConfirmacao, String codigo) {
+		ExcluiConta excluiConta = new ExcluiConta();
+		excluiConta.setCodigo(codigo);
+		excluiConta.setEmail(emailDeConfirmacao);
+		excluiConta.setStatus(Status.PENDENTE.getCodigo());
+		excluiContaDao.adiciona(excluiConta);
+	} 
+	
+	public void enviaConfirmacaoDeExclusaoPorEmail(String emailDeConfirmacao, String codigo) throws EmailException {
+		// TODO adicionar html content e context path
+        Email email = new SimpleEmail();
+        email.setSubject("Confirmação de exclusão de conta");
+        email.addTo(emailDeConfirmacao);
+        email.setMsg("Clique no link para realizar a excluão: "
+        		+ environment.get("context") + "excluiConta/codigo/" + codigo );
+        mailer.send(email);
+	}
 	
 	private String checkNull(String value) {
 		if (value == null) {

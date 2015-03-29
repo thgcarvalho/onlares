@@ -73,8 +73,32 @@
 										Conta
 									</a>
 								</li>
-
 							</ul>
+							
+							<div class="tab-content no-border padding-24">
+						
+								<div class="alert alert-warning">
+									<button type="button" class="close" data-dismiss="alert">
+										<i class="ace-icon fa fa-times"></i>
+									</button>
+									<strong>Atenção!</strong>
+									Você receberá uma confirmação em seu email para iniciar o processo de exclusão de conta.
+									<br />
+								</div>
+							
+								<form class="form-horizontal" role="form" action="${ctx}/configuracao/conta" method="post">
+									<input type="hidden" name="_method" value="PUT">
+									<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-5">
+											<button class="btn btn-danger" type="submit">
+												<i class="ace-icon fa fa-trash bigger-110"></i>
+												Excluir minha Conta
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
 
 						</div>
 					</div>
