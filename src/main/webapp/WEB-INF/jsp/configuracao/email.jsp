@@ -92,7 +92,7 @@
 								<input type="hidden" name="_method" value="PUT">
 								<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
 								<div class="form-group">
-									<label class="col-sm-3 control-label no-padding-right" for="nome"> Email* </label>
+									<label class="col-sm-3 control-label no-padding-right" for="email"> Email* </label>
 			
 									<div class="col-sm-9">
 										<input type="text" required="required" id="email" name="usuario.email" value="${usuarioLogado.usuario.email}" 

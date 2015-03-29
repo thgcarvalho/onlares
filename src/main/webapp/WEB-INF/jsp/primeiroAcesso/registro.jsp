@@ -259,7 +259,7 @@
 						confirmar_senha: {
 							required: "Confirmação de senha é obrigatória.",
 							minlength: "Insira uma senha com no mínimo 6 caracteres",
-							equalTo: "A Senhas não estão iguais."
+							equalTo: "A Senhas não conferem."
 						},
 						termos: "É necessário aceitar os termos de uso"
 					},

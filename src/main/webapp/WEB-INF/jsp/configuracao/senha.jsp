@@ -75,8 +75,41 @@
 								</li>
 
 							</ul>
-
 						</div>
+						
+						<div class="tab-content no-border padding-24">
+						
+							<form class="form-horizontal" id="validation-form" role="form" action="${ctx}/configuracao/senha" method="post">
+								<input type="hidden" name="_method" value="PUT">
+								<input type="hidden" name="usuario.id" value="${usuarioLogado.usuario.id}">
+								
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" for="email"> Nova Senha* </label>
+									<div class="col-sm-9">
+						                <input type="password" id="senha" name="usuario.senha" 
+						                class="col-xs-10 col-sm-5" placeholder="Senha" />
+						        	</div>
+								</div>
+						        
+						       <div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" for="confirmaemail"> Repita a Nova Senha* </label>
+									<div class="col-sm-9">
+						                <input type="password" id="confirmar_senha" name="confirmar_senha" 
+						                class="col-xs-10 col-sm-5" placeholder="Repita a Senha" />
+						        	</div>
+								</div>
+									
+								<div class="clearfix form-actions">
+									<div class="col-md-offset-5">
+										<button class="btn btn-info" type="submit">
+											<i class="ace-icon fa fa-check bigger-110"></i>
+											Salvar
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						
 					</div>
 				</div>
 				<!-- PAGE CONTENT ENDS -->
@@ -86,7 +119,71 @@
 </div>
 	
 <content tag="local_script">
+
 	<!-- page specific plugin scripts -->
+	<script src="${ctx}/assets/js/jquery.validate.min.js"></script>
+		
+	<!-- page specific plugin scripts -->
+	<script type="text/javascript">
+		jQuery(function($) {
+			//documentation : http://docs.jquery.com/Plugins/Validation/validate
+			$('#validation-form').validate({
+				errorElement: 'div',
+				errorClass: 'help-block',
+				focusInvalid: false,
+				ignore: "",
+				rules: {
+					"usuario.senha": {
+						required: true,
+						minlength: 6
+					},
+					confirmar_senha: {
+						required: true,
+						minlength: 6,
+						equalTo: "#senha"
+					}
+				},
+		
+				messages: {
+					"usuario.senha": {
+						required: "Senha é obrigatória.",
+						minlength: "Insira uma senha com no mínimo 6 caracteres"
+					},
+					confirmar_senha: {
+						required: "Confirmação de senha é obrigatória.",
+						minlength: "Insira uma senha com no mínimo 6 caracteres",
+						equalTo: "A Senhas não conferem."
+					}
+				},
+		
+		
+				highlight: function (e) {
+					$(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+				},
+		
+				success: function (e) {
+					$(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+					$(e).remove();
+				},
+		
+				errorPlacement: function (error, element) {
+					if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
+						var controls = element.closest('div[class*="col-"]');
+						if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+						else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+					}
+					else if(element.is('.select2')) {
+						error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+					}
+					else if(element.is('.chosen-select')) {
+						error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+					}
+					else error.insertAfter(element.parent());
+				}
+			});
+			
+		})
+	</script>
 	
 </content>
 

@@ -24,6 +24,7 @@ import br.com.onlares.model.AlteraEmail;
 import br.com.onlares.model.Status;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.service.GeradorDeCodigo;
+import br.com.onlares.util.MD5Hashing;
 
 @Controller
 public class ConfiguracaoController implements Serializable {
@@ -101,31 +102,6 @@ public class ConfiguracaoController implements Serializable {
 		result.redirectTo(this).email();
 	}
 	
-	// NOTIFICACOES
-	
-	@Get
-	public void notificacoes() {
-	}
-	
-	@Put
-	public void notificacoes(Usuario usuario) {
-		Long id = usuario.getId();
-		boolean alertasPorEmail = usuario.isAlertasPorEmail();
-		Usuario usuarioDB = usuarioDao.buscaPorId(id);
-		usuarioDB.setAlertasPorEmail(alertasPorEmail);
-		usuarioDao.altera(usuarioDB);
-		usuarioLogado.setUsuario(usuarioDB);
-		result.redirectTo(this).notificacoes();
-	}
-	
-	@Get
-	public void senha() {
-	}
-	
-	@Get
-	public void conta() {
-	}
-	
 	public void solicitarAlteracaoDeEmail(String emailAntigo, String emailNovo, String codigo) {
 		AlteraEmail alteraEmail = new AlteraEmail();
 		alteraEmail.setCodigo(codigo);
@@ -143,8 +119,61 @@ public class ConfiguracaoController implements Serializable {
         email.setMsg("Clique no link para realizar a alteração: "
         		+ environment.get("context") + "alteraEmail/codigo/" + codigo );
         mailer.send(email);
-	
 	}
+	
+	// NOTIFICACOES
+	
+	@Get
+	public void notificacoes() {
+	}
+	
+	@Put
+	public void notificacoes(Usuario usuario) {
+		Long id = usuario.getId();
+		boolean alertasPorEmail = usuario.isAlertasPorEmail();
+		Usuario usuarioDB = usuarioDao.buscaPorId(id);
+		usuarioDB.setAlertasPorEmail(alertasPorEmail);
+		usuarioDao.altera(usuarioDB);
+		usuarioLogado.setUsuario(usuarioDB);
+		result.redirectTo(this).notificacoes();
+	}
+	
+	// SENHA
+	
+	@Get
+	public void senha() {
+	}
+	
+	@Put
+	public void senha(Usuario usuario) {
+		Long id = usuario.getId();
+		String novaSenha = usuario.getSenha();
+		String confirmacaoDeNovaSenha = usuario.getSenha();
+		System.out.println(id + " " + usuario.getSenha());
+		if (!novaSenha.equals(confirmacaoDeNovaSenha)) {
+			//result.include("codigo", codigo);
+			validator.add(new SimpleMessage("configuracao.senha", "Senhas não conferem!"));
+			validator.onErrorUsePageOf(this).senha();
+		}
+		try {
+			Usuario usuarioDB = usuarioDao.buscaPorId(id);
+			usuarioDB.setSenha(MD5Hashing.convertStringToMd5(novaSenha));
+			usuarioDao.altera(usuarioDB);
+			usuarioLogado.setUsuario(usuarioDB);
+			result.include("notice", "Senha alterada com sucesso.");
+			result.redirectTo(this).senha();
+		} catch (Exception e) {
+			validator.add(new SimpleMessage("configuracao.senha", "Solicitação inválida!"));
+			validator.onErrorUsePageOf(this).senha();
+		}
+	}
+	
+	// CONTA
+	
+	@Get
+	public void conta() {
+	}
+	
 	
 	private String checkNull(String value) {
 		if (value == null) {
