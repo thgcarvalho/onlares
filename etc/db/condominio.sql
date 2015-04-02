@@ -8,6 +8,7 @@ CREATE TABLE condominio
   administradora character varying(45),
   bairro character varying(45),
   cep character varying(10),
+  uf character varying(2),
   cidade character varying(45),
   cnpj character varying(18),
   complemento character varying(45),
