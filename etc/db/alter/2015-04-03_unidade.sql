@@ -1,0 +1,1 @@
+ALTER TABLE unidade ADD CONSTRAINT unidade_unique UNIQUE (localizacao, condominio_id);
