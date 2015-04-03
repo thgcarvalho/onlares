@@ -41,7 +41,7 @@ public class Usuario implements Serializable {
 	private String foneCelular;
 	@Column(name="fone_comercial")
 	private String foneComercial;
-	private String tipo;
+	private String autorizacao;
 	@Column(name="alertas_por_email")
 	private boolean alertasPorEmail;
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -68,7 +68,7 @@ public class Usuario implements Serializable {
 	}
 	
 	public boolean isAdmin() {
-		return (this.tipo != null && this.tipo.equals("ADMIN"));
+		return (this.autorizacao != null && this.autorizacao.equals("ADMIN"));
 	}
 	
 	public Long getId() {
@@ -125,11 +125,11 @@ public class Usuario implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getTipo() {
-		return tipo;
+	public String getAutorizacao() {
+		return autorizacao;
 	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setAutorizacao(String autorizacao) {
+		this.autorizacao = autorizacao;
 	}
 	public boolean isAlertasPorEmail() {
 		return alertasPorEmail;

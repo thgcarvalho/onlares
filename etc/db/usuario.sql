@@ -14,7 +14,7 @@ CREATE TABLE usuario
   fone_comercial character varying(14),
   fone_celular character varying(14),
   foto character varying(45),
-  tipo character varying(45),
+  autorizacao character varying(45),
   alertas_por_email boolean,
   condominio_id bigint,
   unidade_id bigint,
