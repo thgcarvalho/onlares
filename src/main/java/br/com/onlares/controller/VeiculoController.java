@@ -40,28 +40,34 @@ public class VeiculoController {
 		this(null, null, null, null);
 	}
 	
-	@Get
+	@Get("/veiculo/lista")
 	public void lista() {
 		result.include("veiculoUnidadeList", dao.listaDaUnidade(this.unidadeId));
 	}
 	
-	@Get
+	@Get("/veiculo/novo")
 	public void novo() {
 	}
 	
-	@Post("/veiculo")
+	@Post("/veiculo/")
 	public void adiciona(Veiculo veiculo) {
+		System.out.println("@Post(/veiculo)");
+		System.out.println("0" + veiculo.getUnidade().getId());
 		if (checkNull(veiculo.getTipo()).equals("")) {
 			validator.add(new I18nMessage("veiculo.adiciona", "campo.obrigatorio", "Tipo"));
+			System.out.println("1");
 		}
 		if (checkNull(veiculo.getPlaca()).equals("")) {
 			validator.add(new I18nMessage("veiculo.adiciona", "campo.obrigatorio", "Placa"));
+			System.out.println("2");
 		}
 		if (dao.existe(veiculo, this.unidadeId)) {
 			validator.add(new SimpleMessage("veiculo.adiciona", "Veículo já cadastrado"));
+			System.out.println("3");
 		}
-		
+		System.out.println("4");
 		validator.onErrorUsePageOf(this).novo();
+		System.out.println("5");
 	
 		veiculo.setTipo(veiculo.getTipo().toUpperCase());
 		veiculo.setPlaca(veiculo.getPlaca().toUpperCase());

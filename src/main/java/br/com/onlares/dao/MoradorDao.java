@@ -38,41 +38,32 @@ public class MoradorDao {
 	}
 
 	public List<Usuario> listaRegistrados() {
-//		List<Usuario> usuarios = em.createQuery("select u from Usuario u"
-//				+ " where u.condominio.id = :condominioId", Usuario.class)
-//				.setParameter("condominioId", condominioId).getResultList();
 		List<Identificador> identificadores = em.createQuery("select i from Identificador i"
 				+ " where i.condominio.id = :condominioId", Identificador.class)
 				.setParameter("condominioId", condominioId).getResultList();
 		
 		List<Usuario> usuariosRegistrados = new ArrayList<Usuario>();
-		Usuario usuario;
+		Usuario usuario1;
 		Usuario usuario2;
+		String localizacao;
+		boolean found = false;
 		for (Identificador identificador : identificadores) {
-			usuario = identificador.getUsuario();
-			
+			found = false;
+			usuario1 = identificador.getUsuario();
+			localizacao = identificador.getUnidade().getLocalizacao();
+			// agrupa por unidade
 			for (Iterator<Usuario> iterator = usuariosRegistrados.iterator(); iterator.hasNext();) {
 				usuario2 = iterator.next();
-				if (usuario2.equals(usuario)) {
-					usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + identificador.getUnidade().getLocalizacao());
+				if (usuario2.equals(usuario1)) {
+					found = true;
+					usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
 				}
 			}
-			
-			usuariosRegistrados.add(identificador.getUsuario());
-			
+			if (!found) {
+				usuario1.setLocalizacoes(localizacao);
+				usuariosRegistrados.add(usuario1);
+			}
 		}
-		
-//		List<Usuario> usuariosRegistrados = new ArrayList<Usuario>();
-//		for (Usuario usuario : usuarios) {
-//			if (usuario.isRegistrado()) {
-//				List<Unidade> unidades = em.createQuery("select i.unidade from Identificador i"
-//						+ " where i.condominio.id = :condominioId", Unidade.class)
-//						.setParameter("condominioId", condominioId).getResultList();
-//				
-//				usuario.setLocalizacaoes(unidades.toString());
-//				usuariosRegistrados.add(usuario);
-//			}
-//		}
 		return usuariosRegistrados;
 	 }
 
