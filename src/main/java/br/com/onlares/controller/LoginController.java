@@ -1,5 +1,7 @@
 package br.com.onlares.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -10,7 +12,9 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Public;
+import br.com.onlares.dao.IdentificadorDao;
 import br.com.onlares.dao.UsuarioDao;
+import br.com.onlares.model.Identificador;
 import br.com.onlares.model.Usuario;
 
 @Controller
@@ -20,10 +24,12 @@ public class LoginController {
 	private final Validator validator;
 	private final Result result;
 	private final UsuarioLogado usuarioLogado;
+	private final IdentificadorDao identificadorDao;
 	
 	@Inject
-	public LoginController(UsuarioDao usuariodao, Validator validator, Result result, UsuarioLogado usuarioLogado) {
+	public LoginController(UsuarioDao usuariodao, IdentificadorDao identificadorDao, Validator validator, Result result, UsuarioLogado usuarioLogado) {
 		this.usuariodao = usuariodao;
+		this.identificadorDao = identificadorDao;
 		this.validator = validator;
 		this.result = result;
 		this.usuarioLogado = usuarioLogado;
@@ -31,7 +37,7 @@ public class LoginController {
 	
 	@Deprecated
 	public LoginController() {
-		this(null, null, null, null);
+		this(null, null, null, null, null);
 	}
 
 	@Get("/login")
@@ -52,7 +58,9 @@ public class LoginController {
 			validator.onErrorUsePageOf(this).login();
 		} 
 		Usuario usuarioDB = usuariodao.buscaPorEmail(usuario.getEmail());
+		List<Identificador> identificadores = identificadorDao.lista(usuarioDB.getId());
 		usuarioLogado.setUsuario(usuarioDB);
+		usuarioLogado.setIdentificadores(identificadores);
 		result.redirectTo(HomeController.class).index();
 	}
 	

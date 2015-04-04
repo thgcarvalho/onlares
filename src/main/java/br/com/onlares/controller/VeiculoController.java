@@ -30,7 +30,7 @@ public class VeiculoController {
 		this.validator = validator;
 		this.result = result;
 		if (usuarioLogado != null) {
-			this.unidadeId = usuarioLogado.getUsuario().getUnidade().getId();
+			this.unidadeId = usuarioLogado.getIdentificadorAtual().getUnidade().getId();
 		} else {
 			this.unidadeId = 0L;
 		}

@@ -2,15 +2,13 @@ package br.com.onlares.model;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -44,12 +42,16 @@ public class Usuario implements Serializable {
 	private String autorizacao;
 	@Column(name="alertas_por_email")
 	private boolean alertasPorEmail;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "condominio_id", referencedColumnName = "id", insertable = true, updatable = true)
-	private Condominio condominio;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "unidade_id", referencedColumnName = "id", insertable = true, updatable = true)
-	private Unidade unidade;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "condominio_id", referencedColumnName = "id", insertable = true, updatable = true)
+//	private Condominio condominio;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "unidade_id", referencedColumnName = "id", insertable = true, updatable = true)
+//	private Unidade unidade;
+	@Transient
+	private List<Unidade> unidades;
+	@Transient
+	private String localizacoes;
 	private String foto;
 	@Transient
 	private Download fotoDownload;
@@ -137,18 +139,18 @@ public class Usuario implements Serializable {
 	public void setAlertasPorEmail(boolean alertasPorEmail) {
 		this.alertasPorEmail = alertasPorEmail;
 	}
-	public Condominio getCondominio() {
-		return condominio;
-	}
-	public void setCondominio(Condominio condominio) {
-		this.condominio = condominio;
-	}
-	public Unidade getUnidade() {
-		return unidade;
-	}
-	public void setUnidade(Unidade unidade) {
-		this.unidade = unidade;
-	}
+//	public Condominio getCondominio() {
+//		return condominio;
+//	}
+//	public void setCondominio(Condominio condominio) {
+//		this.condominio = condominio;
+//	}
+//	public Unidade getUnidade() {
+//		return unidade;
+//	}
+//	public void setUnidade(Unidade unidade) {
+//		this.unidade = unidade;
+//	}
 	
 	public URI getFoto() {
 		if (foto == null) {
@@ -184,6 +186,19 @@ public class Usuario implements Serializable {
 		this.fotoDownload = fotoDownload;
 	}
 	
+	public List<Unidade> getUnidades() {
+		return unidades;
+	}
+	public void setUnidades(List<Unidade> unidades) {
+		this.unidades = unidades;
+	}
+	public String getLocalizacoes() {
+		return localizacoes;
+	}
+	public void setLocalizacoes(String localizacoes) {
+		this.localizacoes = localizacoes;
+	}
+	
 	@Transient
 	public int getNotificacoes() {
 		return 0;
@@ -202,7 +217,7 @@ public class Usuario implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((condominio == null) ? 0 : condominio.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
 

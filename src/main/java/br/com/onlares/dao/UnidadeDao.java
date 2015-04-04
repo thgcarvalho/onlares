@@ -17,8 +17,9 @@ public class UnidadeDao {
 	
 	@Inject
 	public UnidadeDao(EntityManager em, UsuarioLogado usuarioLogado) {
+		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
-		this.condominioId = usuarioLogado.getUsuario().getCondominio().getId();
+		this.condominioId = usuarioLogado.getIdentificadorAtual().getCondominio().getId();
 	}
 	
 	@Deprecated

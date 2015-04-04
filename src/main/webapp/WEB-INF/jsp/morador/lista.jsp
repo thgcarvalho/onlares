@@ -26,7 +26,7 @@
 				
 		<div class="nav-search" id="nav-search">
 			<span class="condominium">
-				${usuarioLogado.usuario.condominio.nome}
+				<!-- COND -->
 			</span>
 		</div><!-- /.nav-search -->
 	</div>
@@ -57,7 +57,7 @@
 									<tr>
 										<td>${morador.nome}</td>
 										<td>${morador.email}</td>
-										<td>${morador.unidade.localizacao}</td>
+										<td>${morador.localizacoes}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

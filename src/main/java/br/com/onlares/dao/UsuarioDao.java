@@ -23,8 +23,8 @@ public class UsuarioDao {
 		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
 		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
-				&& usuarioLogado.getUsuario().getCondominio() != null) {
-			this.condominioId = usuarioLogado.getUsuario().getCondominio().getId();
+				&& usuarioLogado.getIdentificadorAtual().getCondominio() != null) {
+			this.condominioId = usuarioLogado.getIdentificadorAtual().getCondominio().getId();
 		} else {
 			this.condominioId = -1L;
 		}
@@ -86,7 +86,8 @@ public class UsuarioDao {
 	public void adiciona(Usuario usuario) {
 		Condominio condominio = new Condominio();
 		condominio.setId(condominioId);
-		usuario.setCondominio(condominio);
+		// TODO Implementar insert no identificador
+		// usuario.setCondominio(condominio);
 		em.getTransaction().begin();
 		em.persist(usuario);
 		em.getTransaction().commit();

@@ -26,7 +26,7 @@
 				
 		<div class="nav-search" id="nav-search">
 			<span class="condominium">
-				${usuarioLogado.usuario.condominio.nome}
+				<!-- COND -->
 			</span>
 		</div><!-- /.nav-search -->
 	</div>
@@ -34,7 +34,7 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Veículos da Unidade - ${usuarioLogado.usuario.unidade.localizacao}
+				Veículos da Unidade - ${usuarioLogado.identificadorAtual.unidade.localizacao}
 			</h1>
 		</div><!-- /.page-header -->
 		

@@ -62,9 +62,10 @@ public class AdminUsuarioController {
 		if (usuarioDao.existe(usuario)) {
 			validator.add(new SimpleMessage("usuario.adiciona", "Email já cadastrado"));
 		}
-		if (usuario.getUnidade() == null) {
-			validator.add(new SimpleMessage("usuario.adiciona", "Selecione a unidade"));
-		}
+		// TODO implementar com a nova alteração
+//		if (usuario.getUnidade() == null) {
+//			validator.add(new SimpleMessage("usuario.adiciona", "Selecione a unidade"));
+//		}
 		
 		result.include("unidadeList", unidadeDao.lista());
 		validator.onErrorUsePageOf(this).novo();
@@ -95,10 +96,11 @@ public class AdminUsuarioController {
 			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Nome"));
 		}
-		if (usuario.getUnidade() == null) {
-			erro=true;
-			validator.add(new SimpleMessage("usuario.edita", "Selecione a unidade"));
-		}
+		// TODO implementar com a nova alteração
+//		if (usuario.getUnidade() == null) {
+//			erro=true;
+//			validator.add(new SimpleMessage("usuario.edita", "Selecione a unidade"));
+//		}
 		if (checkNull(usuario.getEmail()).equals("")) {
 			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Email"));
@@ -123,7 +125,8 @@ public class AdminUsuarioController {
 		
 		Usuario usuarioDB = usuarioDao.busca(usuario);
 		usuarioDB.setNome(usuario.getNome());
-		usuarioDB.setUnidade(usuario.getUnidade());
+		// TODO implementar com a nova alteração
+		//usuarioDB.setUnidade(usuario.getUnidade());
 		usuarioDB.setFoneResidencial(usuario.getFoneResidencial());
 		usuarioDB.setFoneCelular(usuario.getFoneCelular());
 		usuarioDB.setEmail(usuario.getEmail());
