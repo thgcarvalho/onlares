@@ -51,17 +51,19 @@ public class MoradorDao {
 			found = false;
 			usuario1 = identificador.getUsuario();
 			localizacao = identificador.getUnidade().getLocalizacao();
-			// agrupa por unidade
-			for (Iterator<Usuario> iterator = usuariosRegistrados.iterator(); iterator.hasNext();) {
-				usuario2 = iterator.next();
-				if (usuario2.equals(usuario1)) {
-					found = true;
-					usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+			if (usuario1.isRegistrado()) {
+				// agrupa por unidade
+				for (Iterator<Usuario> iterator = usuariosRegistrados.iterator(); iterator.hasNext();) {
+					usuario2 = iterator.next();
+					if (usuario2.equals(usuario1)) {
+						found = true;
+						usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+					}
 				}
-			}
-			if (!found) {
-				usuario1.setLocalizacoes(localizacao);
-				usuariosRegistrados.add(usuario1);
+				if (!found) {
+					usuario1.setLocalizacoes(localizacao);
+					usuariosRegistrados.add(usuario1);
+				}
 			}
 		}
 		return usuariosRegistrados;

@@ -1,6 +1,8 @@
 package br.com.onlares.dao;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,6 +12,7 @@ import javax.persistence.Query;
 
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Condominio;
+import br.com.onlares.model.Identificador;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.util.MD5Hashing;
 
@@ -36,9 +39,33 @@ public class UsuarioDao {
 	}
 	
 	public List<Usuario> lista() {
-		return em.createQuery("select u from Usuario u"
-				+ " where u.condominio.id = :condominioId", Usuario.class)
+		List<Identificador> identificadores = em.createQuery("select i from Identificador i"
+				+ " where i.condominio.id = :condominioId", Identificador.class)
 				.setParameter("condominioId", condominioId).getResultList();
+		
+		List<Usuario> usuariosAgrupados = new ArrayList<Usuario>();
+		Usuario usuario1;
+		Usuario usuario2;
+		String localizacao;
+		boolean found = false;
+		for (Identificador identificador : identificadores) {
+			found = false;
+			usuario1 = identificador.getUsuario();
+			localizacao = identificador.getUnidade().getLocalizacao();
+			// agrupa por unidade
+			for (Iterator<Usuario> iterator = usuariosAgrupados.iterator(); iterator.hasNext();) {
+				usuario2 = iterator.next();
+				if (usuario2.equals(usuario1)) {
+					found = true;
+					usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+				}
+			}
+			if (!found) {
+				usuario1.setLocalizacoes(localizacao);
+				usuariosAgrupados.add(usuario1);
+			}
+		}
+		return usuariosAgrupados;
 	}
 
 	public List<Usuario> listaTodos() {
@@ -76,10 +103,8 @@ public class UsuarioDao {
 	
 	public boolean existe(Usuario usuario) {
 		return !em.createQuery("select u from Usuario u"
-			+ " where u.email = :email"
-			+ " and u.condominio.id = :condominioId", Usuario.class)
+			+ " where u.email = :email", Usuario.class)
 			.setParameter("email", usuario.getEmail())
-			.setParameter("condominioId", condominioId)
 			.getResultList().isEmpty();
 	}
 

@@ -72,7 +72,7 @@
 											<a href="#">${usuario.nome}</a>
 										</td>
 										<td>${usuario.email}</td>
-										<td>${usuario.unidade.localizacao}</td>
+										<td>${usuario.localizacoes}</td>
 										<td>
 											<c:if test="${usuario.registrado}">
 												<span class="label label-sm label-success">Registrado</span>

@@ -84,10 +84,9 @@ public class UnidadeDao {
 	}
 	
 	public List<Unidade> lista() {
-		return em.createQuery("select u from Unidade u where u.condominioId = "
-			+ ":condominioId", Unidade.class)
-			.setParameter("condominioId", condominioId)
-			.getResultList();
+		return em.createQuery("select i.unidade from Identificador i"
+			+ " where i.condominio.id = :condominioId", Unidade.class)
+			.setParameter("condominioId", condominioId).getResultList();
 	}
 	
 	private boolean mesmoCondominio(Unidade unidade) {
