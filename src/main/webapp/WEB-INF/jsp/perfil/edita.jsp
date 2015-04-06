@@ -102,7 +102,7 @@
 
 													<div class="profile-info-value">
 														<i class="fa fa-map-marker light-orange bigger-110"></i>
-														<span>${usuarioLogado.usuario.unidade.localizacao}</span>
+														<span>${usuarioLogado.usuario.localizacoes}</span>
 													</div>
 												</div>
 												

@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import br.com.caelum.vraptor.observer.download.Download;
-
 /**
  * @author Thiago Carvalho
  * 
@@ -42,19 +40,11 @@ public class Usuario implements Serializable {
 	private String autorizacao;
 	@Column(name="alertas_por_email")
 	private boolean alertasPorEmail;
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "condominio_id", referencedColumnName = "id", insertable = true, updatable = true)
-//	private Condominio condominio;
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "unidade_id", referencedColumnName = "id", insertable = true, updatable = true)
-//	private Unidade unidade;
 	@Transient
 	private List<Unidade> unidades;
 	@Transient
 	private String localizacoes;
 	private String foto;
-	@Transient
-	private Download fotoDownload;
 	@Transient
 	private String fotoTemp;
 
@@ -139,18 +129,6 @@ public class Usuario implements Serializable {
 	public void setAlertasPorEmail(boolean alertasPorEmail) {
 		this.alertasPorEmail = alertasPorEmail;
 	}
-//	public Condominio getCondominio() {
-//		return condominio;
-//	}
-//	public void setCondominio(Condominio condominio) {
-//		this.condominio = condominio;
-//	}
-//	public Unidade getUnidade() {
-//		return unidade;
-//	}
-//	public void setUnidade(Unidade unidade) {
-//		this.unidade = unidade;
-//	}
 	
 	public URI getFoto() {
 		if (foto == null) {
@@ -174,18 +152,6 @@ public class Usuario implements Serializable {
 		this.fotoTemp = fotoTemp == null ? null : fotoTemp.toString();
 	}
 	
-	@Deprecated // chamada no header
-	public Download getFotoDownload() {
-		System.out.println("@Deprecated USUARIO GET FOTO DOWNLOAD " + fotoDownload);
-		return fotoDownload;
-	}
-	
-	@Deprecated // chamada em LoginController.adicionaFotoDoPerfilEmMemoria
-	public void setFotoDownload(Download fotoDownload) {
-		System.out.println("@Deprecated USUARIO SET FOTO DOWNLOAD " + fotoDownload);
-		this.fotoDownload = fotoDownload;
-	}
-	
 	public List<Unidade> getUnidades() {
 		return unidades;
 	}
@@ -197,6 +163,18 @@ public class Usuario implements Serializable {
 	}
 	public void setLocalizacoes(String localizacoes) {
 		this.localizacoes = localizacoes;
+	}
+	public boolean contemUnidade(Long id) {
+		System.out.println("contemUnidade(" + id + ") " + unidades);
+		if (unidades != null) {
+			for (Unidade unidade : unidades) {
+				if (unidade.getId().equals(id)) {
+					System.out.println("CONTEM(" + id + ")");
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	@Transient

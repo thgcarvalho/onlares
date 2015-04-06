@@ -1,5 +1,6 @@
 package br.com.onlares.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.UnidadeDao;
 import br.com.onlares.dao.UsuarioDao;
+import br.com.onlares.model.Unidade;
 import br.com.onlares.model.Usuario;
 
 @Controller
@@ -49,10 +51,28 @@ public class AdminUsuarioController {
 	public void novo() {
 		result.include("unidadeList", unidadeDao.lista());
 	}
+	
+	public void adicionaListaDeUnidades(Usuario usuario, List<Long> unidades) {
+		System.out.println("unidades=" + unidades);
+		List<Unidade> unidadesAUX = new ArrayList<Unidade>();
+		Unidade unidadeAUX;
+		if (unidades != null) {
+			for (Long unidadeId: unidades) {
+				unidadeAUX = new Unidade();
+				unidadeAUX.setId(unidadeId);
+				unidadesAUX.add(unidadeAUX);
+				System.out.println("unidade=" + unidadeId);
+			}
+		}
+		// adiciona para poder obter 
+		usuario.setUnidades(unidadesAUX);
+	}
 
 	@Admin
 	@Post("/adminUsuario")
-	public void adiciona(Usuario usuario) {
+	public void adiciona(Usuario usuario, List<Long> unidades) {
+		adicionaListaDeUnidades(usuario, unidades);
+		
 		if (checkNull(usuario.getNome()).equals("")) {
 			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Nome"));
 		}
@@ -62,15 +82,14 @@ public class AdminUsuarioController {
 		if (usuarioDao.existe(usuario)) {
 			validator.add(new SimpleMessage("usuario.adiciona", "Email já cadastrado"));
 		}
-		// TODO implementar com a nova alteração
-//		if (usuario.getUnidade() == null) {
-//			validator.add(new SimpleMessage("usuario.adiciona", "Selecione a unidade"));
-//		}
+		if (unidades == null || unidades.isEmpty()) {
+			validator.add(new SimpleMessage("usuario.adiciona", "Selecione alguma unidade"));
+		}
 		
 		result.include("unidadeList", unidadeDao.lista());
 		validator.onErrorUsePageOf(this).novo();
 		
-		usuarioDao.adiciona(usuario);
+		usuarioDao.adiciona(usuario, unidades);
 		result.include("notice", "Usuário adicionado com sucesso!");
 		result.redirectTo(this).lista();
 	}
@@ -79,7 +98,7 @@ public class AdminUsuarioController {
 	@Get("/adminUsuario/edita/{email}")
 	public void edita(String email) {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
-		System.out.println("/adminUsuario/edita/{email} "+ usuario);
+		System.out.println("/adminUsuario/edita/{email} " + usuario);
 		if (usuario == null) {
 			result.notFound();
 		} else {
@@ -90,17 +109,17 @@ public class AdminUsuarioController {
 	
 	@Admin
 	@Put("/adminUsuario/{email}")
-	public void altera(Usuario usuario) {
+	public void altera(Usuario usuario, List<Long> unidades) {
 		boolean erro = false;
+		adicionaListaDeUnidades(usuario, unidades);
+		
 		if (checkNull(usuario.getNome()).equals("")) {
 			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Nome"));
 		}
-		// TODO implementar com a nova alteração
-//		if (usuario.getUnidade() == null) {
-//			erro=true;
-//			validator.add(new SimpleMessage("usuario.edita", "Selecione a unidade"));
-//		}
+		if (unidades == null || unidades.isEmpty()) {
+			validator.add(new SimpleMessage("usuario.edita", "Selecione alguma unidade"));
+		}
 		if (checkNull(usuario.getEmail()).equals("")) {
 			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Email"));
@@ -125,13 +144,11 @@ public class AdminUsuarioController {
 		
 		Usuario usuarioDB = usuarioDao.busca(usuario);
 		usuarioDB.setNome(usuario.getNome());
-		// TODO implementar com a nova alteração
-		//usuarioDB.setUnidade(usuario.getUnidade());
 		usuarioDB.setFoneResidencial(usuario.getFoneResidencial());
 		usuarioDB.setFoneCelular(usuario.getFoneCelular());
 		usuarioDB.setEmail(usuario.getEmail());
 		
-		usuarioDao.altera(usuarioDB);
+		usuarioDao.altera(usuarioDB, unidades);
 		result.include("notice", "Usuário atualizado com sucesso!");
 		result.redirectTo(this).lista();
 	}

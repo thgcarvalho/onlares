@@ -61,12 +61,6 @@ public class PerfilController implements Serializable{
 	public void edita() {
 	}
 	
-    @Deprecated
-	@Get
-	public Download fotoDownload() {
-		return usuarioLogado.getUsuario().getFotoDownload();
-	}
-	
 	@Get("/perfil/{email}/foto")
 	public Download foto(String email, ServletContext context) throws FileNotFoundException {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);

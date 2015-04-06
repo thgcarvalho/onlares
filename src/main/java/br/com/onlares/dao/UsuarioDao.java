@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Condominio;
 import br.com.onlares.model.Localizador;
+import br.com.onlares.model.Unidade;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.util.MD5Hashing;
 
@@ -42,7 +43,10 @@ public class UsuarioDao {
 		List<Localizador> identificadores = em.createQuery("select l from Localizador l"
 				+ " where l.condominio.id = :condominioId", Localizador.class)
 				.setParameter("condominioId", condominioId).getResultList();
-		
+		return agrupaUnidades(identificadores);
+	}
+	
+	private List<Usuario> agrupaUnidades(List<Localizador> identificadores) {
 		List<Usuario> usuariosAgrupados = new ArrayList<Usuario>();
 		Usuario usuario1;
 		Usuario usuario2;
@@ -67,7 +71,28 @@ public class UsuarioDao {
 		}
 		return usuariosAgrupados;
 	}
-
+	
+	private void agrupaUnidades(Usuario usuario) {
+		List<Localizador> identificadores = em.createQuery("select l from Localizador l"
+				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId", Localizador.class)
+				.setParameter("usuarioId", usuario.getId())
+				.setParameter("condominioId", condominioId).getResultList();
+		
+		List<Unidade> unidades = new ArrayList<Unidade>();
+		String localizacao;
+		for (Localizador identificador : identificadores) {
+			localizacao = identificador.getUnidade().getDescricao();
+			// agrupa por unidade
+			if (usuario.getLocalizacoes() == null) {
+				usuario.setLocalizacoes(localizacao);
+			} else {
+				usuario.setLocalizacoes(usuario.getLocalizacoes() + " | " + localizacao);
+			}
+			unidades.add(identificador.getUnidade());
+		}
+		usuario.setUnidades(unidades);
+	}
+	
 	public List<Usuario> listaTodos() {
 		return em.createQuery("select u from Usuario u", Usuario.class).getResultList();
 	}
@@ -87,6 +112,7 @@ public class UsuarioDao {
 			Query query = em.createQuery(strQuery, Usuario.class);
 			query.setParameter("email", email);
 			usuario = (Usuario) query.getSingleResult();
+			agrupaUnidades(usuario);
 		} catch (NoResultException nrExp) {
 			usuario = null;
 		}
@@ -108,13 +134,22 @@ public class UsuarioDao {
 			.getResultList().isEmpty();
 	}
 
-	public void adiciona(Usuario usuario) {
+	public void adiciona(Usuario usuario, List<Long> unidades) {
+		Localizador localizador;
 		Condominio condominio = new Condominio();
 		condominio.setId(condominioId);
-		// TODO Implementar insert no identificador
-		// usuario.setCondominio(condominio);
+		
 		em.getTransaction().begin();
 		em.persist(usuario);
+		for (Long unidadeId : unidades) {
+			Unidade unidade = new Unidade();
+			unidade.setId(unidadeId);
+			localizador = new Localizador();
+			localizador.setCondominio(condominio);
+			localizador.setUsuario(usuario);
+			localizador.setUnidade(unidade);
+			em.persist(localizador);
+		}
 		em.getTransaction().commit();
 	}
 	
@@ -132,8 +167,43 @@ public class UsuarioDao {
 		em.getTransaction().commit();
 	}
 	
-	public void remove(Usuario usuario) {
+	public void altera(Usuario usuario, List<Long> unidades) {
+		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
+				+ " where l.usuario.id = :usuarioId", Localizador.class)
+				.setParameter("usuarioId", usuario.getId()).getResultList();
+		Localizador localizador;
+		Condominio condominio = new Condominio();
+		condominio.setId(condominioId);
+		
 		em.getTransaction().begin();
+		em.merge(usuario);
+		for (Localizador localizadorDB : localizadores) {
+			System.out.println("em.remove(localizadorDB)=" + localizadorDB.getId());
+			em.remove(localizadorDB);
+		}
+		em.getTransaction().commit();
+		em.getTransaction().begin();
+		for (Long unidadeId : unidades) {
+			Unidade unidade = new Unidade();
+			unidade.setId(unidadeId);
+			localizador = new Localizador();
+			localizador.setCondominio(condominio);
+			localizador.setUsuario(usuario);
+			localizador.setUnidade(unidade);
+			em.persist(localizador);
+		}
+		em.getTransaction().commit();
+	}
+	
+	public void remove(Usuario usuario) {
+		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
+				+ " where l.usuario.id = :usuarioId", Localizador.class)
+				.setParameter("usuarioId", usuario.getId()).getResultList();
+		
+		em.getTransaction().begin();
+		for (Localizador localizador : localizadores) {
+			em.remove(localizador);
+		}
 		em.remove(busca(usuario));
 		em.getTransaction().commit();
 	}

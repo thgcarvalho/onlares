@@ -57,9 +57,7 @@ public class UnidadeDao {
 					.setParameter("unidadeId", unidade.getId()).getResultList();
 			
 			em.getTransaction().begin();
-			System.out.println("localizadores.size()=" + localizadores.size());
 			for (Localizador localizador : localizadores) {
-				System.out.println(localizador.getId());
 				em.remove(localizador);
 			}
 			em.remove(unidade);
@@ -101,7 +99,7 @@ public class UnidadeDao {
 	}
 	
 	public List<Unidade> lista() {
-		return em.createQuery("select l.unidade from Localizador l"
+		return em.createQuery("select distinct l.unidade from Localizador l"
 			+ " where l.condominio.id = :condominioId", Unidade.class)
 			.setParameter("condominioId", condominioId).getResultList();
 	}

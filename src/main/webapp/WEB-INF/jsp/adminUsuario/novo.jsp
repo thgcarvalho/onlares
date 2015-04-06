@@ -86,21 +86,20 @@
 					<div class="space-4"></div>
 					
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="unidade"> Unidade </label>
-
-						<div class="col-sm-9">
-						<select name="usuario.unidade.id" class="col-xs-10 col-sm-5" id="unidade" data-placeholder="Escolha a unidade...">
-							<c:forEach items="${unidadeList}" var="unidade" >							
-								<c:choose>
-								<c:when test="${usuario.unidade.id == unidade.id}">
-									<option value="${unidade.id}" selected="selected">${unidade.localizacao}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${unidade.id}">${unidade.localizacao}</option>
-								</c:otherwise>
-							</c:choose>
-							</c:forEach>
-						</select>
+						<label class="col-sm-3 control-label no-padding-right" for="unidade"> Unidades </label>
+						<div class="col-sm-5">
+							<select multiple="" name="unidades[]" class="chosen-select col-xs-10 col-sm-5" id="form-field-select-4" data-placeholder="Selecione as unidades...">
+								<c:forEach items="${unidadeList}" var="unidade" >							
+									<c:choose>
+										<c:when test="${usuario.contemUnidade(unidade.id)}">
+											<option value="${unidade.id}" selected="selected">${unidade.descricao}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${unidade.id}">${unidade.descricao}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</select>
 						</div>
 					</div>
 					
