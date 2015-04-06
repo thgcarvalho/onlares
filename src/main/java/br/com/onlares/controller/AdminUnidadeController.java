@@ -52,7 +52,7 @@ public class AdminUnidadeController {
 	@Post("/adminUnidade")
 	public void adiciona(Unidade unidade) {
 		if (checkNull(unidade.getDescricao()).equals("")) {
-			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Localização"));
+			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Descrição"));
 		}
 		if (unidadeDao.existe(unidade)) {
 			validator.add(new SimpleMessage("unidade.adiciona", "Unidade já cadastrada"));
@@ -80,7 +80,7 @@ public class AdminUnidadeController {
 	@Put("/adminUnidade/{id}")
 	public void altera(Unidade unidade) {
 		if (checkNull(unidade.getDescricao()).equals("")) {
-			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Localização"));
+			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Descrição"));
 			validator.onErrorUsePageOf(this).edita(unidade.getId());
 		}
 		List<Unidade> unidades = unidadeDao.lista();

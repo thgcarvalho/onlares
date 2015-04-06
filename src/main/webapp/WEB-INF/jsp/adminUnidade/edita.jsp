@@ -49,13 +49,12 @@
 				<form class="form-horizontal" role="form" action="${ctx}/adminUnidade/" method="post">
 					<input type="hidden" name="_method" value="PUT">
 					<input type="hidden" name="unidade.id" value="${unidade.id}">
-					<input type="hidden" name="unidade.condominioId" value="${unidade.condominioId}">
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Unidade* </label>
 
 						<div class="col-sm-9">
-							<input type="text" required="required" id="unidade" name="unidade.localizacao" value="${unidade.localizacao}" 
-							placeholder="Unidade" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
+							<input type="text" required="required" id="unidade" name="unidade.descricao" value="${unidade.descricao}" 
+							placeholder="Unidade" maxlength="60" autofocus class="col-xs-10 col-sm-5 text-uppercase" />
 						</div>
 					</div>
 

@@ -65,16 +65,16 @@
 							<tbody>
 								<c:forEach items="${unidadeList}" var="unidade">
 									<tr id="myTableRow">
-										<td>${unidade.localizacao}</td>
+										<td>${unidade.descricao}</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
 												<a class="editar" href="${linkTo[AdminUnidadeController].edita(unidade.id)}" 
-													title="Editar '${unidade.localizacao}'." >
+													title="Editar '${unidade.descricao}'." >
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 												
 												<a class="deletar" href="${linkTo[AdminUnidadeController].remove(unidade.id)}" 
-                    								title="Remover '${unidade.localizacao}'." >
+                    								title="Remover '${unidade.descricao}'." >
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
 																			

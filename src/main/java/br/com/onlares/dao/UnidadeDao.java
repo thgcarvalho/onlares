@@ -30,16 +30,15 @@ public class UnidadeDao {
 	}
 	
 	public void adiciona(Unidade unidade) {
-		Localizador identificador = new Localizador();
+		Localizador localizador = new Localizador();
 		Condominio condominio = new Condominio();
 		condominio.setId(condominioId);
-		
-		identificador.setCondominio(condominio);
-		identificador.setUnidade(unidade);
+		localizador.setCondominio(condominio);
+		localizador.setUnidade(unidade);
 		
 		em.getTransaction().begin();
 		em.persist(unidade);
-		em.persist(identificador);
+		em.persist(localizador);
 		em.getTransaction().commit();
 	}
 		
@@ -53,21 +52,30 @@ public class UnidadeDao {
 
 	public void remove(Unidade unidade) {
 		if (mesmoCondominio(unidade)) {
+			List<Localizador> localizadores = em.createQuery("select l from Localizador l"
+					+ " where l.unidade.id = :unidadeId", Localizador.class)
+					.setParameter("unidadeId", unidade.getId()).getResultList();
+			
 			em.getTransaction().begin();
-			em.remove(busca(unidade));
+			System.out.println("localizadores.size()=" + localizadores.size());
+			for (Localizador localizador : localizadores) {
+				System.out.println(localizador.getId());
+				em.remove(localizador);
+			}
+			em.remove(unidade);
 			em.getTransaction().commit();
 		}
 	}
 	
 	public void verificaIntegridade(long unidadeId) throws RestricaoDeIntegridadeException {
-		boolean temUsuario = !em.createQuery("select u from Usuario u"
-				+ " where u.unidade.id = :unidadeId"
-				+ " and u.condominio.id = :condominioId", Usuario.class)
+		boolean temUsuario = !em.createQuery("select l.usuario from Localizador l"
+				+ " where l.unidade.id = :unidadeId"
+				+ " and l.condominio.id = :condominioId", Usuario.class)
 				.setParameter("unidadeId", unidadeId)
 				.setParameter("condominioId", condominioId)
 				.getResultList().isEmpty();
 		if (temUsuario) {
-			//throw new RestricaoDeIntegridadeException("Existe(m) usuário(s) relacionados com está unidade");
+			// TODO throw new RestricaoDeIntegridadeException("Existe(m) usuário(s) relacionados com está unidade");
 		}
 	}
 
@@ -84,17 +92,17 @@ public class UnidadeDao {
 	}
 
 	public boolean existe(Unidade unidade) {
-		return !em.createQuery("select u from Unidade u"
-				+ " where u.localizacao = :localizacao"
-				+ " and u.condominioId = :condominioId", Unidade.class)
-			.setParameter("localizacao", unidade.getDescricao())
+		return !em.createQuery("select l.unidade from Localizador l"
+				+ " where l.unidade.descricao = :descricao"
+				+ " and l.condominio.id = :condominioId", Unidade.class)
+			.setParameter("descricao", unidade.getDescricao())
 			.setParameter("condominioId", condominioId)
 			.getResultList().isEmpty();
 	}
 	
 	public List<Unidade> lista() {
-		return em.createQuery("select i.unidade from Localizador i"
-			+ " where i.condominio.id = :condominioId", Unidade.class)
+		return em.createQuery("select l.unidade from Localizador l"
+			+ " where l.condominio.id = :condominioId", Unidade.class)
 			.setParameter("condominioId", condominioId).getResultList();
 	}
 	

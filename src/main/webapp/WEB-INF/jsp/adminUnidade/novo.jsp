@@ -51,7 +51,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Unidade* </label>
 
 						<div class="col-sm-9">
-							<input type="text" required="required" id="unidade" name="unidade.localizacao" value="${unidade.localizacao}" 
+							<input type="text" required="required" id="unidade" name="unidade.descricao" value="${unidade.descricao}" 
 							placeholder="Unidade" maxlength="60" autofocus class="col-xs-10 col-sm-5 text-uppercase" />
 						</div>
 					</div>
