@@ -41,7 +41,7 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<form class="form-horizontal" role="form" action="${ctx}/veiculo/" method="post">
-					<input type="hidden" name="veiculo.unidade.id" value="${usuarioLogado.identificadorAtual.unidade.id}">
+					<input type="hidden" name="veiculo.unidade.id" value="${usuarioLogado.localizadorAtual.unidade.id}">
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Tipo* </label>
 

@@ -1,4 +1,4 @@
- -- Inser
+ -- Insert
 INSERT INTO unidade(localizacao, condominio_id) VALUES (trim('X'), Y);
  -- Remove espaços em branco no inínio
 UPDATE unidade SET localizacao = regexp_replace(localizacao, '^\s+', '') WHERE condominio_id = Y;

@@ -51,7 +51,7 @@ public class AdminUnidadeController {
 	@Admin
 	@Post("/adminUnidade")
 	public void adiciona(Unidade unidade) {
-		if (checkNull(unidade.getLocalizacao()).equals("")) {
+		if (checkNull(unidade.getDescricao()).equals("")) {
 			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Localização"));
 		}
 		if (unidadeDao.existe(unidade)) {
@@ -79,7 +79,7 @@ public class AdminUnidadeController {
 	@Admin
 	@Put("/adminUnidade/{id}")
 	public void altera(Unidade unidade) {
-		if (checkNull(unidade.getLocalizacao()).equals("")) {
+		if (checkNull(unidade.getDescricao()).equals("")) {
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Localização"));
 			validator.onErrorUsePageOf(this).edita(unidade.getId());
 		}
@@ -87,7 +87,7 @@ public class AdminUnidadeController {
 		unidades.add(unidade);
 		int mesmoEmail = 0;
 		for (Unidade unidadeCadastrada : unidades) {
-			if (unidadeCadastrada.getLocalizacao().equals(unidade.getLocalizacao())) {
+			if (unidadeCadastrada.getDescricao().equals(unidade.getDescricao())) {
 				mesmoEmail++;
 			}
 		}

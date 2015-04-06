@@ -1,7 +1,4 @@
-nome autorizacao cadastro
-Logradouro	 Bairro	 Localidade	 UF	 CEP
-
- -- Insere
+ -- Insert
 INSERT INTO usuario(localizacao, condominio_id) VALUES (trim('X'), Y);
 
 INSERT INTO usuario(

@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.onlares.controller.UsuarioLogado;
-import br.com.onlares.model.Identificador;
+import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Usuario;
 
 public class MoradorDao {
@@ -21,8 +21,8 @@ public class MoradorDao {
 		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
 		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
-				&& usuarioLogado.getIdentificadorAtual().getCondominio() != null) {
-			this.condominioId = usuarioLogado.getIdentificadorAtual().getCondominio().getId();
+				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
+			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
 		} else {
 			this.condominioId = -1L;
 		}
@@ -38,8 +38,8 @@ public class MoradorDao {
 	}
 
 	public List<Usuario> listaRegistrados() {
-		List<Identificador> identificadores = em.createQuery("select i from Identificador i"
-				+ " where i.condominio.id = :condominioId", Identificador.class)
+		List<Localizador> identificadores = em.createQuery("select l from Localizador l"
+				+ " where l.condominio.id = :condominioId", Localizador.class)
 				.setParameter("condominioId", condominioId).getResultList();
 		
 		List<Usuario> usuariosRegistrados = new ArrayList<Usuario>();
@@ -47,10 +47,10 @@ public class MoradorDao {
 		Usuario usuario2;
 		String localizacao;
 		boolean found = false;
-		for (Identificador identificador : identificadores) {
+		for (Localizador identificador : identificadores) {
 			found = false;
 			usuario1 = identificador.getUsuario();
-			localizacao = identificador.getUnidade().getLocalizacao();
+			localizacao = identificador.getUnidade().getDescricao();
 			if (usuario1.isRegistrado()) {
 				// agrupa por unidade
 				for (Iterator<Usuario> iterator = usuariosRegistrados.iterator(); iterator.hasNext();) {

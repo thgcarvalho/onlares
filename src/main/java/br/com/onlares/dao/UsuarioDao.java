@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Condominio;
-import br.com.onlares.model.Identificador;
+import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.util.MD5Hashing;
 
@@ -26,8 +26,8 @@ public class UsuarioDao {
 		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
 		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
-				&& usuarioLogado.getIdentificadorAtual().getCondominio() != null) {
-			this.condominioId = usuarioLogado.getIdentificadorAtual().getCondominio().getId();
+				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
+			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
 		} else {
 			this.condominioId = -1L;
 		}
@@ -39,8 +39,8 @@ public class UsuarioDao {
 	}
 	
 	public List<Usuario> lista() {
-		List<Identificador> identificadores = em.createQuery("select i from Identificador i"
-				+ " where i.condominio.id = :condominioId", Identificador.class)
+		List<Localizador> identificadores = em.createQuery("select l from Localizador l"
+				+ " where l.condominio.id = :condominioId", Localizador.class)
 				.setParameter("condominioId", condominioId).getResultList();
 		
 		List<Usuario> usuariosAgrupados = new ArrayList<Usuario>();
@@ -48,10 +48,10 @@ public class UsuarioDao {
 		Usuario usuario2;
 		String localizacao;
 		boolean found = false;
-		for (Identificador identificador : identificadores) {
+		for (Localizador identificador : identificadores) {
 			found = false;
 			usuario1 = identificador.getUsuario();
-			localizacao = identificador.getUnidade().getLocalizacao();
+			localizacao = identificador.getUnidade().getDescricao();
 			// agrupa por unidade
 			for (Iterator<Usuario> iterator = usuariosAgrupados.iterator(); iterator.hasNext();) {
 				usuario2 = iterator.next();

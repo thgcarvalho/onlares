@@ -17,7 +17,7 @@ public class AnuncioDao {
 	public AnuncioDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
-		this.condominioId = usuarioLogado.getIdentificadorAtual().getCondominio().getId();
+		this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
 	}
 	
 	@Deprecated

@@ -17,16 +17,14 @@ import javax.persistence.Transient;
  * 
  */
 @Entity
-@Table(name = "identificador")
-public class Identificador implements Serializable {
+@Table(name = "localizador")
+public class Localizador implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	//@Column(name="usuario_id")
-	//private Long usuarioId;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private Usuario usuario;
@@ -38,19 +36,13 @@ public class Identificador implements Serializable {
 	private Unidade unidade;
 	@Transient
 	private boolean selecionado;
-
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-//	public Long getUsuarioId() {
-//		return usuarioId;
-//	}
-//	public void setUsuarioId(Long usuarioId) {
-//		this.usuarioId = usuarioId;
-//	}
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -89,14 +81,7 @@ public class Identificador implements Serializable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Identificador other = (Identificador) obj;
-//		if (usuarioId == null) {
-//			if (other.usuarioId != null) {
-//				return false;
-//			}
-//		} else if (!usuarioId.equals(other.usuarioId)) {
-//			return false;
-//		}
+		Localizador other = (Localizador) obj;
 		if (usuario == null) {
 			if (other.usuario != null) {
 				return false;

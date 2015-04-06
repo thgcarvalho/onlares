@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.exception.RestricaoDeIntegridadeException;
+import br.com.onlares.model.Condominio;
+import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Unidade;
 import br.com.onlares.model.Usuario;
 
@@ -19,7 +21,7 @@ public class UnidadeDao {
 	public UnidadeDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
-		this.condominioId = usuarioLogado.getIdentificadorAtual().getCondominio().getId();
+		this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
 	}
 	
 	@Deprecated
@@ -28,9 +30,16 @@ public class UnidadeDao {
 	}
 	
 	public void adiciona(Unidade unidade) {
-		unidade.setCondominioId(condominioId);
+		Localizador identificador = new Localizador();
+		Condominio condominio = new Condominio();
+		condominio.setId(condominioId);
+		
+		identificador.setCondominio(condominio);
+		identificador.setUnidade(unidade);
+		
 		em.getTransaction().begin();
 		em.persist(unidade);
+		em.persist(identificador);
 		em.getTransaction().commit();
 	}
 		
@@ -78,22 +87,27 @@ public class UnidadeDao {
 		return !em.createQuery("select u from Unidade u"
 				+ " where u.localizacao = :localizacao"
 				+ " and u.condominioId = :condominioId", Unidade.class)
-			.setParameter("localizacao", unidade.getLocalizacao())
+			.setParameter("localizacao", unidade.getDescricao())
 			.setParameter("condominioId", condominioId)
 			.getResultList().isEmpty();
 	}
 	
 	public List<Unidade> lista() {
-		return em.createQuery("select i.unidade from Identificador i"
+		return em.createQuery("select i.unidade from Localizador i"
 			+ " where i.condominio.id = :condominioId", Unidade.class)
 			.setParameter("condominioId", condominioId).getResultList();
 	}
 	
 	private boolean mesmoCondominio(Unidade unidade) {
-		if (unidade.getCondominioId().compareTo(condominioId) == 0) {
+		boolean mesmoCondominio = !em.createQuery("select l.unidade from Localizador l"
+				+ " where l.condominio.id = :condominioId",Unidade.class)
+				.setParameter("condominioId", condominioId).getResultList()
+				.isEmpty();
+		if (mesmoCondominio) {
 			return true;
 		} else {
-			System.out.println("CONDOMÍNIOS DIFERENTES: " + unidade.getCondominioId() + " != " + condominioId);
+			System.out.println("CONDOMÍNIOS DIFERENTES: unidade="
+					+ unidade.getDescricao() + " (" + unidade.getId() + ") != " + condominioId);
 			return false;
 		}
 	}

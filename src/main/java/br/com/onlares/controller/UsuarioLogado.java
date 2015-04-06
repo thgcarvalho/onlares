@@ -6,7 +6,7 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import br.com.onlares.model.Identificador;
+import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Usuario;
 
 @SessionScoped
@@ -16,8 +16,8 @@ public class UsuarioLogado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Usuario usuario;
-	private List<Identificador> identificadores;
-	private Identificador identificadorAtual;
+	private List<Localizador> localizadores;
+	private Localizador localizadorAtual;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -26,24 +26,24 @@ public class UsuarioLogado implements Serializable {
 		System.out.println("USUARIO LOGADO = " + usuario.getNome());
 		this.usuario = usuario;
 	}
-	public List<Identificador> getIdentificadores() {
-		return identificadores;
+	public List<Localizador> getLocalizadores() {
+		return localizadores;
 	}
-	public void setIdentificadores(List<Identificador> identificadores) {
-		setIdentificadorAtual(identificadores.get(0));
-		for (Identificador identificador : identificadores) {
+	public void setLocalizadores(List<Localizador> localizadores) {
+		setIdentificadorAtual(localizadores.get(0));
+		for (Localizador localizador : localizadores) {
 			System.out.println("      IDENTIFICADOR = "
-					+ identificador.getUsuario().getNome() + " - "
-					+ identificador.getCondominio().getNome() + " - "
-					+ identificador.getUnidade().getLocalizacao());
+					+ localizador.getUsuario().getNome() + " - "
+					+ localizador.getCondominio().getNome() + " - "
+					+ localizador.getUnidade().getDescricao());
 		}
-		this.identificadores = identificadores;
+		this.localizadores = localizadores;
 	}
-	public Identificador getIdentificadorAtual() {
-		return identificadorAtual;
+	public Localizador getLocalizadorAtual() {
+		return localizadorAtual;
 	}
-	public void setIdentificadorAtual(Identificador identificadorAtual) {
-		this.identificadorAtual = identificadorAtual;
+	public void setIdentificadorAtual(Localizador localizadorAtual) {
+		this.localizadorAtual = localizadorAtual;
 	}
 	
 	public void logout() {

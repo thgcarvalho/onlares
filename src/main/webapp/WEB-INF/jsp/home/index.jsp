@@ -26,7 +26,7 @@
 		
 		<div class="nav-search" id="nav-search">
 			<span class="condominium">
-				${usuarioLogado.identificadorAtual.condominio.nome} 
+				${usuarioLogado.localizadorAtual.condominio.nome} 
 			</span>
 		</div><!-- /.nav-search -->
 

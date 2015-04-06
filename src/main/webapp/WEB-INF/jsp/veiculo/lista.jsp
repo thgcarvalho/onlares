@@ -34,7 +34,7 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Veículos da Unidade - ${usuarioLogado.identificadorAtual.unidade.localizacao}
+				Veículos da Unidade - ${usuarioLogado.localizadorAtual.unidade.descricao}
 			</h1>
 		</div><!-- /.page-header -->
 		

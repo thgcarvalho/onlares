@@ -38,7 +38,7 @@ public class AdminUnidadeControllerTest {
 		Result resultFalso = new MockResult();
 		
 		Unidade unidadeForm = new Unidade();
-		unidadeForm.setLocalizacao("Apartamento 603, Torre 1");
+		unidadeForm.setDescricao("Apartamento 603, Torre 1");
 		
 		when(unidadeDaoFalso.existe(unidadeForm)).thenReturn(false);
 		
@@ -65,7 +65,7 @@ public class AdminUnidadeControllerTest {
 				Result resultFalso = new MockResult();
 				AdminUnidadeController adminUnidadeController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
 				Unidade unidadeForm = new Unidade();
-				unidadeForm.setLocalizacao(localizacao);
+				unidadeForm.setDescricao(localizacao);
 				adminUnidadeController.adiciona(unidadeForm);
 				fail();
 			} catch (ValidationException e) {
@@ -95,7 +95,7 @@ public class AdminUnidadeControllerTest {
 		
 	    try {
 	    	unidadeForm = new Unidade();
-	    	unidadeForm.setLocalizacao("Apartamento 603, Torre 1");
+	    	unidadeForm.setDescricao("Apartamento 603, Torre 1");
 			
 			when(unidadeDaoFalso.existe(unidadeForm)).thenReturn(true);
 			
@@ -117,7 +117,7 @@ public class AdminUnidadeControllerTest {
 		
 		Unidade unidadeForm = new Unidade();
 		unidadeForm.setId(0L);
-		unidadeForm.setLocalizacao("Apartamento 603, Torre 1");
+		unidadeForm.setDescricao("Apartamento 603, Torre 1");
 		
 		when(unidadeDaoFalso.lista()).thenReturn(new ArrayList<Unidade>());
 		
@@ -144,7 +144,7 @@ public class AdminUnidadeControllerTest {
 				Result resultFalso = new MockResult();
 				AdminUnidadeController adminUnidadeController = new AdminUnidadeController(unidadeDaoFalso, validatorFalso, resultFalso);
 				Unidade unidadeForm = new Unidade();
-				unidadeForm.setLocalizacao(localizacao);
+				unidadeForm.setDescricao(localizacao);
 				adminUnidadeController.altera(unidadeForm);
 				fail();
 			} catch (ValidationException e) {
@@ -173,16 +173,16 @@ public class AdminUnidadeControllerTest {
 		
 		List<Unidade> unidadesDB = new ArrayList<Unidade>();
 		Unidade unidadeDB1 = new Unidade();
-		unidadeDB1.setLocalizacao("Apartamento 603, Torre 1");
+		unidadeDB1.setDescricao("Apartamento 603, Torre 1");
 		Unidade unidadeDB2 = new Unidade();
-		unidadeDB2.setLocalizacao("Apartamento 111, Torre 2");
+		unidadeDB2.setDescricao("Apartamento 111, Torre 2");
 		unidadesDB.add(unidadeDB1);
 		unidadesDB.add(unidadeDB2);
 		Unidade unidadeForm = new Unidade();
 		
 	    try {
 	    	unidadeForm = new Unidade();
-	    	unidadeForm.setLocalizacao("Apartamento 603, Torre 1");
+	    	unidadeForm.setDescricao("Apartamento 603, Torre 1");
 			
 			when(unidadeDaoFalso.lista()).thenReturn(unidadesDB);
 			
@@ -205,7 +205,7 @@ public class AdminUnidadeControllerTest {
 		
 		Unidade unidadeDB = new Unidade();
 		unidadeDB.setId(1L);
-		unidadeDB.setLocalizacao("Apartamento 603, Torre 1");
+		unidadeDB.setDescricao("Apartamento 603, Torre 1");
 		
 	    try {
 	    	when(unidadeDaoFalso.buscaPorId(1L)).thenReturn(unidadeDB);
