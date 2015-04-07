@@ -21,7 +21,12 @@ public class UnidadeDao {
 	public UnidadeDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
-		this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
+		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
+				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
+			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
+		} else {
+			this.condominioId = -1L;
+		}
 	}
 	
 	@Deprecated

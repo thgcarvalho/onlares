@@ -153,9 +153,9 @@ public class UsuarioDao {
 		em.getTransaction().commit();
 	}
 	
-	public void registra(Usuario usuario, String nickname, String senha) {
+	public void registra(Usuario usuario, String nome, String senha) {
 		em.getTransaction().begin();
-		usuario.setNome(nickname);
+		usuario.setNome(nome);
 		usuario.setSenha(senha);
 		em.merge(usuario);
 		em.getTransaction().commit();
