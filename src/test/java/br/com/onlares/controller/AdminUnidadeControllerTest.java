@@ -55,7 +55,7 @@ public class AdminUnidadeControllerTest {
 		localizacoes.add(" ");
 		localizacoes.add("");
 		
-		I18nMessage expectedMessage = new I18nMessage("unidade.adiciona", "campo.obrigatorio", "Localização");
+		I18nMessage expectedMessage = new I18nMessage("unidade.adiciona", "campo.obrigatorio", "Descrição");
 		expectedMessage.setBundle(new SafeResourceBundle(ResourceBundle.getBundle("messages"))); 
 		
 		for (String localizacao : localizacoes) {
@@ -134,7 +134,7 @@ public class AdminUnidadeControllerTest {
 		localizacoes.add(" ");
 		localizacoes.add("");
 		
-		I18nMessage expectedMessage = new I18nMessage("unidade.adiciona", "campo.obrigatorio", "Localização");
+		I18nMessage expectedMessage = new I18nMessage("unidade.adiciona", "campo.obrigatorio", "Descrição");
 		expectedMessage.setBundle(new SafeResourceBundle(ResourceBundle.getBundle("messages"))); 
 		
 		for (String localizacao : localizacoes) {

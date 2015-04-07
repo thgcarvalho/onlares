@@ -24,12 +24,12 @@ public class LoginController {
 	private final Validator validator;
 	private final Result result;
 	private final UsuarioLogado usuarioLogado;
-	private final LocalizadorDao identificadorDao;
+	private final LocalizadorDao localizadorDao;
 	
 	@Inject
-	public LoginController(UsuarioDao usuariodao, LocalizadorDao identificadorDao, Validator validator, Result result, UsuarioLogado usuarioLogado) {
+	public LoginController(UsuarioDao usuariodao, LocalizadorDao localizadorDao, Validator validator, Result result, UsuarioLogado usuarioLogado) {
 		this.usuariodao = usuariodao;
-		this.identificadorDao = identificadorDao;
+		this.localizadorDao = localizadorDao;
 		this.validator = validator;
 		this.result = result;
 		this.usuarioLogado = usuarioLogado;
@@ -58,9 +58,9 @@ public class LoginController {
 			validator.onErrorUsePageOf(this).login();
 		} 
 		Usuario usuarioDB = usuariodao.buscaPorEmail(usuario.getEmail());
-		List<Localizador> identificadores = identificadorDao.lista(usuarioDB.getId());
+		List<Localizador> localizadores = localizadorDao.lista(usuarioDB.getId());
 		usuarioLogado.setUsuario(usuarioDB);
-		usuarioLogado.setLocalizadores(identificadores);
+		usuarioLogado.setLocalizadores(localizadores);
 		result.redirectTo(HomeController.class).index();
 	}
 	
