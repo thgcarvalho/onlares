@@ -31,28 +31,25 @@ public class UsuarioLogado implements Serializable {
 	}
 	public void setLocalizadores(List<Localizador> localizadores) {
 		if (localizadores != null && !localizadores.isEmpty()) {
-			setIdentificadorAtual(localizadores.get(0));
-			for (Localizador localizador : localizadores) {
-				System.out.println("      IDENTIFICADOR = "
-						+ localizador.getUsuario().getNome() + " - "
-						+ localizador.getCondominio().getNome() + " - "
-						+ localizador.getUnidade().getDescricao());
-			}
+			setLocalizadorAtual(localizadores.get(0));
+//			for (Localizador localizador : localizadores) {
+//				System.out.println("      IDENTIFICADOR = "
+//						+ localizador.getUsuario().getNome() + " - "
+//						+ localizador.getCondominio().getNome() + " - "
+//						+ localizador.getUnidade().getDescricao());
+//			}
 		}
 		this.localizadores = localizadores;
 	}
 	public Localizador getLocalizadorAtual() {
 		return localizadorAtual;
 	}
-	public void setIdentificadorAtual(Localizador localizadorAtual) {
+	public void setLocalizadorAtual(Localizador localizadorAtual) {
 		this.localizadorAtual = localizadorAtual;
 	}
 	
 	public void logout() {
 		this.usuario = null;
 	}
-
-
-
 	
 }

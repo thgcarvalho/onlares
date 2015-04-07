@@ -40,21 +40,21 @@ public class UsuarioDao {
 	
 	public List<Usuario> lista() {
 		List<Localizador> identificadores = em.createQuery("select l from Localizador l"
-				+ " where l.condominio.id = :condominioId", Localizador.class)
+				+ " where l.condominio.id = :condominioId and l.usuario.id is not null", Localizador.class)
 				.setParameter("condominioId", condominioId).getResultList();
 		return agrupaUnidades(identificadores);
 	}
 	
-	private List<Usuario> agrupaUnidades(List<Localizador> identificadores) {
+	private List<Usuario> agrupaUnidades(List<Localizador> localizadores) {
 		List<Usuario> usuariosAgrupados = new ArrayList<Usuario>();
 		Usuario usuario1;
 		Usuario usuario2;
 		String localizacao;
 		boolean found = false;
-		for (Localizador identificador : identificadores) {
+		for (Localizador localizador : localizadores) {
 			found = false;
-			usuario1 = identificador.getUsuario();
-			localizacao = identificador.getUnidade().getDescricao();
+			usuario1 = localizador.getUsuario();
+			localizacao = localizador.getUnidade().getDescricao();
 			// agrupa por unidade
 			for (Iterator<Usuario> iterator = usuariosAgrupados.iterator(); iterator.hasNext();) {
 				usuario2 = iterator.next();

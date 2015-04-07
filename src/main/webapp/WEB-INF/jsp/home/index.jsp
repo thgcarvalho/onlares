@@ -24,12 +24,6 @@
 			</li>
 		</ul><!-- /.breadcrumb -->
 		
-		<div class="nav-search" id="nav-search">
-			<span class="condominium">
-				${usuarioLogado.localizadorAtual.condominio.nome} 
-			</span>
-		</div><!-- /.nav-search -->
-
 	</div>
 
 	<div class="page-content">

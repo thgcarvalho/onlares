@@ -62,6 +62,16 @@ public class LoginController {
 		usuarioLogado.setUsuario(usuarioDB);
 		usuarioLogado.setLocalizadores(localizadores);
 		result.redirectTo(HomeController.class).index();
+		
+		for (Localizador localizador : usuarioLogado.getLocalizadores()) {
+			if (usuarioLogado.getLocalizadorAtual().getId() == localizador.getId()) {
+				System.out.println("      IGUAL = " + localizador.getUnidade().getDescricao());
+			}
+			System.out.println("      LOCALIZADOR = "
+					+ localizador.getUsuario().getNome() + " - "
+					+ localizador.getCondominio().getNome() + " - "
+					+ localizador.getUnidade().getDescricao());
+		}
 	}
 	
 	@Get("/logout")
@@ -69,7 +79,20 @@ public class LoginController {
 		usuarioLogado.logout();
 		result.redirectTo(this).login();
 	}
+	
+	@Post("/alteraUnidade")
+	public void alteraUnidade(String localizador) { 
+		Long localizadorId = Long.parseLong(localizador);
+		for (Localizador localizadorDB : usuarioLogado.getLocalizadores()) {
+			if (localizadorDB.getId().equals(localizadorId)) {
+				usuarioLogado.setLocalizadorAtual(localizadorDB);
+				break;
+			}
+		}
+		result.redirectTo(HomeController.class).index();
+	}
 
+	
 	public UsuarioLogado getUsuarioLogado() {
 		return usuarioLogado;
 	}

@@ -21,17 +21,41 @@
 			<img alt="OnLares" src="${ctx}/resources/images/onlares_branco.png" height="26">
 		</a>
 	</div>
-
+	
+	<form name="unidadesForm" id="unidadesForm" action="${ctx}/alteraUnidade" method="post" >
+		<div class="navbar-buttons navbar-header" role="navigation">
+			<ul class="nav ace-nav">
+				<li>
+				<div class="styled-select">
+					<select name="localizador" id="unidadesBox" onchange="this.form.submit();">
+						<c:forEach items="${usuarioLogado.localizadores}" var="localizador" >							
+							<c:choose>
+								<c:when test="${usuarioLogado.localizadorAtual.id == localizador.id}">
+									<option value="${localizador.id}" selected="selected">${localizador.condominio.nome} - Unidade: ${localizador.unidade.descricao}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${localizador.id}">${localizador.condominio.nome} - Unidade: ${localizador.unidade.descricao}</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select>
+				</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+	
 	<div class="navbar-buttons navbar-header pull-right" role="navigation">
 		<ul class="nav ace-nav">
-		
-			<c:if test="${usuarioLogado.usuario.admin}">
-      			<li class="blue" >
-					<a href="${ctx}/admin/index">
-						<i class="ace-icon fa fa-user"></i>
-					</a>
-				</li>
-			</c:if>
+			<li>
+				<c:if test="${usuarioLogado.usuario.admin}">
+	      			<li class="blue" >
+						<a href="${ctx}/admin/index">
+							<i class="ace-icon fa fa-user"></i>
+						</a>
+					</li>
+				</c:if>
+			</li>
 		
 			<li class="purple">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">

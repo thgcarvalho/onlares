@@ -8,6 +8,7 @@
 	<%@ include file="/templates/head.jsp"%>
 	<!-- grandev -->
 	<link rel="stylesheet" href="${ctx}/resources/css/style.css" />
+	<script src="${ctx}/resources/js/util.js"></script>
 	
 	<link rel="icon" href="${ctx}/resources/images/favicon-16.png" />
 	<link rel="shortcut icon" href="${ctx}/resources/onlares.ico" />
