@@ -19,7 +19,6 @@ public class UnidadeDao {
 	
 	@Inject
 	public UnidadeDao(EntityManager em, UsuarioLogado usuarioLogado) {
-		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
 		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
 				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
@@ -112,13 +111,12 @@ public class UnidadeDao {
 	private boolean mesmoCondominio(Unidade unidade) {
 		boolean mesmoCondominio = !em.createQuery("select l.unidade from Localizador l"
 				+ " where l.condominio.id = :condominioId",Unidade.class)
-				.setParameter("condominioId", condominioId).getResultList()
-				.isEmpty();
+				.setParameter("condominioId", condominioId).getResultList().isEmpty();
 		if (mesmoCondominio) {
 			return true;
 		} else {
-			System.out.println("CONDOMÍNIOS DIFERENTES: unidade="
-					+ unidade.getDescricao() + " (" + unidade.getId() + ") != " + condominioId);
+			System.out.println("CONDOMÍNIOS DIFERENTES: unidade="+ unidade.getDescricao() 
+					+ " (" + unidade.getId() + ") != " + condominioId);
 			return false;
 		}
 	}

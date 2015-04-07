@@ -15,7 +15,6 @@ public class AnuncioDao {
 	
 	@Inject
 	public AnuncioDao(EntityManager em, UsuarioLogado usuarioLogado) {
-		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
 		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
 				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {

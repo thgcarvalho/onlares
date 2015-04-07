@@ -162,15 +162,6 @@ public class AdminUsuarioController {
 		result.nothing();
 	}
 	
-//	private boolean mesmoCondominio(Usuario usuario, Long condominioId) {
-//		if (usuario.getCondominio().getId().compareTo(condominioId) == 0) {
-//			return true;
-//		} else {
-//			System.out.println("CONDOMÍNIOS DIFERENTES: " + usuario.getCondominio().getId() + " != " + condominioId);
-//			return false;
-//		}
-//	}
-	
 	private String checkNull(String value) {
 		if (value == null) {
 			return ("");

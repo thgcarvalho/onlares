@@ -24,7 +24,6 @@ public class UsuarioDao {
 	
 	@Inject
 	public UsuarioDao(EntityManager em, UsuarioLogado usuarioLogado) {
-		// TODO VERIFICAR A NECESSIDADE DE OBTER UsuarioLogado NESSE DAO
 		this.em = em;
 		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
 				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
@@ -178,7 +177,6 @@ public class UsuarioDao {
 		em.getTransaction().begin();
 		em.merge(usuario);
 		for (Localizador localizadorDB : localizadores) {
-			System.out.println("em.remove(localizadorDB)=" + localizadorDB.getId());
 			em.remove(localizadorDB);
 		}
 		em.getTransaction().commit();
@@ -199,13 +197,27 @@ public class UsuarioDao {
 		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
 				+ " where l.usuario.id = :usuarioId", Localizador.class)
 				.setParameter("usuarioId", usuario.getId()).getResultList();
-		
-		em.getTransaction().begin();
-		for (Localizador localizador : localizadores) {
-			em.remove(localizador);
+		if (mesmoCondominio(usuario)) {
+			em.getTransaction().begin();
+			for (Localizador localizador : localizadores) {
+				em.remove(localizador);
+			}
+			em.remove(busca(usuario));
+			em.getTransaction().commit();
 		}
-		em.remove(busca(usuario));
-		em.getTransaction().commit();
+	}
+	
+	private boolean mesmoCondominio(Usuario usuario) {
+		boolean mesmoCondominio = !em.createQuery("select l.usuario from Localizador l"
+				+ " where l.condominio.id = :condominioId",Unidade.class)
+				.setParameter("condominioId", condominioId).getResultList().isEmpty();
+		if (mesmoCondominio) {
+			return true;
+		} else {
+			System.out.println("CONDOMÍNIOS DIFERENTES: usuario="+ usuario.getNome()
+					+ " (" + usuario.getId() + ") != " + condominioId);
+			return false;
+		}
 	}
 
 }
