@@ -27,7 +27,7 @@
 			<ul class="nav ace-nav">
 				<li>
 				<div class="styled-select">
-					<select name="localizador" id="unidadesBox" onchange="this.form.submit();">
+					<select name="localizador" id="unidadesBox" onchange="this.form.submit();" onMouseOver="this.style.textDecoration='underline';" onMouseOut="this.style.textDecoration='none';" >
 						<c:forEach items="${usuarioLogado.localizadores}" var="localizador" >							
 							<c:choose>
 								<c:when test="${usuarioLogado.localizadorAtual.id == localizador.id}">
