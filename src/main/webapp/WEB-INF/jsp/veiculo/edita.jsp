@@ -49,7 +49,8 @@
 
 						<div class="col-sm-9">
 							<input type="text" required="required" id="nome" name="veiculo.tipo" value="${veiculo.tipo}" 
-							placeholder="Tipo" maxlength="45" autofocus class="col-xs-10 col-sm-5 text-uppercase" />
+							placeholder="Tipo" maxlength="45" autofocus class="col-xs-10 col-sm-5 text-uppercase" 
+							data-rel="tooltip" title="Ex: CARRO, MOTO, QUADRICICLO ..." />
 						</div>
 					</div>
 
@@ -71,7 +72,8 @@
 
 						<div class="col-sm-9">
 							<input type="text" name="veiculo.marca" value="${veiculo.marca}" 
-							placeholder="Marca" maxlength="45" class="col-xs-10 col-sm-5" id="marca" />
+							placeholder="Marca" maxlength="45" class="col-xs-10 col-sm-5" id="marca" 
+							data-rel="tooltip" title="Ex: Ford, Fiat, Chevrolet, Volkswagen, Honda ..." />
 						</div>
 					</div>
 					
@@ -82,7 +84,8 @@
 
 						<div class="col-sm-9">
 							<input type="text" name="veiculo.modelo" value="${veiculo.modelo}" 
-							placeholder="Modelo" maxlength="45" class="col-xs-10 col-sm-5" id="modelo" />
+							placeholder="Modelo" maxlength="45" class="col-xs-10 col-sm-5" id="modelo" 
+							data-rel="tooltip" title="Ex: Fiesta, Palio, Celta, Gol, Titan ..." />
 						</div>
 					</div>
 					
