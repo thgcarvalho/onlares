@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import br.com.onlares.model.Condominio;
 import br.com.onlares.model.Localizador;
 
 public class LocalizadorDao {
@@ -48,17 +47,12 @@ public class LocalizadorDao {
 			Query query = em.createQuery(strQuery, Localizador.class);
 			query.setParameter("usuarioId", usuarioId);
 			query.setParameter("condominioId", condominioId);
-			query.setParameter("usuarioId", usuarioId);
+			query.setParameter("unidadeId", unidadeId);
 			identificador = (Localizador) query.getSingleResult();
 		} catch (NoResultException nrExp) {
 			identificador = null;
 		}
 		return identificador;
-	}
-	
-	public Condominio buscaCondominio(Long usuarioId) {
-		// TODO implementar
-		return new Condominio();
 	}
 	
 }

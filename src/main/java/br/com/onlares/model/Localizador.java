@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  * @author Thiago Carvalho
@@ -34,8 +33,6 @@ public class Localizador implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "unidade_id", referencedColumnName = "id", insertable = true, updatable = true)
 	private Unidade unidade;
-	@Transient
-	private boolean selecionado;
 	
 	public Long getId() {
 		return id;
@@ -56,6 +53,9 @@ public class Localizador implements Serializable {
 		this.condominio = condominio;
 	}
 	public Unidade getUnidade() {
+		if (unidade == null) {
+			unidade = new UnidadeNaoRelacionada();
+		}
 		return unidade;
 	}
 	public void setUnidade(Unidade unidade) {

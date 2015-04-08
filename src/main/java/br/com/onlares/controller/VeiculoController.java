@@ -29,7 +29,7 @@ public class VeiculoController {
 		this.dao = dao;
 		this.validator = validator;
 		this.result = result;
-		if (usuarioLogado != null) {
+		if (usuarioLogado != null && usuarioLogado.getLocalizadorAtual().getUnidade() != null) {
 			this.unidadeId = usuarioLogado.getLocalizadorAtual().getUnidade().getId();
 		} else {
 			this.unidadeId = 0L;

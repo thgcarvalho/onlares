@@ -54,13 +54,17 @@ public class UsuarioDao {
 		for (Localizador localizador : localizadores) {
 			found = false;
 			usuario1 = localizador.getUsuario();
-			localizacao = localizador.getUnidade().getDescricao();
-			// agrupa por unidade
-			for (Iterator<Usuario> iterator = usuariosAgrupados.iterator(); iterator.hasNext();) {
-				usuario2 = iterator.next();
-				if (usuario2.equals(usuario1)) {
-					found = true;
-					usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+			if (localizador.getUnidade() == null) {
+				localizacao = "";
+			} else {
+				localizacao = localizador.getUnidade().getDescricao();
+				// agrupa por unidade
+				for (Iterator<Usuario> iterator = usuariosAgrupados.iterator(); iterator.hasNext();) {
+					usuario2 = iterator.next();
+					if (usuario2.equals(usuario1)) {
+						found = true;
+						usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+					}
 				}
 			}
 			if (!found) {

@@ -37,7 +37,7 @@ public class MoradorDao {
 	}
 
 	public List<Usuario> listaRegistrados() {
-		List<Localizador> identificadores = em.createQuery("select l from Localizador l"
+		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
 				+ " where l.condominio.id = :condominioId", Localizador.class)
 				.setParameter("condominioId", condominioId).getResultList();
 		
@@ -46,17 +46,21 @@ public class MoradorDao {
 		Usuario usuario2;
 		String localizacao;
 		boolean found = false;
-		for (Localizador identificador : identificadores) {
+		for (Localizador localizador : localizadores) {
 			found = false;
-			usuario1 = identificador.getUsuario();
-			localizacao = identificador.getUnidade().getDescricao();
+			usuario1 = localizador.getUsuario();
 			if (usuario1.isRegistrado()) {
-				// agrupa por unidade
-				for (Iterator<Usuario> iterator = usuariosRegistrados.iterator(); iterator.hasNext();) {
-					usuario2 = iterator.next();
-					if (usuario2.equals(usuario1)) {
-						found = true;
-						usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+				if (localizador.getUnidade() == null) {
+					localizacao = "";
+				} else {
+					localizacao = localizador.getUnidade().getDescricao();
+					// agrupa por unidade
+					for (Iterator<Usuario> iterator = usuariosRegistrados.iterator(); iterator.hasNext();) {
+						usuario2 = iterator.next();
+						if (usuario2.equals(usuario1)) {
+							found = true;
+							usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+						}
 					}
 				}
 				if (!found) {

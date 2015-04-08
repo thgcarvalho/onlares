@@ -32,12 +32,6 @@ public class UsuarioLogado implements Serializable {
 	public void setLocalizadores(List<Localizador> localizadores) {
 		if (localizadores != null && !localizadores.isEmpty()) {
 			setLocalizadorAtual(localizadores.get(0));
-//			for (Localizador localizador : localizadores) {
-//				System.out.println("      IDENTIFICADOR = "
-//						+ localizador.getUsuario().getNome() + " - "
-//						+ localizador.getCondominio().getNome() + " - "
-//						+ localizador.getUnidade().getDescricao());
-//			}
 		}
 		this.localizadores = localizadores;
 	}

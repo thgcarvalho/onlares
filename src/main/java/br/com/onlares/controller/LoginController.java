@@ -11,6 +11,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.caelum.vraptor.view.Results;
 import br.com.onlares.annotations.Public;
 import br.com.onlares.dao.LocalizadorDao;
 import br.com.onlares.dao.UsuarioDao;
@@ -62,16 +63,6 @@ public class LoginController {
 		usuarioLogado.setUsuario(usuarioDB);
 		usuarioLogado.setLocalizadores(localizadores);
 		result.redirectTo(HomeController.class).index();
-		
-		for (Localizador localizador : usuarioLogado.getLocalizadores()) {
-			if (usuarioLogado.getLocalizadorAtual().getId() == localizador.getId()) {
-				System.out.println("      IGUAL = " + localizador.getUnidade().getDescricao());
-			}
-			System.out.println("      LOCALIZADOR = "
-					+ localizador.getUsuario().getNome() + " - "
-					+ localizador.getCondominio().getNome() + " - "
-					+ localizador.getUnidade().getDescricao());
-		}
 	}
 	
 	@Get("/logout")
@@ -89,7 +80,11 @@ public class LoginController {
 				break;
 			}
 		}
-		result.redirectTo(HomeController.class).index();
+		if (Results.referer() != null) {
+			result.use(Results.referer()).redirect();
+		} else {
+			result.redirectTo(HomeController.class).index();
+		}
 	}
 
 	
