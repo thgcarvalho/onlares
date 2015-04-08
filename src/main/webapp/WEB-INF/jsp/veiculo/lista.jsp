@@ -94,12 +94,12 @@
 												<td>${veiculo.cor}</td>
 												<td>
 													<div class="hidden-sm hidden-xs action-buttons">
-														<a class="editar" href="${linkTo[VeiculoController].edita(veiculo.placa)}" 
+														<a class="editar" href="${linkTo[VeiculoController].edita(veiculo.id)}" 
 															title="Editar" >
 															<i class="ace-icon fa fa-pencil bigger-130"></i>
 														</a>
 														
-														<a class="deletar" href="${linkTo[VeiculoController].remove(veiculo.placa)}" 
+														<a class="deletar" href="${linkTo[VeiculoController].remove(veiculo.id)}" 
 		                    								title="Remover" >
 															<i class="ace-icon fa fa-trash-o bigger-130"></i>
 														</a>
@@ -114,7 +114,7 @@
 		
 															<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 																<li>
-																	<a href="${linkTo[VeiculoController].edita(veiculo.placa)}" 
+																	<a href="${linkTo[VeiculoController].edita(veiculo.id)}" 
 																		class="tooltip-success" data-rel="tooltip" title="Editar">
 																		<span class="green">
 																			<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
@@ -123,7 +123,7 @@
 																</li>
 		
 																<li>
-																	<a href="${linkTo[VeiculoController].remove(veiculo.placa)}" 
+																	<a href="${linkTo[VeiculoController].remove(veiculo.id)}" 
 																		class="deletar tooltip-error" data-rel="tooltip" title="Remover" >
 																		<span class="red">
 																			<i class="ace-icon fa fa-trash-o bigger-120"></i>

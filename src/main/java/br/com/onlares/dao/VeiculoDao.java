@@ -46,14 +46,14 @@ public class VeiculoDao {
 		em.getTransaction().commit();
 	}
 	
-	public Veiculo buscaNaUnidade(Long unidadeId, String placa) {
+	public Veiculo buscaNaUnidade(Long unidadeId, Long veiculoId) {
 		Veiculo veiculo;
 		String strQuery = "SELECT v FROM Veiculo v"
-				+ " WHERE v.unidade.id = :unidadeId AND v.placa = :placa";
+				+ " WHERE v.unidade.id = :unidadeId AND v.id = :veiculoId";
 		try {
 			Query query = em.createQuery(strQuery, Veiculo.class);
 			query.setParameter("unidadeId", unidadeId);
-			query.setParameter("placa", placa);
+			query.setParameter("veiculoId", veiculoId);
 			veiculo = (Veiculo) query.getSingleResult();
 		} catch (NoResultException nrExp) {
 			veiculo = null;
@@ -73,14 +73,14 @@ public class VeiculoDao {
 		return veiculos;
 	}
 	
-	public boolean existe(Veiculo veiculo, Long unidadeId) {
-		return !em.createQuery("select v from Veiculo v"
-			+ " where v.placa = :placa"
-			+ " and v.unidade.id = :unidadeId", Veiculo.class)
-			.setParameter("placa", veiculo.getPlaca())
-			.setParameter("unidadeId", unidadeId)
-			.getResultList().isEmpty();
-	}
+//	public boolean existe(Veiculo veiculo, Long unidadeId) {
+//		return !em.createQuery("select v from Veiculo v"
+//			+ " where v.placa = :placa"
+//			+ " and v.unidade.id = :unidadeId", Veiculo.class)
+//			.setParameter("placa", veiculo.getPlaca())
+//			.setParameter("unidadeId", unidadeId)
+//			.getResultList().isEmpty();
+//	}
 	
 	public void remove(Veiculo veiculo) {
 		em.getTransaction().begin();

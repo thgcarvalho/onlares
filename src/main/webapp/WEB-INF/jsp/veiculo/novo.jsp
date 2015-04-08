@@ -55,10 +55,10 @@
 					<div class="space-4"></div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="placa"> Placa* </label>
+						<label class="col-sm-3 control-label no-padding-right" for="placa"> Placa </label>
 
 						<div class="col-sm-9">
-							<input type="text" required="required" name="veiculo.placa" value="${veiculo.placa}" 
+							<input type="text" name="veiculo.placa" value="${veiculo.placa}" 
 							placeholder="Placa" maxlength="8" class="col-xs-10 col-sm-5 input-mask-plaque text-uppercase" id="placa" />
 						</div>
 					</div>
