@@ -1,0 +1,1 @@
+UPDATE usuario SET alertas_por_email = true where id in (SELECT usuario_id from localizador where condominio_id = 2);
