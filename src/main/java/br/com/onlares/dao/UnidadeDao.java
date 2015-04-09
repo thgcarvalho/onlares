@@ -1,5 +1,6 @@
 package br.com.onlares.dao;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.exception.RestricaoDeIntegridadeException;
+import br.com.onlares.model.ComparadorUnidade;
 import br.com.onlares.model.Condominio;
 import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Unidade;
@@ -103,9 +105,12 @@ public class UnidadeDao {
 	}
 	
 	public List<Unidade> lista() {
-		return em.createQuery("select distinct l.unidade from Localizador l"
-			+ " where l.condominio.id = :condominioId", Unidade.class)
+		 List<Unidade> unidades = em.createQuery("select distinct l.unidade from Localizador l"
+			+ " where l.condominio.id = :condominioId and l.unidade.id is not null", Unidade.class)
 			.setParameter("condominioId", condominioId).getResultList();
+		 ComparadorUnidade comparadorUnidade = new ComparadorUnidade();
+		 Collections.sort(unidades, comparadorUnidade);
+		 return unidades;
 	}
 	
 	private boolean mesmoCondominio(Unidade unidade) {

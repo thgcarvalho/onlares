@@ -1,5 +1,3 @@
-INSERT INTO localizador(condominio_id, unidade_id, usuario_id) VALUES (2, (SELECT id from unidade where descricao = '' and id >= 1540), (SELECT id from usuario where email = ''));
-
 INSERT INTO localizador(condominio_id, unidade_id, usuario_id) VALUES (2, (SELECT id from unidade where descricao = '101' and id >= 1540), (SELECT id from usuario where email = 'brunnasalgado@icloud.com;thiagodeoliveiralima@me.com'));
 INSERT INTO localizador(condominio_id, unidade_id, usuario_id) VALUES (2, (SELECT id from unidade where descricao = '102' and id >= 1540), (SELECT id from usuario where email = 'jtdparticipacoes@gmail.com'));
 INSERT INTO localizador(condominio_id, unidade_id, usuario_id) VALUES (2, (SELECT id from unidade where descricao = '103' and id >= 1540), (SELECT id from usuario where email = 'marxbs@hotmail.com'));

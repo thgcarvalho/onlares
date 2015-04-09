@@ -35,6 +35,15 @@ public class MoradorDao {
 	public Usuario busca(Usuario usuario) {
 		return em.find(Usuario.class, usuario.getId());
 	}
+	
+	private boolean adminGlobal(Localizador localizador) {
+		if (localizador.getUsuario().getEmail().endsWith("@grandev.com.br")) {
+			if (localizador.getCondominio().getId().compareTo(1L) != 0) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public List<Usuario> listaRegistrados() {
 		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
@@ -47,6 +56,9 @@ public class MoradorDao {
 		String localizacao;
 		boolean found = false;
 		for (Localizador localizador : localizadores) {
+			if (adminGlobal(localizador)) {
+				continue;
+			}
 			found = false;
 			usuario1 = localizador.getUsuario();
 			if (usuario1.isRegistrado()) {

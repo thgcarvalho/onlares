@@ -40,11 +40,21 @@ public class UsuarioDao {
 	
 	public List<Usuario> lista() {
 		List<Localizador> identificadores = em.createQuery("select l from Localizador l"
-				+ " where l.condominio.id = :condominioId and l.usuario.id is not null", Localizador.class)
+				+ " where l.condominio.id = :condominioId and l.usuario.id is not null"
+				+ " order by l.usuario.nome", Localizador.class)
 				.setParameter("condominioId", condominioId).getResultList();
 		return agrupaUnidades(identificadores);
 	}
 	
+	private boolean adminGlobal(Localizador localizador) {
+		if (localizador.getUsuario().getEmail().endsWith("@grandev.com.br")) {
+			if (localizador.getCondominio().getId().compareTo(1L) != 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private List<Usuario> agrupaUnidades(List<Localizador> localizadores) {
 		List<Usuario> usuariosAgrupados = new ArrayList<Usuario>();
 		Usuario usuario1;
@@ -52,6 +62,9 @@ public class UsuarioDao {
 		String localizacao;
 		boolean found = false;
 		for (Localizador localizador : localizadores) {
+			if (adminGlobal(localizador)) {
+				continue;
+			}
 			found = false;
 			usuario1 = localizador.getUsuario();
 			if (localizador.getUnidade() == null) {
