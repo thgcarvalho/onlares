@@ -35,9 +35,9 @@ public class VeiculoDao {
 	}
 	
 	public void adiciona(Veiculo veiculo) {
-		em.getTransaction().begin();
+		//em.getTransaction().begin();
 		em.persist(veiculo);
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 	}
 	
 	public void altera(Veiculo veiculo) {
