@@ -25,21 +25,15 @@ public class AlteraEmailDao {
 	}
 	
 	public void adiciona(AlteraEmail alteraEmail) {
-		em.getTransaction().begin();
 		em.persist(alteraEmail);
-		em.getTransaction().commit();
 	}
 
 	public void remove(AlteraEmail alteraEmail) {
-		em.getTransaction().begin();
 		em.remove(busca(alteraEmail));
-		em.getTransaction().commit();
 	}
 	
 	public void altera(AlteraEmail alteraEmail) {
-		em.getTransaction().begin();
 		em.merge(alteraEmail);
-		em.getTransaction().commit();
 	}
 
 	public AlteraEmail busca(AlteraEmail alteraEmail) {

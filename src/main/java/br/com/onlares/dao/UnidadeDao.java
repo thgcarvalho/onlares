@@ -42,17 +42,13 @@ public class UnidadeDao {
 		localizador.setCondominio(condominio);
 		localizador.setUnidade(unidade);
 		
-		em.getTransaction().begin();
 		em.persist(unidade);
 		em.persist(localizador);
-		em.getTransaction().commit();
 	}
 		
 	public void altera(Unidade unidade) {
 		if (mesmoCondominio(unidade)) {
-			em.getTransaction().begin();
 			em.merge(unidade);
-			em.getTransaction().commit();
 		}
 	}
 
@@ -62,12 +58,10 @@ public class UnidadeDao {
 					+ " where l.unidade.id = :unidadeId", Localizador.class)
 					.setParameter("unidadeId", unidade.getId()).getResultList();
 			
-			em.getTransaction().begin();
 			for (Localizador localizador : localizadores) {
 				em.remove(localizador);
 			}
 			em.remove(unidade);
-			em.getTransaction().commit();
 		}
 	}
 	

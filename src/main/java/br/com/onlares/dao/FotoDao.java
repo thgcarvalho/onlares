@@ -22,9 +22,7 @@ public class FotoDao {
 	}
 
 	public URI grava(Foto arquivo) {
-		em.getTransaction().begin();
 		em.persist(arquivo);
-		em.getTransaction().commit();
 		return URI.create("foto://" + arquivo.getId());
 	}
 	
@@ -43,9 +41,7 @@ public class FotoDao {
 	
 	public void deleta(URI chave) {
 		Foto arquivo = recupera(chave);
-		em.getTransaction().begin();
 		em.remove(arquivo);
-		em.getTransaction().commit();
 	}
 	
 }

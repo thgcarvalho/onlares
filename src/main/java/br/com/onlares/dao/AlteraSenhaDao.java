@@ -25,21 +25,15 @@ public class AlteraSenhaDao {
 	}
 	
 	public void adiciona(AlteraSenha alteraSenha) {
-		em.getTransaction().begin();
 		em.persist(alteraSenha);
-		em.getTransaction().commit();
 	}
 	
 	public void edita(AlteraSenha alteraSenha) {
-		em.getTransaction().begin();
 		em.merge(alteraSenha);
-		em.getTransaction().commit();
 	}
 
 	public void remove(AlteraSenha alteraSenha) {
-		em.getTransaction().begin();
 		em.remove(buscaPorCodigo(alteraSenha.getCodigo()));
-		em.getTransaction().commit();
 	}
 
 	public AlteraSenha buscaPorCodigo(String codigo) {

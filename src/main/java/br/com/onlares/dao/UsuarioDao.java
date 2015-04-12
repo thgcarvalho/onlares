@@ -155,7 +155,6 @@ public class UsuarioDao {
 		Condominio condominio = new Condominio();
 		condominio.setId(condominioId);
 		
-		em.getTransaction().begin();
 		em.persist(usuario);
 		for (Long unidadeId : unidades) {
 			Unidade unidade = new Unidade();
@@ -166,21 +165,16 @@ public class UsuarioDao {
 			localizador.setUnidade(unidade);
 			em.persist(localizador);
 		}
-		em.getTransaction().commit();
 	}
 	
 	public void registra(Usuario usuario, String nome, String senha) {
-		em.getTransaction().begin();
 		usuario.setNome(nome);
 		usuario.setSenha(senha);
 		em.merge(usuario);
-		em.getTransaction().commit();
 	}
 	
 	public void altera(Usuario usuario) {
-		em.getTransaction().begin();
 		em.merge(usuario);
-		em.getTransaction().commit();
 	}
 	
 	public void altera(Usuario usuario, List<Long> unidades) {
@@ -191,13 +185,10 @@ public class UsuarioDao {
 		Condominio condominio = new Condominio();
 		condominio.setId(condominioId);
 		
-		em.getTransaction().begin();
 		em.merge(usuario);
 		for (Localizador localizadorDB : localizadores) {
 			em.remove(localizadorDB);
 		}
-		em.getTransaction().commit();
-		em.getTransaction().begin();
 		for (Long unidadeId : unidades) {
 			Unidade unidade = new Unidade();
 			unidade.setId(unidadeId);
@@ -207,7 +198,6 @@ public class UsuarioDao {
 			localizador.setUnidade(unidade);
 			em.persist(localizador);
 		}
-		em.getTransaction().commit();
 	}
 	
 	public void remove(Usuario usuario) {
@@ -215,12 +205,10 @@ public class UsuarioDao {
 				+ " where l.usuario.id = :usuarioId", Localizador.class)
 				.setParameter("usuarioId", usuario.getId()).getResultList();
 		if (mesmoCondominio(usuario)) {
-			em.getTransaction().begin();
 			for (Localizador localizador : localizadores) {
 				em.remove(localizador);
 			}
 			em.remove(busca(usuario));
-			em.getTransaction().commit();
 		}
 	}
 	

@@ -35,15 +35,11 @@ public class VeiculoDao {
 	}
 	
 	public void adiciona(Veiculo veiculo) {
-		//em.getTransaction().begin();
 		em.persist(veiculo);
-		//em.getTransaction().commit();
 	}
 	
 	public void altera(Veiculo veiculo) {
-		em.getTransaction().begin();
 		em.merge(veiculo);
-		em.getTransaction().commit();
 	}
 	
 	public Veiculo buscaNaUnidade(Long unidadeId, Long veiculoId) {
@@ -83,9 +79,7 @@ public class VeiculoDao {
 //	}
 	
 	public void remove(Veiculo veiculo) {
-		em.getTransaction().begin();
 		em.remove(busca(veiculo));
-		em.getTransaction().commit();
 	}
 
 }

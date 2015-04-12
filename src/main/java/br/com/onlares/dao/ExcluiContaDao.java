@@ -25,21 +25,15 @@ public class ExcluiContaDao {
 	}
 	
 	public void adiciona(ExcluiConta excluiConta) {
-		em.getTransaction().begin();
 		em.persist(excluiConta);
-		em.getTransaction().commit();
 	}
 
 	public void remove(ExcluiConta excluiConta) {
-		em.getTransaction().begin();
 		em.remove(busca(excluiConta));
-		em.getTransaction().commit();
 	}
 	
 	public void altera(ExcluiConta excluiConta) {
-		em.getTransaction().begin();
 		em.merge(excluiConta);
-		em.getTransaction().commit();
 	}
 
 	public ExcluiConta busca(ExcluiConta excluiConta) {

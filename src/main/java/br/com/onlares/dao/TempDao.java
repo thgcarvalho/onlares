@@ -22,9 +22,7 @@ public class TempDao {
 	}
 
 	public URI grava(Temp arquivo) {
-		em.getTransaction().begin();
 		em.persist(arquivo);
-		em.getTransaction().commit();
 		return URI.create("temp://" + arquivo.getId());
 	}
 	
@@ -44,9 +42,7 @@ public class TempDao {
 	
 	public void deleta(URI chave) {
 		Temp arquivo = recupera(chave);
-		em.getTransaction().begin();
 		em.remove(arquivo);
-		em.getTransaction().commit();
 	}
 	
 }
