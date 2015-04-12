@@ -73,7 +73,7 @@ public class AdminUsuarioController {
 	public void adiciona(Usuario usuario, List<Long> unidades) {
 		adicionaListaDeUnidades(usuario, unidades);
 		
-		if (checkNull(usuario.getNome()).equals("")) {
+		if (checkNull(usuario.getNomeCompleto()).equals("")) {
 			validator.add(new I18nMessage("usuario.adiciona", "campo.obrigatorio", "Nome"));
 		}
 		if (checkNull(usuario.getEmail()).equals("")) {
@@ -98,7 +98,6 @@ public class AdminUsuarioController {
 	@Get("/adminUsuario/edita/{email}")
 	public void edita(String email) {
 		Usuario usuario = usuarioDao.buscaPorEmail(email);
-		System.out.println("/adminUsuario/edita/{email} " + usuario);
 		if (usuario == null) {
 			result.notFound();
 		} else {
@@ -113,7 +112,7 @@ public class AdminUsuarioController {
 		boolean erro = false;
 		adicionaListaDeUnidades(usuario, unidades);
 		
-		if (checkNull(usuario.getNome()).equals("")) {
+		if (checkNull(usuario.getNomeCompleto()).equals("")) {
 			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Nome"));
 		}
@@ -143,7 +142,7 @@ public class AdminUsuarioController {
 		validator.onErrorUsePageOf(this).edita(usuario.getEmail());
 		
 		Usuario usuarioDB = usuarioDao.busca(usuario);
-		usuarioDB.setNome(usuario.getNome());
+		usuarioDB.setNomeCompleto(usuario.getNomeCompleto());
 		usuarioDB.setFoneResidencial(usuario.getFoneResidencial());
 		usuarioDB.setFoneCelular(usuario.getFoneCelular());
 		usuarioDB.setEmail(usuario.getEmail());

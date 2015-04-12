@@ -57,7 +57,7 @@
 						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
-									<th>Nome Completo</th>
+									<th>Nome</th>
 									<th>Email</th>
 									<th>Unidade</th>
 									<th>Status</th>

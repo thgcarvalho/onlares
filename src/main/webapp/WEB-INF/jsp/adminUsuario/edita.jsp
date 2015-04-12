@@ -53,7 +53,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Nome* </label>
 
 						<div class="col-sm-9">
-							<input type="text" required="required" id="nome" name="usuario.nome" value="${usuario.nome}" 
+							<input type="text" required="required" id="nome" name="usuario.nomeCompleto" value="${usuario.nomeCompleto}" 
 							placeholder="Nome" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
 						</div>
 					</div>
