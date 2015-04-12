@@ -61,6 +61,11 @@ public class Localizador implements Serializable {
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
+	
+	@Override
+	public String toString() {
+		return "cond=" + getCondominio() + " user=" + getUsuario() + " unid=" + getUnidade();
+	}
 
 	@Override
 	public int hashCode() {
@@ -105,6 +110,5 @@ public class Localizador implements Serializable {
 		}
 		return true;
 	}
-
 	
 }

@@ -189,7 +189,7 @@ public class Condominio implements Serializable {
 	public void setEmailAdministradora(String emailAdministradora) {
 		this.emailAdministradora = emailAdministradora;
 	}
-
+	
 	public String getFones() {
 		String fones = "";
 		if (fone1 != null && !fone1.equals("")) {
@@ -202,6 +202,11 @@ public class Condominio implements Serializable {
 			fones += fone2;
 		}
 		return fones;
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + this.id + ") " + this.nome;
 	}
 
 	@Override

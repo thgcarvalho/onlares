@@ -57,7 +57,7 @@
 						<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
-									<th>Nome</th>
+									<th>Nome Completo</th>
 									<th>Email</th>
 									<th>Unidade</th>
 									<th>Status</th>
@@ -69,14 +69,19 @@
 								<c:forEach items="${usuarioList}" var="usuario">
 									<tr id="myTableRow">
 										<td>
-											<a href="#">${usuario.nome}</a>
+											<a href="#">${usuario.nomeCompleto}</a>
 										</td>
 										<td>${usuario.email}</td>
 										<td>${usuario.localizacoes}</td>
 										<td>
-											<c:if test="${usuario.registrado}">
-												<span class="label label-sm label-success">Registrado</span>
-											</c:if>
+											<c:choose>
+												<c:when test="${usuario.registrado}">
+													<span class="label label-sm label-success">Registrado</span>
+												</c:when>
+												<c:otherwise>
+													<span class="label label-sm label-error">Pendente</span>
+												</c:otherwise>
+											</c:choose>
 										</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">

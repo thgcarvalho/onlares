@@ -177,33 +177,79 @@ public class UsuarioDao {
 		em.merge(usuario);
 	}
 	
+	@SuppressWarnings("unchecked")
+	private List<Localizador> localizadoresDoUsuario(Usuario usuario) {
+		return em.createQuery("select l from Localizador l"
+				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId")
+				.setParameter("usuarioId", usuario.getId())
+				.setParameter("condominioId", condominioId).getResultList();
+	}
+	
 	public void altera(Usuario usuario, List<Long> unidades) {
-		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
-				+ " where l.usuario.id = :usuarioId", Localizador.class)
-				.setParameter("usuarioId", usuario.getId()).getResultList();
+		List<Localizador> localizadoresDB = localizadoresDoUsuario(usuario);
+		List<Localizador> insertList = new ArrayList<Localizador>();
+		List<Localizador> removeList = new ArrayList<Localizador>();
 		Localizador localizador;
 		Condominio condominio = new Condominio();
 		condominio.setId(condominioId);
 		
 		em.merge(usuario);
-		for (Localizador localizadorDB : localizadores) {
-			em.remove(localizadorDB);
-		}
+		boolean encontrado;
+		
+		// Selecionados que não estão no DB (INSERT)
+		encontrado = false;
 		for (Long unidadeId : unidades) {
+			encontrado = false;
 			Unidade unidade = new Unidade();
 			unidade.setId(unidadeId);
 			localizador = new Localizador();
 			localizador.setCondominio(condominio);
 			localizador.setUsuario(usuario);
 			localizador.setUnidade(unidade);
-			em.persist(localizador);
+			for (Localizador localizadorDB : localizadoresDB) {
+				if (localizadorDB.equals(localizador)) {
+					encontrado = true;
+					break;
+				}
+			}
+			if (!encontrado) {
+				insertList.add(localizador);
+			}
+		}
+		
+		// DB que não estão nos Selecionados (DELETE)
+		encontrado = false;
+		for (Localizador localizadorDB : localizadoresDB) {
+			encontrado = false;
+			for (Long unidadeId : unidades) {
+				Unidade unidade = new Unidade();
+				unidade.setId(unidadeId);
+				localizador = new Localizador();
+				localizador.setCondominio(condominio);
+				localizador.setUsuario(usuario);
+				localizador.setUnidade(unidade);
+				if (localizadorDB.equals(localizador)) {
+					encontrado = true;
+					break;
+				}
+			}
+			if (!encontrado) {
+				removeList.add(localizadorDB);
+			}
+		}
+		for (Localizador locInsert : insertList) {
+			em.persist(locInsert);
+		}
+		for (Localizador locRemove : removeList) {
+			em.remove(locRemove);
 		}
 	}
 	
 	public void remove(Usuario usuario) {
 		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
-				+ " where l.usuario.id = :usuarioId", Localizador.class)
-				.setParameter("usuarioId", usuario.getId()).getResultList();
+				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId", Localizador.class)
+				.setParameter("usuarioId", usuario.getId())
+				.setParameter("condominioId", condominioId).getResultList();
 		if (mesmoCondominio(usuario)) {
 			for (Localizador localizador : localizadores) {
 				em.remove(localizador);
@@ -214,7 +260,7 @@ public class UsuarioDao {
 	
 	private boolean mesmoCondominio(Usuario usuario) {
 		boolean mesmoCondominio = !em.createQuery("select l.usuario from Localizador l"
-				+ " where l.condominio.id = :condominioId",Unidade.class)
+				+ " where l.condominio.id = :condominioId", Unidade.class)
 				.setParameter("condominioId", condominioId).getResultList().isEmpty();
 		if (mesmoCondominio) {
 			return true;

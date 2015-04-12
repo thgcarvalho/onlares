@@ -37,6 +37,8 @@ public class Usuario implements Serializable {
 	private String foneCelular;
 	@Column(name="fone_comercial")
 	private String foneComercial;
+	@Column(name="nome_completo")
+	private String nomeCompleto;
 	private String autorizacao;
 	@Column(name="alertas_por_email")
 	private boolean alertasPorEmail;
@@ -48,9 +50,8 @@ public class Usuario implements Serializable {
 	@Transient
 	private String fotoTemp;
 
-	@Deprecated
 	public Usuario() {
-		this(null, null, null); // para uso do CDI
+		this(null, null, null);
 	}
 	
 	public Usuario(String email, String senha, String nome) {
@@ -116,6 +117,12 @@ public class Usuario implements Serializable {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public String getNomeCompleto() {
+		return nomeCompleto;
+	}
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
 	}
 	public String getAutorizacao() {
 		return autorizacao;

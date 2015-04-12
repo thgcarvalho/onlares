@@ -31,7 +31,6 @@ public class TempDao {
 			return null;
 		}
 		// scheme é o protocolo. No caso temp://
-		System.out.println("ESQUEMA=" + chave.getScheme() + " " + chave.getAuthority());
 		if (!chave.getScheme().equals("temp")) {
 			throw new IllegalArgumentException(chave + " não é uma URI de banco de dados");
 		}
