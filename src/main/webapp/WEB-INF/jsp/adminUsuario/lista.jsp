@@ -79,7 +79,7 @@
 													<span class="label label-sm label-success">Registrado</span>
 												</c:when>
 												<c:otherwise>
-													<span class="label label-sm label-error">Pendente</span>
+													<span class="label label-sm label-danger">Pendente</span>
 												</c:otherwise>
 											</c:choose>
 										</td>
@@ -90,12 +90,12 @@
 												</a>
 
 												<a class="editar" href="${linkTo[AdminUsuarioController].edita(usuario.email)}" 
-													title="Editar '${usuario.nome}'." >
+													title="Editar" >
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 												
 												<a class="deletar" href="${linkTo[AdminUsuarioController].remove(usuario.email)}" 
-                    								title="Remover '${usuario.nome}'." >
+                    								title="Remover" >
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
 																			

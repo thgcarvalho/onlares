@@ -172,11 +172,9 @@ public class Usuario implements Serializable {
 		this.localizacoes = localizacoes;
 	}
 	public boolean contemUnidade(Long id) {
-		System.out.println("contemUnidade(" + id + ") " + unidades);
 		if (unidades != null) {
 			for (Unidade unidade : unidades) {
 				if (unidade.getId().equals(id)) {
-					System.out.println("CONTEM(" + id + ")");
 					return true;
 				}
 			}

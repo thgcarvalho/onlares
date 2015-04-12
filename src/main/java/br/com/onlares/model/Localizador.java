@@ -91,24 +91,45 @@ public class Localizador implements Serializable {
 			if (other.usuario != null) {
 				return false;
 			}
-		} else if (!usuario.equals(other.usuario)) {
+		} else if (usuario.getId().compareTo(other.usuario.getId()) != 0) {
 			return false;
 		}
 		if (condominio == null) {
 			if (other.condominio != null) {
 				return false;
 			}
-		} else if (!condominio.equals(other.condominio)) {
+		} else if (condominio.getId().compareTo(other.condominio.getId()) != 0) {
 			return false;
 		}
 		if (unidade == null) {
 			if (other.unidade != null) {
 				return false;
 			}
-		} else if (!unidade.equals(other.unidade)) {
+		} else if (unidade.getId().compareTo(other.unidade.getId()) != 0) {
 			return false;
 		}
 		return true;
+//		if (usuario == null) {
+//			if (other.usuario != null) {
+//				return false;
+//			}
+//		} else if (!usuario.equals(other.usuario)) {
+//			return false;
+//		}
+//		if (condominio == null) {
+//			if (other.condominio != null) {
+//				return false;
+//			}
+//		} else if (!condominio.equals(other.condominio)) {
+//			return false;
+//		}
+//		if (unidade == null) {
+//			if (other.unidade != null) {
+//				return false;
+//			}
+//		} else if (!unidade.equals(other.unidade)) {
+//			return false;
+//		}
 	}
 	
 }

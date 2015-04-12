@@ -238,9 +238,11 @@ public class UsuarioDao {
 			}
 		}
 		for (Localizador locInsert : insertList) {
+			System.out.println("locInsert=" + locInsert);
 			em.persist(locInsert);
 		}
 		for (Localizador locRemove : removeList) {
+			System.out.println("locRemove=" + locRemove);
 			em.remove(locRemove);
 		}
 	}
