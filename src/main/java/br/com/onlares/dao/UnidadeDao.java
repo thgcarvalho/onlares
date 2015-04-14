@@ -1,5 +1,6 @@
 package br.com.onlares.dao;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -100,7 +101,9 @@ public class UnidadeDao {
 	
 	public List<Unidade> lista() {
 		 List<Unidade> unidades = em.createQuery("select distinct l.unidade from Localizador l"
-			+ " where l.condominio.id = :condominioId and l.unidade.id is not null", Unidade.class)
+			+ " where l.condominio.id = :condominioId"
+			//+ " and l.unidade.id is not null", Unidade.class)
+			+ " and l.unidade.id is not null", Unidade.class)
 			.setParameter("condominioId", condominioId).getResultList();
 		 ComparadorUnidade comparadorUnidade = new ComparadorUnidade();
 		 Collections.sort(unidades, comparadorUnidade);

@@ -40,13 +40,13 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				<form class="form-horizontal" role="form" action="${ctx }/adminUsuario" method="post">
+				<form id="userForm" class="form-horizontal" role="form" action="${ctx}/adminUsuario" method="post">
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Nome* </label>
 
 						<div class="col-sm-9">
 							<input type="text" required="required" id="nome" name="usuario.nomeCompleto" value="${usuario.nomeCompleto}" 
-							placeholder="Nome" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
+							placeholder="Nome" maxlength="60" autofocus class="col-xs-10 col-sm-5 text-uppercase" />
 						</div>
 					</div>
 
@@ -62,13 +62,33 @@
 					</div>
 					
 					<div class="space-4"></div>
-
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="foneResidencial"> CPF</label>
+						
+						<div class="col-sm-9">
+							<input type="text" name="usuario.cpf" value="${usuario.cpf}" 
+							placeholder="xxx.xxx.xxx-xx" maxlength="14" class="col-xs-10 col-sm-5 input-mask-cpf" id="cpf" onfocus="javascript:setAddCPF()" />
+						</div>
+						</div>
+						
+						<div class="space-4"></div>
+						
+						<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="foneResidencial"> CNPJ</label>
+						
+						<div class="col-sm-9">
+							<input type="text" name="usuario.cnpj" value="${usuario.cnpj}" 
+							placeholder="xx.xxx.xxx/xxxx-xx" maxlength="14" class="col-xs-10 col-sm-5 input-mask-cnpj" id="cnpj" onfocus="javascript:setAddCNPJ()" />
+						</div>
+					</div>
+					
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="foneResidencial"> Fone Residencial </label>
 
 						<div class="col-sm-9">
 							<input type="text" name="usuario.foneResidencial" value="${usuario.foneResidencial}" 
-							placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="fone1" />
+							placeholder="(xx) xxxx-xxxx" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="fone1" />
 						</div>
 					</div>
 					
@@ -79,7 +99,84 @@
 
 						<div class="col-sm-9">
 							<input type="text" name="usuario.foneCelular" value="${usuario.foneCelular}" 
-							placeholder="(99) 9999-9999" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="foneCelular" />
+							placeholder="(xx) xxxx-xxxx" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="foneCelular" />
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="foneCelular"> Fone Comercial </label>
+
+						<div class="col-sm-9">
+							<input type="text" name="usuario.foneComercial" value="${usuario.foneComercial}" 
+							placeholder="(xx) xxxx-xxxx" maxlength="14" class="col-xs-10 col-sm-5 input-mask-phone" id="foneComercial" />
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="logradouro"> Logradouro </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="logradoruo" name="usuario.logradouro" value="${usuario.logradouro}" 
+							placeholder="Logradouro" maxlength="60" class="col-xs-10 col-sm-5" />
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="complemento"> Complemento </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="complemento" name="usuario.complemento" value="${usuario.complemento}" 
+							placeholder="Complemento" maxlength="45" class="col-xs-10 col-sm-5" />
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="bairro"> Bairro </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="bairro" name="usuario.bairro" value="${usuario.bairro}" 
+							placeholder="Bairro" maxlength="45" class="col-xs-10 col-sm-5" />
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="cidade"> Cidade </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="cidade" name="usuario.cidade" value="${usuario.cidade}" 
+							placeholder="Cidade" maxlength="45" class="col-xs-10 col-sm-5" />
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="uf"> UF </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="uf" name="usuario.uf" value="${usuario.uf}" 
+							placeholder="UF" maxlength="2" class="col-xs-10 col-sm-5 text-uppercase" />
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="cep"> CEP </label>
+
+						<div class="col-sm-9">
+							<input type="text" id="cep" name="usuario.cep" value="${usuario.cep}" 
+							placeholder="xxxx-xxx" maxlength="10" class="col-xs-10 col-sm-5 input-mask-cep" />
 						</div>
 					</div>
 					
@@ -202,9 +299,11 @@
 			$.mask.definitions['~']='[+-]';
 			$('.input-mask-date').mask('99/99/9999');
 			$('.input-mask-phone').mask('(99) 9999-9999');
+			$('.input-mask-cpf').mask('999.999.999-99');
+			$('.input-mask-cnpj').mask('99.999.999/9999-99');
+			$('.input-mask-cep').mask('99999-999');
 			$('.input-mask-eyescript').mask('~9.99 ~9.99 999');
 			$(".input-mask-product").mask("a*-999-a999",{placeholder:" ",completed:function(){alert("You typed the following: "+this.val());}});
-		
 		
 		
 			$( "#input-size-slider" ).css('width','200px').slider({

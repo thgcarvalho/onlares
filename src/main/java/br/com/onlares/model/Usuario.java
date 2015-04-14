@@ -29,6 +29,13 @@ public class Usuario implements Serializable {
 	private String email;
 	private String senha;
 	private String nome;
+	private String cadastro;
+	private String logradouro;
+	private String complemento;
+	private String bairro;
+	private String cidade;
+	private String uf;
+	private String cep;
 	private String profissao;
 	private String aniversario;
 	@Column(name="fone_residencial")
@@ -84,6 +91,89 @@ public class Usuario implements Serializable {
 	}
 	public String getNome() {
 		return nome;
+	}
+	public String getCadastro() {
+		return cadastro;
+	}
+	public void setCadastro(String cadastro) {
+		if (cadastro != null) {
+			this.cadastro = cadastro;
+		}
+	}
+	/*
+	 * getters e setters cpf e cnpj auxiliam para inserir na colula (cadastro)
+	 * no db somente o campo preenchido e permite a separacao desse campo
+	 * quando se obtem o (cadastro) no db
+	 */
+	public String getCpf() {
+		if (getIsPF()) {
+			return getCadastro();
+		}
+		return "";
+	}
+	public void setCpf(String cpf) {
+		if (getCnpj().equals("")) {
+			setCadastro(cpf);
+		}
+	}
+	public String getCnpj() {
+		if (getIsPJ()) {
+			return getCadastro();
+		}
+		return "";
+	}
+	public void setCnpj(String cnpj) {
+		if (getCpf().equals("")) {
+			setCadastro(cnpj);
+		}
+	}
+	public boolean getIsPF() {
+		if (getCadastro() != null && getCadastro().length() == 14) {
+			return true;
+		}
+		return false;
+	}
+	public boolean getIsPJ() {
+		if (getCadastro() != null && getCadastro().length() == 18) {
+			return true;
+		}
+		return false;
+	}
+	public String getLogradouro() {
+		return logradouro;
+	}
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	public String getComplemento() {
+		return complemento;
+	}
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+	public String getUf() {
+		return uf;
+	}
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
 	}
 	public String getProfissao() {
 		return profissao;
@@ -245,6 +335,5 @@ public class Usuario implements Serializable {
 			return (value.trim());
 		}
 	}
-	
-	
+
 }

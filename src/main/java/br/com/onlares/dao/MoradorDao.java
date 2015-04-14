@@ -47,7 +47,9 @@ public class MoradorDao {
 
 	public List<Usuario> listaRegistrados() {
 		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
-				+ " where l.condominio.id = :condominioId and l.usuario.id is not null", Localizador.class)
+				+ " where l.condominio.id = :condominioId"
+				+ " and l.usuario.id is not null"
+				+ " and l.unidade.id is not null", Localizador.class)
 				.setParameter("condominioId", condominioId).getResultList();
 		
 		List<Usuario> usuariosRegistrados = new ArrayList<Usuario>();

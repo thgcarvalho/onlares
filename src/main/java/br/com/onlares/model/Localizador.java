@@ -25,13 +25,13 @@ public class Localizador implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "usuario_id", referencedColumnName = "id", insertable = true, updatable = true)
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario usuario;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "condominio_id", referencedColumnName = "id", insertable = true, updatable = true)
+	@JoinColumn(name = "condominio_id", referencedColumnName = "id", nullable = true)
 	private Condominio condominio;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "unidade_id", referencedColumnName = "id", insertable = true, updatable = true)
+	@ManyToOne(fetch = FetchType.EAGER)//, cascade=CascadeType.ALL
+	@JoinColumn(name = "unidade_id", referencedColumnName = "id", nullable = true)
 	private Unidade unidade;
 	
 	public Long getId() {

@@ -53,7 +53,6 @@ public class AdminUsuarioController {
 	}
 	
 	public void adicionaListaDeUnidades(Usuario usuario, List<Long> unidades) {
-		System.out.println("unidades=" + unidades);
 		List<Unidade> unidadesAUX = new ArrayList<Unidade>();
 		Unidade unidadeAUX;
 		if (unidades != null) {
@@ -61,7 +60,6 @@ public class AdminUsuarioController {
 				unidadeAUX = new Unidade();
 				unidadeAUX.setId(unidadeId);
 				unidadesAUX.add(unidadeAUX);
-				System.out.println("unidade=" + unidadeId);
 			}
 		}
 		// adiciona para poder obter 
@@ -82,12 +80,19 @@ public class AdminUsuarioController {
 		if (usuarioDao.existe(usuario)) {
 			validator.add(new SimpleMessage("usuario.adiciona", "Email já cadastrado"));
 		}
-		if (unidades == null || unidades.isEmpty()) {
-			validator.add(new SimpleMessage("usuario.adiciona", "Selecione alguma unidade"));
-		}
+//		if (unidades == null || unidades.isEmpty()) {
+//			validator.add(new SimpleMessage("usuario.adiciona", "Selecione alguma unidade"));
+//		}
 		
 		result.include("unidadeList", unidadeDao.lista());
 		validator.onErrorUsePageOf(this).novo();
+		
+		if (usuario.getNomeCompleto() != null) {
+			usuario.setNomeCompleto(usuario.getNomeCompleto().toUpperCase());
+		}
+		if (usuario.getUf() != null) {
+			usuario.setUf(usuario.getUf().toUpperCase());
+		}
 		
 		usuarioDao.adiciona(usuario, unidades);
 		result.include("notice", "Usuário adicionado com sucesso!");
@@ -116,9 +121,9 @@ public class AdminUsuarioController {
 			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Nome"));
 		}
-		if (unidades == null || unidades.isEmpty()) {
-			validator.add(new SimpleMessage("usuario.edita", "Selecione alguma unidade"));
-		}
+//		if (unidades == null || unidades.isEmpty()) {
+//			validator.add(new SimpleMessage("usuario.edita", "Selecione alguma unidade"));
+//		}
 		if (checkNull(usuario.getEmail()).equals("")) {
 			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Email"));
@@ -140,6 +145,13 @@ public class AdminUsuarioController {
 			result.include("unidadeList", unidadeDao.lista());
 		}
 		validator.onErrorUsePageOf(this).edita(usuario.getEmail());
+		
+		if (usuario.getNomeCompleto() != null) {
+			usuario.setNomeCompleto(usuario.getNomeCompleto().toUpperCase());
+		}
+		if (usuario.getUf() != null) {
+			usuario.setUf(usuario.getUf().toUpperCase());
+		}
 		
 		Usuario usuarioDB = usuarioDao.busca(usuario);
 		usuarioDB.setNomeCompleto(usuario.getNomeCompleto());
