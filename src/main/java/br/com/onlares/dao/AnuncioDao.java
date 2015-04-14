@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Anuncio;
+import br.com.onlares.model.Constantes;
 
 public class AnuncioDao {
 
@@ -20,7 +21,7 @@ public class AnuncioDao {
 				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
 			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
 		} else {
-			this.condominioId = -1L;
+			this.condominioId = Constantes.CONDOMINIO_INEXISTENTE_ID;
 		}
 	}
 	

@@ -11,14 +11,24 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import br.com.onlares.model.Condominio;
+import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Unidade;
 import br.com.onlares.model.Usuario;
 
 public class UsuarioDaoTest {
+	
+	private Condominio condominio;
+	
+	@Before
+	public void criaCondominioInexistente() {
+		this.condominio = new Condominio();
+		this.condominio.setId(Constantes.CONDOMINIO_INEXISTENTE_ID);
+	}
 	
 	
 	@Test
@@ -39,9 +49,6 @@ public class UsuarioDaoTest {
 		unidades.add(u1.getId());
 		unidades.add(u2.getId());
 		
-		Condominio condominio = new Condominio();
-		condominio.setId(-1L);
-		
 		Localizador l1 = new Localizador();
 		l1.setCondominio(condominio);
 		l1.setUsuario(usuario);
@@ -55,7 +62,8 @@ public class UsuarioDaoTest {
 		List<Localizador> localizadoresDB = new ArrayList<Localizador>();
 		
 		when(mockedEm.createQuery("select l from Localizador l"
-				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId")).thenReturn(mockedQuery);
+				+ " where l.usuario.id = :usuarioId"
+				+ " and l.condominio.id = :condominioId")).thenReturn(mockedQuery);
 		
 		when(mockedQuery.setParameter("usuarioId", usuario.getId())).thenReturn(mockedQuery);
 		when(mockedQuery.setParameter("condominioId", condominio.getId())).thenReturn(mockedQuery);
@@ -84,8 +92,6 @@ public class UsuarioDaoTest {
 		List<Long> unidades = new ArrayList<Long>();
 		unidades.add(u2.getId());
 		
-		Condominio condominio = new Condominio();
-		condominio.setId(-1L);
 		
 		Localizador l1 = new Localizador();
 		l1.setCondominio(condominio);
@@ -101,7 +107,8 @@ public class UsuarioDaoTest {
 		localizadoresDB.add(l1);
 		
 		when(mockedEm.createQuery("select l from Localizador l"
-				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId")).thenReturn(mockedQuery);
+				+ " where l.usuario.id = :usuarioId"
+				+ " and l.condominio.id = :condominioId")).thenReturn(mockedQuery);
 		
 		when(mockedQuery.setParameter("usuarioId", usuario.getId())).thenReturn(mockedQuery);
 		when(mockedQuery.setParameter("condominioId", condominio.getId())).thenReturn(mockedQuery);
@@ -128,9 +135,6 @@ public class UsuarioDaoTest {
 		
 		List<Long> unidades = new ArrayList<Long>();
 		
-		Condominio condominio = new Condominio();
-		condominio.setId(-1L);
-		
 		Localizador l1 = new Localizador();
 		l1.setCondominio(condominio);
 		l1.setUsuario(usuario);
@@ -146,7 +150,8 @@ public class UsuarioDaoTest {
 		localizadoresDB.add(l2);
 		
 		when(mockedEm.createQuery("select l from Localizador l"
-				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId")).thenReturn(mockedQuery);
+				+ " where l.usuario.id = :usuarioId"
+				+ " and l.condominio.id = :condominioId")).thenReturn(mockedQuery);
 		
 		when(mockedQuery.setParameter("usuarioId", usuario.getId())).thenReturn(mockedQuery);
 		when(mockedQuery.setParameter("condominioId", condominio.getId())).thenReturn(mockedQuery);
@@ -178,9 +183,6 @@ public class UsuarioDaoTest {
 		unidades.add(u1.getId());
 		unidades.add(u3.getId());
 		
-		Condominio condominio = new Condominio();
-		condominio.setId(-1L);
-		
 		Localizador l1 = new Localizador();
 		l1.setCondominio(condominio);
 		l1.setUsuario(usuario);
@@ -201,7 +203,8 @@ public class UsuarioDaoTest {
 		localizadoresDB.add(l2);
 		
 		when(mockedEm.createQuery("select l from Localizador l"
-				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId")).thenReturn(mockedQuery);
+				+ " where l.usuario.id = :usuarioId"
+				+ " and l.condominio.id = :condominioId")).thenReturn(mockedQuery);
 		
 		when(mockedQuery.setParameter("usuarioId", usuario.getId())).thenReturn(mockedQuery);
 		when(mockedQuery.setParameter("condominioId", condominio.getId())).thenReturn(mockedQuery);

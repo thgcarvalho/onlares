@@ -69,15 +69,6 @@ public class VeiculoDao {
 		return veiculos;
 	}
 	
-//	public boolean existe(Veiculo veiculo, Long unidadeId) {
-//		return !em.createQuery("select v from Veiculo v"
-//			+ " where v.placa = :placa"
-//			+ " and v.unidade.id = :unidadeId", Veiculo.class)
-//			.setParameter("placa", veiculo.getPlaca())
-//			.setParameter("unidadeId", unidadeId)
-//			.getResultList().isEmpty();
-//	}
-	
 	public void remove(Veiculo veiculo) {
 		em.remove(busca(veiculo));
 	}

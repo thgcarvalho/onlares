@@ -1,6 +1,5 @@
 package br.com.onlares.dao;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.exception.RestricaoDeIntegridadeException;
 import br.com.onlares.model.ComparadorUnidade;
 import br.com.onlares.model.Condominio;
+import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Unidade;
 import br.com.onlares.model.Usuario;
@@ -27,7 +27,7 @@ public class UnidadeDao {
 				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
 			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
 		} else {
-			this.condominioId = -1L;
+			this.condominioId = Constantes.CONDOMINIO_INEXISTENTE_ID;
 		}
 	}
 	
@@ -102,9 +102,9 @@ public class UnidadeDao {
 	public List<Unidade> lista() {
 		 List<Unidade> unidades = em.createQuery("select distinct l.unidade from Localizador l"
 			+ " where l.condominio.id = :condominioId"
-			//+ " and l.unidade.id is not null", Unidade.class)
-			+ " and l.unidade.id is not null", Unidade.class)
-			.setParameter("condominioId", condominioId).getResultList();
+			+ " and l.unidade.id <> :unidadeId", Unidade.class)
+			.setParameter("condominioId", condominioId)
+		 	.setParameter("unidadeId", Constantes.UNIDADE_NAO_RELACIONADA_ID).getResultList();
 		 ComparadorUnidade comparadorUnidade = new ComparadorUnidade();
 		 Collections.sort(unidades, comparadorUnidade);
 		 return unidades;

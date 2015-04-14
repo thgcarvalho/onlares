@@ -12,7 +12,7 @@ public class UnidadeNaoRelacionada extends Unidade {
 	private String descricao;
 
 	public UnidadeNaoRelacionada() {
-		this.id = 0L;
+		this.id = Constantes.UNIDADE_NAO_RELACIONADA_ID;
 		this.descricao = "Não relacionada";
 	}
 

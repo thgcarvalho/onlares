@@ -1,6 +1,7 @@
 package br.com.onlares.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.onlares.controller.UsuarioLogado;
+import br.com.onlares.model.ComparadorUsuarioNome;
+import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Usuario;
 
@@ -23,7 +26,7 @@ public class MoradorDao {
 				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
 			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
 		} else {
-			this.condominioId = -1L;
+			this.condominioId = Constantes.CONDOMINIO_INEXISTENTE_ID;
 		}
 	}
 	
@@ -48,9 +51,11 @@ public class MoradorDao {
 	public List<Usuario> listaRegistrados() {
 		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
 				+ " where l.condominio.id = :condominioId"
-				+ " and l.usuario.id is not null"
-				+ " and l.unidade.id is not null", Localizador.class)
-				.setParameter("condominioId", condominioId).getResultList();
+				+ " and l.usuario.id <> :usuarioId"
+				+ " and l.unidade.id <> :unidadeId", Localizador.class)
+				.setParameter("condominioId", condominioId)
+				.setParameter("usuarioId", Constantes.USUARIO_INEXISTENTE_ID)
+				.setParameter("unidadeId", Constantes.UNIDADE_NAO_RELACIONADA_ID).getResultList();
 		
 		List<Usuario> usuariosRegistrados = new ArrayList<Usuario>();
 		Usuario usuario1;
@@ -64,17 +69,17 @@ public class MoradorDao {
 			found = false;
 			usuario1 = localizador.getUsuario();
 			if (usuario1.isRegistrado()) {
-				if (localizador.getUnidade() == null) {
+			 	if (localizador.getUnidade().getId().equals(Constantes.UNIDADE_NAO_RELACIONADA_ID)) {
 					localizacao = "";
 				} else {
 					localizacao = localizador.getUnidade().getDescricao();
-					// agrupa por unidade
-					for (Iterator<Usuario> iterator = usuariosRegistrados.iterator(); iterator.hasNext();) {
-						usuario2 = iterator.next();
-						if (usuario2.equals(usuario1)) {
-							found = true;
-							usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
-						}
+				}
+				// agrupa por unidade
+				for (Iterator<Usuario> iterator = usuariosRegistrados.iterator(); iterator.hasNext();) {
+					usuario2 = iterator.next();
+					if (usuario2.equals(usuario1)) {
+						found = true;
+						usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
 					}
 				}
 				if (!found) {
@@ -83,6 +88,9 @@ public class MoradorDao {
 				}
 			}
 		}
+		
+		ComparadorUsuarioNome comparadorUsuarioNome = new ComparadorUsuarioNome();
+		Collections.sort(usuariosRegistrados, comparadorUsuarioNome);
 		return usuariosRegistrados;
 	 }
 

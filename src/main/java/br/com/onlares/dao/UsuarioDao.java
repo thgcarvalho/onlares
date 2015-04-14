@@ -12,8 +12,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.onlares.controller.UsuarioLogado;
-import br.com.onlares.model.ComparadorUsuarioNome;
+import br.com.onlares.model.ComparadorUsuarioNomeCompleto;
 import br.com.onlares.model.Condominio;
+import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Unidade;
 import br.com.onlares.model.Usuario;
@@ -31,7 +32,7 @@ public class UsuarioDao {
 				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
 			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
 		} else {
-			this.condominioId = -1L;
+			this.condominioId = Constantes.CONDOMINIO_INEXISTENTE_ID;
 		}
 	}
 	
@@ -40,48 +41,136 @@ public class UsuarioDao {
 		this(null, null); // para uso do CDI
 	}
 	
-//	public List<Usuario> lista() {
-//		System.out.println(" private boolean lista() {");
-//		List<Usuario> usuarios = em.createQuery("select l.usuario from Localizador l"
-//				+ " where l.condominio.id = :condominioId and l.usuario.id is not null"
-//				+ " order by l.usuario.nome", Usuario.class)
-//				.setParameter("condominioId", condominioId).getResultList();
-//		return usuarios;
-//	}
-	
 	public List<Usuario> lista() {
-		System.out.println(" private boolean lista() {");
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-		List<Localizador> localizadoresComUnidades = new ArrayList<Localizador>();
-		List<Usuario> usuariosSemUnidades = new ArrayList<Usuario>();
-		try {
-			localizadoresComUnidades = em.createQuery("select l from Localizador l"
-					+ " where l.condominio.id = :condominioId"
-					+ " and l.usuario.id is not null"
-					+ " and l.unidade.id is not null"
-					+ " order by l.usuario.nome", Localizador.class)
-					.setParameter("condominioId", condominioId).getResultList();
-			usuariosSemUnidades = em.createQuery("select l.usuario from Localizador l"
-					+ " where l.condominio.id = :condominioId"
-					+ " and l.usuario.id is not null"
-					+ " and l.unidade.id is null"
-					+ " order by l.usuario.nome", Usuario.class)
-					.setParameter("condominioId", condominioId).getResultList();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
-		usuarios = agrupaUnidades(localizadoresComUnidades);
-		usuariosSemUnidades = agrupaUnidadesNulas(usuariosSemUnidades);
-		usuarios.addAll(usuariosSemUnidades);
-		ComparadorUsuarioNome comparadorUsuarioNome = new ComparadorUsuarioNome();
-		Collections.sort(usuarios, comparadorUsuarioNome);
+		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
+				+ " where l.condominio.id = :condominioId"
+				+ " and l.usuario.id <> :usuarioId"
+				+ " order by l.usuario.nome", Localizador.class)
+				.setParameter("condominioId", condominioId)
+				.setParameter("usuarioId", Constantes.USUARIO_INEXISTENTE_ID).getResultList();
+		usuarios = agrupaUnidades(localizadores);
+		ComparadorUsuarioNomeCompleto comparadorUsuarioNomeCompleto = new ComparadorUsuarioNomeCompleto();
+		Collections.sort(usuarios, comparadorUsuarioNomeCompleto);
 		return usuarios;
 	}
 	
+	private List<Usuario> agrupaUnidades(List<Localizador> localizadores) {
+		List<Usuario> usuariosAgrupados = new ArrayList<Usuario>();
+		Usuario usuario1;
+		Usuario usuario2;
+		String localizacao;
+		boolean found = false;
+		for (Localizador localizador : localizadores) {
+			
+			if (adminGlobal(localizador)) {
+				continue;
+			}
+			found = false;
+			usuario1 = localizador.getUsuario();
+           	if (localizador.getUnidade().getId().equals(Constantes.UNIDADE_NAO_RELACIONADA_ID)) {
+				localizacao = "";
+			} else {
+				localizacao = localizador.getUnidade().getDescricao();
+			}
+			// agrupa por unidade
+			for (Iterator<Usuario> iterator = usuariosAgrupados.iterator(); iterator.hasNext();) {
+				usuario2 = iterator.next();
+				if (usuario2.getEmail().equals(usuario1.getEmail())) {
+					found = true;
+					usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+					break;
+				}
+			}
+			if (!found) {
+				usuario1.setLocalizacoes(localizacao);
+				usuariosAgrupados.add(usuario1);
+			}
+		}
+		return usuariosAgrupados;
+	}
+	
+//	private List<Usuario> agrupaUnidades(List<Localizador> localizadores) {
+//		System.out.println(" agrupaUnidades");
+//		List<Usuario> usuariosAgrupados = new ArrayList<Usuario>();
+//		Usuario usuario1;
+//		Usuario usuario2;
+//		String localizacao;
+//		boolean found = false;
+//		try {
+//		for (Localizador localizador : localizadores) {
+//			
+//			if (adminGlobal(localizador)) {
+//				continue;
+//			}
+//			found = false;
+//			usuario1 = localizador.getUsuario();
+//			if (usuario1.getId()==9L) {System.out.println("-----------------USER 9");}
+//			if (localizador.getUnidade().getId().equals(Constantes.UNIDADE_NAO_RELACIONADA_ID)) {
+//				System.out.println("UNIDADE NULL " + localizador);
+//				localizacao = "";
+//				if (usuario1.getId()==9L) {System.out.println("USER 9 localizacao == blank");}
+//			} else {
+//				localizacao = localizador.getUnidade().getDescricao();
+//				if (usuario1.getId()==9L) {System.out.println("USER 9 localizacao == " + localizacao);}
+//				// agrupa por unidade
+//				for (Iterator<Usuario> iterator = usuariosAgrupados.iterator(); iterator.hasNext();) {
+//					if (usuario1.getId()==9L) {System.out.println("iterator");}
+//					usuario2 = iterator.next();
+//					if (usuario1.getId()==9L) {System.out.println(usuario1.getId()+"=="+usuario2.getId()+"  "+usuario1.getEmail()+"=="+usuario2.getEmail());}
+//					if (usuario2.getEmail().equals(usuario1.getEmail())) {
+//						//System.out.println(usuario2.getEmail().equals(usuario1.getEmail()) + " " + usuario1);
+//						if (usuario1.getId()==9L) {System.out.println("USER 9 found = true TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");}
+//						found = true;
+//						usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+//						break;
+//					}
+//				}
+//			}
+//			if (!found) {
+//				if (usuario1.getId()==9L) {System.out.println(" add USER 9");}
+//				usuario1.setLocalizacoes(localizacao);
+//				usuariosAgrupados.add(usuario1);
+//			}
+//		}
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//		return usuariosAgrupados;
+//	}
+	
+//	public List<Usuario> lista() {
+//		System.out.println(" private boolean lista() {");
+//		List<Usuario> usuarios = new ArrayList<Usuario>();
+//		List<Localizador> localizadoresComUnidades = new ArrayList<Localizador>();
+//		List<Usuario> usuariosSemUnidades = new ArrayList<Usuario>();
+//		try {
+//			localizadoresComUnidades = em.createQuery("select l from Localizador l"
+//					+ " where l.condominio.id = :condominioId"
+//					+ " and l.usuario.id is not null"
+//					+ " and l.unidade.id is not null"
+//					+ " order by l.usuario.nome", Localizador.class)
+//					.setParameter("condominioId", condominioId).getResultList();
+//			usuariosSemUnidades = em.createQuery("select l.usuario from Localizador l"
+//					+ " where l.condominio.id = :condominioId"
+//					+ " and l.usuario.id is not null"
+//					+ " and l.unidade.id is null"
+//					+ " order by l.usuario.nome", Usuario.class)
+//					.setParameter("condominioId", condominioId).getResultList();
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//		
+//		usuarios = agrupaUnidades(localizadoresComUnidades);
+//		usuariosSemUnidades = agrupaUnidadesNulas(usuariosSemUnidades);
+//		usuarios.addAll(usuariosSemUnidades);
+//		ComparadorUsuarioNome comparadorUsuarioNome = new ComparadorUsuarioNome();
+//		Collections.sort(usuarios, comparadorUsuarioNome);
+//		return usuarios;
+//	}
+	
 	private boolean adminGlobal(Localizador localizador) {
 		if (localizador.getUsuario().getEmail().endsWith("@grandev.com.br")) {
-			System.out.println("  adminGlobal localizador " + localizador);
 			if (localizador.getCondominio().getId().compareTo(1L) != 0) {
 				return true;
 			}
@@ -89,94 +178,97 @@ public class UsuarioDao {
 		return false;
 	}
 	
-	private boolean adminGlobal(Usuario usuario) {
-		if (usuario.getEmail().endsWith("@grandev.com.br")) {
-			System.out.println("  adminGlobal usuario" + usuario);
-			if (condominioId.compareTo(1L) != 0) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private List<Usuario> agrupaUnidadesNulas(List<Usuario> usuariosSemUnidades) {
-		System.out.println(" agrupaUnidadesNulas");
-		Usuario usuario;
-		for (Iterator<Usuario> iterator = usuariosSemUnidades.iterator(); iterator.hasNext();) {
-			usuario = iterator.next();
-			if (adminGlobal(usuario)) {
-				iterator.remove();
-			} else {
-				System.out.println("UNIDADE NULL " + usuario);
-				usuario.setLocalizacoes("");
-			}
-		}
-		
-		return usuariosSemUnidades;
-	}
-
-	private List<Usuario> agrupaUnidades(List<Localizador> localizadores) {
-		System.out.println(" agrupaUnidades");
-		List<Usuario> usuariosAgrupados = new ArrayList<Usuario>();
-		Usuario usuario1;
-		Usuario usuario2;
-		String localizacao;
-		boolean found = false;
-		try {
-		for (Localizador localizador : localizadores) {
-			if (adminGlobal(localizador)) {
-				continue;
-			}
-			found = false;
-			usuario1 = localizador.getUsuario();
-//			if (localizador.getUnidade() == null) {
-//				System.out.println("UNIDADE NULL " + localizador);
-//				localizacao = "";
-//			} else {
-			localizacao = localizador.getUnidade().getDescricao();
-			// agrupa por unidade
-			for (Iterator<Usuario> iterator = usuariosAgrupados.iterator(); iterator.hasNext();) {
-				usuario2 = iterator.next();
-				if (usuario2.equals(usuario1)) {
-					found = true;
-					usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
-				}
-			}
+//	private boolean adminGlobal(Usuario usuario) {
+//		if (usuario.getEmail().endsWith("@grandev.com.br")) {
+//			System.out.println("  adminGlobal usuario" + usuario);
+//			if (condominioId.compareTo(1L) != 0) {
+//				return true;
 //			}
-			if (!found) {
-				usuario1.setLocalizacoes(localizacao);
-				usuariosAgrupados.add(usuario1);
-			}
-		}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return usuariosAgrupados;
-	}
+//		}
+//		return false;
+//	}
+	
+//	private List<Usuario> agrupaUnidadesNulas(List<Usuario> usuariosSemUnidades) {
+//		System.out.println(" agrupaUnidadesNulas");
+//		Usuario usuario;
+//		for (Iterator<Usuario> iterator = usuariosSemUnidades.iterator(); iterator.hasNext();) {
+//			usuario = iterator.next();
+//			if (adminGlobal(usuario)) {
+//				iterator.remove();
+//			} else {
+//				System.out.println("UNIDADE NULL " + usuario);
+//				usuario.setLocalizacoes("");
+//			}
+//		}
+//		
+//		return usuariosSemUnidades;
+//	}
+
+//	private List<Usuario> agrupaUnidades(List<Localizador> localizadores) {
+//		System.out.println(" agrupaUnidades");
+//		List<Usuario> usuariosAgrupados = new ArrayList<Usuario>();
+//		Usuario usuario1;
+//		Usuario usuario2;
+//		String localizacao;
+//		boolean found = false;
+//		try {
+//		for (Localizador localizador : localizadores) {
+//			if (adminGlobal(localizador)) {
+//				continue;
+//			}
+//			found = false;
+//			usuario1 = localizador.getUsuario();
+////			if (localizador.getUnidade() == null) {
+////				System.out.println("UNIDADE NULL " + localizador);
+////				localizacao = "";
+////			} else {
+//			localizacao = localizador.getUnidade().getDescricao();
+//			// agrupa por unidade
+//			for (Iterator<Usuario> iterator = usuariosAgrupados.iterator(); iterator.hasNext();) {
+//				usuario2 = iterator.next();
+//				if (usuario2.equals(usuario1)) {
+//					found = true;
+//					usuario2.setLocalizacoes(usuario2.getLocalizacoes() + " | " + localizacao);
+//				}
+//			}
+////			}
+//			if (!found) {
+//				usuario1.setLocalizacoes(localizacao);
+//				usuariosAgrupados.add(usuario1);
+//			}
+//		}
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//		return usuariosAgrupados;
+//	}
 	
 	private void agrupaUnidades(Usuario usuario) {
-		List<Localizador> identificadores = em.createQuery("select l from Localizador l"
-				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId", Localizador.class)
+		// TODO avaliar unidades não relacionadas
+		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
+				+ " where l.usuario.id = :usuarioId"
+				+ " and l.condominio.id = :condominioId", Localizador.class)
 				.setParameter("usuarioId", usuario.getId())
 				.setParameter("condominioId", condominioId).getResultList();
 		
 		List<Unidade> unidades = new ArrayList<Unidade>();
 		String localizacao;
-		for (Localizador identificador : identificadores) {
-			localizacao = identificador.getUnidade().getDescricao();
+		for (Localizador localizador : localizadores) {
+			localizacao = localizador.getUnidade().getDescricao();
 			// agrupa por unidade
 			if (usuario.getLocalizacoes() == null) {
 				usuario.setLocalizacoes(localizacao);
 			} else {
 				usuario.setLocalizacoes(usuario.getLocalizacoes() + " | " + localizacao);
 			}
-			unidades.add(identificador.getUnidade());
+			unidades.add(localizador.getUnidade());
 		}
 		usuario.setUnidades(unidades);
 	}
 	
 	public List<Usuario> listaTodos() {
-		return em.createQuery("select u from Usuario u", Usuario.class).getResultList();
+		return em.createQuery("select u from Usuario u where u.id <> :usuarioId", Usuario.class)
+				.setParameter("usuarioId", Constantes.USUARIO_INEXISTENTE_ID).getResultList();
 	}
 	
 	public Usuario busca(Usuario usuario) {
@@ -223,12 +315,12 @@ public class UsuarioDao {
 		
 		em.persist(usuario);
 		if (unidades == null || unidades.isEmpty()) {
-//			Unidade unidade = new Unidade();
-//			unidade.setId(null);
+			Unidade unidade = new Unidade();
+			unidade.setId(Constantes.UNIDADE_NAO_RELACIONADA_ID);
 			localizador = new Localizador();
 			localizador.setCondominio(condominio);
 			localizador.setUsuario(usuario);
-//			localizador.setUnidade(null);
+			localizador.setUnidade(unidade);
 			em.persist(localizador);
 		} else {
 			for (Long unidadeId : unidades) {
@@ -256,7 +348,8 @@ public class UsuarioDao {
 	@SuppressWarnings("unchecked")
 	private List<Localizador> localizadoresDoUsuario(Usuario usuario) {
 		return em.createQuery("select l from Localizador l"
-				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId")
+				+ " where l.usuario.id = :usuarioId"
+				+ " and l.condominio.id = :condominioId")
 				.setParameter("usuarioId", usuario.getId())
 				.setParameter("condominioId", condominioId).getResultList();
 	}
@@ -268,9 +361,13 @@ public class UsuarioDao {
 		Localizador localizador;
 		Condominio condominio = new Condominio();
 		condominio.setId(condominioId);
+		boolean encontrado;
 		
 		em.merge(usuario);
-		boolean encontrado;
+		
+		if (unidades == null) {
+			unidades = new ArrayList<Long>();
+		}
 		
 		// Selecionados que não estão no DB (INSERT)
 		encontrado = false;
@@ -314,18 +411,38 @@ public class UsuarioDao {
 			}
 		}
 		for (Localizador locInsert : insertList) {
-			System.out.println("locInsert=" + locInsert);
 			em.persist(locInsert);
 		}
 		for (Localizador locRemove : removeList) {
-			System.out.println("locRemove=" + locRemove);
 			em.remove(locRemove);
+		}
+		// Todos foram removidos - Adiciona unidade nao relacionada
+		if ((removeList.size() > 0 && insertList.size() == 0)
+				&& (removeList.size() == localizadoresDB.size())) {
+//			boolean unidadeNaoRelacionadaJaExistente = false;
+//			for (Localizador loc : localizadoresDB) {
+//				if (loc.getUnidade().getId().equals(Constantes.UNIDADE_NAO_RELACIONADA_ID)) {
+//					unidadeNaoRelacionadaJaExistente = true;
+//					break;
+//				}
+//			} 
+//			if (!unidadeNaoRelacionadaJaExistente) {
+				Localizador locUnidNaoRelac = new Localizador();
+				Unidade unidade = new Unidade();
+				unidade.setId(Constantes.UNIDADE_NAO_RELACIONADA_ID);
+				locUnidNaoRelac = new Localizador();
+				locUnidNaoRelac.setCondominio(condominio);
+				locUnidNaoRelac.setUsuario(usuario);
+				locUnidNaoRelac.setUnidade(unidade);
+				em.persist(locUnidNaoRelac);
+//			}
 		}
 	}
 	
 	public void remove(Usuario usuario) {
 		List<Localizador> localizadores = em.createQuery("select l from Localizador l"
-				+ " where l.usuario.id = :usuarioId and l.condominio.id = :condominioId", Localizador.class)
+				+ " where l.usuario.id = :usuarioId"
+				+ " and l.condominio.id = :condominioId", Localizador.class)
 				.setParameter("usuarioId", usuario.getId())
 				.setParameter("condominioId", condominioId).getResultList();
 		if (mesmoCondominio(usuario)) {
@@ -338,7 +455,7 @@ public class UsuarioDao {
 	
 	private boolean mesmoCondominio(Usuario usuario) {
 		boolean mesmoCondominio = !em.createQuery("select l.usuario from Localizador l"
-				+ " where l.condominio.id = :condominioId", Unidade.class)
+				+ " where l.condominio.id = :condominioId", Usuario.class)
 				.setParameter("condominioId", condominioId).getResultList().isEmpty();
 		if (mesmoCondominio) {
 			return true;
