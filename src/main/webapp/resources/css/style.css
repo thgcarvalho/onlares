@@ -58,6 +58,18 @@
   font-weight:bold;
 }
 
+.info-row {
+
+}
+
+.info-name {
+  color:#667E99;
+}
+
+.info-value {
+  color:#000000;
+}
+
 .styled-select select {
    background: #438EB9;
    color: #EEE;

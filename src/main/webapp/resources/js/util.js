@@ -50,3 +50,7 @@ function setEdtCNPJ() {
 		document.getElementById("cnpj").style.color = "#CCCCCC";
 	}
 }
+
+function goBack() {
+    window.history.back()
+}

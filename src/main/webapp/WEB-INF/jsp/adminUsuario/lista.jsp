@@ -68,9 +68,7 @@
 							<tbody>
 								<c:forEach items="${usuarioList}" var="usuario">
 									<tr id="myTableRow">
-										<td>
-											<a href="#">${usuario.nomeCompleto}</a>
-										</td>
+										<td>${usuario.nomeCompleto}</td>
 										<td>${usuario.email}</td>
 										<td>${usuario.localizacoes}</td>
 										<td>
@@ -85,7 +83,8 @@
 										</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
-												<a class="visualizar" href="${linkTo[PerfilController].visualiza(usuario.email)}">
+												<a class="visualizar" href="${linkTo[AdminUsuarioController].visualiza(usuario.email)}" 
+													title="Editar" >
 													<i class="ace-icon fa fa-search-plus bigger-130"></i>
 												</a>
 
@@ -109,7 +108,7 @@
 
 													<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 														<li>
-															<a href="${linkTo[PerfilController].visualiza(usuario.email)}" 
+															<a href="${linkTo[AdminUsuarioController].visualiza(usuario.email)}" 
 																class="tooltip-info" data-rel="tooltip" title="Visualizar">
 																<span class="blue">
 																	<i class="ace-icon fa fa-search-plus bigger-120"></i>
