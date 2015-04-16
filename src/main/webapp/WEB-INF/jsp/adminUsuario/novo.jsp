@@ -53,18 +53,29 @@
 					<div class="space-4"></div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right required" for="email"> Email* </label>
+						<label class="col-sm-3 control-label no-padding-right required" for="emailprincipal"> Email Principal* </label>
 
 						<div class="col-sm-9">
-							<input type="email" required="required" id="email" name="usuario.email" value="${usuario.email}" 
-							placeholder="Email" maxlength="45" class="col-xs-10 col-sm-5" />
+							<input type="email" required="required" id="emailprincipal" name="usuario.email" value="${usuario.email}" 
+							placeholder="Email Principal" maxlength="45" class="col-xs-10 col-sm-5" />
+						</div>
+					</div>
+					
+					<div class="space-4"></div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="emailsecundario"> Email Secundário </label>
+
+						<div class="col-sm-9">
+							<input type="email" id="emailsecundario" name="usuario.emailSecundario" value="${usuario.emailSecundario}" 
+							placeholder="Email Secundário" maxlength="45" class="col-xs-10 col-sm-5" />
 						</div>
 					</div>
 					
 					<div class="space-4"></div>
 					
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="foneResidencial"> CPF</label>
+						<label class="col-sm-3 control-label no-padding-right" for="cpf"> CPF</label>
 						
 						<div class="col-sm-9">
 							<input type="text" name="usuario.cpf" value="${usuario.cpf}" 
@@ -75,7 +86,7 @@
 						<div class="space-4"></div>
 						
 						<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="foneResidencial"> CNPJ</label>
+						<label class="col-sm-3 control-label no-padding-right" for="cnpj"> CNPJ</label>
 						
 						<div class="col-sm-9">
 							<input type="text" name="usuario.cnpj" value="${usuario.cnpj}" 
@@ -106,7 +117,7 @@
 					<div class="space-4"></div>
 					
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="foneCelular"> Fone Comercial </label>
+						<label class="col-sm-3 control-label no-padding-right" for="foneComercial"> Fone Comercial </label>
 
 						<div class="col-sm-9">
 							<input type="text" name="usuario.foneComercial" value="${usuario.foneComercial}" 

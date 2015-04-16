@@ -38,6 +38,8 @@ public class Usuario implements Serializable {
 	private String cep;
 	private String profissao;
 	private String aniversario;
+	@Column(name="email_secundario")
+	private String emailSecundario;
 	@Column(name="fone_residencial")
 	private String foneResidencial;
 	@Column(name="fone_celular")
@@ -186,6 +188,12 @@ public class Usuario implements Serializable {
 	}
 	public void setAniversario(String aniversario) {
 		this.aniversario = aniversario;
+	}
+	public String getEmailSecundario() {
+		return emailSecundario;
+	}
+	public void setEmailSecundario(String emailSecundario) {
+		this.emailSecundario = emailSecundario;
 	}
 	public String getFoneResidencial() {
 		return foneResidencial;

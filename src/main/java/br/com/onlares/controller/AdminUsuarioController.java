@@ -155,9 +155,19 @@ public class AdminUsuarioController {
 		
 		Usuario usuarioDB = usuarioDao.busca(usuario);
 		usuarioDB.setNomeCompleto(usuario.getNomeCompleto());
+		usuarioDB.setEmail(usuario.getEmail());
+		usuarioDB.setEmailSecundario(usuario.getEmailSecundario());
+		usuarioDB.setCpf(usuario.getCpf());
+		usuarioDB.setCnpj(usuario.getCnpj());
 		usuarioDB.setFoneResidencial(usuario.getFoneResidencial());
 		usuarioDB.setFoneCelular(usuario.getFoneCelular());
-		usuarioDB.setEmail(usuario.getEmail());
+		usuarioDB.setFoneComercial(usuario.getFoneComercial());
+		usuarioDB.setLogradouro(usuario.getLogradouro());
+		usuarioDB.setComplemento(usuario.getComplemento());
+		usuarioDB.setBairro(usuario.getBairro());
+		usuarioDB.setCidade(usuario.getCidade());
+		usuarioDB.setUf(usuario.getUf());
+		usuarioDB.setCep(usuario.getCep());
 		
 		usuarioDao.altera(usuarioDB, unidades);
 		result.include("notice", "Usuário atualizado com sucesso!");
