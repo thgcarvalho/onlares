@@ -62,7 +62,7 @@
 		<li id="menu_veiculos" class="">
 			<a href="${ctx}/veiculo/lista">
 				<i class="menu-icon fa fa-car"></i>
-				<span class="menu-text"> Veiculos </span>
+				<span class="menu-text"> Veículos </span>
 			</a>
 
 			<b class="arrow"></b>

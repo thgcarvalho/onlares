@@ -41,6 +41,15 @@
 
 			<b class="arrow"></b>
 		</li>
+		
+		<li id="menu_veiculos" class="">
+			<a href="${ctx}/adminVeiculo/lista">
+				<i class="menu-icon fa fa-car"></i>
+				<span class="menu-text"> Veículos </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
 
 	</ul><!-- /.nav-list -->
 
