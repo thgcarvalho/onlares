@@ -159,8 +159,10 @@
 			$.mask.definitions['~']='[+-]';
 			$('.input-mask-plaque').mask('aaa-9999');
 		});
-	</script>
 		
+		$('[data-rel=tooltip]').tooltip({container:'body'});
+	</script>
+	
 	<!-- menu script -->
 	<script type="text/javascript">
 		$('li').click(function(e) {

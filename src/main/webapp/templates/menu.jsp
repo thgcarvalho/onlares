@@ -67,6 +67,15 @@
 
 			<b class="arrow"></b>
 		</li>
+		
+		<li id="menu_pets" class="">
+			<a href="">
+				<i class="menu-icon fa fa-paw"></i>
+				<span class="menu-text"> Pets </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
 
 		<li class="disabled">
 			<a href="#" class="dropdown-toggle">
@@ -181,10 +190,19 @@
 
 			<b class="arrow"></b>
 		</li>
-
+		
 		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-comments"></i>
+				<span class="menu-text"> Fórum </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
+
+		<li class="disabled">
+			<a href="#">
+				<i class="menu-icon fa fa-question"></i>
 				<span class="menu-text"> Enquetes </span>
 			</a>
 
