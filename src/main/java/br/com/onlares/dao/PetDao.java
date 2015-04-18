@@ -1,6 +1,7 @@
 package br.com.onlares.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,13 +11,14 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.onlares.controller.UsuarioLogado;
+import br.com.onlares.model.ComparadorUnidade;
 import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Pet;
+import br.com.onlares.model.Unidade;
 
 public class PetDao {
 
 	private final EntityManager em;
-	@SuppressWarnings("unused")
 	private final Long condominioId;
 	
 	@Inject
@@ -39,26 +41,26 @@ public class PetDao {
 		return em.find(Pet.class, pet.getId());
 	}
 
-//	public List<Pet> lista() {
-//		List<Pet> pets = new ArrayList<Pet>();
-//		List<Unidade> unidadesDoCondominio = em.createQuery("select distinct l.unidade from Localizador l"
-//				+ " where l.condominio.id = :condominioId"
-//				+ " and l.unidade.id <> :unidadeId", Unidade.class)
-//				.setParameter("condominioId", condominioId)
-//				.setParameter("unidadeId", Constantes.UNIDADE_NAO_RELACIONADA_ID).getResultList();
-//
-//		ComparadorUnidade comparadorUnidade = new ComparadorUnidade();
-//		Collections.sort(unidadesDoCondominio, comparadorUnidade);
-//		
-//		for (Unidade unidade : unidadesDoCondominio) {
-//			pets.addAll(em.createQuery("select v from Pet v"
-//				+ " where v.unidade.id = :unidadeId", Pet.class)
-//				.setParameter("unidadeId", unidade.getId()).getResultList());
-//
-//		}
-//		return pets;
-//	}
-//	
+	public List<Pet> lista() {
+		List<Pet> pets = new ArrayList<Pet>();
+		List<Unidade> unidadesDoCondominio = em.createQuery("select distinct l.unidade from Localizador l"
+				+ " where l.condominio.id = :condominioId"
+				+ " and l.unidade.id <> :unidadeId", Unidade.class)
+				.setParameter("condominioId", condominioId)
+				.setParameter("unidadeId", Constantes.UNIDADE_NAO_RELACIONADA_ID).getResultList();
+
+		ComparadorUnidade comparadorUnidade = new ComparadorUnidade();
+		Collections.sort(unidadesDoCondominio, comparadorUnidade);
+		
+		for (Unidade unidade : unidadesDoCondominio) {
+			pets.addAll(em.createQuery("select v from Pet v"
+				+ " where v.unidade.id = :unidadeId", Pet.class)
+				.setParameter("unidadeId", unidade.getId()).getResultList());
+
+		}
+		return pets;
+	}
+	
 	public void adiciona(Pet pet) {
 		em.persist(pet);
 	}
@@ -67,20 +69,20 @@ public class PetDao {
 		em.merge(pet);
 	}
 	
-//	public Pet busca(Long petId) {
-//		Pet pet;
-//		// TODO deveria obter somente do condominio em questao
-//		String strQuery = "SELECT v FROM Pet v"
-//				+ " WHERE v.id = :petId";
-//		try {
-//			Query query = em.createQuery(strQuery, Pet.class);
-//			query.setParameter("petId", petId);
-//			pet = (Pet) query.getSingleResult();
-//		} catch (NoResultException nrExp) {
-//			pet = null;
-//		}
-//		return pet;
-//	}
+	public Pet busca(Long petId) {
+		Pet pet;
+		// TODO deveria obter somente do condominio em questao
+		String strQuery = "SELECT v FROM Pet v"
+				+ " WHERE v.id = :petId";
+		try {
+			Query query = em.createQuery(strQuery, Pet.class);
+			query.setParameter("petId", petId);
+			pet = (Pet) query.getSingleResult();
+		} catch (NoResultException nrExp) {
+			pet = null;
+		}
+		return pet;
+	}
 	
 	public Pet buscaNaUnidade(Long unidadeId, Long petId) {
 		Pet pet;

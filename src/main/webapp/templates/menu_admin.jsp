@@ -50,6 +50,15 @@
 
 			<b class="arrow"></b>
 		</li>
+		
+		<li id="menu_pets" class="">
+			<a href="${ctx}/adminPet/lista">
+				<i class="menu-icon fa fa-paw"></i>
+				<span class="menu-text"> Pets </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
 
 	</ul><!-- /.nav-list -->
 
