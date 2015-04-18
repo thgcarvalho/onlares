@@ -69,7 +69,7 @@
 		</li>
 		
 		<li id="menu_pets" class="">
-			<a href="">
+			<a href="${ctx}/pet/lista">
 				<i class="menu-icon fa fa-paw"></i>
 				<span class="menu-text"> Pets </span>
 			</a>

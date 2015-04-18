@@ -6,6 +6,7 @@
 		<pattern>/home/*</pattern>
 		<pattern>/morador/*</pattern>
 		<pattern>/veiculo/*</pattern>
+		<pattern>/pet/*</pattern>
 		<pattern>/perfil/*</pattern>
 		<pattern>/configuracao/*</pattern>
 	</decorator>

@@ -51,9 +51,6 @@ public class VeiculoController {
 		if (checkNull(veiculo.getTipo()).equals("")) {
 			validator.add(new I18nMessage("veiculo.adiciona", "campo.obrigatorio", "Tipo"));
 		}
-//		if (dao.existe(veiculo, this.unidadeId)) {
-//			validator.add(new SimpleMessage("veiculo.adiciona", "Veículo já cadastrado"));
-//		}
 		validator.onErrorUsePageOf(this).novo();
 	
 		veiculo.setTipo(veiculo.getTipo().toUpperCase());
@@ -80,16 +77,6 @@ public class VeiculoController {
 		if (checkNull(veiculo.getTipo()).equals("")) {
 			validator.add(new I18nMessage("veiculo.edita", "campo.obrigatorio", "Tipo"));
 		}
-		
-//		List<Veiculo> veiculos = dao.listaDaUnidade(this.unidadeId);
-//		for (Veiculo veiculoCadastrado : veiculos) {
-//			if (veiculoCadastrado.getPlaca().equals(veiculo.getPlaca())) {
-//				if (!veiculoCadastrado.getId().equals(veiculo.getId())) {
-//					validator.add(new SimpleMessage("veiculo.edita", "Veículo já cadastrado"));
-//					break;
-//				}
-//			}
-//		}
 		
 		validator.onErrorUsePageOf(this).edita(veiculo.getId());
 		
