@@ -109,27 +109,6 @@ public class Localizador implements Serializable {
 			return false;
 		}
 		return true;
-//		if (usuario == null) {
-//			if (other.usuario != null) {
-//				return false;
-//			}
-//		} else if (!usuario.equals(other.usuario)) {
-//			return false;
-//		}
-//		if (condominio == null) {
-//			if (other.condominio != null) {
-//				return false;
-//			}
-//		} else if (!condominio.equals(other.condominio)) {
-//			return false;
-//		}
-//		if (unidade == null) {
-//			if (other.unidade != null) {
-//				return false;
-//			}
-//		} else if (!unidade.equals(other.unidade)) {
-//			return false;
-//		}
 	}
 	
 }
