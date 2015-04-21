@@ -59,6 +59,15 @@
 
 			<b class="arrow"></b>
 		</li>
+		
+		<li id="menu_reservas" class="">
+			<a href="${ctx}/adminReserva/lista">
+				<i class="menu-icon fa fa-book"></i>
+				<span class="menu-text"> Reservas </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
 
 	</ul><!-- /.nav-list -->
 

@@ -76,7 +76,7 @@
 
 			<b class="arrow"></b>
 		</li>
-
+<!-- 
 		<li class="disabled">
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-book"></i>
@@ -226,7 +226,7 @@
 
 			<b class="arrow"></b>
 		</li>
-		
+ -->
 		<li>
 			<a href="#" id="bootbox-suport">
 				<i class="menu-icon fa fa-headphones"></i>

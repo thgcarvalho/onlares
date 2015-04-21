@@ -58,6 +58,16 @@
   font-weight:bold;
 }
 
+.espaco {
+  padding-right: 2px;
+  padding-left: 16px;
+}
+
+.margem {
+  padding-right: 0px;
+  padding-left: 2px;
+}
+
 .info-row {
 
 }
