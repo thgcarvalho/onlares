@@ -13,27 +13,24 @@ import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.ReservaDao;
-import br.com.onlares.dao.UnidadeDao;
 import br.com.onlares.model.Reserva;
 
 @Controller
 public class AdminReservaController {
 
 	private final ReservaDao reservaDao;
-	private final UnidadeDao unidadeDao;
 	private final Validator validator;
 	private final Result result;
 
 	@Inject
-	public AdminReservaController(UsuarioLogado usuarioLogado, ReservaDao reservaDao, UnidadeDao unidadeDao, Validator validator, Result result) {
+	public AdminReservaController(UsuarioLogado usuarioLogado, ReservaDao reservaDao, Validator validator, Result result) {
 		this.reservaDao = reservaDao;
-		this.unidadeDao = unidadeDao;
 		this.validator = validator;
 		this.result = result;
 	}
 	
 	public AdminReservaController() {
-		this(null, null, null, null, null);
+		this(null, null, null, null);
 	}
 	
 	@Admin
@@ -57,7 +54,6 @@ public class AdminReservaController {
 		if (checkNull(reserva.getDescricao()).equals("")) {
 			validator.add(new I18nMessage("reserva.adiciona", "campo.obrigatorio", "Descrição"));
 		}
-		
 		if (reserva.getAntecedenciaMaximaParaReservar() < reserva.getAntecedenciaMinimaParaReservar()) {
 			validator.add(new SimpleMessage("reserva.adiciona", 
 					"'Máximo de dias de antecedência para reservar'" +
@@ -80,7 +76,6 @@ public class AdminReservaController {
 			result.notFound();
 		} else {
 			result.include("reserva", reserva);
-			result.include("unidadeList", unidadeDao.lista());
 		}
 	}
 	
@@ -89,6 +84,12 @@ public class AdminReservaController {
 	public void altera(Reserva reserva) {
 		if (checkNull(reserva.getDescricao()).equals("")) {
 			validator.add(new I18nMessage("reserva.edita", "campo.obrigatorio", "Descrição"));
+		}
+		if (reserva.getAntecedenciaMaximaParaReservar() < reserva.getAntecedenciaMinimaParaReservar()) {
+			validator.add(new SimpleMessage("reserva.adiciona", 
+					"'Máximo de dias de antecedência para reservar'" +
+					" deve ser maior que " +
+					"'Mínimo de dias de antecedência para reservar'"));
 		}
 		
 		validator.onErrorUsePageOf(this).edita(reserva.getId());

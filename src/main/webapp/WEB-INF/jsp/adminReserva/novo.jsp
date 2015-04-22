@@ -46,7 +46,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Descrição* </label>
 						<div class="col-sm-9">
 							<input type="text" required="required" id="nome" name="reserva.descricao" value="${reserva.descricao}" 
-							placeholder="Descrição" maxlength="45" autofocus class="col-xs-10 col-sm-5 text-uppercase" 
+							placeholder="Descrição" maxlength="45" autofocus class="col-xs-10 col-sm-5" 
 							data-rel="tooltip" title="Ex: Deck, Salão de Festas ..." />
 						</div>
 					</div>
@@ -172,11 +172,6 @@
 		$('#minimacancela').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
 		$('#reservasquantidade').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
 		$('#reservasdias').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
-		
-		$('#spinner2').ace_spinner({value:0,min:0,max:10000,step:100, touch_spinner: true, icon_up:'ace-icon fa fa-caret-up bigger-110', icon_down:'ace-icon fa fa-caret-down bigger-110'});
-		$('#spinner3').ace_spinner({value:0,min:-100,max:100,step:10, on_sides: true, icon_up:'ace-icon fa fa-plus bigger-110', icon_down:'ace-icon fa fa-minus bigger-110', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
-		$('#spinner4').ace_spinner({value:0,min:-100,max:100,step:10, on_sides: true, icon_up:'ace-icon fa fa-plus', icon_down:'ace-icon fa fa-minus', btn_up_class:'btn-purple' , btn_down_class:'btn-purple'});
-	
 	</script>
 		
 	<!-- menu script -->

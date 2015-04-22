@@ -76,38 +76,41 @@
 
 			<b class="arrow"></b>
 		</li>
-<!-- 
-		<li class="disabled">
-			<a href="#" class="dropdown-toggle">
+		
+		<li id="menu_reservas" class="">
+			<a href="${ctx}/reserva/index">
 				<i class="menu-icon fa fa-book"></i>
 				<span class="menu-text"> Reservas </span>
-
-				<b class="arrow fa fa-angle-down"></b>
 			</a>
 
 			<b class="arrow"></b>
-
-			<ul class="submenu">
-				<li class="disabled">
-					<a href="#">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Deck
-					</a>
-
-					<b class="arrow"></b>
-				</li>
-
-				<li class="disabled">
-					<a href="#">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Salão de Festas
-					</a>
-
-					<b class="arrow"></b>
-				</li>
-			</ul>
 		</li>
-
+<!-- 
+		<c:if test="${reservaList.isEmpty()}">
+			<li class="disabled">
+				<a href="#" class="dropdown-toggle">
+					<i class="menu-icon fa fa-book"></i>
+					<span class="menu-text"> Reservas </span>
+	
+					<b class="arrow fa fa-angle-down"></b>
+				</a>
+	
+				<b class="arrow"></b>
+				<c:forEach items="${reservaList}" var="reserva">
+					<ul class="submenu">
+						<li class="disabled">
+							<a href="#">
+								<i class="menu-icon fa fa-caret-right"></i>
+								${reserva.descricao}
+							</a>
+							<b class="arrow"></b>
+						</li>
+					</ul>
+				</c:forEach>
+			</li>
+		</c:if>
+-->
+<!-- 
 		<li class="disabled">
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-sign-in"></i>

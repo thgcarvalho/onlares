@@ -26,23 +26,22 @@
 			<i class=""></i>
 				<a href="${ctx}/adminReserva/lista">Reservas</a>
 			</li>
-			<li class="active">Edita Reserva</li>
+			<li class="active">Nova Reserva</li>
 		</ul><!-- /.breadcrumb -->
 	</div>
 	
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Edita Reserva
+				Nova Reserva - ${reserva.descricao}
 			</h1>
 		</div><!-- /.page-header -->
 	
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				<form class="form-horizontal" role="form" action="${ctx}/adminReserva" method="post">
-					<input type="hidden" name="_method" value="PUT">
-					<input type="hidden" name="reserva.id" value="${reserva.id}">
+				<form class="form-horizontal" role="form" action="${ctx}/adminReserva/" method="post">
+			
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="nome"> Descrição* </label>
 						<div class="col-sm-9">
@@ -52,80 +51,6 @@
 						</div>
 					</div>
 
-					<div class="space-4"></div>
-
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="maximareserva"> Máximo de dias de antecedência para reservar </label>
-						<div class="col-sm-9">
-						<span class="input-icon">
-							<input type="text" name="reserva.antecedenciaMaximaParaReservar" value="${reserva.antecedenciaMaximaParaReservar}" 
-							placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="maximareserva" />
-						</span>
-						</div>
-					</div>
-					
-					<div class="space-4"></div>
-					
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="minimareserva"> Mínimo de dias de antecedência para reservar </label>
-						<div class="col-sm-9">
-						<span class="input-icon">
-							<input type="text" name="reserva.antecedenciaMinimaParaReservar" value="${reserva.antecedenciaMinimaParaReservar}" 
-							placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="minimareserva" />
-						</span>
-						</div>
-					</div>
-					
-					<div class="space-4"></div>
-					
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="minimacancela"> Mínimo de dias de antecedência para cancelar </label>
-						<div class="col-sm-9">
-						<span class="input-icon">
-							<input type="text" name="reserva.antecedenciaMinimaParaCancelar" value="${reserva.antecedenciaMinimaParaCancelar}" 
-							placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="minimacancela" />
-						</span>
-						</div>
-					</div>
-					
-					<div class="space-4"></div>
-					
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right"> Reservas por unidade </label>
-						<div class="col-sm-9">
-							<input type="text" name="reserva.reservasQuantidade" value="${reserva.reservasQuantidade}" 
-								placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="reservasquantidade" />
-							<span class="espaco">a cada</span>
-							<input type="text" name="reserva.reservasDias" value="${reserva.reservasDias}" 
-								placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="reservasdias" />
-							<span class="margem">dias</span>
-						</div>
-					</div>
-					
-					<div class="space-4"></div>
-					
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="permitirposterior"> Permitir reserva antes da conclusão da atual? </label>
-						<div class="col-sm-9">
-							<label>
-								<input name="reserva.permitirPosterior" class="ace ace-switch" type="checkbox" ${reserva.permitirPosterior ? 'checked' : ''}/>
-								<span class="lbl" data-lbl="SIM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NÂO"></span>
-							</label>
-						</div>
-					</div>
-					
-					<div class="space-4"></div>
-					
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="permitirposterior"> Permitir a utilização do espaço de unidades sem reserva </label>
-						<div class="col-sm-9">
-							<label>
-								<input name="reserva.permitirSemReserva" class="ace ace-switch" type="checkbox" ${reserva.permitirSemReserva ? 'checked' : ''}/>
-								<span class="lbl" data-lbl="SIM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NÂO"></span>
-							</label>
-						</div>
-					</div>
-					
 					<div class="clearfix form-actions">
 						<div class="col-md-offset-5">
 							<button class="btn btn-info" type="submit">
@@ -174,8 +99,7 @@
 		$('#reservasquantidade').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
 		$('#reservasdias').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
 	</script>
-	</script>
-	
+		
 	<!-- menu script -->
 	<script type="text/javascript">
 		$('li').click(function(e) {
@@ -184,7 +108,7 @@
 	    });
 	
 		window.onload = function() {
-			document.getElementById('menuadmin_reservas').className = 'active';
+			document.getElementById('menu_reservas').className = 'active';
 		};
 	</script>
 </content>

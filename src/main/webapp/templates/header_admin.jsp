@@ -26,7 +26,7 @@
 		<div class="navbar-buttons navbar-header" role="navigation">
 			<ul class="nav ace-nav">
 				<li>
-				<div class="styled-select">
+				<div class="styled-select-admin">
 					<select name="localizador" id="unidadesBox" onchange="this.form.submit();" onMouseOver="this.style.textDecoration='underline';" onMouseOut="this.style.textDecoration='none';" >
 						<c:forEach items="${usuarioLogado.localizadores}" var="localizador" >							
 							<c:choose>
@@ -53,7 +53,7 @@
 				</a>
 			</li>
 		
-			<li class="light-blue">
+			<li class="dark-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 					<span class="user-info">
 						<small>Bem vindo,</small>

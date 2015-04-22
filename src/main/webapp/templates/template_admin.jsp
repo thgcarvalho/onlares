@@ -18,7 +18,7 @@
 </head>
 <body class="no-skin">
 
-	<div id="navbar" class="navbar navbar-default">
+	<div id="navbar" class="navbar navbar-admin navbar-default">
 		<!-- Top -->
 		<%@ include file="/templates/header_admin.jsp"%>
 	</div>

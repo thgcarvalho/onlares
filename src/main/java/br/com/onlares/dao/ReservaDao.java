@@ -54,6 +54,9 @@ public class ReservaDao {
 	}
 	
 	public void altera(Reserva reserva) {
+		Condominio condominio = new Condominio();
+		condominio.setId(condominioId);
+		reserva.setCondominio(condominio);
 		em.merge(reserva);
 	}
 	

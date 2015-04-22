@@ -14,6 +14,10 @@
   color:#DD5A43 !important;
 }
 
+.navbar-admin {
+  background:#2E6589 !important;
+}
+
 .sidebar .sidebar-shortcuts-large > .btn-admin {
   border-width:4px;
   line-height:24px;
@@ -90,4 +94,21 @@
    height: 36px;
    -webkit-appearance: none;
    -moz-appearance: none; /* Removes Default Firefox style*/
+}
+
+.styled-select-admin select {
+   background: #2E6589;
+   color: #EEE;
+   padding: 5px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 36px;
+   -webkit-appearance: none;
+   -moz-appearance: none; /* Removes Default Firefox style*/
+}
+
+
+.ace-nav > li.dark-blue > a {
+  background-color:#2E6589 !important;
 }

@@ -30,7 +30,7 @@ public class Localizador implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "condominio_id", referencedColumnName = "id", nullable = true)
 	private Condominio condominio;
-	@ManyToOne(fetch = FetchType.EAGER)//, cascade=CascadeType.ALL
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "unidade_id", referencedColumnName = "id", nullable = true)
 	private Unidade unidade;
 	

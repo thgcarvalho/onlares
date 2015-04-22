@@ -184,7 +184,7 @@
 	    });
 	
 		window.onload = function() {
-			document.getElementById('menuadmin_reservas').className = 'active';
+			document.getElementById('menu_reservas').className = 'active';
 		};
 	</script>
 </content>
