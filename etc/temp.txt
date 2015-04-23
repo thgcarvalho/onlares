@@ -1,0 +1,29 @@
+		    $("#calendario").datepicker({
+		        dateFormat: 'dd/mm/yy',
+		        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+		        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+		        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+		        monthNames: ['Janeiro','Fevereiro','Março','AAAA','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		        monthNamesShort: ['Jan','Fev','Mar','AAAA','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+		    });
+		    
+		    
+		    	<script>
+		$(function() {
+		    var nowTemp = new Date();
+		    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+		     
+		    var checkin = $('#calendario').datepicker({
+		      onRender: function(date) {
+		    	  console.log('onRender'+now.valueOf());
+		        return date.valueOf() < now.valueOf() ? 'disabled' : '';
+		      }
+		    }).on('changeDate', function(ev) {
+		    	console.log('changeDate'+ev.date.valueOf());
+		        var newDate = new Date(ev.date);
+		        newDate.setDate(newDate.getDate() + 1);
+		      	checkin.hide();
+		    }).data('datepicker');
+		    
+		});
+	</script>

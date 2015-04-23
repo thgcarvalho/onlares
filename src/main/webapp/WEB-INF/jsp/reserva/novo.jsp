@@ -8,6 +8,11 @@
 	<!-- page specific plugin styles -->
 	<link rel="stylesheet" href="${ctx}/assets/css/jquery-ui.custom.min.css" />
 	<link rel="stylesheet" href="${ctx}/assets/css/chosen.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/datepicker.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap-timepicker.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/daterangepicker.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/colorpicker.min.css" />
 </head>
 
 <body>
@@ -33,7 +38,8 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Nova Reserva - ${reserva.descricao}
+				Nova Reserva - ${reserva.descricao} 
+				<br />Unidade: ${usuarioLogado.localizadorAtual.unidade.descricao}
 			</h1>
 		</div><!-- /.page-header -->
 	
@@ -41,16 +47,72 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<form class="form-horizontal" role="form" action="${ctx}/adminReserva/" method="post">
-			
+					<input type="hidden" name="unidadeReserva.id" value="${reserva.id}">
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="nome"> Descrição* </label>
-						<div class="col-sm-9">
-							<input type="text" required="required" id="nome" name="reserva.descricao" value="${reserva.descricao}" 
-							placeholder="Descrição" maxlength="45" autofocus class="col-xs-10 col-sm-5" 
-							data-rel="tooltip" title="Ex: Deck, Salão de Festas ..." />
+						<div class="input-group bootstrap-timepicker">
+							<label class="col-sm-5 control-label" for="calendario"> Data </label>
+							<div class="input-group">
+								<input class="form-control date-picker" id="calendario" type="text" data-date-format="dd/mm/yyyy"/>
+								<span class="input-group-addon">
+									<i class="fa fa-calendar bigger-110"></i>
+								</span>
+							</div>
 						</div>
 					</div>
+						
+					<div class="space-4"></div>
+						
+					<div class="form-group">
+						<div class="input-group bootstrap-timepicker">
+							<label class="col-sm-5 control-label" for="timepicker1"> Hora </label>
+							<div class="input-group">
+								<input id="timepicker1" type="text" class="form-control" />
+								<span class="input-group-addon">
+									<i class="fa fa-clock-o bigger-110"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="widget-box">
+						<div class="widget-header widget-header-flat">
+							<h4 class="widget-title">Regras da reserva</h4>
+						</div>
 
+						<div class="widget-body">
+							<div class="widget-main">
+								<div class="row">
+									<div class="col-sm-6">
+										<ul>
+											<li>
+												Máximo de dias de antecedência para reservar:
+												<b>${reserva.antecedenciaMaximaParaReservar}</b> 
+											</li>
+
+											<li>
+												Mínimo de dias de antecedência para reservar:
+												<b>${reserva.antecedenciaMinimaParaReservar}</b> 
+											</li>
+
+											<li>
+												Mínimo de dias de antecedência para cancelar:
+												<b>${reserva.antecedenciaMinimaParaCancelar}</b> 
+											</li>
+
+											<li>
+												Reservas por unidade:
+												<b>${reserva.reservasQuantidade}</b> 
+												a cada 
+												<b>${reserva.reservasDias}</b> 
+												dias
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 					<div class="clearfix form-actions">
 						<div class="col-md-offset-5">
 							<button class="btn btn-info" type="submit">
@@ -90,14 +152,59 @@
 	<script src="${ctx}/assets/js/bootstrap-tag.min.js"></script>
 
 	<!-- inline scripts related to this page -->
+
+
 	<script type="text/javascript">
-		$('[data-rel=tooltip]').tooltip({container:'body'});
+		jQuery(function($) {
+			//datepicker plugin
+			//link
+			$('.date-picker').datepicker({
+				autoclose: true,
+				todayHighlight: true,
+				startDate: '0d',
+				endDate: '+20d',
+				daysOfWeekDisabled: "1,3,6",
+				format: 'dd/mm/yyyy',                
+				language: 'pt-BR'
+			})
+			//show datepicker when clicking on the icon
+			.next().on(ace.click_event, function(){
+				console.log('next');
+				$(this).prev().focus();
+			});
 		
-		$('#maximareserva').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'}); 
-		$('#minimareserva').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
-		$('#minimacancela').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
-		$('#reservasquantidade').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
-		$('#reservasdias').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
+			//or change it into a date range picker
+			$('.input-daterange').datepicker({autoclose:true});
+		
+		
+			//to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
+			$('input[name=date-range-picker]').daterangepicker({
+				'applyClass' : 'btn-sm btn-success',
+				'cancelClass' : 'btn-sm btn-default',
+				locale: {
+					applyLabel: 'Apply',
+					cancelLabel: 'Cancel',
+				}
+			})
+			.prev().on(ace.click_event, function(){
+				$(this).next().focus();
+			});
+		
+		
+			$('#timepicker1').timepicker({
+				minuteStep: 1,
+				showSeconds: false,
+				showMeridian: false,                
+				language: 'pt-BR'
+			}).next().on(ace.click_event, function(){
+				$(this).prev().focus();
+			});
+			
+			$('#date-timepicker1').datetimepicker().next().on(ace.click_event, function(){
+				$(this).prev().focus();
+			});
+		
+		});
 	</script>
 		
 	<!-- menu script -->

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
 	<%@ include file="/templates/head.jsp"%>
 	<!-- grandev -->
