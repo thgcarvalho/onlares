@@ -1,5 +1,11 @@
 package br.com.onlares.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -9,9 +15,11 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
+import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.dao.ReservaDao;
 import br.com.onlares.model.Reserva;
+import br.com.onlares.model.UnidadeReserva;
 
 @SuppressWarnings("unused")
 @Controller
@@ -63,16 +71,52 @@ public class ReservaController {
 //	}
 	
 	@Post("/reserva/")
-	public void adiciona(Reserva reserva) {
-//		if (checkNull(reserva.getTipo()).equals("")) {
-//			validator.add(new I18nMessage("reserva.adiciona", "campo.obrigatorio", "Tipo"));
-//		}
-//		validator.onErrorUsePageOf(this).novo();
-//	
-//		reserva.setTipo(reserva.getTipo().toUpperCase());
-//		dao.adiciona(reserva);
-//		result.include("notice", "Reserva adicionado com sucesso!");
-//		result.redirectTo(this).lista();
+	public void adiciona(UnidadeReserva unidadeReserva) {
+//		System.out.println(unidadeReserva.getUnidade());
+//		System.out.println(unidadeReserva.getReserva());
+//		System.out.println(unidadeReserva.getData());
+//		System.out.println(unidadeReserva.getHora());
+		if (unidadeReserva.getData() == null) {
+			validator.add(new I18nMessage("reserva.adiciona", "campo.obrigatorio", "Data"));
+		}
+		if (unidadeReserva.getHora() == null) {
+			validator.add(new I18nMessage("reserva.adiciona", "campo.obrigatorio", "Hora"));
+		}
+		
+		validator.onErrorRedirectTo(this).novo(unidadeReserva.getReserva().getId());
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Calendar hoje = GregorianCalendar.getInstance();
+		Calendar calSel = unidadeReserva.getData();
+		Calendar antMax = Calendar.getInstance();
+		Calendar antMin = Calendar.getInstance();
+		
+		Reserva reserva = dao.busca(unidadeReserva.getReserva().getId());
+		antMax.add(Calendar.DAY_OF_MONTH, reserva.getAntecedenciaMaximaParaReservar());
+		antMin.add(Calendar.DAY_OF_MONTH, reserva.getAntecedenciaMinimaParaReservar());
+		
+		if (calSel.after(antMax)) {
+			validator.add(new SimpleMessage("reserva.adiciona", "Data máxima é " + sdf.format(antMax.getTime())));
+		}
+		if (calSel.before(antMin)) {
+			validator.add(new SimpleMessage("reserva.adiciona", "Data mínima é " + sdf.format(antMin.getTime())));
+		}
+		
+		validator.onErrorRedirectTo(this).novo(unidadeReserva.getReserva().getId());
+		
+		List<UnidadeReserva> unidadeReservas = dao.listaUnidadeReserva(unidadeReserva.getReserva().getId());
+		for (UnidadeReserva uniRes : unidadeReservas) {
+			if (calSel.equals(uniRes.getData())) {
+				validator.add(new SimpleMessage("reserva.adiciona", "Já existe uma reserva na data " + sdf.format(calSel.getTime())));
+				break;
+			}
+		}
+		
+		validator.onErrorRedirectTo(this).novo(unidadeReserva.getReserva().getId());
+		
+		dao.reserva(unidadeReserva);
+		result.include("notice", "Reserva realizada com sucesso!");
+		result.redirectTo(this).lista();
 	}
 	
 	@Get("/reserva/edita/{reservaId}")

@@ -13,6 +13,7 @@ import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Condominio;
 import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Reserva;
+import br.com.onlares.model.UnidadeReserva;
 
 public class ReservaDao {
 
@@ -40,10 +41,21 @@ public class ReservaDao {
 	}
 
 	public List<Reserva> lista() {
-		List<Reserva> reservas = em.createQuery("SELECT v FROM Reserva v"
-				+ " where v.condominio.id = :condominioId", Reserva.class)
+		List<Reserva> reservas = em.createQuery("SELECT r FROM Reserva r"
+				+ " where r.condominio.id = :condominioId", Reserva.class)
 				.setParameter("condominioId", condominioId).getResultList();
 		return reservas;
+	}
+	
+	public List<UnidadeReserva> listaUnidadeReserva(Long reservaId) {
+		List<UnidadeReserva> unidadeReservas = em.createQuery("SELECT ur FROM UnidadeReserva ur"
+				+ " where ur.reserva.id = :reservaId", UnidadeReserva.class)
+				.setParameter("reservaId", reservaId).getResultList();
+		return unidadeReservas;
+	}
+	
+	public void reserva(UnidadeReserva unidadeReserva) {
+		em.persist(unidadeReserva);
 	}
 	
 	public void adiciona(Reserva reserva) {
@@ -93,16 +105,16 @@ public class ReservaDao {
 		return reserva;
 	}
 	
-	public List<Reserva> listaDaUnidade(Long unidadeId) {
-		List<Reserva> reservas;
+	public List<UnidadeReserva> listaDaUnidade(Long unidadeId) {
+		List<UnidadeReserva> unidadeReserva;
 		try {
-			reservas = em.createQuery("select v from Reserva v"
-					+ " where v.unidade.id = :unidadeId", Reserva.class)
+			unidadeReserva = em.createQuery("select ur from UnidadeReserva ur"
+					+ " where ur.unidade.id = :unidadeId", UnidadeReserva.class)
 					.setParameter("unidadeId", unidadeId).getResultList();
 		} catch (EntityNotFoundException e) {
-			reservas = new ArrayList<Reserva>();
+			unidadeReserva = new ArrayList<UnidadeReserva>();
 		}
-		return reservas;
+		return unidadeReserva;
 	}
 	
 	public void remove(Reserva reserva) {

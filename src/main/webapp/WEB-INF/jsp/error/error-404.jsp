@@ -1,7 +1,7 @@
 <%@ include file="/templates/jstl.jsp"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 	<head>
 		
 		<link rel="icon" href="${ctx}/resources/images/favicon-16.png" />

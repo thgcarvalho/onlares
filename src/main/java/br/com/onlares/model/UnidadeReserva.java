@@ -1,7 +1,10 @@
 package br.com.onlares.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,8 +34,8 @@ public class UnidadeReserva implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "reserva_id", referencedColumnName = "id")
 	private Reserva reserva;
-	private Date data;
-	private Date hora;
+	private Calendar data;
+	private Calendar hora;
 	
 	public Long getId() {
 		return id;
@@ -52,17 +55,27 @@ public class UnidadeReserva implements Serializable {
 	public void setReserva(Reserva reserva) {
 		this.reserva = reserva;
 	}
-	public Date getData() {
+	public Calendar getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(Calendar data) {
 		this.data = data;
 	}
-	public Date getHora() {
+	public Calendar getHora() {
 		return hora;
 	}
-	public void setHora(Date hora) {
+	public void setHora(Calendar hora) {
 		this.hora = hora;
+	}
+	public void setHoraString(String hora) {
+		Calendar calendar = GregorianCalendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+		try {
+			calendar.setTime(sdf.parse(hora));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.hora = calendar;
 	}
 	
 }

@@ -46,13 +46,14 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				<form class="form-horizontal" role="form" action="${ctx}/adminReserva/" method="post">
-					<input type="hidden" name="unidadeReserva.id" value="${reserva.id}">
+				<form class="form-horizontal" role="form" action="${ctx}/reserva/" method="post">
+					<input type="hidden" name="unidadeReserva.unidade.id" value="${usuarioLogado.localizadorAtual.unidade.id}">
+					<input type="hidden" name="unidadeReserva.reserva.id" value="${reserva.id}">
 					<div class="form-group">
 						<div class="input-group bootstrap-timepicker">
 							<label class="col-sm-5 control-label" for="calendario"> Data </label>
 							<div class="input-group">
-								<input class="form-control date-picker" id="calendario" type="text" data-date-format="dd/mm/yyyy"/>
+								<input id="calendario" name="unidadeReserva.data" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy"/>
 								<span class="input-group-addon">
 									<i class="fa fa-calendar bigger-110"></i>
 								</span>
@@ -66,7 +67,7 @@
 						<div class="input-group bootstrap-timepicker">
 							<label class="col-sm-5 control-label" for="timepicker1"> Hora </label>
 							<div class="input-group">
-								<input id="timepicker1" type="text" class="form-control" />
+								<input id="timepicker1" name="unidadeReserva.horaString" type="text" class="form-control" data-format="hh:mm" />
 								<span class="input-group-addon">
 									<i class="fa fa-clock-o bigger-110"></i>
 								</span>
@@ -162,8 +163,8 @@
 				autoclose: true,
 				todayHighlight: true,
 				startDate: '0d',
-				endDate: '+20d',
-				daysOfWeekDisabled: "1,3,6",
+				//endDate: '+20d',
+				//daysOfWeekDisabled: "1,3,6",
 				format: 'dd/mm/yyyy',                
 				language: 'pt-BR'
 			})
@@ -194,7 +195,7 @@
 			$('#timepicker1').timepicker({
 				minuteStep: 1,
 				showSeconds: false,
-				showMeridian: false,                
+				showMeridian: false,
 				language: 'pt-BR'
 			}).next().on(ace.click_event, function(){
 				$(this).prev().focus();
