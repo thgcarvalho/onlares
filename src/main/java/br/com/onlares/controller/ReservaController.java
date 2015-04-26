@@ -1,7 +1,9 @@
 package br.com.onlares.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -18,6 +20,7 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.dao.ReservaDao;
+import br.com.onlares.model.ComparadorUnidadeReserva;
 import br.com.onlares.model.Reserva;
 import br.com.onlares.model.UnidadeReserva;
 
@@ -72,10 +75,6 @@ public class ReservaController {
 	
 	@Post("/reserva/")
 	public void adiciona(UnidadeReserva unidadeReserva) {
-//		System.out.println(unidadeReserva.getUnidade());
-//		System.out.println(unidadeReserva.getReserva());
-//		System.out.println(unidadeReserva.getData());
-//		System.out.println(unidadeReserva.getHora());
 		if (unidadeReserva.getData() == null) {
 			validator.add(new I18nMessage("reserva.adiciona", "campo.obrigatorio", "Data"));
 		}
@@ -87,18 +86,23 @@ public class ReservaController {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Calendar hoje = GregorianCalendar.getInstance();
+		hoje.set(Calendar.HOUR_OF_DAY, 0);
 		Calendar calSel = unidadeReserva.getData();
 		Calendar antMax = Calendar.getInstance();
 		Calendar antMin = Calendar.getInstance();
 		
 		Reserva reserva = dao.busca(unidadeReserva.getReserva().getId());
-		antMax.add(Calendar.DAY_OF_MONTH, reserva.getAntecedenciaMaximaParaReservar());
-		antMin.add(Calendar.DAY_OF_MONTH, reserva.getAntecedenciaMinimaParaReservar());
+		int antecedenciaMaxima = reserva.getAntecedenciaMaximaParaReservar();
+		int antecedenciaMinima = reserva.getAntecedenciaMinimaParaReservar();
+		int reservasQuantidade = reserva.getReservasQuantidade();
+		int reservasDias = reserva.getReservasDias();
+		antMax.add(Calendar.DAY_OF_MONTH, antecedenciaMaxima);
+		antMin.add(Calendar.DAY_OF_MONTH, antecedenciaMinima);
 		
-		if (calSel.after(antMax)) {
+		if (antecedenciaMaxima > 0 && calSel.after(antMax)) {
 			validator.add(new SimpleMessage("reserva.adiciona", "Data máxima é " + sdf.format(antMax.getTime())));
 		}
-		if (calSel.before(antMin)) {
+		if (antecedenciaMinima > 0 && calSel.before(antMin)) {
 			validator.add(new SimpleMessage("reserva.adiciona", "Data mínima é " + sdf.format(antMin.getTime())));
 		}
 		
@@ -108,6 +112,29 @@ public class ReservaController {
 		for (UnidadeReserva uniRes : unidadeReservas) {
 			if (calSel.equals(uniRes.getData())) {
 				validator.add(new SimpleMessage("reserva.adiciona", "Já existe uma reserva na data " + sdf.format(calSel.getTime())));
+				break;
+			}
+		}
+		
+		if (!reserva.isPermitirPosterior()) {
+			for (UnidadeReserva uniRes : unidadeReservas) {
+				if (uniRes.getUnidade().getId().compareTo(unidadeReserva.getUnidade().getId()) == 0) {
+					validator.add(new SimpleMessage("reserva.adiciona", "A unidade já possui uma reserva neste espaço"));
+				}
+			}
+		}
+		
+		int quantidadeDeReservas = 0;
+		ComparadorUnidadeReserva comparadorUnidadeReserva = new ComparadorUnidadeReserva();
+		Collections.sort(unidadeReservas, comparadorUnidadeReserva);
+		for (UnidadeReserva uniRes : unidadeReservas) {
+			if (uniRes.getUnidade().getId().compareTo(unidadeReserva.getUnidade().getId()) == 0) {
+				quantidadeDeReservas++;
+			}
+			if (quantidadeDeReservas == reservasQuantidade) {
+				if (uniRes.getData().compareTo(hoje) >= 0) {
+					validator.add(new SimpleMessage("reserva.adiciona", ""));
+				}
 				break;
 			}
 		}
