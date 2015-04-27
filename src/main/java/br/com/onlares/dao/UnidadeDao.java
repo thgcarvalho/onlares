@@ -6,9 +6,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import br.com.onlares.comparador.ComparadorUnidade;
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.exception.RestricaoDeIntegridadeException;
-import br.com.onlares.model.ComparadorUnidade;
 import br.com.onlares.model.Condominio;
 import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Localizador;

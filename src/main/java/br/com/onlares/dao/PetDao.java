@@ -10,8 +10,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import br.com.onlares.comparador.ComparadorUnidade;
 import br.com.onlares.controller.UsuarioLogado;
-import br.com.onlares.model.ComparadorUnidade;
 import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Pet;
 import br.com.onlares.model.Unidade;

@@ -8,8 +8,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import br.com.onlares.comparador.ComparadorUsuarioNome;
 import br.com.onlares.controller.UsuarioLogado;
-import br.com.onlares.model.ComparadorUsuarioNome;
 import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Usuario;

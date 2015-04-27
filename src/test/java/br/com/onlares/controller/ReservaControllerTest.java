@@ -123,7 +123,7 @@ public class ReservaControllerTest {
 		unidadeReserva.setUnidade(unidade);
 		unidadeReserva.setReserva(reserva);
 		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		calendar.add(Calendar.DAY_OF_MONTH, 4);
 		unidadeReserva.setData(calendar);
 		unidadeReserva.setHora(calendar);
 		
@@ -272,6 +272,14 @@ public class ReservaControllerTest {
 		reserva.setReservasQuantidade(2);
 		reserva.setReservasDias(30);
 		
+		Calendar calendarAntigo = Calendar.getInstance();
+		calendarAntigo.add(Calendar.DAY_OF_MONTH, -1);
+		UnidadeReserva unidadeReservaAntiga = new UnidadeReserva();
+		unidadeReservaAntiga.setUnidade(unidade);
+		unidadeReservaAntiga.setReserva(reserva);
+		unidadeReservaAntiga.setData(calendarAntigo);
+		unidadeReservaAntiga.setHora(calendarAntigo);
+		
 		Calendar calendar1 = Calendar.getInstance();
 		calendar1.add(Calendar.DAY_OF_MONTH, 4);
 		UnidadeReserva unidadeReserva1 = new UnidadeReserva();
@@ -289,6 +297,7 @@ public class ReservaControllerTest {
 		unidadeReserva2.setHora(calendar2);
 		
 		ArrayList<UnidadeReserva> unidadeReservas = new ArrayList<UnidadeReserva>();
+		unidadeReservas.add(unidadeReservaAntiga);
 		unidadeReservas.add(unidadeReserva1);
 		
 		when(reservaDaoFalso.busca(reserva.getId())).thenReturn(reserva);
@@ -306,9 +315,12 @@ public class ReservaControllerTest {
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
+		int reservasQuantidade = 2;
+		int reservasDias = 30;
+		
 		reserva.setPermitirPosterior(true);
-		reserva.setReservasQuantidade(2);
-		reserva.setReservasDias(30);
+		reserva.setReservasQuantidade(reservasQuantidade);
+		reserva.setReservasDias(reservasDias);
 		
 		Calendar calendar1 = Calendar.getInstance();
 		calendar1.add(Calendar.DAY_OF_MONTH, 12);
@@ -327,7 +339,7 @@ public class ReservaControllerTest {
 		unidadeReserva2.setHora(calendar2);
 		
 		Calendar calendar3 = Calendar.getInstance();
-		calendar3.add(Calendar.DAY_OF_MONTH, 4);
+		calendar3.add(Calendar.DAY_OF_MONTH, 5);
 		UnidadeReserva unidadeReserva3 = new UnidadeReserva();
 		unidadeReserva3.setUnidade(unidade);
 		unidadeReserva3.setReserva(reserva);
@@ -348,7 +360,8 @@ public class ReservaControllerTest {
 	    	fail();
 		} catch (ValidationException e) {
 	        List<Message> errors = e.getErrors();
-	        assertTrue(errors.contains(new SimpleMessage("reserva.adiciona", "")));
+	        assertTrue(errors.contains(new SimpleMessage("reserva.adiciona", "A unidade pode realizar no máximo " 
+	        		+ reservasQuantidade + " no período de " + reservasDias + " dias")));
 	    }
 	}
 	

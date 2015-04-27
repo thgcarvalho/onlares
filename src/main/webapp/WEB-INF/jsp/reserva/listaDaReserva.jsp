@@ -35,36 +35,53 @@
 	
 		<div class="page-header">
 			<h1>
-				Reservas
+				Reservas - ${reserva.descricao}
 			</h1>
 		</div><!-- /.page-header -->
 		
+		
+		<div class="clearfix">
+			<div class="pull-right tableTools-buttons">
+	      		<a href="${linkTo[ReservaController].novo(reserva.id)}">
+					<button class="btn btn-success" type="submit" >
+						<i class="ace-icon fa fa-book bigger-110"></i>
+						Reservar
+					</button>
+				</a>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
 					<div class="col-xs-12">
-						<c:choose>
-						<c:when test="${reservaList.isEmpty()}">
-						        <td colspan="6">Não existem reservas cadastradas</td>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${reservaList}" var="reserva">
-								<div class="well">
-									<h4 class="green smaller lighter">${reserva.descricao}</h4>
-									<a class="blue" id="hide-option" href="${linkTo[ReservaController].novo(reserva.id)}" title="Reservar">
-										<i class="ace-icon fa fa-hand-o-right"></i>
-										Reservar
-									</a>
-									<br />
-									<a class="blue" id="hide-option" href="${linkTo[ReservaController].listaDaReserva(reserva.id)}" title="Visualizar reservas">
-										<i class="ace-icon fa fa-hand-o-right"></i>
-										Visualizar reservas
-									</a>
-								</div>
-							</c:forEach>
-						</c:otherwise>
-						</c:choose>
+						<table id="simple-table" class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Data</th>
+									<th>Hora</th>
+								</tr>
+							</thead>
+	
+							<tbody>
+								<c:choose>
+								<c:when test="${reservaUnidadeList.isEmpty()}">
+								    <tr>
+								        <td colspan="6">Não existem reservas cadastradas</td>
+								    </tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${reservaUnidadeList}" var="reservaUnidade">
+										<tr>
+											<td>${reservaUnidade.dataFormatada}</td>
+											<td>${reservaUnidade.horaFormatada}</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+								</c:choose>
+							</tbody>
+						</table>
 					</div><!-- /.span -->
 				</div><!-- /.row -->
 				<!-- PAGE CONTENT ENDS -->

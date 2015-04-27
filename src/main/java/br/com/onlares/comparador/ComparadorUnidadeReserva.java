@@ -1,6 +1,8 @@
-package br.com.onlares.model;
+package br.com.onlares.comparador;
 
 import java.util.Comparator;
+
+import br.com.onlares.model.UnidadeReserva;
 
 public class ComparadorUnidadeReserva implements Comparator<UnidadeReserva> {
 

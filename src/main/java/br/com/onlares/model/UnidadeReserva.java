@@ -14,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import br.com.onlares.util.DataUtil;
 
 /**
  * @author Thiago Carvalho
@@ -67,6 +70,8 @@ public class UnidadeReserva implements Serializable {
 	public void setHora(Calendar hora) {
 		this.hora = hora;
 	}
+	
+	@Transient
 	public void setHoraString(String hora) {
 		Calendar calendar = GregorianCalendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
@@ -78,4 +83,13 @@ public class UnidadeReserva implements Serializable {
 		this.hora = calendar;
 	}
 	
+	@Transient
+	public String getDataFormatada() {
+		return DataUtil.formatarData(this.data);
+	}
+	
+	@Transient
+	public String getHoraFormatada() {
+		return DataUtil.formatarHora(this.hora);
+	}
 }

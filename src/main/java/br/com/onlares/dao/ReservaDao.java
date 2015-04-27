@@ -1,6 +1,7 @@
 package br.com.onlares.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -103,6 +104,21 @@ public class ReservaDao {
 			reserva = null;
 		}
 		return reserva;
+	}
+	
+	public List<UnidadeReserva> listaDaReserva(Long reservaId) {
+		List<UnidadeReserva> unidadeReserva;
+		Calendar hoje = Calendar.getInstance();
+		try {
+			unidadeReserva = em.createQuery("select ur from UnidadeReserva ur"
+					+ " where ur.reserva.id = :reservaId"
+					+ " and ur.data >= :hoje", UnidadeReserva.class)
+					.setParameter("reservaId", reservaId)
+					.setParameter("hoje", hoje).getResultList();
+		} catch (EntityNotFoundException e) {
+			unidadeReserva = new ArrayList<UnidadeReserva>();
+		}
+		return unidadeReserva;
 	}
 	
 	public List<UnidadeReserva> listaDaUnidade(Long unidadeId) {
