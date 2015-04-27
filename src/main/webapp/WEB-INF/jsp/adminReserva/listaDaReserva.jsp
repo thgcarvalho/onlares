@@ -69,7 +69,7 @@
 								<c:choose>
 								<c:when test="${reservaList.isEmpty()}">
 								    <tr>
-								        <td colspan="6">Não existem reservas cadastradas</td>
+								        <td colspan="3">Não existem reservas cadastradas</td>
 								    </tr>
 								</c:when>
 								<c:otherwise>

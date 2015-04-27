@@ -71,7 +71,7 @@ public class AdminReservaController {
 	@Admin
 	@Get("/adminReserva/edita/{reservaId}")
 	public void edita(Long reservaId) {
-		Reserva reserva = reservaDao.busca(reservaId);
+		Reserva reserva = reservaDao.buscaReserva(reservaId);
 		if (reserva == null) {
 			result.notFound();
 		} else {
@@ -103,8 +103,8 @@ public class AdminReservaController {
 	@Delete("/adminReserva/{reservaId}")
 	public void remove(Long reservaId){
 		System.out.println("Veículo = " + reservaId + " FOI REMOVIDO!");
-		Reserva reserva = reservaDao.busca(reservaId);
-		reservaDao.remove(reserva);
+		Reserva reserva = reservaDao.buscaReserva(reservaId);
+		reservaDao.removeReserva(reserva);
 		result.nothing();
 	}
 	

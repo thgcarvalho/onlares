@@ -37,10 +37,6 @@ public class ReservaDao {
 		this(null, null); // para uso do CDI
 	}
 	
-	public Reserva busca(Reserva reserva) {
-		return em.find(Reserva.class, reserva.getId());
-	}
-
 	public List<Reserva> lista() {
 		List<Reserva> reservas = em.createQuery("SELECT r FROM Reserva r"
 				+ " where r.condominio.id = :condominioId", Reserva.class)
@@ -73,11 +69,11 @@ public class ReservaDao {
 		em.merge(reserva);
 	}
 	
-	public Reserva busca(Long reservaId) {
+	public Reserva buscaReserva(Long reservaId) {
 		Reserva reserva;
-		String strQuery = "SELECT v FROM Reserva v"
-				+ " WHERE v.id = :reservaId"
-				+ " AND v.condominio.id = :condominioId";
+		String strQuery = "SELECT r FROM Reserva r"
+				+ " WHERE r.id = :reservaId"
+				+ " AND r.condominio.id = :condominioId";
 		try {
 			Query query = em.createQuery(strQuery, Reserva.class);
 			query.setParameter("reservaId", reservaId);
@@ -88,22 +84,21 @@ public class ReservaDao {
 		}
 		return reserva;
 	}
-
-	@SuppressWarnings("unused")
-	private Reserva buscaNaUnidade(Long unidadeId, Long reservaId) {
-		Reserva reserva;
-		String strQuery = "SELECT v FROM Reserva v"
-				+ " WHERE v.unidade.id = :unidadeId"
-				+ " AND v.id = :reservaId";
+	
+	public UnidadeReserva buscaUnidadeReserva(Long unidadeReservaId) {
+		UnidadeReserva unidadeReserva;
+		String strQuery = "SELECT ur FROM UnidadeReserva ur"
+				+ " WHERE ur.id = :unidadeReservaId"
+				+ " AND ur.reserva.condominio.id = :condominioId";
 		try {
 			Query query = em.createQuery(strQuery, Reserva.class);
-			query.setParameter("unidadeId", unidadeId);
-			query.setParameter("reservaId", reservaId);
-			reserva = (Reserva) query.getSingleResult();
+			query.setParameter("unidadeReservaId", unidadeReservaId);
+			query.setParameter("condominioId", condominioId);
+			unidadeReserva = (UnidadeReserva) query.getSingleResult();
 		} catch (NoResultException nrExp) {
-			reserva = null;
+			unidadeReserva = null;
 		}
-		return reserva;
+		return unidadeReserva;
 	}
 	
 	public List<UnidadeReserva> listaDaReserva(Long reservaId) {
@@ -133,8 +128,16 @@ public class ReservaDao {
 		return unidadeReserva;
 	}
 	
-	public void remove(Reserva reserva) {
-		em.remove(busca(reserva));
+	public void removeReserva(Reserva reserva) {
+		List<UnidadeReserva> unidadesReservas = listaUnidadeReserva(reserva.getId());
+		for (UnidadeReserva unidadeReserva : unidadesReservas) {
+			em.remove(unidadeReserva);
+		}
+		em.remove(buscaReserva(reserva.getId()));
+	}
+	
+	public void removeUnidadeReserva(UnidadeReserva unidadeReserva) {
+		em.remove(buscaUnidadeReserva(unidadeReserva.getId()));
 	}
 
 }

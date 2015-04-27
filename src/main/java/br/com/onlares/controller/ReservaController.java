@@ -58,7 +58,7 @@ public class ReservaController {
 	
 	@Get("/reserva/lista/{reservaId}")
 	public void listaDaReserva(Long reservaId) {
-		Reserva reserva = dao.busca(reservaId);
+		Reserva reserva = dao.buscaReserva(reservaId);
 		if (reserva == null) {
 			result.notFound();
 		} else {
@@ -70,14 +70,17 @@ public class ReservaController {
 		}
 	}
 	
-	@Get("/reserva/lista/")
+	@Get("/reserva/listaDaUnidade/")
 	public void listaDaUnidade() {
-		result.include("reservaUnidadeList", dao.listaDaUnidade(this.unidadeId));
+		List<UnidadeReserva> listaDaUnidade= dao.listaDaUnidade(this.unidadeId);
+		ComparadorUnidadeReserva comparadorUnidadeReserva = new ComparadorUnidadeReserva();
+		Collections.sort(listaDaUnidade, comparadorUnidadeReserva);
+		result.include("reservaUnidadeList", listaDaUnidade);
 	}
 	
 	@Get("/reserva/novo/{reservaId}")
 	public void novo(Long reservaId) {
-		Reserva reserva = dao.busca(reservaId);
+		Reserva reserva = dao.buscaReserva(reservaId);
 		if (reserva == null) {
 			result.notFound();
 		} else {
@@ -108,7 +111,7 @@ public class ReservaController {
 		Calendar antMin = Calendar.getInstance();
 		
 		Long reservaId = unidadeReserva.getReserva().getId();
-		Reserva reserva = dao.busca(reservaId);
+		Reserva reserva = dao.buscaReserva(reservaId);
 		int antecedenciaMaxima = reserva.getAntecedenciaMaximaParaReservar();
 		int antecedenciaMinima = reserva.getAntecedenciaMinimaParaReservar();
 		int reservasQuantidade = reserva.getReservasQuantidade();
@@ -121,7 +124,7 @@ public class ReservaController {
 		if (antecedenciaMaxima > 0 && calSel.after(antMax)) {
 			validator.add(new SimpleMessage("reserva.adiciona", "Data máxima é " + sdf.format(antMax.getTime())));
 		}
-		System.out.println(DataUtil.formatarTudo(calSel) +" "+ DataUtil.formatarTudo(antMin));
+		
 		if (antecedenciaMinima > 0 && calSel.before(antMin)) {
 			validator.add(new SimpleMessage("reserva.adiciona", "Data mínima é " + sdf.format(antMin.getTime())));
 		}
@@ -172,36 +175,12 @@ public class ReservaController {
 		result.redirectTo(this).listaDaReserva(reservaId);;
 	}
 	
-	@Get("/reserva/edita/{reservaId}")
-	public void edita(Long reservaId) {
-//		Reserva reserva = dao.buscaNaUnidade(this.unidadeId, reservaId);
-//		if (reserva == null) {
-//			result.notFound();
-//		} else {
-//			result.include("reserva", reserva);
-//		}
-	}
-	
-	@Put("/reserva")
-	public void altera(Reserva reserva) {
-//		if (checkNull(reserva.getTipo()).equals("")) {
-//			validator.add(new I18nMessage("reserva.edita", "campo.obrigatorio", "Tipo"));
-//		}
-//		
-//		validator.onErrorUsePageOf(this).edita(reserva.getId());
-//		
-//		reserva.setTipo(reserva.getTipo().toUpperCase());
-//		dao.altera(reserva);
-//		result.include("notice", "Reserva atualizado com sucesso!");
-//		result.redirectTo(this).lista();
-	}
-	
-	@Delete("/reserva/{reservaId}")
-	public void remove(Long reservaId){
-//		System.out.println("Reserva = " + reservaId + " FOI REMOVIDA!");
-//		Reserva usuario = dao.buscaNaUnidade(this.unidadeId, reservaId);
-//		dao.remove(usuario);
-//		result.nothing();
+	@Delete("/reserva/{unidadeReservaId}")
+	public void remove(Long unidadeReservaId){
+		System.out.println("UnidadeReserva = " + unidadeReservaId + " FOI REMOVIDA!");
+		UnidadeReserva unidadeReserva = dao.buscaUnidadeReserva(unidadeReservaId);
+		dao.removeUnidadeReserva(unidadeReserva);
+		result.nothing();
 	}
 	
 	private String checkNull(String value) {

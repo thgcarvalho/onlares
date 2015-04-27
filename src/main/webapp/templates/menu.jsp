@@ -78,13 +78,37 @@
 		</li>
 		
 		<li id="menu_reservas" class="">
-			<a href="${ctx}/reserva/index">
+			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-book"></i>
 				<span class="menu-text"> Reservas </span>
+
+				<b class="arrow fa fa-angle-down"></b>
 			</a>
 
 			<b class="arrow"></b>
+
+			<ul class="submenu">
+				<li class="">
+					<a href="${ctx}/reserva/index">
+						<i class="menu-icon fa fa-caret-right"></i>
+						Reservas
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="">
+					<a href="${ctx}/reserva/listaDaUnidade/">
+						<i class="menu-icon fa fa-caret-right"></i>
+						Minhas reservas
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+			</ul>
 		</li>
+		
 <!-- 
 		<c:if test="${reservaList.isEmpty()}">
 			<li class="disabled">
@@ -110,7 +134,7 @@
 			</li>
 		</c:if>
 -->
-<!-- 
+
 		<li class="disabled">
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-sign-in"></i>
@@ -229,7 +253,7 @@
 
 			<b class="arrow"></b>
 		</li>
- -->
+
 		<li>
 			<a href="#" id="bootbox-suport">
 				<i class="menu-icon fa fa-headphones"></i>

@@ -68,7 +68,7 @@ public class ReservaControllerTest {
 		unidadeReserva.setData(calendar);
 		unidadeReserva.setHora(calendar);
 		
-		when(reservaDaoFalso.busca(reserva.getId())).thenReturn(reserva);
+		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
 		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(new ArrayList<UnidadeReserva>());
 		
 		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
@@ -93,7 +93,7 @@ public class ReservaControllerTest {
 		unidadeReserva.setData(calendar);
 		unidadeReserva.setHora(calendar);
 		
-		when(reservaDaoFalso.busca(reserva.getId())).thenReturn(reserva);
+		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
 		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(new ArrayList<UnidadeReserva>());
 		
 		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
@@ -127,7 +127,7 @@ public class ReservaControllerTest {
 		unidadeReserva.setData(calendar);
 		unidadeReserva.setHora(calendar);
 		
-		when(reservaDaoFalso.busca(reserva.getId())).thenReturn(reserva);
+		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
 		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(new ArrayList<UnidadeReserva>());
 		
 		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
@@ -171,7 +171,7 @@ public class ReservaControllerTest {
 		unidadeReservas.add(unidadeReserva1);
 		unidadeReservas.add(unidadeReserva2);
 		
-		when(reservaDaoFalso.busca(reserva.getId())).thenReturn(reserva);
+		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
 		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
 		
 		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
@@ -212,7 +212,7 @@ public class ReservaControllerTest {
 		ArrayList<UnidadeReserva> unidadeReservas = new ArrayList<UnidadeReserva>();
 		unidadeReservas.add(unidadeReserva1);
 		
-		when(reservaDaoFalso.busca(reserva.getId())).thenReturn(reserva);
+		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
 		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
 		
 		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
@@ -248,7 +248,7 @@ public class ReservaControllerTest {
 		ArrayList<UnidadeReserva> unidadeReservas = new ArrayList<UnidadeReserva>();
 		unidadeReservas.add(unidadeReserva1);
 		
-		when(reservaDaoFalso.busca(reserva.getId())).thenReturn(reserva);
+		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
 		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
 		
 		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
@@ -300,7 +300,7 @@ public class ReservaControllerTest {
 		unidadeReservas.add(unidadeReservaAntiga);
 		unidadeReservas.add(unidadeReserva1);
 		
-		when(reservaDaoFalso.busca(reserva.getId())).thenReturn(reserva);
+		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
 		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
 		
 		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
@@ -350,7 +350,7 @@ public class ReservaControllerTest {
 		unidadeReservas.add(unidadeReserva1);
 		unidadeReservas.add(unidadeReserva2);
 		
-		when(reservaDaoFalso.busca(reserva.getId())).thenReturn(reserva);
+		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
 		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
 		
 		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);

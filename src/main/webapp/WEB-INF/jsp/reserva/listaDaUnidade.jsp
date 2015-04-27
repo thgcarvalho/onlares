@@ -35,7 +35,7 @@
 	
 		<div class="page-header">
 			<h1>
-				Reservas - ${reserva.descricao}
+				Reservas da Unidade - ${usuarioLogado.localizadorAtual.unidade.descricao}
 			</h1>
 		</div><!-- /.page-header -->
 		
@@ -61,6 +61,8 @@
 								<tr>
 									<th>Data</th>
 									<th>Hora</th>
+									<th>Espaço reservado</th>
+									<th></th>
 								</tr>
 							</thead>
 	
@@ -68,7 +70,7 @@
 								<c:choose>
 								<c:when test="${reservaUnidadeList.isEmpty()}">
 								    <tr>
-								        <td colspan="2">Não existem reservas cadastradas</td>
+								        <td colspan="3">Não existem reservas cadastradas</td>
 								    </tr>
 								</c:when>
 								<c:otherwise>
@@ -76,6 +78,35 @@
 										<tr>
 											<td>${reservaUnidade.dataFormatada}</td>
 											<td>${reservaUnidade.horaFormatada}</td>
+											<td>${reservaUnidade.reserva.descricao}</td>
+											<td>
+												<div class="hidden-sm hidden-xs action-buttons">
+													<a class="deletar" href="${linkTo[AdminReservaController].remove(reservaUnidade.id)}" 
+	                    								title="Cancelar" >
+														<i class="ace-icon fa fa-times bigger-130"></i> Cancelar
+													</a>
+																				
+												</div>
+	
+												<div class="hidden-md hidden-lg">
+													<div class="inline pos-rel">
+														<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+															<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+														</button>
+	
+														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+															<li>
+																<a href="${linkTo[AdminReservaController].remove(reservaUnidade.id)}" 
+																	class="deletar tooltip-error" data-rel="tooltip" title="Cancelar" >
+																	<span class="red">
+																		<i class="ace-icon fa fa-times bigger-120"></i>
+																	</span>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>
