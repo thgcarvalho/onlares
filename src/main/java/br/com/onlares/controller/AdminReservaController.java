@@ -102,7 +102,7 @@ public class AdminReservaController {
 	@Admin
 	@Delete("/adminReserva/{reservaId}")
 	public void remove(Long reservaId){
-		System.out.println("Veículo = " + reservaId + " FOI REMOVIDO!");
+		System.out.println("Reserva = " + reservaId + " FOI REMOVIDA!");
 		Reserva reserva = reservaDao.buscaReserva(reservaId);
 		reservaDao.removeReserva(reserva);
 		result.nothing();

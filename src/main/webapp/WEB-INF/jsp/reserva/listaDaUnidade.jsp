@@ -39,18 +39,6 @@
 			</h1>
 		</div><!-- /.page-header -->
 		
-		
-		<div class="clearfix">
-			<div class="pull-right tableTools-buttons">
-	      		<a href="${linkTo[ReservaController].novo(reserva.id)}">
-					<button class="btn btn-success" type="submit" >
-						<i class="ace-icon fa fa-book bigger-110"></i>
-						Reservar
-					</button>
-				</a>
-			</div>
-		</div>
-
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
@@ -68,20 +56,20 @@
 	
 							<tbody>
 								<c:choose>
-								<c:when test="${reservaUnidadeList.isEmpty()}">
+								<c:when test="${unidadeReservaList.isEmpty()}">
 								    <tr>
 								        <td colspan="3">Não existem reservas cadastradas</td>
 								    </tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${reservaUnidadeList}" var="reservaUnidade">
+									<c:forEach items="${unidadeReservaList}" var="unidadeReserva">
 										<tr>
-											<td>${reservaUnidade.dataFormatada}</td>
-											<td>${reservaUnidade.horaFormatada}</td>
-											<td>${reservaUnidade.reserva.descricao}</td>
+											<td>${unidadeReserva.dataFormatada}</td>
+											<td>${unidadeReserva.horaFormatada}</td>
+											<td>${unidadeReserva.reserva.descricao}</td>
 											<td>
 												<div class="hidden-sm hidden-xs action-buttons">
-													<a class="deletar" href="${linkTo[AdminReservaController].remove(reservaUnidade.id)}" 
+													<a class="deletar" href="${linkTo[ReservaController].remove(unidadeReserva.id)}" 
 	                    								title="Cancelar" >
 														<i class="ace-icon fa fa-times bigger-130"></i> Cancelar
 													</a>
@@ -96,7 +84,7 @@
 	
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<li>
-																<a href="${linkTo[AdminReservaController].remove(reservaUnidade.id)}" 
+																<a href="${linkTo[ReservaController].remove(unidadeReserva.id)}" 
 																	class="deletar tooltip-error" data-rel="tooltip" title="Cancelar" >
 																	<span class="red">
 																		<i class="ace-icon fa fa-times bigger-120"></i>

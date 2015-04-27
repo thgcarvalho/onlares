@@ -65,7 +65,7 @@ public class ReservaController {
 			List<UnidadeReserva> listaDaReserva = dao.listaDaReserva(reservaId);
 			ComparadorUnidadeReserva comparadorUnidadeReserva = new ComparadorUnidadeReserva();
 			Collections.sort(listaDaReserva, comparadorUnidadeReserva);
-			result.include("reservaUnidadeList", listaDaReserva);
+			result.include("unidadeReservaList", listaDaReserva);
 			result.include("reserva", reserva);
 		}
 	}
@@ -75,7 +75,7 @@ public class ReservaController {
 		List<UnidadeReserva> listaDaUnidade= dao.listaDaUnidade(this.unidadeId);
 		ComparadorUnidadeReserva comparadorUnidadeReserva = new ComparadorUnidadeReserva();
 		Collections.sort(listaDaUnidade, comparadorUnidadeReserva);
-		result.include("reservaUnidadeList", listaDaUnidade);
+		result.include("unidadeReservaList", listaDaUnidade);
 	}
 	
 	@Get("/reserva/novo/{reservaId}")

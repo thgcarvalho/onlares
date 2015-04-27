@@ -91,7 +91,7 @@ public class ReservaDao {
 				+ " WHERE ur.id = :unidadeReservaId"
 				+ " AND ur.reserva.condominio.id = :condominioId";
 		try {
-			Query query = em.createQuery(strQuery, Reserva.class);
+			Query query = em.createQuery(strQuery, UnidadeReserva.class);
 			query.setParameter("unidadeReservaId", unidadeReservaId);
 			query.setParameter("condominioId", condominioId);
 			unidadeReserva = (UnidadeReserva) query.getSingleResult();

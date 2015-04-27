@@ -66,16 +66,16 @@
 	
 							<tbody>
 								<c:choose>
-								<c:when test="${reservaUnidadeList.isEmpty()}">
+								<c:when test="${unidadeReservaList.isEmpty()}">
 								    <tr>
 								        <td colspan="2">Não existem reservas cadastradas</td>
 								    </tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${reservaUnidadeList}" var="reservaUnidade">
+									<c:forEach items="${unidadeReservaList}" var="unidadeReserva">
 										<tr>
-											<td>${reservaUnidade.dataFormatada}</td>
-											<td>${reservaUnidade.horaFormatada}</td>
+											<td>${unidadeReserva.dataFormatada}</td>
+											<td>${unidadeReserva.horaFormatada}</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>
