@@ -5,14 +5,10 @@
 CREATE TABLE reserva
 (
   id bigserial NOT NULL,
-  condominio_id bigint,
-  descricao character varying(45) NOT NULL,
-  antecedencia_maxima_reservar integer,
-  antecedencia_minima_reservar integer,
-  antecedancia_minima_cancelar integer,
-  permitir_reservas_quantidade integer,
-  permitir_reservas_dias integer,
-  permitir_posterior boolean,
+  unidade_id bigint,
+  espaco_id bigint,
+  data date,
+  hora time without time zone,
   CONSTRAINT reserva_pkey PRIMARY KEY (id)
 )
 WITH (

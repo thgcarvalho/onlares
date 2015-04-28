@@ -24,16 +24,16 @@
 			</li>
 			<li>
 			<i class=""></i>
-				<a href="${ctx}/adminReserva/lista">Reservas</a>
+				<a href="${ctx}/adminReserva/lista">Espaços</a>
 			</li>
-			<li class="active">Edita Reserva</li>
+			<li class="active">Edita Espaco</li>
 		</ul><!-- /.breadcrumb -->
 	</div>
 	
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Edita Reserva
+				Edita Espaco
 			</h1>
 		</div><!-- /.page-header -->
 	
@@ -42,11 +42,11 @@
 				<!-- PAGE CONTENT BEGINS -->
 				<form class="form-horizontal" role="form" action="${ctx}/adminReserva" method="post">
 					<input type="hidden" name="_method" value="PUT">
-					<input type="hidden" name="reserva.id" value="${reserva.id}">
+					<input type="hidden" name="espaco.id" value="${espaco.id}">
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="nome"> Descrição* </label>
+						<label class="col-sm-3 control-label no-padding-right" for="descricao"> Descrição* </label>
 						<div class="col-sm-9">
-							<input type="text" required="required" id="nome" name="reserva.descricao" value="${reserva.descricao}" 
+							<input type="text" required="required" id="descricao" name="espaco.descricao" value="${espaco.descricao}" 
 							placeholder="Descrição" maxlength="45" autofocus class="col-xs-10 col-sm-5" 
 							data-rel="tooltip" title="Ex: Deck, Salão de Festas ..." />
 						</div>
@@ -58,7 +58,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="maximareserva"> Máximo de dias de antecedência para reservar </label>
 						<div class="col-sm-9">
 						<span class="input-icon">
-							<input type="text" name="reserva.antecedenciaMaximaParaReservar" value="${reserva.antecedenciaMaximaParaReservar}" 
+							<input type="text" name="espaco.antecedenciaMaximaParaReservar" value="${espaco.antecedenciaMaximaParaReservar}" 
 							placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="maximareserva" />
 						</span>
 						</div>
@@ -70,7 +70,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="minimareserva"> Mínimo de dias de antecedência para reservar </label>
 						<div class="col-sm-9">
 						<span class="input-icon">
-							<input type="text" name="reserva.antecedenciaMinimaParaReservar" value="${reserva.antecedenciaMinimaParaReservar}" 
+							<input type="text" name="espaco.antecedenciaMinimaParaReservar" value="${espaco.antecedenciaMinimaParaReservar}" 
 							placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="minimareserva" />
 						</span>
 						</div>
@@ -82,7 +82,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="minimacancela"> Mínimo de dias de antecedência para cancelar </label>
 						<div class="col-sm-9">
 						<span class="input-icon">
-							<input type="text" name="reserva.antecedenciaMinimaParaCancelar" value="${reserva.antecedenciaMinimaParaCancelar}" 
+							<input type="text" name="espaco.antecedenciaMinimaParaCancelar" value="${espaco.antecedenciaMinimaParaCancelar}" 
 							placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="minimacancela" />
 						</span>
 						</div>
@@ -93,10 +93,10 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right"> Reservas por unidade </label>
 						<div class="col-sm-9">
-							<input type="text" name="reserva.reservasQuantidade" value="${reserva.reservasQuantidade}" 
+							<input type="text" name="espaco.reservasQuantidade" value="${espaco.reservasQuantidade}" 
 								placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="reservasquantidade" />
 							<span class="espaco">a cada</span>
-							<input type="text" name="reserva.reservasDias" value="${reserva.reservasDias}" 
+							<input type="text" name="espaco.reservasDias" value="${espaco.reservasDias}" 
 								placeholder="" maxlength="3" class="col-xs-10 col-sm-5" id="reservasdias" />
 							<span class="margem">dias</span>
 						</div>
@@ -108,7 +108,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="permitirposterior"> Permitir reserva antes da conclusão da atual? </label>
 						<div class="col-sm-9">
 							<label>
-								<input name="reserva.permitirPosterior" class="ace ace-switch" type="checkbox" ${reserva.permitirPosterior ? 'checked' : ''}/>
+								<input name="espaco.permitirPosterior" class="ace ace-switch" type="checkbox" ${espaco.permitirPosterior ? 'checked' : ''}/>
 								<span class="lbl" data-lbl="SIM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NÂO"></span>
 							</label>
 						</div>
@@ -120,7 +120,7 @@
 						<label class="col-sm-3 control-label no-padding-right" for="permitirposterior"> Permitir a utilização do espaço de unidades sem reserva </label>
 						<div class="col-sm-9">
 							<label>
-								<input name="reserva.permitirSemReserva" class="ace ace-switch" type="checkbox" ${reserva.permitirSemReserva ? 'checked' : ''}/>
+								<input name="espaco.permitirSemReserva" class="ace ace-switch" type="checkbox" ${espaco.permitirSemReserva ? 'checked' : ''}/>
 								<span class="lbl" data-lbl="SIM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NÂO"></span>
 							</label>
 						</div>
@@ -173,7 +173,6 @@
 		$('#minimacancela').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
 		$('#reservasquantidade').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
 		$('#reservasdias').ace_spinner({value:0,min:0,max:999,step:1, btn_up_class:'btn-info' , btn_down_class:'btn-info'});
-	</script>
 	</script>
 	
 	<!-- menu script -->

@@ -21,7 +21,7 @@
 				<a href="${ctx}/admin/index">Home</a>
 			</li>
 
-			<li class="active">Reservas</li>
+			<li class="active">Espaços</li>
 		</ul><!-- /.breadcrumb -->
 				
 		<div class="nav-search" id="nav-search">
@@ -35,7 +35,7 @@
 	
 		<div class="page-header">
 			<h1>
-				Reservas
+				Espaços
 			</h1>
 		</div><!-- /.page-header -->
 		
@@ -45,19 +45,19 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<c:choose>
-						<c:when test="${reservaList.isEmpty()}">
-						        <td colspan="6">Não existem reservas cadastradas</td>
+						<c:when test="${espacoList.isEmpty()}">
+						        <h1>Não existem espaços cadastradas</h1>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${reservaList}" var="reserva">
+							<c:forEach items="${espacoList}" var="espaco">
 								<div class="well">
-									<h4 class="green smaller lighter">${reserva.descricao}</h4>
-									<a class="blue" id="hide-option" href="${linkTo[ReservaController].novo(reserva.id)}" title="Reservar">
+									<h4 class="green smaller lighter">${espaco.descricao}</h4>
+									<a class="blue" id="hide-option" href="${linkTo[ReservaController].novo(espaco.id)}" title="Reservar">
 										<i class="ace-icon fa fa-hand-o-right"></i>
 										Reservar
 									</a>
 									<br />
-									<a class="blue" id="hide-option" href="${linkTo[ReservaController].listaDaReserva(reserva.id)}" title="Visualizar reservas">
+									<a class="blue" id="hide-option" href="${linkTo[ReservaController].listaDaReserva(espaco.id)}" title="Visualizar reservas">
 										<i class="ace-icon fa fa-hand-o-right"></i>
 										Visualizar reservas
 									</a>

@@ -42,7 +42,7 @@
 			<b class="arrow"></b>
 		</li>
 		
-		<li id="menu_veiculos" class="">
+		<li id="menuadmin_veiculos" class="">
 			<a href="${ctx}/adminVeiculo/lista">
 				<i class="menu-icon fa fa-car"></i>
 				<span class="menu-text"> Veículos </span>
@@ -51,7 +51,7 @@
 			<b class="arrow"></b>
 		</li>
 		
-		<li id="menu_pets" class="">
+		<li id="menuadmin_pets" class="">
 			<a href="${ctx}/adminPet/lista">
 				<i class="menu-icon fa fa-paw"></i>
 				<span class="menu-text"> Pets </span>
@@ -60,15 +60,38 @@
 			<b class="arrow"></b>
 		</li>
 		
-		<li id="menu_reservas" class="">
-			<a href="${ctx}/adminReserva/lista">
+		<li id="menuadmin_reservas" class="">
+			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-book"></i>
 				<span class="menu-text"> Reservas </span>
+
+				<b class="arrow fa fa-angle-down"></b>
 			</a>
 
 			<b class="arrow"></b>
-		</li>
 
+			<ul class="submenu">
+				<li class="">
+					<a href="${ctx}/adminReserva/lista">
+						<i class="menu-icon fa fa-caret-right"></i>
+						Espaços
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="">
+					<a href="#">
+						<i class="menu-icon fa fa-caret-right"></i>
+						Reservas
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+			</ul>
+		</li>
+		
 	</ul><!-- /.nav-list -->
 
 	<div class="sidebar-toggle-admin sidebar-toggle sidebar-collapse" id="sidebar-collapse">

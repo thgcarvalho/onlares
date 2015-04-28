@@ -15,10 +15,11 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.onlares.comparador.ComparadorUnidadeReserva;
+import br.com.onlares.comparador.ComparadorReserva;
+import br.com.onlares.dao.EspacoDao;
 import br.com.onlares.dao.ReservaDao;
+import br.com.onlares.model.Espaco;
 import br.com.onlares.model.Reserva;
-import br.com.onlares.model.UnidadeReserva;
 import br.com.onlares.util.DataUtil;
 
 /**  
@@ -29,14 +30,16 @@ import br.com.onlares.util.DataUtil;
 @Controller
 public class ReservaController {
 
-	private final ReservaDao dao;
+	private final ReservaDao reservaDao;
+	private final EspacoDao espacoDao;
 	private final Validator validator;
 	private final Result result;
 	private final Long unidadeId;
 
 	@Inject
-	public ReservaController(UsuarioLogado usuarioLogado, ReservaDao dao, Validator validator, Result result) {
-		this.dao = dao;
+	public ReservaController(UsuarioLogado usuarioLogado, ReservaDao reservaDao, EspacoDao espacoDao, Validator validator, Result result) {
+		this.reservaDao = reservaDao;
+		this.espacoDao = espacoDao;
 		this.validator = validator;
 		this.result = result;
 		if (usuarioLogado != null && usuarioLogado.getLocalizadorAtual().getUnidade() != null) {
@@ -47,70 +50,70 @@ public class ReservaController {
 	}
 	
 	public ReservaController() {
-		this(null, null, null, null);
+		this(null, null, null, null, null);
 	}
 	
 	@Get("/reserva/index")
 	public void index() {
-		result.include("reservaList", dao.lista());
+		result.include("espacoList", espacoDao.lista());
 	}
 	
-	@Get("/reserva/lista/{reservaId}")
-	public void listaDaReserva(Long reservaId) {
-		Reserva reserva = dao.buscaReserva(reservaId);
-		if (reserva == null) {
+	@Get("/reserva/lista/{espacoId}")
+	public void listaDaReserva(Long espacoId) {
+		Espaco espaco = espacoDao.buscaEspaco(espacoId);
+		if (espaco == null) {
 			result.notFound();
 		} else {
-			List<UnidadeReserva> listaDaReserva = dao.listaDaReserva(reservaId);
-			ComparadorUnidadeReserva comparadorUnidadeReserva = new ComparadorUnidadeReserva();
+			List<Reserva> listaDaReserva = reservaDao.listaDaReserva(espacoId);
+			ComparadorReserva comparadorUnidadeReserva = new ComparadorReserva();
 			Collections.sort(listaDaReserva, comparadorUnidadeReserva);
-			result.include("unidadeReservaList", listaDaReserva);
-			result.include("reserva", reserva);
+			result.include("reservaList", listaDaReserva);
+			result.include("espaco", espaco);
 		}
 	}
 	
 	@Get("/reserva/listaDaUnidade/")
 	public void listaDaUnidade() {
-		List<UnidadeReserva> listaDaUnidade= dao.listaDaUnidade(this.unidadeId);
-		ComparadorUnidadeReserva comparadorUnidadeReserva = new ComparadorUnidadeReserva();
-		Collections.sort(listaDaUnidade, comparadorUnidadeReserva);
-		result.include("unidadeReservaList", listaDaUnidade);
+		List<Reserva> reservas= reservaDao.listaDaUnidade(this.unidadeId);
+		ComparadorReserva comparadorReserva = new ComparadorReserva();
+		Collections.sort(reservas, comparadorReserva);
+		result.include("reservaList", reservas);
 	}
 	
-	@Get("/reserva/novo/{reservaId}")
-	public void novo(Long reservaId) {
-		Reserva reserva = dao.buscaReserva(reservaId);
-		if (reserva == null) {
+	@Get("/reserva/novo/{espacoId}")
+	public void novo(Long espacoId) {
+		Espaco espaco = espacoDao.buscaEspaco(espacoId);
+		if (espaco == null) {
 			result.notFound();
 		} else {
-			result.include("reserva", reserva);
+			result.include("espaco", espaco);
 		}
 	}
 	
 	@Post("/reserva/")
-	public void adiciona(UnidadeReserva unidadeReserva) {
-		if (unidadeReserva.getData() == null) {
+	public void adiciona(Reserva reserva) {
+		if (reserva.getData() == null) {
 			validator.add(new I18nMessage("reserva.adiciona", "campo.obrigatorio", "Data"));
 		}
-		if (unidadeReserva.getHora() == null) {
+		if (reserva.getHora() == null) {
 			validator.add(new I18nMessage("reserva.adiciona", "campo.obrigatorio", "Hora"));
 		}
 		
-		validator.onErrorRedirectTo(this).novo(unidadeReserva.getReserva().getId());
+		validator.onErrorRedirectTo(this).novo(reserva.getEspaco().getId());
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Calendar hoje = Calendar.getInstance();
 		DataUtil.zeraHora(hoje);
-		Calendar calSel = unidadeReserva.getData();
+		Calendar calSel = reserva.getData();
 		Calendar antMax = Calendar.getInstance();
 		Calendar antMin = Calendar.getInstance();
 		
-		Long reservaId = unidadeReserva.getReserva().getId();
-		Reserva reserva = dao.buscaReserva(reservaId);
-		int antecedenciaMaxima = reserva.getAntecedenciaMaximaParaReservar();
-		int antecedenciaMinima = reserva.getAntecedenciaMinimaParaReservar();
-		int reservasQuantidade = reserva.getReservasQuantidade();
-		int reservasDias = reserva.getReservasDias();
+		Long espacoId = reserva.getEspaco().getId();
+		Espaco espaco = espacoDao.buscaEspaco(espacoId);
+		int antecedenciaMaxima = espaco.getAntecedenciaMaximaParaReservar();
+		int antecedenciaMinima = espaco.getAntecedenciaMinimaParaReservar();
+		int reservasQuantidade = espaco.getReservasQuantidade();
+		int reservasDias = espaco.getReservasDias();
 		antMax.add(Calendar.DAY_OF_MONTH, antecedenciaMaxima);
 		DataUtil.zeraHora(antMax);
 		antMin.add(Calendar.DAY_OF_MONTH, antecedenciaMinima);
@@ -124,34 +127,34 @@ public class ReservaController {
 			validator.add(new SimpleMessage("reserva.adiciona", "Data mínima é " + sdf.format(antMin.getTime())));
 		}
 		
-		validator.onErrorRedirectTo(this).novo(unidadeReserva.getReserva().getId());
+		validator.onErrorRedirectTo(this).novo(reserva.getEspaco().getId());
 		
-		List<UnidadeReserva> unidadeReservas = dao.listaUnidadeReserva(unidadeReserva.getReserva().getId());
-		for (UnidadeReserva uniRes : unidadeReservas) {
+		List<Reserva> unidadeReservas = reservaDao.listaReserva(reserva.getEspaco().getId());
+		for (Reserva uniRes : unidadeReservas) {
 			if (calSel.equals(uniRes.getData())) {
 				validator.add(new SimpleMessage("reserva.adiciona", "Já existe uma reserva na data " + sdf.format(calSel.getTime())));
 				break;
 			}
 		}
 		
-		validator.onErrorRedirectTo(this).novo(unidadeReserva.getReserva().getId());
+		validator.onErrorRedirectTo(this).novo(reserva.getEspaco().getId());
 		
-		if (!reserva.isPermitirPosterior()) {
-			for (UnidadeReserva uniRes : unidadeReservas) {
-				if (uniRes.getUnidade().getId().compareTo(unidadeReserva.getUnidade().getId()) == 0) {
+		if (!espaco.isPermitirPosterior()) {
+			for (Reserva uniRes : unidadeReservas) {
+				if (uniRes.getUnidade().getId().compareTo(reserva.getUnidade().getId()) == 0) {
 					validator.add(new SimpleMessage("reserva.adiciona", "A unidade já possui uma reserva neste espaço"));
 					break;
 				}
 			}
 		}
 		
-		validator.onErrorRedirectTo(this).novo(unidadeReserva.getReserva().getId());
+		validator.onErrorRedirectTo(this).novo(reserva.getEspaco().getId());
 		
 		int quantidadeDeReservas = 0;
-		ComparadorUnidadeReserva comparadorUnidadeReserva = new ComparadorUnidadeReserva();
+		ComparadorReserva comparadorUnidadeReserva = new ComparadorReserva();
 		Collections.sort(unidadeReservas, comparadorUnidadeReserva);
-		for (UnidadeReserva uniRes : unidadeReservas) {
-			if (uniRes.getUnidade().getId().compareTo(unidadeReserva.getUnidade().getId()) == 0) {
+		for (Reserva uniRes : unidadeReservas) {
+			if (uniRes.getUnidade().getId().compareTo(reserva.getUnidade().getId()) == 0) {
 				quantidadeDeReservas++;
 			}
 			if (quantidadeDeReservas == reservasQuantidade) {
@@ -163,18 +166,18 @@ public class ReservaController {
 			}
 		}
 		
-		validator.onErrorRedirectTo(this).novo(unidadeReserva.getReserva().getId());
+		validator.onErrorRedirectTo(this).novo(reserva.getEspaco().getId());
 		
-		dao.reserva(unidadeReserva);
+		reservaDao.reserva(reserva);
 		result.include("notice", "Reserva realizada com sucesso!");
-		result.redirectTo(this).listaDaReserva(reservaId);;
+		result.redirectTo(this).listaDaReserva(espacoId);;
 	}
 	
-	@Delete("/reserva/{unidadeReservaId}")
-	public void remove(Long unidadeReservaId){
-		System.out.println("UnidadeReserva = " + unidadeReservaId + " FOI REMOVIDA!");
-		UnidadeReserva unidadeReserva = dao.buscaUnidadeReserva(unidadeReservaId);
-		dao.removeUnidadeReserva(unidadeReserva);
+	@Delete("/reserva/{reservaId}")
+	public void remove(Long reservaId){
+		System.out.println("Reserva = " + reservaId + " FOI REMOVIDA!");
+		Reserva reserva = reservaDao.buscaReserva(reservaId);
+		reservaDao.removeUnidadeReserva(reserva);
 		result.nothing();
 	}
 	

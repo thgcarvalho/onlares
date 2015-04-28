@@ -35,7 +35,7 @@
 	
 		<div class="page-header">
 			<h1>
-				Reservas - ${reserva.descricao}
+				Reservas - ${espaco.descricao}
 			</h1>
 		</div><!-- /.page-header -->
 		
@@ -73,10 +73,10 @@
 								    </tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${reservaUnidadeList}" var="reservaUnidade">
+									<c:forEach items="${reservaList}" var="reserva">
 										<tr>
-											<td>${reservaUnidade.dataFormatada}</td>
-											<td>${reservaUnidade.horaFormatada}</td>
+											<td>${reserva.dataFormatada}</td>
+											<td>${reserva.horaFormatada}</td>
 											<td>
 												<div class="hidden-sm hidden-xs action-buttons">
 													<a class="editar" href="${linkTo[AdminReservaController].edita(reserva.id)}" 

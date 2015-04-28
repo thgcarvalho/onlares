@@ -29,7 +29,7 @@
 			</li>
 			<li>
 			<i class=""></i>
-				<a href="${ctx}/adminReserva/lista">Reservas</a>
+				<a href="${ctx}/adminReserva/lista">Espaços</a>
 			</li>
 			<li class="active">Nova Reserva</li>
 		</ul><!-- /.breadcrumb -->
@@ -38,7 +38,8 @@
 	<div class="page-content">
 		<div class="page-header">
 			<h1>
-				Nova Reserva - ${reserva.descricao} 
+				Nova Reserva
+				<br />Espaço: ${espaco.descricao} 
 				<br />Unidade: ${usuarioLogado.localizadorAtual.unidade.descricao}
 			</h1>
 		</div><!-- /.page-header -->
@@ -47,13 +48,13 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<form class="form-horizontal" role="form" action="${ctx}/reserva/" method="post">
-					<input type="hidden" name="unidadeReserva.unidade.id" value="${usuarioLogado.localizadorAtual.unidade.id}">
-					<input type="hidden" name="unidadeReserva.reserva.id" value="${reserva.id}">
+					<input type="hidden" name="reserva.unidade.id" value="${usuarioLogado.localizadorAtual.unidade.id}">
+					<input type="hidden" name="reserva.espaco.id" value="${espaco.id}">
 					<div class="form-group">
 						<div class="input-group bootstrap-timepicker">
 							<label class="col-sm-5 control-label" for="calendario"> Data </label>
 							<div class="input-group">
-								<input id="calendario" name="unidadeReserva.data" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy"/>
+								<input id="calendario" name="reserva.data" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy"/>
 								<span class="input-group-addon">
 									<i class="fa fa-calendar bigger-110"></i>
 								</span>
@@ -67,7 +68,7 @@
 						<div class="input-group bootstrap-timepicker">
 							<label class="col-sm-5 control-label" for="timepicker1"> Hora </label>
 							<div class="input-group">
-								<input id="timepicker1" name="unidadeReserva.horaString" type="text" class="form-control" data-format="hh:mm" />
+								<input id="timepicker1" name="reserva.horaString" type="text" class="form-control" data-format="hh:mm" />
 								<span class="input-group-addon">
 									<i class="fa fa-clock-o bigger-110"></i>
 								</span>
@@ -87,24 +88,24 @@
 										<ul>
 											<li>
 												Máximo de dias de antecedência para reservar:
-												<b>${reserva.antecedenciaMaximaParaReservar}</b> 
+												<b>${espaco.antecedenciaMaximaParaReservar}</b> 
 											</li>
 
 											<li>
 												Mínimo de dias de antecedência para reservar:
-												<b>${reserva.antecedenciaMinimaParaReservar}</b> 
+												<b>${espaco.antecedenciaMinimaParaReservar}</b> 
 											</li>
 
 											<li>
 												Mínimo de dias de antecedência para cancelar:
-												<b>${reserva.antecedenciaMinimaParaCancelar}</b> 
+												<b>${espaco.antecedenciaMinimaParaCancelar}</b> 
 											</li>
 
 											<li>
 												Reservas por unidade:
-												<b>${reserva.reservasQuantidade}</b> 
+												<b>${espaco.reservasQuantidade}</b> 
 												a cada 
-												<b>${reserva.reservasDias}</b> 
+												<b>${espaco.reservasDias}</b> 
 												dias
 											</li>
 										</ul>

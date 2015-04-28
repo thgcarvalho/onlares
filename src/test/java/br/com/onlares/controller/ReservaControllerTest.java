@@ -20,10 +20,11 @@ import br.com.caelum.vraptor.validator.Message;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.ValidationException;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.onlares.dao.EspacoDao;
 import br.com.onlares.dao.ReservaDao;
+import br.com.onlares.model.Espaco;
 import br.com.onlares.model.Reserva;
 import br.com.onlares.model.Unidade;
-import br.com.onlares.model.UnidadeReserva;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -33,7 +34,7 @@ import br.com.onlares.model.UnidadeReserva;
 public class ReservaControllerTest {
 	
 	private Unidade unidade;
-	private Reserva reserva;
+	private Espaco espaco;
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
 	@Before
@@ -46,16 +47,16 @@ public class ReservaControllerTest {
 	
 	@Before
 	public void criaReserva() {
-		Reserva reserva = new Reserva();
+		Espaco reserva = new Espaco();
 		reserva.setDescricao("Deck");
-		this.reserva = reserva;
+		this.espaco = reserva;
 	}
 	
 	@Before
 	public void criaReservaController() {
-		Reserva reserva = new Reserva();
+		Espaco reserva = new Espaco();
 		reserva.setDescricao("Deck");
-		this.reserva = reserva;
+		this.espaco = reserva;
 	}
 
 	// Reservar
@@ -63,20 +64,21 @@ public class ReservaControllerTest {
 	@Test
 	public void deveObterUmaMensagemDeSucessoAoTentarReservar() {
 		ReservaDao reservaDaoFalso = mock(ReservaDao.class);
+		EspacoDao espacoDaoFalso = mock(EspacoDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
-		UnidadeReserva unidadeReserva = new UnidadeReserva();
+		Reserva unidadeReserva = new Reserva();
 		unidadeReserva.setUnidade(unidade);
-		unidadeReserva.setReserva(reserva);
+		unidadeReserva.setEspaco(espaco);
 		Calendar calendar = Calendar.getInstance();
 		unidadeReserva.setData(calendar);
 		unidadeReserva.setHora(calendar);
 		
-		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
-		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(new ArrayList<UnidadeReserva>());
+		when(espacoDaoFalso.buscaEspaco(espaco.getId())).thenReturn(espaco);
+		when(reservaDaoFalso.listaReserva(espaco.getId())).thenReturn(new ArrayList<Reserva>());
 		
-		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
+		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, espacoDaoFalso, validatorFalso, resultFalso);
 		reservaController.adiciona(unidadeReserva);
 		
 		assertTrue(resultFalso.included().containsKey("notice"));
@@ -85,26 +87,27 @@ public class ReservaControllerTest {
 	@Test 
 	public void deveLancarValidationExceptionAoTentarReservarAposDataMáximaPermitida() {
 		ReservaDao reservaDaoFalso = mock(ReservaDao.class);
+		EspacoDao espacoDaoFalso = mock(EspacoDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
-		reserva.setAntecedenciaMaximaParaReservar(10);
+		espaco.setAntecedenciaMaximaParaReservar(10);
 		
-		UnidadeReserva unidadeReserva = new UnidadeReserva();
+		Reserva unidadeReserva = new Reserva();
 		unidadeReserva.setUnidade(unidade);
-		unidadeReserva.setReserva(reserva);
+		unidadeReserva.setEspaco(espaco);
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DAY_OF_MONTH, 12);
 		unidadeReserva.setData(calendar);
 		unidadeReserva.setHora(calendar);
 		
-		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
-		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(new ArrayList<UnidadeReserva>());
+		when(espacoDaoFalso.buscaEspaco(espaco.getId())).thenReturn(espaco);
+		when(reservaDaoFalso.listaReserva(espaco.getId())).thenReturn(new ArrayList<Reserva>());
 		
-		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
+		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, espacoDaoFalso, validatorFalso, resultFalso);
 		
 		Calendar antMax = Calendar.getInstance();
-		int antecedenciaMaxima = reserva.getAntecedenciaMaximaParaReservar();
+		int antecedenciaMaxima = espaco.getAntecedenciaMaximaParaReservar();
 		antMax.add(Calendar.DAY_OF_MONTH, antecedenciaMaxima);
 		
 	    try {
@@ -119,26 +122,27 @@ public class ReservaControllerTest {
 	@Test 
 	public void deveLancarValidationExceptionAoTentarReservarAnteriorDataPermitida() {
 		ReservaDao reservaDaoFalso = mock(ReservaDao.class);
+		EspacoDao espacoDaoFalso = mock(EspacoDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
-		reserva.setAntecedenciaMinimaParaReservar(5);
+		espaco.setAntecedenciaMinimaParaReservar(5);
 		
-		UnidadeReserva unidadeReserva = new UnidadeReserva();
+		Reserva unidadeReserva = new Reserva();
 		unidadeReserva.setUnidade(unidade);
-		unidadeReserva.setReserva(reserva);
+		unidadeReserva.setEspaco(espaco);
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.DAY_OF_MONTH, 4);
 		unidadeReserva.setData(calendar);
 		unidadeReserva.setHora(calendar);
 		
-		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
-		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(new ArrayList<UnidadeReserva>());
+		when(espacoDaoFalso.buscaEspaco(espaco.getId())).thenReturn(espaco);
+		when(reservaDaoFalso.listaReserva(espaco.getId())).thenReturn(new ArrayList<Reserva>());
 		
-		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
+		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, espacoDaoFalso, validatorFalso, resultFalso);
 		
 		Calendar antMin = Calendar.getInstance();
-		int antecedenciaMinima = reserva.getAntecedenciaMinimaParaReservar();
+		int antecedenciaMinima = espaco.getAntecedenciaMinimaParaReservar();
 		antMin.add(Calendar.DAY_OF_MONTH, antecedenciaMinima);
 		
 	    try {
@@ -153,33 +157,34 @@ public class ReservaControllerTest {
 	@Test
 	public void deveLancarValidationExceptionAoTentarReservarDataJaReservada() {
 		ReservaDao reservaDaoFalso = mock(ReservaDao.class);
+		EspacoDao espacoDaoFalso = mock(EspacoDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
 		Calendar calendar1 = Calendar.getInstance();
 		calendar1.add(Calendar.DAY_OF_MONTH, 4);
-		UnidadeReserva unidadeReserva1 = new UnidadeReserva();
+		Reserva unidadeReserva1 = new Reserva();
 		unidadeReserva1.setUnidade(unidade);
-		unidadeReserva1.setReserva(reserva);
+		unidadeReserva1.setEspaco(espaco);
 		unidadeReserva1.setData(calendar1);
 		unidadeReserva1.setHora(calendar1);
 		
 		Calendar calendar2 = Calendar.getInstance();
 		calendar2.add(Calendar.DAY_OF_MONTH, 8);
-		UnidadeReserva unidadeReserva2 = new UnidadeReserva();
+		Reserva unidadeReserva2 = new Reserva();
 		unidadeReserva2.setUnidade(unidade);
-		unidadeReserva2.setReserva(reserva);
+		unidadeReserva2.setEspaco(espaco);
 		unidadeReserva2.setData(calendar2);
 		unidadeReserva2.setHora(calendar2);
 		
-		ArrayList<UnidadeReserva> unidadeReservas = new ArrayList<UnidadeReserva>();
+		ArrayList<Reserva> unidadeReservas = new ArrayList<Reserva>();
 		unidadeReservas.add(unidadeReserva1);
 		unidadeReservas.add(unidadeReserva2);
 		
-		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
-		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
+		when(espacoDaoFalso.buscaEspaco(espaco.getId())).thenReturn(espaco);
+		when(reservaDaoFalso.listaReserva(espaco.getId())).thenReturn(unidadeReservas);
 		
-		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
+		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, espacoDaoFalso, validatorFalso, resultFalso);
 		
 	    try {
 	    	reservaController.adiciona(unidadeReserva2);
@@ -193,34 +198,35 @@ public class ReservaControllerTest {
 	@Test
 	public void deveObterUmaMensagemDeSucessoAoTentarRelizarReservaPosterior() {
 		ReservaDao reservaDaoFalso = mock(ReservaDao.class);
+		EspacoDao espacoDaoFalso = mock(EspacoDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
-		reserva.setPermitirPosterior(true);
+		espaco.setPermitirPosterior(true);
 		
 		Calendar calendar1 = Calendar.getInstance();
 		calendar1.add(Calendar.DAY_OF_MONTH, 4);
-		UnidadeReserva unidadeReserva1 = new UnidadeReserva();
+		Reserva unidadeReserva1 = new Reserva();
 		unidadeReserva1.setUnidade(unidade);
-		unidadeReserva1.setReserva(reserva);
+		unidadeReserva1.setEspaco(espaco);
 		unidadeReserva1.setData(calendar1);
 		unidadeReserva1.setHora(calendar1);
 		
 		Calendar calendar2 = Calendar.getInstance();
 		calendar2.add(Calendar.DAY_OF_MONTH, 8);
-		UnidadeReserva unidadeReserva2 = new UnidadeReserva();
+		Reserva unidadeReserva2 = new Reserva();
 		unidadeReserva2.setUnidade(unidade);
-		unidadeReserva2.setReserva(reserva);
+		unidadeReserva2.setEspaco(espaco);
 		unidadeReserva2.setData(calendar2);
 		unidadeReserva2.setHora(calendar2);
 		
-		ArrayList<UnidadeReserva> unidadeReservas = new ArrayList<UnidadeReserva>();
+		ArrayList<Reserva> unidadeReservas = new ArrayList<Reserva>();
 		unidadeReservas.add(unidadeReserva1);
 		
-		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
-		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
+		when(espacoDaoFalso.buscaEspaco(espaco.getId())).thenReturn(espaco);
+		when(reservaDaoFalso.listaReserva(espaco.getId())).thenReturn(unidadeReservas);
 		
-		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
+		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, espacoDaoFalso, validatorFalso, resultFalso);
 		reservaController.adiciona(unidadeReserva2);
 		
 		assertTrue(resultFalso.included().containsKey("notice"));
@@ -229,34 +235,35 @@ public class ReservaControllerTest {
 	@Test
 	public void deveLancarValidationExceptionAoTentarRelizarReservaPosterior() {
 		ReservaDao reservaDaoFalso = mock(ReservaDao.class);
+		EspacoDao espacoDaoFalso = mock(EspacoDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
-		reserva.setPermitirPosterior(false);
+		espaco.setPermitirPosterior(false);
 		
 		Calendar calendar1 = Calendar.getInstance();
 		calendar1.add(Calendar.DAY_OF_MONTH, 4);
-		UnidadeReserva unidadeReserva1 = new UnidadeReserva();
+		Reserva unidadeReserva1 = new Reserva();
 		unidadeReserva1.setUnidade(unidade);
-		unidadeReserva1.setReserva(reserva);
+		unidadeReserva1.setEspaco(espaco);
 		unidadeReserva1.setData(calendar1);
 		unidadeReserva1.setHora(calendar1);
 		
 		Calendar calendar2 = Calendar.getInstance();
 		calendar2.add(Calendar.DAY_OF_MONTH, 8);
-		UnidadeReserva unidadeReserva2 = new UnidadeReserva();
+		Reserva unidadeReserva2 = new Reserva();
 		unidadeReserva2.setUnidade(unidade);
-		unidadeReserva2.setReserva(reserva);
+		unidadeReserva2.setEspaco(espaco);
 		unidadeReserva2.setData(calendar2);
 		unidadeReserva2.setHora(calendar2);
 		
-		ArrayList<UnidadeReserva> unidadeReservas = new ArrayList<UnidadeReserva>();
+		ArrayList<Reserva> unidadeReservas = new ArrayList<Reserva>();
 		unidadeReservas.add(unidadeReserva1);
 		
-		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
-		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
+		when(espacoDaoFalso.buscaEspaco(espaco.getId())).thenReturn(espaco);
+		when(reservaDaoFalso.listaReserva(espaco.getId())).thenReturn(unidadeReservas);
 		
-		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
+		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, espacoDaoFalso, validatorFalso, resultFalso);
 		
 		 try {
 	    	reservaController.adiciona(unidadeReserva2);
@@ -270,45 +277,46 @@ public class ReservaControllerTest {
 	@Test
 	public void deveObterUmaMensagemDeSucessoAoTentarRelizarReservaDentroDaQuntidadeDisponivel() {
 		ReservaDao reservaDaoFalso = mock(ReservaDao.class);
+		EspacoDao espacoDaoFalso = mock(EspacoDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
-		reserva.setPermitirPosterior(true);
-		reserva.setReservasQuantidade(2);
-		reserva.setReservasDias(30);
+		espaco.setPermitirPosterior(true);
+		espaco.setReservasQuantidade(2);
+		espaco.setReservasDias(30);
 		
 		Calendar calendarAntigo = Calendar.getInstance();
 		calendarAntigo.add(Calendar.DAY_OF_MONTH, -1);
-		UnidadeReserva unidadeReservaAntiga = new UnidadeReserva();
+		Reserva unidadeReservaAntiga = new Reserva();
 		unidadeReservaAntiga.setUnidade(unidade);
-		unidadeReservaAntiga.setReserva(reserva);
+		unidadeReservaAntiga.setEspaco(espaco);
 		unidadeReservaAntiga.setData(calendarAntigo);
 		unidadeReservaAntiga.setHora(calendarAntigo);
 		
 		Calendar calendar1 = Calendar.getInstance();
 		calendar1.add(Calendar.DAY_OF_MONTH, 4);
-		UnidadeReserva unidadeReserva1 = new UnidadeReserva();
+		Reserva unidadeReserva1 = new Reserva();
 		unidadeReserva1.setUnidade(unidade);
-		unidadeReserva1.setReserva(reserva);
+		unidadeReserva1.setEspaco(espaco);
 		unidadeReserva1.setData(calendar1);
 		unidadeReserva1.setHora(calendar1);
 		
 		Calendar calendar2 = Calendar.getInstance();
 		calendar2.add(Calendar.DAY_OF_MONTH, 8);
-		UnidadeReserva unidadeReserva2 = new UnidadeReserva();
+		Reserva unidadeReserva2 = new Reserva();
 		unidadeReserva2.setUnidade(unidade);
-		unidadeReserva2.setReserva(reserva);
+		unidadeReserva2.setEspaco(espaco);
 		unidadeReserva2.setData(calendar2);
 		unidadeReserva2.setHora(calendar2);
 		
-		ArrayList<UnidadeReserva> unidadeReservas = new ArrayList<UnidadeReserva>();
+		ArrayList<Reserva> unidadeReservas = new ArrayList<Reserva>();
 		unidadeReservas.add(unidadeReservaAntiga);
 		unidadeReservas.add(unidadeReserva1);
 		
-		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
-		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
+		when(espacoDaoFalso.buscaEspaco(espaco.getId())).thenReturn(espaco);
+		when(reservaDaoFalso.listaReserva(espaco.getId())).thenReturn(unidadeReservas);
 		
-		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
+		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, espacoDaoFalso, validatorFalso, resultFalso);
 		reservaController.adiciona(unidadeReserva2);
 		
 		assertTrue(resultFalso.included().containsKey("notice"));
@@ -317,48 +325,49 @@ public class ReservaControllerTest {
 	@Test
 	public void deveLancarValidationExceptionAoTentarRelizarReservaForaDaQuntidadeDisponivel() {
 		ReservaDao reservaDaoFalso = mock(ReservaDao.class);
+		EspacoDao espacoDaoFalso = mock(EspacoDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
 		int reservasQuantidade = 2;
 		int reservasDias = 30;
 		
-		reserva.setPermitirPosterior(true);
-		reserva.setReservasQuantidade(reservasQuantidade);
-		reserva.setReservasDias(reservasDias);
+		espaco.setPermitirPosterior(true);
+		espaco.setReservasQuantidade(reservasQuantidade);
+		espaco.setReservasDias(reservasDias);
 		
 		Calendar calendar1 = Calendar.getInstance();
 		calendar1.add(Calendar.DAY_OF_MONTH, 12);
-		UnidadeReserva unidadeReserva1 = new UnidadeReserva();
+		Reserva unidadeReserva1 = new Reserva();
 		unidadeReserva1.setUnidade(unidade);
-		unidadeReserva1.setReserva(reserva);
+		unidadeReserva1.setEspaco(espaco);
 		unidadeReserva1.setData(calendar1);
 		unidadeReserva1.setHora(calendar1);
 		
 		Calendar calendar2 = Calendar.getInstance();
 		calendar2.add(Calendar.DAY_OF_MONTH, 8);
-		UnidadeReserva unidadeReserva2 = new UnidadeReserva();
+		Reserva unidadeReserva2 = new Reserva();
 		unidadeReserva2.setUnidade(unidade);
-		unidadeReserva2.setReserva(reserva);
+		unidadeReserva2.setEspaco(espaco);
 		unidadeReserva2.setData(calendar2);
 		unidadeReserva2.setHora(calendar2);
 		
 		Calendar calendar3 = Calendar.getInstance();
 		calendar3.add(Calendar.DAY_OF_MONTH, 5);
-		UnidadeReserva unidadeReserva3 = new UnidadeReserva();
+		Reserva unidadeReserva3 = new Reserva();
 		unidadeReserva3.setUnidade(unidade);
-		unidadeReserva3.setReserva(reserva);
+		unidadeReserva3.setEspaco(espaco);
 		unidadeReserva3.setData(calendar3);
 		unidadeReserva3.setHora(calendar3);
 		
-		ArrayList<UnidadeReserva> unidadeReservas = new ArrayList<UnidadeReserva>();
+		ArrayList<Reserva> unidadeReservas = new ArrayList<Reserva>();
 		unidadeReservas.add(unidadeReserva1);
 		unidadeReservas.add(unidadeReserva2);
 		
-		when(reservaDaoFalso.buscaReserva(reserva.getId())).thenReturn(reserva);
-		when(reservaDaoFalso.listaUnidadeReserva(reserva.getId())).thenReturn(unidadeReservas);
+		when(espacoDaoFalso.buscaEspaco(espaco.getId())).thenReturn(espaco);
+		when(reservaDaoFalso.listaReserva(espaco.getId())).thenReturn(unidadeReservas);
 		
-		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, validatorFalso, resultFalso);
+		ReservaController reservaController = new ReservaController(null, reservaDaoFalso, espacoDaoFalso, validatorFalso, resultFalso);
 		
 		try {
 	    	reservaController.adiciona(unidadeReserva3);

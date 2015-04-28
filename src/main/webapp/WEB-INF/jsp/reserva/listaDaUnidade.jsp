@@ -56,20 +56,20 @@
 	
 							<tbody>
 								<c:choose>
-								<c:when test="${unidadeReservaList.isEmpty()}">
+								<c:when test="${reservaList.isEmpty()}">
 								    <tr>
-								        <td colspan="3">Não existem reservas cadastradas</td>
+								        <td colspan="4">Não existem reservas cadastradas</td>
 								    </tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${unidadeReservaList}" var="unidadeReserva">
+									<c:forEach items="${reservaList}" var="reserva">
 										<tr>
-											<td>${unidadeReserva.dataFormatada}</td>
-											<td>${unidadeReserva.horaFormatada}</td>
-											<td>${unidadeReserva.reserva.descricao}</td>
+											<td>${reserva.dataFormatada}</td>
+											<td>${reserva.horaFormatada}</td>
+											<td>${reserva.espaco.descricao}</td>
 											<td>
 												<div class="hidden-sm hidden-xs action-buttons">
-													<a class="deletar" href="${linkTo[ReservaController].remove(unidadeReserva.id)}" 
+													<a class="deletar" href="${linkTo[ReservaController].remove(reserva.id)}" 
 	                    								title="Cancelar" >
 														<i class="ace-icon fa fa-times bigger-130"></i> Cancelar
 													</a>
@@ -84,7 +84,7 @@
 	
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<li>
-																<a href="${linkTo[ReservaController].remove(unidadeReserva.id)}" 
+																<a href="${linkTo[ReservaController].remove(reserva.id)}" 
 																	class="deletar tooltip-error" data-rel="tooltip" title="Cancelar" >
 																	<span class="red">
 																		<i class="ace-icon fa fa-times bigger-120"></i>

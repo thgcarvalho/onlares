@@ -12,8 +12,8 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
-import br.com.onlares.dao.ReservaDao;
-import br.com.onlares.model.Reserva;
+import br.com.onlares.dao.EspacoDao;
+import br.com.onlares.model.Espaco;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -23,13 +23,13 @@ import br.com.onlares.model.Reserva;
 @Controller
 public class AdminReservaController {
 
-	private final ReservaDao reservaDao;
+	private final EspacoDao espacoDao;
 	private final Validator validator;
 	private final Result result;
 
 	@Inject
-	public AdminReservaController(UsuarioLogado usuarioLogado, ReservaDao reservaDao, Validator validator, Result result) {
-		this.reservaDao = reservaDao;
+	public AdminReservaController(UsuarioLogado usuarioLogado, EspacoDao espacoDao, Validator validator, Result result) {
+		this.espacoDao = espacoDao;
 		this.validator = validator;
 		this.result = result;
 	}
@@ -41,75 +41,76 @@ public class AdminReservaController {
 	@Admin
 	@Get("/adminReserva/lista")
 	public void lista() {
-		result.include("reservaList", reservaDao.lista());
+		result.include("espacoList", espacoDao.lista());
 	}
 	
 	@Admin
 	@Get("/adminReserva/novo")
 	public void novo() {
-		Reserva reserva = new Reserva();
-		reserva.setPermitirPosterior(true);
-		reserva.setPermitirSemReserva(true);
-		result.include("reserva", reserva);
+		Espaco espaco = new Espaco();
+		espaco.setPermitirPosterior(true);
+		espaco.setPermitirSemReserva(true);
+		result.include("espaco", espaco);
 	}
 	
 	@Admin
 	@Post("/adminReserva/")
-	public void adiciona(Reserva reserva) {
-		if (checkNull(reserva.getDescricao()).equals("")) {
-			validator.add(new I18nMessage("reserva.adiciona", "campo.obrigatorio", "Descrição"));
+	public void adiciona(Espaco espaco) {
+		if (checkNull(espaco.getDescricao()).equals("")) {
+			validator.add(new I18nMessage("espaco.adiciona", "campo.obrigatorio", "Descrição"));
 		}
-		if (reserva.getAntecedenciaMaximaParaReservar() < reserva.getAntecedenciaMinimaParaReservar()) {
-			validator.add(new SimpleMessage("reserva.adiciona", 
+		if (espaco.getAntecedenciaMaximaParaReservar() < espaco.getAntecedenciaMinimaParaReservar()) {
+			validator.add(new SimpleMessage("espaco.adiciona", 
 					"'Máximo de dias de antecedência para reservar'" +
 					" deve ser maior que " +
 					"'Mínimo de dias de antecedência para reservar'"));
 		}
 		
 		validator.onErrorUsePageOf(this).novo();
-	
-		reservaDao.adiciona(reserva);
-		result.include("notice", "Veículo adicionado com sucesso!");
+		System.out.println(espaco.isPermitirSemReserva());
+	System.out.println(espaco.isPermitirPosterior());
+		espacoDao.adiciona(espaco);
+		result.include("notice", "Espaço adicionado com sucesso!");
 		result.redirectTo(this).lista();
 	}
 	
 	@Admin
-	@Get("/adminReserva/edita/{reservaId}")
-	public void edita(Long reservaId) {
-		Reserva reserva = reservaDao.buscaReserva(reservaId);
-		if (reserva == null) {
+	@Get("/adminReserva/edita/{espacoId}")
+	public void edita(Long espacoId) {
+		Espaco espaco = espacoDao.buscaEspaco(espacoId);
+		if (espaco == null) {
 			result.notFound();
 		} else {
-			result.include("reserva", reserva);
+			result.include("espaco", espaco);
 		}
 	}
 	
 	@Admin
 	@Put("/adminReserva")
-	public void altera(Reserva reserva) {
-		if (checkNull(reserva.getDescricao()).equals("")) {
-			validator.add(new I18nMessage("reserva.edita", "campo.obrigatorio", "Descrição"));
+	public void altera(Espaco espaco) {
+		if (checkNull(espaco.getDescricao()).equals("")) {
+			validator.add(new I18nMessage("espaco.edita", "campo.obrigatorio", "Descrição"));
 		}
-		if (reserva.getAntecedenciaMaximaParaReservar() < reserva.getAntecedenciaMinimaParaReservar()) {
+		if (espaco.getAntecedenciaMaximaParaReservar() < espaco.getAntecedenciaMinimaParaReservar()) {
 			validator.add(new SimpleMessage("reserva.adiciona", 
 					"'Máximo de dias de antecedência para reservar'" +
 					" deve ser maior que " +
 					"'Mínimo de dias de antecedência para reservar'"));
 		}
 		
-		validator.onErrorUsePageOf(this).edita(reserva.getId());
+		validator.onErrorUsePageOf(this).edita(espaco.getId());
 		
-		reservaDao.altera(reserva);
-		result.include("notice", "Veículo atualizado com sucesso!");
+		espacoDao.altera(espaco);
+		result.include("notice", "Espaço atualizado com sucesso!");
 		result.redirectTo(this).lista();
 	}
 	
 	@Admin
-	@Delete("/adminReserva/{reservaId}")
-	public void remove(Long reservaId){
-		System.out.println("Reserva = " + reservaId + " FOI REMOVIDA!");
-		Reserva reserva = reservaDao.buscaReserva(reservaId);
-		reservaDao.removeReserva(reserva);
+	@Delete("/adminReserva/{espacoId}")
+	public void remove(Long espacoId){
+		System.out.println("Espaco = " + espacoId + " FOI REMOVIDO!");
+		Espaco espaco = espacoDao.buscaEspaco(espacoId);
+		espacoDao.removeEspaco(espaco);
 		result.nothing();
 	}
 	

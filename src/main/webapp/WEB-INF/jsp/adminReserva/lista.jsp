@@ -21,7 +21,7 @@
 				<a href="${ctx}/admin/index">Home</a>
 			</li>
 
-			<li class="active">Reservas</li>
+			<li class="active">Espaços</li>
 		</ul><!-- /.breadcrumb -->
 				
 		<div class="nav-search" id="nav-search">
@@ -35,7 +35,7 @@
 	
 		<div class="page-header">
 			<h1>
-				Reservas
+				Espaços
 			</h1>
 		</div><!-- /.page-header -->
 		
@@ -66,23 +66,23 @@
 	
 							<tbody>
 								<c:choose>
-								<c:when test="${reservaList.isEmpty()}">
+								<c:when test="${espacoList.isEmpty()}">
 								    <tr>
-								        <td colspan="6">Não existem reservas cadastradas</td>
+								        <td colspan="6">Não existem espacos cadastrados</td>
 								    </tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${reservaList}" var="reserva">
+									<c:forEach items="${espacoList}" var="espaco">
 										<tr>
-											<td>${reserva.descricao}</td>
+											<td>${espaco.descricao}</td>
 											<td>
 												<div class="hidden-sm hidden-xs action-buttons">
-													<a class="editar" href="${linkTo[AdminReservaController].edita(reserva.id)}" 
+													<a class="editar" href="${linkTo[AdminReservaController].edita(espaco.id)}" 
 														title="Editar" >
 														<i class="ace-icon fa fa-pencil bigger-130"></i>
 													</a>
 													
-													<a class="deletar" href="${linkTo[AdminReservaController].remove(reserva.id)}" 
+													<a class="deletar" href="${linkTo[AdminReservaController].remove(espaco.id)}" 
 	                    								title="Remover" >
 														<i class="ace-icon fa fa-trash-o bigger-130"></i>
 													</a>
@@ -97,7 +97,7 @@
 	
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 															<li>
-																<a href="${linkTo[AdminReservaController].edita(reserva.id)}" 
+																<a href="${linkTo[AdminReservaController].edita(espaco.id)}" 
 																	class="tooltip-success" data-rel="tooltip" title="Editar">
 																	<span class="green">
 																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
@@ -106,7 +106,7 @@
 															</li>
 	
 															<li>
-																<a href="${linkTo[AdminReservaController].remove(reserva.id)}" 
+																<a href="${linkTo[AdminReservaController].remove(espaco.id)}" 
 																	class="deletar tooltip-error" data-rel="tooltip" title="Remover" >
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>

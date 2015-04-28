@@ -11,10 +11,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.onlares.controller.UsuarioLogado;
-import br.com.onlares.model.Condominio;
 import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Reserva;
-import br.com.onlares.model.UnidadeReserva;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -42,43 +40,59 @@ public class ReservaDao {
 		this(null, null); // para uso do CDI
 	}
 	
-	public List<Reserva> lista() {
-		List<Reserva> reservas = em.createQuery("SELECT r FROM Reserva r"
-				+ " where r.condominio.id = :condominioId", Reserva.class)
-				.setParameter("condominioId", condominioId).getResultList();
-		return reservas;
-	}
+//	public List<Espaco> lista() {
+//		List<Espaco> reservas = em.createQuery("SELECT e FROM Espaco e"
+//				+ " where e.condominio.id = :condominioId", Espaco.class)
+//				.setParameter("condominioId", condominioId).getResultList();
+//		return reservas;
+//	}
 	
-	public List<UnidadeReserva> listaUnidadeReserva(Long reservaId) {
-		List<UnidadeReserva> unidadeReservas = em.createQuery("SELECT ur FROM UnidadeReserva ur"
-				+ " where ur.reserva.id = :reservaId", UnidadeReserva.class)
-				.setParameter("reservaId", reservaId).getResultList();
+	public List<Reserva> listaReserva(Long espacoId) {
+		List<Reserva> unidadeReservas = em.createQuery("SELECT r FROM Reserva r"
+				+ " where r.espaco.id = :espacoId", Reserva.class)
+				.setParameter("espacoId", espacoId).getResultList();
 		return unidadeReservas;
 	}
 	
-	public void reserva(UnidadeReserva unidadeReserva) {
-		em.persist(unidadeReserva);
-	}
-	
-	public void adiciona(Reserva reserva) {
-		Condominio condominio = new Condominio();
-		condominio.setId(condominioId);
-		reserva.setCondominio(condominio);
+	public void reserva(Reserva reserva) {
 		em.persist(reserva);
 	}
 	
-	public void altera(Reserva reserva) {
-		Condominio condominio = new Condominio();
-		condominio.setId(condominioId);
-		reserva.setCondominio(condominio);
-		em.merge(reserva);
-	}
+//	public void adiciona(Espaco espaco) {
+//		Condominio condominio = new Condominio();
+//		condominio.setId(condominioId);
+//		espaco.setCondominio(condominio);
+//		em.persist(espaco);
+//	}
+//	
+//	public void altera(Espaco espaco) {
+//		Condominio condominio = new Condominio();
+//		condominio.setId(condominioId);
+//		espaco.setCondominio(condominio);
+//		em.merge(espaco);
+//	}
+	
+//	public Espaco buscaEspaco(Long espacoId) {
+//		Espaco espaco;
+//		String strQuery = "SELECT e FROM Espaco e"
+//				+ " WHERE e.id = :espacoId"
+//				+ " AND e.condominio.id = :condominioId";
+//		try {
+//			Query query = em.createQuery(strQuery, Reserva.class);
+//			query.setParameter("espacoId", espacoId);
+//			query.setParameter("condominioId", condominioId);
+//			espaco = (Espaco) query.getSingleResult();
+//		} catch (NoResultException nrExp) {
+//			espaco = null;
+//		}
+//		return espaco;
+//	}
 	
 	public Reserva buscaReserva(Long reservaId) {
 		Reserva reserva;
 		String strQuery = "SELECT r FROM Reserva r"
 				+ " WHERE r.id = :reservaId"
-				+ " AND r.condominio.id = :condominioId";
+				+ " AND r.espaco.condominio.id = :condominioId";
 		try {
 			Query query = em.createQuery(strQuery, Reserva.class);
 			query.setParameter("reservaId", reservaId);
@@ -90,59 +104,43 @@ public class ReservaDao {
 		return reserva;
 	}
 	
-	public UnidadeReserva buscaUnidadeReserva(Long unidadeReservaId) {
-		UnidadeReserva unidadeReserva;
-		String strQuery = "SELECT ur FROM UnidadeReserva ur"
-				+ " WHERE ur.id = :unidadeReservaId"
-				+ " AND ur.reserva.condominio.id = :condominioId";
-		try {
-			Query query = em.createQuery(strQuery, UnidadeReserva.class);
-			query.setParameter("unidadeReservaId", unidadeReservaId);
-			query.setParameter("condominioId", condominioId);
-			unidadeReserva = (UnidadeReserva) query.getSingleResult();
-		} catch (NoResultException nrExp) {
-			unidadeReserva = null;
-		}
-		return unidadeReserva;
-	}
-	
-	public List<UnidadeReserva> listaDaReserva(Long reservaId) {
-		List<UnidadeReserva> unidadeReserva;
+	public List<Reserva> listaDaReserva(Long espacoId) {
+		List<Reserva> unidadeReserva;
 		Calendar hoje = Calendar.getInstance();
 		try {
-			unidadeReserva = em.createQuery("select ur from UnidadeReserva ur"
-					+ " where ur.reserva.id = :reservaId"
-					+ " and ur.data >= :hoje", UnidadeReserva.class)
-					.setParameter("reservaId", reservaId)
+			unidadeReserva = em.createQuery("select r from Reserva r"
+					+ " where r.espaco.id = :espacoId"
+					+ " and r.data >= :hoje", Reserva.class)
+					.setParameter("espacoId", espacoId)
 					.setParameter("hoje", hoje).getResultList();
 		} catch (EntityNotFoundException e) {
-			unidadeReserva = new ArrayList<UnidadeReserva>();
+			unidadeReserva = new ArrayList<Reserva>();
 		}
 		return unidadeReserva;
 	}
 	
-	public List<UnidadeReserva> listaDaUnidade(Long unidadeId) {
-		List<UnidadeReserva> unidadeReserva;
+	public List<Reserva> listaDaUnidade(Long unidadeId) {
+		List<Reserva> reservas;
 		try {
-			unidadeReserva = em.createQuery("select ur from UnidadeReserva ur"
-					+ " where ur.unidade.id = :unidadeId", UnidadeReserva.class)
+			reservas = em.createQuery("select r from Reserva r"
+					+ " where r.unidade.id = :unidadeId", Reserva.class)
 					.setParameter("unidadeId", unidadeId).getResultList();
 		} catch (EntityNotFoundException e) {
-			unidadeReserva = new ArrayList<UnidadeReserva>();
+			reservas = new ArrayList<Reserva>();
 		}
-		return unidadeReserva;
+		return reservas;
 	}
 	
-	public void removeReserva(Reserva reserva) {
-		List<UnidadeReserva> unidadesReservas = listaUnidadeReserva(reserva.getId());
-		for (UnidadeReserva unidadeReserva : unidadesReservas) {
-			em.remove(unidadeReserva);
-		}
-		em.remove(buscaReserva(reserva.getId()));
-	}
+//	public void removeEspaco(Espaco espaco) {
+//		List<Reserva> unidadesReservas = listaReserva(espaco.getId());
+//		for (Reserva unidadeReserva : unidadesReservas) {
+//			em.remove(unidadeReserva);
+//		}
+//		em.remove(buscaEspaco(espaco.getId()));
+//	}
 	
-	public void removeUnidadeReserva(UnidadeReserva unidadeReserva) {
-		em.remove(buscaUnidadeReserva(unidadeReserva.getId()));
+	public void removeUnidadeReserva(Reserva unidadeReserva) {
+		em.remove(buscaReserva(unidadeReserva.getId()));
 	}
 
 }

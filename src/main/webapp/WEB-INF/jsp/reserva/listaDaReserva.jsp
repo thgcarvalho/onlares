@@ -35,14 +35,15 @@
 	
 		<div class="page-header">
 			<h1>
-				Reservas - ${reserva.descricao}
+				Reservas
+				<br />Espaço: ${espaco.descricao} 
 			</h1>
 		</div><!-- /.page-header -->
 		
 		
 		<div class="clearfix">
 			<div class="pull-right tableTools-buttons">
-	      		<a href="${linkTo[ReservaController].novo(reserva.id)}">
+	      		<a href="${linkTo[ReservaController].novo(espaco.id)}">
 					<button class="btn btn-success" type="submit" >
 						<i class="ace-icon fa fa-book bigger-110"></i>
 						Reservar
@@ -66,16 +67,16 @@
 	
 							<tbody>
 								<c:choose>
-								<c:when test="${unidadeReservaList.isEmpty()}">
+								<c:when test="${reservaList.isEmpty()}">
 								    <tr>
 								        <td colspan="2">Não existem reservas cadastradas</td>
 								    </tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${unidadeReservaList}" var="unidadeReserva">
+									<c:forEach items="${reservaList}" var="reserva">
 										<tr>
-											<td>${unidadeReserva.dataFormatada}</td>
-											<td>${unidadeReserva.horaFormatada}</td>
+											<td>${reserva.dataFormatada}</td>
+											<td>${reserva.horaFormatada}</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

@@ -1,8 +1,11 @@
 package br.com.onlares.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import br.com.onlares.util.DataUtil;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -27,28 +33,13 @@ public class Reserva implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "condominio_id", referencedColumnName = "id", nullable = true)
-	private Condominio condominio;
-	private String descricao;
-	@Column(name="antecedencia_maxima_reservar")
-	private int antecedenciaMaximaParaReservar;
-	@Column(name="antecedencia_minima_reservar")
-	private int antecedenciaMinimaParaReservar;
-	@Column(name="antecedancia_minima_cancelar")
-	private int antecedenciaMinimaParaCancelar;
-	@Column(name="reservas_quantidade")
-	private int reservasQuantidade;
-	@Column(name="reservas_dias")
-	private int reservasDias;
-	@Column(name="permitir_posterior")
-	private boolean permitirPosterior;
-	@Column(name="permitir_sem_reserva")
-	private boolean permitirSemReserva;
-
-	public Reserva() {
-		this.permitirPosterior = true;
-		this.permitirSemReserva = true;
-	}
+	@JoinColumn(name = "unidade_id", referencedColumnName = "id")
+	private Unidade unidade;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "espaco_id", referencedColumnName = "id")
+	private Espaco espaco;
+	private Calendar data;
+	private Calendar hora;
 	
 	public Long getId() {
 		return id;
@@ -56,94 +47,50 @@ public class Reserva implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Condominio getCondominio() {
-		return condominio;
+	public Unidade getUnidade() {
+		return unidade;
 	}
-	public void setCondominio(Condominio condominio) {
-		this.condominio = condominio;
+	public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
 	}
-	public String getDescricao() {
-		return descricao;
+	public Espaco getEspaco() {
+		return espaco;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setEspaco(Espaco espaco) {
+		this.espaco = espaco;
 	}
-	public int getAntecedenciaMaximaParaReservar() {
-		return antecedenciaMaximaParaReservar;
+	public Calendar getData() {
+		return data;
 	}
-	public void setAntecedenciaMaximaParaReservar(int antecedenciaMaximaParaReservar) {
-		this.antecedenciaMaximaParaReservar = antecedenciaMaximaParaReservar;
+	public void setData(Calendar data) {
+		this.data = data;
 	}
-	public int getAntecedenciaMinimaParaReservar() {
-		return antecedenciaMinimaParaReservar;
+	public Calendar getHora() {
+		return hora;
 	}
-	public void setAntecedenciaMinimaParaReservar(int antecedenciaMinimaParaReservar) {
-		this.antecedenciaMinimaParaReservar = antecedenciaMinimaParaReservar;
-	}
-	public int getAntecedenciaMinimaParaCancelar() {
-		return antecedenciaMinimaParaCancelar;
-	}
-	public void setAntecedenciaMinimaParaCancelar(int antecedenciaMinimaParaCancelar) {
-		this.antecedenciaMinimaParaCancelar = antecedenciaMinimaParaCancelar;
-	}
-	public int getReservasQuantidade() {
-		return reservasQuantidade;
-	}
-	public void setReservasQuantidade(int reservasQuantidade) {
-		this.reservasQuantidade = reservasQuantidade;
-	}
-	public int getReservasDias() {
-		return reservasDias;
-	}
-	public void setReservasDias(int reservasDias) {
-		this.reservasDias = reservasDias;
-	}
-	public boolean isPermitirPosterior() {
-		return permitirPosterior;
-	}
-	public void setPermitirPosterior(boolean permitirPosterior) {
-		this.permitirPosterior = permitirPosterior;
-	}
-	public boolean isPermitirSemReserva() {
-		return permitirSemReserva;
-	}
-	public void setPermitirSemReserva(boolean permitirSemReserva) {
-		this.permitirSemReserva = permitirSemReserva;
+	public void setHora(Calendar hora) {
+		this.hora = hora;
 	}
 	
-	@Override
-	public String toString() {
-		return "rsrv=" + getDescricao() + " cond=" + getCondominio();
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((condominio == null) ? 0 : condominio.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
+	@Transient
+	public void setHoraString(String hora) {
+		Calendar calendar = GregorianCalendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+		try {
+			calendar.setTime(sdf.parse(hora));
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Reserva other = (Reserva) obj;
-		if (id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		} else if (id.compareTo(id) != 0) {
-			return false;
-		}
-		return true;
+		this.hora = calendar;
 	}
 	
+	@Transient
+	public String getDataFormatada() {
+		return DataUtil.formatarData(this.data);
+	}
+	
+	@Transient
+	public String getHoraFormatada() {
+		return DataUtil.formatarHora(this.hora);
+	}
 }
