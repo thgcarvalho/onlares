@@ -177,7 +177,7 @@ public class ReservaController {
 	public void remove(Long reservaId){
 		System.out.println("Reserva = " + reservaId + " FOI REMOVIDA!");
 		Reserva reserva = reservaDao.buscaReserva(reservaId);
-		reservaDao.removeUnidadeReserva(reserva);
+		reservaDao.removeReserva(reserva);
 		result.nothing();
 	}
 	

@@ -40,13 +40,6 @@ public class ReservaDao {
 		this(null, null); // para uso do CDI
 	}
 	
-//	public List<Espaco> lista() {
-//		List<Espaco> reservas = em.createQuery("SELECT e FROM Espaco e"
-//				+ " where e.condominio.id = :condominioId", Espaco.class)
-//				.setParameter("condominioId", condominioId).getResultList();
-//		return reservas;
-//	}
-	
 	public List<Reserva> listaReserva(Long espacoId) {
 		List<Reserva> unidadeReservas = em.createQuery("SELECT r FROM Reserva r"
 				+ " where r.espaco.id = :espacoId", Reserva.class)
@@ -57,36 +50,6 @@ public class ReservaDao {
 	public void reserva(Reserva reserva) {
 		em.persist(reserva);
 	}
-	
-//	public void adiciona(Espaco espaco) {
-//		Condominio condominio = new Condominio();
-//		condominio.setId(condominioId);
-//		espaco.setCondominio(condominio);
-//		em.persist(espaco);
-//	}
-//	
-//	public void altera(Espaco espaco) {
-//		Condominio condominio = new Condominio();
-//		condominio.setId(condominioId);
-//		espaco.setCondominio(condominio);
-//		em.merge(espaco);
-//	}
-	
-//	public Espaco buscaEspaco(Long espacoId) {
-//		Espaco espaco;
-//		String strQuery = "SELECT e FROM Espaco e"
-//				+ " WHERE e.id = :espacoId"
-//				+ " AND e.condominio.id = :condominioId";
-//		try {
-//			Query query = em.createQuery(strQuery, Reserva.class);
-//			query.setParameter("espacoId", espacoId);
-//			query.setParameter("condominioId", condominioId);
-//			espaco = (Espaco) query.getSingleResult();
-//		} catch (NoResultException nrExp) {
-//			espaco = null;
-//		}
-//		return espaco;
-//	}
 	
 	public Reserva buscaReserva(Long reservaId) {
 		Reserva reserva;
@@ -131,16 +94,8 @@ public class ReservaDao {
 		return reservas;
 	}
 	
-//	public void removeEspaco(Espaco espaco) {
-//		List<Reserva> unidadesReservas = listaReserva(espaco.getId());
-//		for (Reserva unidadeReserva : unidadesReservas) {
-//			em.remove(unidadeReserva);
-//		}
-//		em.remove(buscaEspaco(espaco.getId()));
-//	}
-	
-	public void removeUnidadeReserva(Reserva unidadeReserva) {
-		em.remove(buscaReserva(unidadeReserva.getId()));
+	public void removeReserva(Reserva unidadeReserva) {
+		em.remove(unidadeReserva);
 	}
 
 }

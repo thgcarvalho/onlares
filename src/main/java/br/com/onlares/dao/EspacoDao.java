@@ -49,16 +49,12 @@ public class EspacoDao {
 		return reservas;
 	}
 	
-	public List<Reserva> listaReserva(Long espacoId) { // TODO ESTE ESTA DUPLICADO
+	private List<Reserva> listaReserva(Long espacoId) { // TODO ESTE ESTA DUPLICADO
 		List<Reserva> unidadeReservas = em.createQuery("SELECT r FROM Reserva r"
 				+ " where r.espaco.id = :espacoId", Reserva.class)
 				.setParameter("espacoId", espacoId).getResultList();
 		return unidadeReservas;
 	}
-	
-//	public void reserva(Reserva reserva) {
-//		em.persist(reserva);
-//	}
 	
 	public void adiciona(Espaco espaco) {
 		Condominio condominio = new Condominio();
@@ -90,22 +86,6 @@ public class EspacoDao {
 		return espaco;
 	}
 	
-//	public Reserva buscaReserva(Long reservaId) {
-//		Reserva reserva;
-//		String strQuery = "SELECT r FROM Reserva r"
-//				+ " WHERE r.id = :reservaId"
-//				+ " AND r.espaco.condominio.id = :condominioId";
-//		try {
-//			Query query = em.createQuery(strQuery, Reserva.class);
-//			query.setParameter("reservaId", reservaId);
-//			query.setParameter("condominioId", condominioId);
-//			reserva = (Reserva) query.getSingleResult();
-//		} catch (NoResultException nrExp) {
-//			reserva = null;
-//		}
-//		return reserva;
-//	}
-	
 	public List<Reserva> listaDaReserva(Long espacoId) {
 		List<Reserva> unidadeReserva;
 		Calendar hoje = Calendar.getInstance();
@@ -121,18 +101,6 @@ public class EspacoDao {
 		return unidadeReserva;
 	}
 	
-//	public List<Reserva> listaDaUnidade(Long unidadeId) {
-//		List<Reserva> reservas;
-//		try {
-//			reservas = em.createQuery("select r from Reserva r"
-//					+ " where r.unidade.id = :unidadeId", Reserva.class)
-//					.setParameter("unidadeId", unidadeId).getResultList();
-//		} catch (EntityNotFoundException e) {
-//			reservas = new ArrayList<Reserva>();
-//		}
-//		return reservas;
-//	}
-	
 	public void removeEspaco(Espaco espaco) {
 		List<Reserva> unidadesReservas = listaReserva(espaco.getId());
 		for (Reserva unidadeReserva : unidadesReservas) {
@@ -140,9 +108,5 @@ public class EspacoDao {
 		}
 		em.remove(buscaEspaco(espaco.getId()));
 	}
-	
-//	public void removeUnidadeReserva(Reserva unidadeReserva) {
-//		em.remove(buscaReserva(unidadeReserva.getId()));
-//	}
 
 }
