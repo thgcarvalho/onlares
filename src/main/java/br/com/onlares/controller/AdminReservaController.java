@@ -15,6 +15,11 @@ import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.ReservaDao;
 import br.com.onlares.model.Reserva;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Controller
 public class AdminReservaController {
 

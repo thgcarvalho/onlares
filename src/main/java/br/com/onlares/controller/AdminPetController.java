@@ -15,6 +15,11 @@ import br.com.onlares.dao.PetDao;
 import br.com.onlares.dao.UnidadeDao;
 import br.com.onlares.model.Pet;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Controller
 public class AdminPetController {
 

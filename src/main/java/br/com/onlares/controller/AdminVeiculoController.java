@@ -15,6 +15,11 @@ import br.com.onlares.dao.UnidadeDao;
 import br.com.onlares.dao.VeiculoDao;
 import br.com.onlares.model.Veiculo;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Controller
 public class AdminVeiculoController {
 

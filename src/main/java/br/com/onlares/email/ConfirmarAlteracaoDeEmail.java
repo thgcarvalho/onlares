@@ -1,9 +1,10 @@
 //package br.com.onlares.email;
 //
-///**
-// * @author Thiago Carvalho
-// * 
-// */
+///**  
+//* Copyright (c) 2015 GranDev - All rights reserved.
+//* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+//* 
+//*/
 //public class ConfirmarAlteracaoDeEmail {
 //	
 //	private String email; 

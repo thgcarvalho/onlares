@@ -28,6 +28,11 @@ import br.com.onlares.model.Usuario;
 import br.com.onlares.service.GeradorDeCodigo;
 import br.com.onlares.util.MD5Hashing;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Controller
 public class ConfiguracaoController implements Serializable {
 

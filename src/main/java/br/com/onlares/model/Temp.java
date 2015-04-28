@@ -8,6 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Entity
 public class Temp {
 	

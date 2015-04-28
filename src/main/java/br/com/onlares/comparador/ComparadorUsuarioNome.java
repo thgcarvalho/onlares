@@ -4,6 +4,11 @@ import java.util.Comparator;
 
 import br.com.onlares.model.Usuario;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class ComparadorUsuarioNome implements Comparator<Usuario> {
 
 	@Override

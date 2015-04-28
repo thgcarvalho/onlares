@@ -12,6 +12,11 @@ import org.junit.Test;
 import br.com.onlares.dao.AnuncioDao;
 import br.com.onlares.model.Anuncio;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class ColetorDeAnuncioTest {
 
 	@Test

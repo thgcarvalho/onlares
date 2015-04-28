@@ -24,6 +24,11 @@ import br.com.onlares.dao.UnidadeDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Usuario;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class AdminUsuarioControllerTest {
 	
 	// ADICIONA

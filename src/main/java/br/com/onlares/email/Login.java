@@ -3,10 +3,11 @@
 //import javax.mail.Authenticator;
 //import javax.mail.PasswordAuthentication;
 //
-///**
-// * @author Thiago Carvalho
-// * 
-// */
+///**  
+//* Copyright (c) 2015 GranDev - All rights reserved.
+//* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+//* 
+//*/
 //public class Login extends Authenticator{
 //	private String username = null;
 //	private String password = null;

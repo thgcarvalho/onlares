@@ -14,10 +14,11 @@ import br.com.onlares.model.AlteraEmail;
 import br.com.onlares.model.Status;
 import br.com.onlares.model.Usuario;
 
-/**
- * @author Thiago Carvalho
- * 
- */
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Controller
 public class AlteraEmailController {
 	

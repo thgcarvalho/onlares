@@ -1,21 +1,16 @@
 package br.com.onlares.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.UniqueConstraint;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
@@ -26,7 +21,11 @@ import br.com.onlares.model.Reserva;
 import br.com.onlares.model.UnidadeReserva;
 import br.com.onlares.util.DataUtil;
 
-@SuppressWarnings("unused")
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Controller
 public class ReservaController {
 
@@ -87,10 +86,6 @@ public class ReservaController {
 			result.include("reserva", reserva);
 		}
 	}
-	
-//	@Get("/reserva/novo")
-//	public void novo() {
-//	}
 	
 	@Post("/reserva/")
 	public void adiciona(UnidadeReserva unidadeReserva) {
@@ -181,14 +176,6 @@ public class ReservaController {
 		UnidadeReserva unidadeReserva = dao.buscaUnidadeReserva(unidadeReservaId);
 		dao.removeUnidadeReserva(unidadeReserva);
 		result.nothing();
-	}
-	
-	private String checkNull(String value) {
-		if (value == null) {
-			return ("");
-		} else {
-			return (value.trim());
-		}
 	}
 	
 }

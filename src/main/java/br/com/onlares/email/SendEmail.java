@@ -26,11 +26,11 @@
 //import javax.mail.internet.MimeMessage;
 //import javax.mail.internet.MimeMultipart;
 //
-//
-///**
-// * @author Thiago Carvalho
-// * 
-// */
+///**  
+//* Copyright (c) 2015 GranDev - All rights reserved.
+//* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+//* 
+//*/
 //public class SendEmail {
 //
 //	public static final String CONTENT_TEXT_PLAIN = "text/plain; charset=utf-8";

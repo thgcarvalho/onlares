@@ -7,6 +7,11 @@ import javax.persistence.EntityManager;
 
 import br.com.onlares.model.Temp;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class TempDao {
 	
 	private final EntityManager em;

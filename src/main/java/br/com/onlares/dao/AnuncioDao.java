@@ -9,6 +9,11 @@ import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Anuncio;
 import br.com.onlares.model.Constantes;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class AnuncioDao {
 
 	private final EntityManager em;

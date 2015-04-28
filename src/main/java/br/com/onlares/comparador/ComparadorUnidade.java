@@ -4,6 +4,11 @@ import java.util.Comparator;
 
 import br.com.onlares.model.Unidade;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class ComparadorUnidade implements Comparator<Unidade> {
 
 	@Override

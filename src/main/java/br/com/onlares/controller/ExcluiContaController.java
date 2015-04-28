@@ -18,10 +18,11 @@ import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.ExcluiConta;
 import br.com.onlares.model.Usuario;
 
-/**
- * @author Thiago Carvalho
- * 
- */
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Controller
 public class ExcluiContaController {
 	

@@ -9,6 +9,11 @@ import javax.inject.Named;
 import br.com.onlares.model.Localizador;
 import br.com.onlares.model.Usuario;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @SessionScoped
 @Named
 public class UsuarioLogado implements Serializable {

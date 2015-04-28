@@ -6,6 +6,11 @@ import javax.persistence.EntityManager;
 
 import br.com.onlares.model.Condominio;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class CondominioDao {
 
 	private final EntityManager em;

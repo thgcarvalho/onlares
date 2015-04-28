@@ -1,9 +1,10 @@
 package br.com.onlares.model;
 
-/**
- * @author Thiago Carvalho
- * 
- */
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public enum Status {
 
 	PENDENTE("0"), ALTERADO("1"), FALHA("2");

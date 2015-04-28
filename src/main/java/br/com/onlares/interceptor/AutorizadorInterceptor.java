@@ -12,6 +12,11 @@ import br.com.caelum.vraptor.view.Results;
 import br.com.onlares.annotations.Admin;
 import br.com.onlares.controller.UsuarioLogado;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Intercepts(after=AutenticadorInterceptor.class)
 public class AutorizadorInterceptor { 
 

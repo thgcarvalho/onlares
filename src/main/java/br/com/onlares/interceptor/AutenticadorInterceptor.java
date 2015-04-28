@@ -12,6 +12,11 @@ import br.com.onlares.annotations.Public;
 import br.com.onlares.controller.LoginController;
 import br.com.onlares.controller.UsuarioLogado;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 @Intercepts
 public class AutenticadorInterceptor { 
 

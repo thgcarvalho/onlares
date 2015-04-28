@@ -5,11 +5,11 @@ import javax.persistence.EntityManager;
 
 import br.com.onlares.model.AlteraEmail;
 
-
-/**
- * @author Thiago Carvalho
- * 
- */
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class AlteraEmailDao {
 
 	private final EntityManager em;
