@@ -40,6 +40,8 @@ public class Reserva implements Serializable {
 	private Espaco espaco;
 	private Calendar data;
 	private Calendar hora;
+	@Transient
+	private boolean podeCancelar;
 	
 	public Long getId() {
 		return id;
@@ -71,6 +73,12 @@ public class Reserva implements Serializable {
 	public void setHora(Calendar hora) {
 		this.hora = hora;
 	}
+	public boolean isPodeCancelar() {
+		return podeCancelar;
+	}
+	public void setPodeCancelar(boolean podeCancelar) {
+		this.podeCancelar = podeCancelar;
+	}
 	
 	@Transient
 	public void setHoraString(String hora) {
@@ -92,5 +100,10 @@ public class Reserva implements Serializable {
 	@Transient
 	public String getHoraFormatada() {
 		return DataUtil.formatarHora(this.hora);
+	}
+	
+	@Override
+	public String toString() {
+		return "rsrv= " + id + " espc= " + espaco;
 	}
 }

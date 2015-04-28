@@ -75,6 +75,13 @@ public class ReservaController {
 	@Get("/reserva/listaDaUnidade/")
 	public void listaDaUnidade() {
 		List<Reserva> reservas= reservaDao.listaDaUnidade(this.unidadeId);
+		for (Reserva reserva : reservas) {
+			if (podeCancelar(reserva)) {
+				reserva.setPodeCancelar(true);
+			} else {
+				reserva.setPodeCancelar(false);
+			}
+		}
 		ComparadorReserva comparadorReserva = new ComparadorReserva();
 		Collections.sort(reservas, comparadorReserva);
 		result.include("reservaList", reservas);
@@ -175,10 +182,31 @@ public class ReservaController {
 	
 	@Delete("/reserva/{reservaId}")
 	public void remove(Long reservaId){
-		System.out.println("Reserva = " + reservaId + " FOI REMOVIDA!");
 		Reserva reserva = reservaDao.buscaReserva(reservaId);
+		if (!podeCancelar(reserva)) {
+			validator.add(new SimpleMessage("reserva.cancela", "Não é mais possível cancelar essa reserva"));
+		}
+		validator.onErrorRedirectTo(this).novo(reserva.getEspaco().getId());
+		
 		reservaDao.removeReserva(reserva);
 		result.nothing();
+	}
+	
+	public boolean podeCancelar(Reserva reserva) {
+		Espaco espaco = espacoDao.buscaEspaco(reserva.getEspaco().getId());
+		int antecedenciaMinimaCancelar = espaco.getAntecedenciaMinimaParaCancelar();
+		if (antecedenciaMinimaCancelar > 0) {
+			Calendar antMin = Calendar.getInstance();
+			antMin.setTime(reserva.getData().getTime());		
+			antMin.add(Calendar.DAY_OF_MONTH, -antecedenciaMinimaCancelar);
+			DataUtil.zeraHora(antMin);
+			Calendar hoje = Calendar.getInstance();
+			DataUtil.zeraHora(hoje);
+			if (hoje.after(antMin)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 }

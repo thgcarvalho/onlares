@@ -94,6 +94,18 @@ public class ReservaDao {
 		return reservas;
 	}
 	
+	public List<Reserva> listaDoCondominio() {
+		List<Reserva> reservas;
+		try {
+			reservas = em.createQuery("select r from Reserva r"
+					+ " where r.espaco.condominio.id = :condominioId", Reserva.class)
+					.setParameter("condominioId", condominioId).getResultList();
+		} catch (EntityNotFoundException e) {
+			reservas = new ArrayList<Reserva>();
+		}
+		return reservas;
+	}
+	
 	public void removeReserva(Reserva unidadeReserva) {
 		em.remove(unidadeReserva);
 	}

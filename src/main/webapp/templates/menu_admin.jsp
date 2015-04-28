@@ -81,9 +81,9 @@
 				</li>
 
 				<li class="">
-					<a href="#">
+					<a href="${ctx}/adminReserva/listaDoCondominio">
 						<i class="menu-icon fa fa-caret-right"></i>
-						Reservas
+						Todas as Reservas
 					</a>
 
 					<b class="arrow"></b>

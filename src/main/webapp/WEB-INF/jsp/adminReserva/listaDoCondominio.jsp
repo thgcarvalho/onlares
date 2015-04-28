@@ -35,21 +35,10 @@
 	
 		<div class="page-header">
 			<h1>
-				Reservas - ${espaco.descricao}
+				Todoas as Reservas
 			</h1>
 		</div><!-- /.page-header -->
 		
-		<div class="clearfix">
-			<div class="pull-right tableTools-buttons">
-	      		<a href="${ctx}/adminReserva/novo">
-					<button class="btn btn-success" type="submit" >
-						<i class="ace-icon fa fa-plus bigger-110"></i>
-						Novo
-					</button>
-				</a>
-			</div>
-		</div>
-
 		<%@ include file="/templates/messages.jsp"%>
 		
 		<div class="row">
@@ -62,7 +51,7 @@
 								<tr>
 									<th>Data</th>
 									<th>Hora</th>
-									<th></th>
+									<th>Espaço reservado</th>
 								</tr>
 							</thead>
 	
@@ -78,48 +67,7 @@
 										<tr>
 											<td>${reserva.dataFormatada}</td>
 											<td>${reserva.horaFormatada}</td>
-											<td>
-												<div class="hidden-sm hidden-xs action-buttons">
-													<a class="editar" href="${linkTo[AdminReservaController].edita(reserva.id)}" 
-														title="Editar" >
-														<i class="ace-icon fa fa-pencil bigger-130"></i>
-													</a>
-													
-													<a class="deletar" href="${linkTo[AdminReservaController].remove(reserva.id)}" 
-	                    								title="Remover" >
-														<i class="ace-icon fa fa-trash-o bigger-130"></i>
-													</a>
-																				
-												</div>
-	
-												<div class="hidden-md hidden-lg">
-													<div class="inline pos-rel">
-														<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
-															<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
-														</button>
-	
-														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-															<li>
-																<a href="${linkTo[AdminReservaController].edita(reserva.id)}" 
-																	class="tooltip-success" data-rel="tooltip" title="Editar">
-																	<span class="green">
-																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-	
-															<li>
-																<a href="${linkTo[AdminReservaController].remove(reserva.id)}" 
-																	class="deletar tooltip-error" data-rel="tooltip" title="Remover" >
-																	<span class="red">
-																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</td>
+											<td>${reserva.espaco.descricao}</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

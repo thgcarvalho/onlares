@@ -1,5 +1,8 @@
 package br.com.onlares.controller;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -12,8 +15,11 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
+import br.com.onlares.comparador.ComparadorReserva;
 import br.com.onlares.dao.EspacoDao;
+import br.com.onlares.dao.ReservaDao;
 import br.com.onlares.model.Espaco;
+import br.com.onlares.model.Reserva;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -23,25 +29,36 @@ import br.com.onlares.model.Espaco;
 @Controller
 public class AdminReservaController {
 
+	private final ReservaDao reservaDao;
 	private final EspacoDao espacoDao;
 	private final Validator validator;
 	private final Result result;
 
 	@Inject
-	public AdminReservaController(UsuarioLogado usuarioLogado, EspacoDao espacoDao, Validator validator, Result result) {
+	public AdminReservaController(UsuarioLogado usuarioLogado, EspacoDao espacoDao, ReservaDao reservaDao, Validator validator, Result result) {
+		this.reservaDao = reservaDao;
 		this.espacoDao = espacoDao;
 		this.validator = validator;
 		this.result = result;
 	}
 	
 	public AdminReservaController() {
-		this(null, null, null, null);
+		this(null, null, null, null, null);
 	}
 	
 	@Admin
 	@Get("/adminReserva/lista")
 	public void lista() {
 		result.include("espacoList", espacoDao.lista());
+	}
+	
+	@Admin
+	@Get("/adminReserva/listaDoCondominio")
+	public void listaDoCondominio() {
+		List<Reserva> reservas= reservaDao.listaDoCondominio();
+		ComparadorReserva comparadorReserva = new ComparadorReserva();
+		Collections.sort(reservas, comparadorReserva);
+		result.include("reservaList", reservas);
 	}
 	
 	@Admin
@@ -67,8 +84,6 @@ public class AdminReservaController {
 		}
 		
 		validator.onErrorUsePageOf(this).novo();
-		System.out.println(espaco.isPermitirSemReserva());
-	System.out.println(espaco.isPermitirPosterior());
 		espacoDao.adiciona(espaco);
 		result.include("notice", "Espaço adicionado com sucesso!");
 		result.redirectTo(this).lista();
