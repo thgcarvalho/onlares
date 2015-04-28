@@ -29,7 +29,6 @@
 	
 		<!-- Page Content -->
 	    <div class="main-content">
-	        <%@ include file="/templates/messages.jsp"%>
 			<!-- body que muda! -->
 			<decorator:body />
 		</div>

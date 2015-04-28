@@ -39,7 +39,6 @@
 			</h1>
 		</div><!-- /.page-header -->
 		
-		
 		<div class="clearfix">
 			<div class="pull-right tableTools-buttons">
 	      		<a href="${ctx}/adminReserva/novo">
@@ -51,6 +50,8 @@
 			</div>
 		</div>
 
+		<%@ include file="/templates/messages.jsp"%>
+		
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
