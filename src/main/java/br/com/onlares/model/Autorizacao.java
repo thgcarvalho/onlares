@@ -24,7 +24,7 @@ import br.com.onlares.util.DataUtil;
 * 
 */
 @Entity
-@Table(name = "reserva")
+@Table(name = "autorizacao")
 public class Autorizacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;

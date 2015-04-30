@@ -49,9 +49,9 @@ public class TipoDeAutorizacaoDao {
 		return tiposDeAutorizacoes;
 	}
 	
-	private List<Autorizacao> listaReserva(Long tipoDeAutorizacaoId) {
-		List<Autorizacao> autorizacoes = em.createQuery("SELECT r FROM Reserva r"
-				+ " where r.tipoDeAutorizacao.id = :tipoDeAutorizacaoId", Autorizacao.class)
+	private List<Autorizacao> listaAutorizacao(Long tipoDeAutorizacaoId) {
+		List<Autorizacao> autorizacoes = em.createQuery("SELECT a FROM Autorizacao a"
+				+ " where a.tipoDeAutorizacao.id = :tipoDeAutorizacaoId", Autorizacao.class)
 				.setParameter("tipoDeAutorizacaoId", tipoDeAutorizacaoId).getResultList();
 		return autorizacoes;
 	}
@@ -86,27 +86,27 @@ public class TipoDeAutorizacaoDao {
 		return tipoDeAutorizacao;
 	}
 	
-	public List<Autorizacao> listaDaReserva(Long tipoDeAutorizacaoId) {
-		List<Autorizacao> unidadeReserva;
+	public List<Autorizacao> listaDaAutorizacao(Long tipoDeAutorizacaoId) {
+		List<Autorizacao> unidadeAutorizacao;
 		Calendar hoje = Calendar.getInstance();
 		try {
-			unidadeReserva = em.createQuery("select a from Autorizacao a"
+			unidadeAutorizacao = em.createQuery("select a from Autorizacao a"
 					+ " where a.tipoDeAutorizacao.id = :tipoDeAutorizacaoId"
 					+ " and a.data >= :hoje", Autorizacao.class)
 					.setParameter("tipoDeAutorizacaoId", tipoDeAutorizacaoId)
 					.setParameter("hoje", hoje).getResultList();
 		} catch (EntityNotFoundException e) {
-			unidadeReserva = new ArrayList<Autorizacao>();
+			unidadeAutorizacao = new ArrayList<Autorizacao>();
 		}
-		return unidadeReserva;
+		return unidadeAutorizacao;
 	}
 	
-	public void removeTipoDeAutorizacao(TipoDeAutorizacao espaco) {
-		List<Autorizacao> autorizacoes = listaReserva(espaco.getId());
+	public void removeTipoDeAutorizacao(TipoDeAutorizacao tipoDeAutorizacao) {
+		List<Autorizacao> autorizacoes = listaAutorizacao(tipoDeAutorizacao.getId());
 		for (Autorizacao autorizacao : autorizacoes) {
 			em.remove(autorizacao);
 		}
-		em.remove(buscaTipoDeAutorizacao(espaco.getId()));
+		em.remove(buscaTipoDeAutorizacao(tipoDeAutorizacao.getId()));
 	}
 
 }

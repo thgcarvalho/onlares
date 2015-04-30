@@ -21,7 +21,7 @@
 				<a href="${ctx}/admin/index">Home</a>
 			</li>
 
-			<li class="active">Tipos de Autorizações</li>
+			<li class="active">Reservas</li>
 		</ul><!-- /.breadcrumb -->
 				
 		<div class="nav-search" id="nav-search">
@@ -35,21 +35,10 @@
 	
 		<div class="page-header">
 			<h1>
-				Tipos de Autorizações
+				Reservas da Unidade - ${usuarioLogado.localizadorAtual.unidade.descricao}
 			</h1>
 		</div><!-- /.page-header -->
 		
-		<div class="clearfix">
-			<div class="pull-right tableTools-buttons">
-	      		<a href="${ctx}/adminAutorizacao/novo">
-					<button class="btn btn-success" type="submit" >
-						<i class="ace-icon fa fa-plus bigger-110"></i>
-						Novo
-					</button>
-				</a>
-			</div>
-		</div>
-
 		<%@ include file="/templates/messages.jsp"%>
 		
 		<div class="row">
@@ -60,63 +49,55 @@
 						<table id="simple-table" class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
-									<th>Descrição</th>
+									<th>Data</th>
+									<th>Hora</th>
+									<th>Espaço reservado</th>
 									<th></th>
 								</tr>
 							</thead>
 	
 							<tbody>
 								<c:choose>
-								<c:when test="${tipoDeAutorizacaoList.isEmpty()}">
+								<c:when test="${reservaList.isEmpty()}">
 								    <tr>
-								        <td colspan="6">Não existem tipos de autorizações cadastradas</td>
+								        <td colspan="4">Não existem reservas cadastradas</td>
 								    </tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${tipoDeAutorizacaoList}" var="tipoDeAutorizacao">
+									<c:forEach items="${reservaList}" var="reserva">
 										<tr>
-											<td>${tipoDeAutorizacao.descricao}</td>
+											<td>${reserva.dataFormatada}</td>
+											<td>${reserva.horaFormatada}</td>
+											<td>${reserva.espaco.descricao}</td>
 											<td>
-												<div class="hidden-sm hidden-xs action-buttons">
-													<a class="editar" href="${linkTo[AdminAutorizacaoController].edita(tipoDeAutorizacao.id)}" 
-														title="Editar" >
-														<i class="ace-icon fa fa-pencil bigger-130"></i>
-													</a>
-													
-													<a class="deletar" href="${linkTo[AdminAutorizacaoController].remove(tipoDeAutorizacao.id)}" 
-	                    								title="Remover" >
-														<i class="ace-icon fa fa-trash-o bigger-130"></i>
-													</a>
-																				
-												</div>
-	
-												<div class="hidden-md hidden-lg">
-													<div class="inline pos-rel">
-														<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
-															<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
-														</button>
-	
-														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-															<li>
-																<a href="${linkTo[AdminAutorizacaoController].edita(tipoDeAutorizacao.id)}" 
-																	class="tooltip-success" data-rel="tooltip" title="Editar">
-																	<span class="green">
-																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-	
-															<li>
-																<a href="${linkTo[AdminAutorizacaoController].remove(tipoDeAutorizacao.id)}" 
-																	class="deletar tooltip-error" data-rel="tooltip" title="Remover" >
-																	<span class="red">
-																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-														</ul>
+												<c:if test="${reserva.podeCancelar}">
+													<div class="hidden-sm hidden-xs action-buttons">
+														<a class="deletar" href="${linkTo[ReservaController].remove(reserva.id)}" 
+		                    								title="Cancelar" >
+															<i class="ace-icon fa fa-times bigger-130"></i> Cancelar
+														</a>
+																					
 													</div>
-												</div>
+		
+													<div class="hidden-md hidden-lg">
+														<div class="inline pos-rel">
+															<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+																<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+															</button>
+		
+															<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+																<li>
+																	<a href="${linkTo[ReservaController].remove(reserva.id)}" 
+																		class="deletar tooltip-error" data-rel="tooltip" title="Cancelar" >
+																		<span class="red">
+																			<i class="ace-icon fa fa-times bigger-120"></i>
+																		</span>
+																	</a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</c:if>
 											</td>
 										</tr>
 									</c:forEach>
@@ -167,7 +148,7 @@
 	    });
 	
 		window.onload = function() {
-			document.getElementById('menuadmin_autorizacoes').className = 'active';
+			document.getElementById('menu_autorizacoes').className = 'active';
 		};
 	</script>
 	

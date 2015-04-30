@@ -10,6 +10,7 @@
 		<pattern>/reserva/*</pattern>
 		<pattern>/perfil/*</pattern>
 		<pattern>/configuracao/*</pattern>
+		<pattern>/autorizacao/*</pattern>
 	</decorator>
 
 	<decorator name="admin" page="template_admin.jsp">
