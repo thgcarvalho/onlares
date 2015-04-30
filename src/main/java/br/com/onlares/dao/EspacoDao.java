@@ -49,7 +49,7 @@ public class EspacoDao {
 		return reservas;
 	}
 	
-	private List<Reserva> listaReserva(Long espacoId) { // TODO ESTE ESTA DUPLICADO
+	private List<Reserva> listaReserva(Long espacoId) {
 		List<Reserva> unidadeReservas = em.createQuery("SELECT r FROM Reserva r"
 				+ " where r.espaco.id = :espacoId", Reserva.class)
 				.setParameter("espacoId", espacoId).getResultList();
@@ -92,7 +92,7 @@ public class EspacoDao {
 		try {
 			unidadeReserva = em.createQuery("select r from Reserva r"
 					+ " where r.espaco.id = :espacoId"
-					+ " and ur.data >= :hoje", Reserva.class)
+					+ " and r.data >= :hoje", Reserva.class)
 					.setParameter("espacoId", espacoId)
 					.setParameter("hoje", hoje).getResultList();
 		} catch (EntityNotFoundException e) {
@@ -102,9 +102,9 @@ public class EspacoDao {
 	}
 	
 	public void removeEspaco(Espaco espaco) {
-		List<Reserva> unidadesReservas = listaReserva(espaco.getId());
-		for (Reserva unidadeReserva : unidadesReservas) {
-			em.remove(unidadeReserva);
+		List<Reserva> reservas = listaReserva(espaco.getId());
+		for (Reserva reserva : reservas) {
+			em.remove(reserva);
 		}
 		em.remove(buscaEspaco(espaco.getId()));
 	}

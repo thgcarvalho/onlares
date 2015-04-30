@@ -109,6 +109,15 @@
 			</ul>
 		</li>
 		
+		<li id="menu_pets" class="">
+			<a href="${ctx}/autorizacao/index">
+				<i class="menu-icon fa fa-sign-in"></i>
+				<span class="menu-text"> Autorizações </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
+		
 <!-- 
 		<li class="disabled">
 			<a href="#" class="dropdown-toggle">
@@ -228,7 +237,7 @@
 
 			<b class="arrow"></b>
 		</li>
-
+	-->
 		<li>
 			<a href="#" id="bootbox-suport">
 				<i class="menu-icon fa fa-headphones"></i>
@@ -237,7 +246,7 @@
 
 			<b class="arrow"></b>
 		</li>
-	-->
+
 	</ul><!-- /.nav-list -->
 
 	<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">

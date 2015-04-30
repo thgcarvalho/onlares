@@ -83,7 +83,39 @@
 				<li class="">
 					<a href="${ctx}/adminReserva/listaDoCondominio">
 						<i class="menu-icon fa fa-caret-right"></i>
-						Todas as Reservas
+						Todas as reservas solicitadas
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+			</ul>
+		</li>
+		
+		<li id="menuadmin_autorizacoes" class="">
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-sign-in"></i>
+				<span class="menu-text"> Autorizações </span>
+
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+
+			<b class="arrow"></b>
+
+			<ul class="submenu">
+				<li class="">
+					<a href="${ctx}/adminAutorizacao/lista">
+						<i class="menu-icon fa fa-caret-right"></i>
+						Tipos de autorizações
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="">
+					<a href="${ctx}/adminAutorizacao/listaDoCondominio">
+						<i class="menu-icon fa fa-caret-right"></i>
+						Todas as autorizações solicitadas
 					</a>
 
 					<b class="arrow"></b>
