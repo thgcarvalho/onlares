@@ -35,7 +35,7 @@
 	
 		<div class="page-header">
 			<h1>
-				Todoas as Reservas
+				Todas as Reservas
 			</h1>
 		</div><!-- /.page-header -->
 		
@@ -52,6 +52,7 @@
 									<th>Data</th>
 									<th>Hora</th>
 									<th>Espaço reservado</th>
+									<th>Unidade</th>
 								</tr>
 							</thead>
 	
@@ -68,6 +69,7 @@
 											<td>${reserva.dataFormatada}</td>
 											<td>${reserva.horaFormatada}</td>
 											<td>${reserva.espaco.descricao}</td>
+											<td>${reserva.unidade.descricao}</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

@@ -21,7 +21,7 @@
 				<a href="${ctx}/admin/index">Home</a>
 			</li>
 
-			<li class="active">Reservas</li>
+			<li class="active">Autorizações</li>
 		</ul><!-- /.breadcrumb -->
 				
 		<div class="nav-search" id="nav-search">
@@ -35,7 +35,7 @@
 	
 		<div class="page-header">
 			<h1>
-				Todoas as Reservas
+				Todas as Autorizações Solicitadas
 			</h1>
 		</div><!-- /.page-header -->
 		
@@ -51,23 +51,25 @@
 								<tr>
 									<th>Data</th>
 									<th>Hora</th>
-									<th>Espaço reservado</th>
+									<th>Autorização solicitada</th>
+									<th>Unidade</th>
 								</tr>
 							</thead>
 	
 							<tbody>
 								<c:choose>
-								<c:when test="${reservaList.isEmpty()}">
+								<c:when test="${autorizacaoList.isEmpty()}">
 								    <tr>
-								        <td colspan="3">Não existem reservas cadastradas</td>
+								        <td colspan="3">Não existem autorizações solicitadas</td>
 								    </tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${reservaList}" var="reserva">
+									<c:forEach items="${autorizacaoList}" var="autorizacao">
 										<tr>
-											<td>${reserva.dataFormatada}</td>
-											<td>${reserva.horaFormatada}</td>
-											<td>${reserva.espaco.descricao}</td>
+											<td>${autorizacao.dataFormatada}</td>
+											<td>${autorizacao.horaFormatada}</td>
+											<td>${autorizacao.tipoDeAutorizacao.descricao}</td>
+											<td>${autorizacao.unidade.descricao}</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

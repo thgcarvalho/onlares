@@ -74,7 +74,6 @@ public class AutorizacaoController {
 	
 	@Post("/autorizacao/")
 	public void adiciona(Autorizacao autorizacao) {
-		System.out.println(autorizacao);
 		if (autorizacao.getData() == null) {
 			validator.add(new I18nMessage("autorizacao.adiciona", "campo.obrigatorio", "Data"));
 		}
