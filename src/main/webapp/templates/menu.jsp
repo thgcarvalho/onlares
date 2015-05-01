@@ -109,13 +109,36 @@
 			</ul>
 		</li>
 		
-		<li id="menu_pets" class="">
-			<a href="${ctx}/autorizacao/index">
+		<li id="menu_autorizacoes" class="">
+			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-sign-in"></i>
 				<span class="menu-text"> Autorizações </span>
+
+				<b class="arrow fa fa-angle-down"></b>
 			</a>
 
 			<b class="arrow"></b>
+
+			<ul class="submenu">
+				<li class="">
+					<a href="${ctx}/autorizacao/index">
+						<i class="menu-icon fa fa-caret-right"></i>
+						Tipos de Autorizações
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="">
+					<a href="${ctx}/autorizacao/listaDaUnidade/">
+						<i class="menu-icon fa fa-caret-right"></i>
+						Minhas autorizações
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+			</ul>
 		</li>
 		
 <!-- 

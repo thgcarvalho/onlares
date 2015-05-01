@@ -40,10 +40,10 @@ public class AutorizacaoDao {
 		this(null, null); // para uso do CDI
 	}
 	
-	public List<Autorizacao> listaAutorizacao(Long espacoId) {
+	public List<Autorizacao> listaAutorizacao(Long tipoDeAutorizacaoId) {
 		List<Autorizacao> unidadeAutorizacaos = em.createQuery("SELECT r FROM Autorizacao r"
-				+ " where r.espaco.id = :espacoId", Autorizacao.class)
-				.setParameter("espacoId", espacoId).getResultList();
+				+ " where r.tipoDeAutorizacao.id = :tipoDeAutorizacaoId", Autorizacao.class)
+				.setParameter("tipoDeAutorizacaoId", tipoDeAutorizacaoId).getResultList();
 		return unidadeAutorizacaos;
 	}
 	
@@ -55,7 +55,7 @@ public class AutorizacaoDao {
 		Autorizacao autorizacao;
 		String strQuery = "SELECT r FROM Autorizacao r"
 				+ " WHERE r.id = :autorizacaoId"
-				+ " AND r.espaco.condominio.id = :condominioId";
+				+ " AND r.tipoDeAutorizacao.condominio.id = :condominioId";
 		try {
 			Query query = em.createQuery(strQuery, Autorizacao.class);
 			query.setParameter("autorizacaoId", autorizacaoId);
@@ -67,14 +67,14 @@ public class AutorizacaoDao {
 		return autorizacao;
 	}
 	
-	public List<Autorizacao> listaDaAutorizacao(Long espacoId) {
+	public List<Autorizacao> listaDaAutorizacao(Long tipoDeAutorizacaoId) {
 		List<Autorizacao> unidadeAutorizacao;
 		Calendar hoje = Calendar.getInstance();
 		try {
 			unidadeAutorizacao = em.createQuery("select r from Autorizacao r"
-					+ " where r.espaco.id = :espacoId"
+					+ " where r.tipoDeAutorizacao.id = :tipoDeAutorizacaoId"
 					+ " and r.data >= :hoje", Autorizacao.class)
-					.setParameter("espacoId", espacoId)
+					.setParameter("tipoDeAutorizacaoId", tipoDeAutorizacaoId)
 					.setParameter("hoje", hoje).getResultList();
 		} catch (EntityNotFoundException e) {
 			unidadeAutorizacao = new ArrayList<Autorizacao>();
@@ -98,7 +98,7 @@ public class AutorizacaoDao {
 		List<Autorizacao> autorizacoes;
 		try {
 			autorizacoes = em.createQuery("select r from Autorizacao r"
-					+ " where r.espaco.condominio.id = :condominioId", Autorizacao.class)
+					+ " where r.tipoDeAutorizacao.condominio.id = :condominioId", Autorizacao.class)
 					.setParameter("condominioId", condominioId).getResultList();
 		} catch (EntityNotFoundException e) {
 			autorizacoes = new ArrayList<Autorizacao>();

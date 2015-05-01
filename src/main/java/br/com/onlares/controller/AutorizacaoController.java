@@ -74,6 +74,7 @@ public class AutorizacaoController {
 	
 	@Post("/autorizacao/")
 	public void adiciona(Autorizacao autorizacao) {
+		System.out.println(autorizacao);
 		if (autorizacao.getData() == null) {
 			validator.add(new I18nMessage("autorizacao.adiciona", "campo.obrigatorio", "Data"));
 		}
@@ -83,10 +84,9 @@ public class AutorizacaoController {
 		
 		validator.onErrorRedirectTo(this).novo(autorizacao.getTipoDeAutorizacao().getId());
 		
-		
 		autorizacaoDao.autorizacao(autorizacao);
 		result.include("notice", "Autorizacao realizada com sucesso!");
-		// TODO result.redirectTo(this).listaDaAutorizacao(tipoDeAutorizacaoId);
+		result.redirectTo(this).index();
 	}
 	
 	@Delete("/autorizacao/{autorizacaoId}")
