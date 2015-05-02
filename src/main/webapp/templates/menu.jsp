@@ -143,46 +143,6 @@
 		
 <!-- 
 		<li class="disabled">
-			<a href="#" class="dropdown-toggle">
-				<i class="menu-icon fa fa-sign-in"></i>
-				<span class="menu-text"> Autorizações </span>
-
-				<b class="arrow fa fa-angle-down"></b>
-			</a>
-
-			<b class="arrow"></b>
-
-			<ul class="submenu">
-				<li class="disabled">
-					<a href="#">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Visitantes
-					</a>
-
-					<b class="arrow"></b>
-				</li>
-
-				<li class="disabled">
-					<a href="#">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Obras
-					</a>
-
-					<b class="arrow"></b>
-				</li>
-
-				<li class="disabled">
-					<a href="#">
-						<i class="menu-icon fa fa-caret-right"></i>
-						Mudanças
-					</a>
-
-					<b class="arrow"></b>
-				</li>
-			</ul>
-		</li>
-
-		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-envelope-o"></i>
 				<span class="menu-text"> Correspondências </span>
@@ -190,14 +150,14 @@
 
 			<b class="arrow"></b>
 		</li>
+-->
 
-		<li class="disabled">
-			<a href="#">
+		<li id="menu_calendario" class="">
+			<a href="${ctx}/calendario/index">
 				<i class="menu-icon fa fa-calendar"></i>
 
 				<span class="menu-text">
 					Calendário
-
 					<span class="badge badge-transparent tooltip-error" title="0 Eventos Importantes">
 						<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
 					</span>
@@ -206,7 +166,7 @@
 
 			<b class="arrow"></b>
 		</li>
-		
+<!-- 		
 		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-comment-o"></i>

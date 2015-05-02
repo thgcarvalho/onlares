@@ -11,6 +11,7 @@
 		<pattern>/perfil/*</pattern>
 		<pattern>/configuracao/*</pattern>
 		<pattern>/autorizacao/*</pattern>
+		<pattern>/calendario/*</pattern>
 	</decorator>
 
 	<decorator name="admin" page="template_admin.jsp">
