@@ -2,24 +2,16 @@ package br.com.onlares.controller;
 
 import static br.com.caelum.vraptor.view.Results.json;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Result;
+import br.com.onlares.dao.CalendarioDao;
 import br.com.onlares.model.Calendario;
-import br.com.onlares.model.Reserva;
-import br.com.onlares.service.ColetorDeAnuncio;
-
-import com.google.gson.Gson;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -29,12 +21,13 @@ import com.google.gson.Gson;
 @Controller
 public class CalendarioController {
 	
-	private final ColetorDeAnuncio coletorDeAnuncio;
+	@SuppressWarnings("unused")
+	private final CalendarioDao calendarioDao;
 	private final Result result;
 
 	@Inject
-	public CalendarioController(ColetorDeAnuncio coletorDeAnuncio, Result result) {
-		this.coletorDeAnuncio = coletorDeAnuncio;
+	public CalendarioController(CalendarioDao calendarioDao, Result result) {
+		this.calendarioDao = calendarioDao;
 		this.result = result;
 	}
 	
@@ -45,36 +38,11 @@ public class CalendarioController {
 	
 	@Get("/calendario/index")
 	public void index() {
-		result.include("anuncioList", coletorDeAnuncio.getAnuncios());
-	}
-	
-	@Get("/calendario/read.json")
-	public void readJson() {
-//	[
-//	  {
-//		title: 'All Day Event',
-//		start: new Date(y, m, 1),
-//		className: 'label-important'
-//	  },
-//	  {
-//		title: 'Long Event',
-//		start: moment().subtract(5, 'days').format('YYYY-MM-DD'),
-//		end: moment().subtract(1, 'days').format('YYYY-MM-DD'),
-//		className: 'label-success'
-//	  },
-//	  {
-//		title: 'Some Event',
-//		start: new Date(y, m, d-3, 16, 0),
-//		allDay: false,
-//		className: 'label-info'
-//	  }
-//	]
-	//		result.use(json()).from(calendario).serialize();
 	}
 	
 	@Get("/calendario/load.json")
 	public void loadJson() {
-		System.out.println("testeVraptor");
+		System.out.println("loadJson");
 		List<Calendario> calendario = new ArrayList<Calendario>();
 
 		Calendario c1 = new Calendario();
@@ -102,28 +70,4 @@ public class CalendarioController {
 		result.use(json()).withoutRoot().from(calendario).serialize();
 	}
 	
-//	protected void doGet(HttpServletRequest request,
-//			HttpServletResponse response) throws ServletException, IOException {
-//		List l = new ArrayList();
-//
-//		CalendarDTO c = new CalendarDTO();
-//		c.setId(1);
-//		c.setStart("2013-07-28");
-//		c.setEnd("2013-07-29");
-//		c.setTitle("Task in Progress");
-//
-//		CalendarDTO d = new CalendarDTO();
-//		c.setId(2);
-//		c.setStart("2013-07-26");
-//		c.setEnd("2013-08-28");
-//		c.setTitle("Task in Progress");
-//
-//		l.add(c);
-//		l.add(d);
-//
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		PrintWriter out = response.getWriter();
-//		out.write(new Gson().toJson(l));
-//	}
 }

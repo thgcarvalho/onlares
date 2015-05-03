@@ -124,6 +124,17 @@
 			</ul>
 		</li>
 		
+		<li id="menuadmin_calendario" class="">
+			<a href="${ctx}/adminCalendario/index">
+				<i class="menu-icon fa fa-calendar"></i>
+				<span class="menu-text">
+					Calendário
+				</span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
+		
 	</ul><!-- /.nav-list -->
 
 	<div class="sidebar-toggle-admin sidebar-toggle sidebar-collapse" id="sidebar-collapse">

@@ -151,7 +151,6 @@
 			<b class="arrow"></b>
 		</li>
 -->
-
 		<li id="menu_calendario" class="">
 			<a href="${ctx}/calendario/index">
 				<i class="menu-icon fa fa-calendar"></i>

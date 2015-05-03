@@ -41,60 +41,6 @@
 
 						<div id="calendar"></div>
 					</div>
-
-					<div class="col-sm-3">
-						<div class="widget-box transparent">
-							<div class="widget-header">
-								<h4>Draggable events</h4>
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-main no-padding">
-									<div id="external-events">
-										<div class="external-event label-grey" data-class="label-grey">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 1
-										</div>
-
-										<div class="external-event label-success" data-class="label-success">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 2
-										</div>
-
-										<div class="external-event label-danger" data-class="label-danger">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 3
-										</div>
-
-										<div class="external-event label-purple" data-class="label-purple">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 4
-										</div>
-
-										<div class="external-event label-yellow" data-class="label-yellow">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 5
-										</div>
-
-										<div class="external-event label-pink" data-class="label-pink">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 6
-										</div>
-
-										<div class="external-event label-info" data-class="label-info">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 7
-										</div>
-
-										<label>
-											<input type="checkbox" class="ace ace-checkbox" id="drop-remove" />
-											<span class="lbl"> Remove after drop</span>
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 				<!-- PAGE CONTENT ENDS -->
 			</div><!-- /.col -->
@@ -158,6 +104,16 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			monthNames:['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],  
+            monthNamesShort:['jan.','fev.','mar','abr','mai','jun','jul.','ago','set','out','nov','dez'],  
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],  
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],  
+            buttonText: {  
+	            today: 'Hoje',  
+	            day: 'dia',  
+	            week:'Semana',  
+	            month:'Mês'  
+            },  
 			events: '<c:url value="/calendario/load.json"/>'
 			,
 			editable: true,
@@ -191,28 +147,35 @@
 			selectable: true,
 			selectHelper: true,
 			select: function(start, end, allDay) {
-				
 				bootbox.prompt("Título do novo evento:", function(title) {
-					if (title !== null) {
-						calendar.fullCalendar('renderEvent',
-							{
-								title: title,
-								start: start,
-								end: end,
-								allDay: allDay,
-								className: 'label-info'
-							},
-							true // make the event "stick"
-						);
-					}
+					console.log("Novo evento");
+			    	if (title !== null) {
+			    		console.log("title not null");
+			   			//var start = $.fullCalendar.formatDate(start, "yyyy-MM-dd HH:mm:ss");
+			   			//var end = $.fullCalendar.formatDate(end, "yyyy-MM-dd HH:mm:ss");
+			   			console.log("try ajax");
+			  			$.ajax({
+			   				url: '<c:url value="/adminCalendario/adicionar"/>',
+			   				data: 'title=' + title +'&start=' + start + '&end=' + end,
+			   				type: "POST",
+			   				success: function(json) {
+			   					console.log("success!!!!!!!!!!");
+			   					$(".alert").alert();    //Bootstrap alert popup
+			   				}
+			   			}).done(function(data, textStatus, jqXHR){
+							console.log("DONE");
+							alert("DONE");
+						}).fail(function(jqXHR, textStatus, errorThrown){
+							console.log("FAIL=" + textStatus +" and " + errorThrown);
+							alert("FAIL=" + textStatus +" and " + errorThrown);
+						});
+			     	}
+			    	
 				});
 				
-	
 				calendar.fullCalendar('unselect');
-			}
-			,
+			},
 			eventClick: function(calEvent, jsEvent, view) {
-	
 				//display a modal
 				var modal = 
 				'<div class="modal fade">\
@@ -221,14 +184,14 @@
 					 <div class="modal-body">\
 					   <button type="button" class="close" data-dismiss="modal" style="margin-top:-10px;">&times;</button>\
 					   <form class="no-margin">\
-						  <label>Change event name &nbsp;</label>\
+						  <label>Alterar título do evento &nbsp;</label>\
 						  <input class="middle" autocomplete="off" type="text" value="' + calEvent.title + '" />\
-						 <button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Save</button>\
+						 <button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Salvar</button>\
 					   </form>\
 					 </div>\
 					 <div class="modal-footer">\
-						<button type="button" class="btn btn-sm btn-danger" data-action="delete"><i class="ace-icon fa fa-trash-o"></i> Delete Event</button>\
-						<button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Cancel</button>\
+						<button type="button" class="btn btn-sm btn-danger" data-action="delete"><i class="ace-icon fa fa-trash-o"></i> Deletar Evento</button>\
+						<button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Cancelar</button>\
 					 </div>\
 				  </div>\
 				 </div>\
@@ -253,15 +216,13 @@
 					modal.remove();
 				});
 	
-				console.log(calEvent.id);
-				console.log(jsEvent);
-				console.log(view);
+				//console.log(calEvent.id);
+				//console.log(jsEvent);
+				//console.log(view);
 	
 				// change the border color just for fun
 				//$(this).css('border-color', 'red');
-	
 			}
-			
 		});
 
 	})
@@ -275,7 +236,7 @@
 	    });
 	
 		$(function() {
-			$('#menu_calendario').addClass('active');
+			$('#menuadmin_calendario').addClass('active');
 		});
 	</script>
 </content>
