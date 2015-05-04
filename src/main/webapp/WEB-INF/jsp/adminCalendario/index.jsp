@@ -36,7 +36,7 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
-					<div class="col-sm-9">
+					<div class="col-sm-12">
 						<div class="space"></div>
 
 						<div id="calendar"></div>
@@ -112,10 +112,10 @@
 	            today: 'Hoje',  
 	            day: 'dia',  
 	            week:'Semana',  
-	            month:'Mês'  
+	            month:'Mês'
             },  
-			events: '<c:url value="/calendario/load.json"/>'
-			,
+			events: '<c:url value="/adminCalendario/load.json"/>',
+			timeFormat: 'H(:mm)', // uppercase H for 24-hour clock
 			editable: true,
 			droppable: true, // this allows things to be dropped onto the calendar !!!
 			drop: function(date, allDay) { // this function is called when something is dropped
@@ -150,29 +150,29 @@
 				bootbox.prompt("Título do novo evento:", function(title) {
 					console.log("Novo evento");
 			    	if (title !== null) {
-			    		console.log("title not null");
+			    		//console.log("title not null");
 			   			//var start = $.fullCalendar.formatDate(start, "yyyy-MM-dd HH:mm:ss");
 			   			//var end = $.fullCalendar.formatDate(end, "yyyy-MM-dd HH:mm:ss");
-			   			console.log("try ajax");
+			   			//console.log("try ajax");
 			  			$.ajax({
 			   				url: '<c:url value="/adminCalendario/adicionar"/>',
 			   				data: 'title=' + title +'&start=' + start + '&end=' + end,
 			   				type: "POST",
-			   				success: function(json) {
-			   					console.log("success!!!!!!!!!!");
-			   					$(".alert").alert();    //Bootstrap alert popup
+			   				success: function(data) {
+			   					//console.log("success!="+ data);
+				   				location.href = '<c:url value="/adminCalendario/index"/>';
 			   				}
 			   			}).done(function(data, textStatus, jqXHR){
-							console.log("DONE");
-							alert("DONE");
+							//console.log("DONE");
+			   				$(".alert").alert('alerta');    //Bootstrap alert popup
+							//alert("DONE");
 						}).fail(function(jqXHR, textStatus, errorThrown){
-							console.log("FAIL=" + textStatus +" and " + errorThrown);
+							//console.log("FAIL=" + textStatus +" and " + errorThrown);
 							alert("FAIL=" + textStatus +" and " + errorThrown);
 						});
 			     	}
 			    	
 				});
-				
 				calendar.fullCalendar('unselect');
 			},
 			eventClick: function(calEvent, jsEvent, view) {

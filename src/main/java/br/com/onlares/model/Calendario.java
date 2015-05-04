@@ -87,4 +87,9 @@ public class Calendario {
 		this.condominio = condominio;
 	}
 	
+	@Override
+	public String toString() {
+		return "title=" + title + " start=" + start + " end=" + end + " cond=" + condominio;
+	}
+	
 }

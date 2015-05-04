@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class DataUtil {
 	
+	private static SimpleDateFormat sdfyyyyMMddHHmmss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS");
 	private static SimpleDateFormat sdfdmy = new SimpleDateFormat("dd/MM/yyyy"); 
 	private static SimpleDateFormat sdfhm = new SimpleDateFormat("HH:mm"); 
@@ -224,5 +225,15 @@ public class DataUtil {
 			tudo = "";
 		}
 		return tudo;
+	}
+	
+	public static String formatarTudoInverso(Calendar calendar) {
+		String tudoInverso;
+		try {
+			tudoInverso = sdfyyyyMMddHHmmss.format(calendar.getTime());
+		} catch (Exception exp) {
+			tudoInverso = "";
+		}
+		return tudoInverso;
 	}
 }
