@@ -157,9 +157,9 @@
 
 				<span class="menu-text">
 					Calendário
-					<span class="badge badge-transparent tooltip-error" title="0 Eventos Importantes">
+					<!--<span class="badge badge-transparent tooltip-error" title="0 Eventos Importantes">
 						<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
-					</span>
+					</span>-->
 				</span>
 			</a>
 

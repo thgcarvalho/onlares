@@ -36,64 +36,10 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
-					<div class="col-sm-9">
+					<div class="col-sm-12">
 						<div class="space"></div>
 
 						<div id="calendar"></div>
-					</div>
-
-					<div class="col-sm-3">
-						<div class="widget-box transparent">
-							<div class="widget-header">
-								<h4>Draggable events</h4>
-							</div>
-
-							<div class="widget-body">
-								<div class="widget-main no-padding">
-									<div id="external-events">
-										<div class="external-event label-grey" data-class="label-grey">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 1
-										</div>
-
-										<div class="external-event label-success" data-class="label-success">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 2
-										</div>
-
-										<div class="external-event label-danger" data-class="label-danger">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 3
-										</div>
-
-										<div class="external-event label-purple" data-class="label-purple">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 4
-										</div>
-
-										<div class="external-event label-yellow" data-class="label-yellow">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 5
-										</div>
-
-										<div class="external-event label-pink" data-class="label-pink">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 6
-										</div>
-
-										<div class="external-event label-info" data-class="label-info">
-											<i class="ace-icon fa fa-arrows"></i>
-											My Event 7
-										</div>
-
-										<label>
-											<input type="checkbox" class="ace ace-checkbox" id="drop-remove" />
-											<span class="lbl"> Remove after drop</span>
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 				<!-- PAGE CONTENT ENDS -->
@@ -158,61 +104,28 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			monthNames:['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],  
+            monthNamesShort:['jan.','fev.','mar','abr','mai','jun','jul.','ago','set','out','nov','dez'],  
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],  
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],  
+            buttonText: {  
+	            today: 'Hoje',  
+	            day: 'dia',  
+	            week:'Semana',  
+	            month:'Mês'
+            },  
 			events: '<c:url value="/calendario/load.json"/>'
 			,
 			editable: true,
-			droppable: true, // this allows things to be dropped onto the calendar !!!
-			drop: function(date, allDay) { // this function is called when something is dropped
-			
-				// retrieve the dropped element's stored Event Object
-				var originalEventObject = $(this).data('eventObject');
-				var $extraEventClass = $(this).attr('data-class');
-				
-				// we need to copy it, so that multiple events don't have a reference to the same object
-				var copiedEventObject = $.extend({}, originalEventObject);
-				
-				// assign it the date that was reported
-				copiedEventObject.start = date;
-				copiedEventObject.allDay = allDay;
-				if($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
-				
-				// render the event on the calendar
-				// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-				$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-				
-				// is the "remove after drop" checkbox checked?
-				if ($('#drop-remove').is(':checked')) {
-					// if so, remove the element from the "Draggable Events" list
-					$(this).remove();
-				}
-				
-			}
-			,
-			selectable: true,
-			selectHelper: true,
-			select: function(start, end, allDay) {
-				
-				bootbox.prompt("Título do novo evento:", function(title) {
-					if (title !== null) {
-						calendar.fullCalendar('renderEvent',
-							{
-								title: title,
-								start: start,
-								end: end,
-								allDay: allDay,
-								className: 'label-info'
-							},
-							true // make the event "stick"
-						);
-					}
-				});
-				
-	
-				calendar.fullCalendar('unselect');
-			}
-			,
+			droppable: false, // this allows things to be dropped onto the calendar !!!
+			selectable: false,
+			selectHelper: false,
 			eventClick: function(calEvent, jsEvent, view) {
-	
+				var date = new Date(calEvent.start);
+				var d = date.getDate();
+				var m = date.getMonth();
+				var y = date.getFullYear();
+				var time = date.toLocaleTimeString().toLowerCase();
 				//display a modal
 				var modal = 
 				'<div class="modal fade">\
@@ -221,14 +134,18 @@
 					 <div class="modal-body">\
 					   <button type="button" class="close" data-dismiss="modal" style="margin-top:-10px;">&times;</button>\
 					   <form class="no-margin">\
-						  <label>Change event name &nbsp;</label>\
-						  <input class="middle" autocomplete="off" type="text" value="' + calEvent.title + '" />\
-						 <button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Save</button>\
+					      <h2>\
+					        <span class="middle">Evento: </span>\
+						  	<span class="middle">' + calEvent.title + '</span>\
+						  </h2>\
+						  <h3>\
+						  <span class="middle">Início: </span>\
+						  	<span class="middle">' + d + '/' + m + '/' + y + ' às ' + time + '</span>\
+						  </h3>\
 					   </form>\
 					 </div>\
 					 <div class="modal-footer">\
-						<button type="button" class="btn btn-sm btn-danger" data-action="delete"><i class="ace-icon fa fa-trash-o"></i> Delete Event</button>\
-						<button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Cancel</button>\
+						<button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Fechar</button>\
 					 </div>\
 				  </div>\
 				 </div>\

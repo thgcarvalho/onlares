@@ -52,7 +52,6 @@ public class AdminCalendarioController {
 	@Admin
 	@Get("/adminCalendario/load.json")
 	public void loadJson() {
-		System.out.println("loadJson");
 		List<Calendario> calendarios = calendarioDao.lista();
 		result.use(json()).withoutRoot().from(calendarios).serialize();
 	}
@@ -60,8 +59,6 @@ public class AdminCalendarioController {
 	@Admin
 	@Post("/adminCalendario/adicionar")
 	public void adicionar(String title, String start, String end) {
-		System.out.println("ADICIONAR");
-		System.out.println("title=" + title + " start=" + start + " end=" + end);
 		String startFormatado = null;
 		String endFormatado = null;
 		String startHoraFormatada = null;
@@ -83,14 +80,13 @@ public class AdminCalendarioController {
 			endHoraFormatada = DataUtil.formatarHora(cEnd);
 		} catch (Exception exp) {
 			validator.add(new SimpleMessage("calendario.adiciona", exp.getMessage()));
+			exp.printStackTrace();
 		}
-		System.out.println("START=" + startFormatado + " END=" + endFormatado);
-		System.out.println("HoraSTART=" + startHoraFormatada + " HoraEND=" + endHoraFormatada);
 		Calendario calendario = new Calendario();
 		calendario.setTitle(title);
 		calendario.setStart(startFormatado);
 		calendario.setEnd(endFormatado);
-		if (startHoraFormatada.equals("00:00") && startHoraFormatada.equals("00:00")) {
+		if (startHoraFormatada.equals("00:00") && endHoraFormatada.equals("00:00")) {
 			calendario.setAllDay(true);
 		} else {
 			calendario.setAllDay(false);
@@ -109,52 +105,4 @@ public class AdminCalendarioController {
 		result.nothing();
 	}
 	
-//	@Get("/adminCalendario/read.json")
-//	public void readJson() {
-//	[
-//	  {
-//		title: 'All Day Event',
-//		start: new Date(y, m, 1),
-//		className: 'label-important'
-//	  },
-//	  {
-//		title: 'Long Event',
-//		start: moment().subtract(5, 'days').format('YYYY-MM-DD'),
-//		end: moment().subtract(1, 'days').format('YYYY-MM-DD'),
-//		className: 'label-success'
-//	  },
-//	  {
-//		title: 'Some Event',
-//		start: new Date(y, m, d-3, 16, 0),
-//		allDay: false,
-//		className: 'label-info'
-//	  }
-//	]
-	//		result.use(json()).from(calendario).serialize();
-//	}
-	
-//	protected void doGet(HttpServletRequest request,
-//			HttpServletResponse response) throws ServletException, IOException {
-//		List l = new ArrayList();
-//
-//		CalendarDTO c = new CalendarDTO();
-//		c.setId(1);
-//		c.setStart("2013-07-28");
-//		c.setEnd("2013-07-29");
-//		c.setTitle("Task in Progress");
-//
-//		CalendarDTO d = new CalendarDTO();
-//		c.setId(2);
-//		c.setStart("2013-07-26");
-//		c.setEnd("2013-08-28");
-//		c.setTitle("Task in Progress");
-//
-//		l.add(c);
-//		l.add(d);
-//
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		PrintWriter out = response.getWriter();
-//		out.write(new Gson().toJson(l));
-//	}
 }
