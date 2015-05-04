@@ -9,10 +9,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
-import br.com.caelum.vraptor.validator.I18nMessage;
+import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
 import br.com.onlares.dao.CalendarioDao;
@@ -81,7 +82,7 @@ public class AdminCalendarioController {
 			startHoraFormatada = DataUtil.formatarHora(cStart);
 			endHoraFormatada = DataUtil.formatarHora(cEnd);
 		} catch (Exception exp) {
-			validator.add(new I18nMessage("autorizacao.adiciona", "campo.obrigatorio", "Hora"));
+			validator.add(new SimpleMessage("calendario.adiciona", exp.getMessage()));
 		}
 		System.out.println("START=" + startFormatado + " END=" + endFormatado);
 		System.out.println("HoraSTART=" + startHoraFormatada + " HoraEND=" + endHoraFormatada);
@@ -97,6 +98,15 @@ public class AdminCalendarioController {
 		calendarioDao.adiciona(calendario);
 		result.include("notice", "Evento cadastrado com sucesso!");
 		result.redirectTo(this).index();
+	}
+	
+	@Admin
+	@Delete("/adminCalendario/{calendarioId}")
+	public void remove(Long calendarioId){
+		System.out.println("CALENDARIO = " + calendarioId + " FOI REMOVIDO!");
+		Calendario calendario = calendarioDao.busca(calendarioId);
+		calendarioDao.remove(calendario);
+		result.nothing();
 	}
 	
 //	@Get("/adminCalendario/read.json")

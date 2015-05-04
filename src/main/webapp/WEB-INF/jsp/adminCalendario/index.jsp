@@ -116,59 +116,25 @@
             },  
 			events: '<c:url value="/adminCalendario/load.json"/>',
 			timeFormat: 'H(:mm)', // uppercase H for 24-hour clock
-			editable: true,
-			droppable: true, // this allows things to be dropped onto the calendar !!!
-			drop: function(date, allDay) { // this function is called when something is dropped
-			
-				// retrieve the dropped element's stored Event Object
-				var originalEventObject = $(this).data('eventObject');
-				var $extraEventClass = $(this).attr('data-class');
-				
-				// we need to copy it, so that multiple events don't have a reference to the same object
-				var copiedEventObject = $.extend({}, originalEventObject);
-				
-				// assign it the date that was reported
-				copiedEventObject.start = date;
-				copiedEventObject.allDay = allDay;
-				if($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
-				
-				// render the event on the calendar
-				// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-				$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-				
-				// is the "remove after drop" checkbox checked?
-				if ($('#drop-remove').is(':checked')) {
-					// if so, remove the element from the "Draggable Events" list
-					$(this).remove();
-				}
-				
-			}
-			,
+			editable: false,
+			droppable: false, // this allows things to be dropped onto the calendar !!!
 			selectable: true,
 			selectHelper: true,
 			select: function(start, end, allDay) {
 				bootbox.prompt("Título do novo evento:", function(title) {
 					console.log("Novo evento");
 			    	if (title !== null) {
-			    		//console.log("title not null");
-			   			//var start = $.fullCalendar.formatDate(start, "yyyy-MM-dd HH:mm:ss");
-			   			//var end = $.fullCalendar.formatDate(end, "yyyy-MM-dd HH:mm:ss");
-			   			//console.log("try ajax");
 			  			$.ajax({
 			   				url: '<c:url value="/adminCalendario/adicionar"/>',
 			   				data: 'title=' + title +'&start=' + start + '&end=' + end,
 			   				type: "POST",
 			   				success: function(data) {
-			   					//console.log("success!="+ data);
 				   				location.href = '<c:url value="/adminCalendario/index"/>';
 			   				}
 			   			}).done(function(data, textStatus, jqXHR){
-							//console.log("DONE");
-			   				$(".alert").alert('alerta');    //Bootstrap alert popup
 							//alert("DONE");
 						}).fail(function(jqXHR, textStatus, errorThrown){
-							//console.log("FAIL=" + textStatus +" and " + errorThrown);
-							alert("FAIL=" + textStatus +" and " + errorThrown);
+							//alert("FAIL=" + textStatus +" and " + errorThrown);
 						});
 			     	}
 			    	
@@ -184,9 +150,8 @@
 					 <div class="modal-body">\
 					   <button type="button" class="close" data-dismiss="modal" style="margin-top:-10px;">&times;</button>\
 					   <form class="no-margin">\
-						  <label>Alterar título do evento &nbsp;</label>\
-						  <input class="middle" autocomplete="off" type="text" value="' + calEvent.title + '" />\
-						 <button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Salvar</button>\
+						  <label>Evento: &nbsp;</label>\
+						  <span class="middle">' + calEvent.title + '</span>\
 					   </form>\
 					 </div>\
 					 <div class="modal-footer">\
@@ -200,12 +165,22 @@
 				var modal = $(modal).appendTo('body');
 				modal.find('form').on('submit', function(ev){
 					ev.preventDefault();
-	
 					calEvent.title = $(this).find("input[type=text]").val();
 					calendar.fullCalendar('updateEvent', calEvent);
 					modal.modal("hide");
 				});
 				modal.find('button[data-action=delete]').on('click', function() {
+					$.ajax({
+						url: '<c:url value="/adminCalendario/"/>' + calEvent._id,
+						type: 'POST',
+						data: { _method: "DELETE"}
+					}).done(function(data, textStatus, jqXHR){
+						console.log("REMOVER");
+					}).fail(function(jqXHR, textStatus, errorThrown){
+						console.log("O item não foi removido!");
+						alert("O item não foi removido!");
+					});
+					
 					calendar.fullCalendar('removeEvents' , function(ev){
 						return (ev._id == calEvent._id);
 					})
