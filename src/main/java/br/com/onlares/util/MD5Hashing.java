@@ -3,6 +3,11 @@ package br.com.onlares.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class MD5Hashing {
 	
 	public static String convertStringToMd5(String value) throws NoSuchAlgorithmException {

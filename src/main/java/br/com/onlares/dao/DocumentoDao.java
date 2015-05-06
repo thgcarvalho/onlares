@@ -12,7 +12,7 @@ import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
-* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* @author Thiago Carvalho - tcarvalho@grandev.com.br
 * 
 */
 public class DocumentoDao {

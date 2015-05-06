@@ -4,6 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class DataUtil {
 	
 	private static SimpleDateFormat sdfyyyyMMddHHmmss = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 

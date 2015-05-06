@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
-* @author  Thiago Carvalho - tcarvalho@grandev.com.br
+* @author Thiago Carvalho - tcarvalho@grandev.com.br
 * 
 */
 @Entity

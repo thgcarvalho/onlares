@@ -2,6 +2,11 @@ package br.com.onlares.service;
 
 import java.util.Random;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class GeradorDeCodigo {
 
 	public String gerar(int tamanho) {

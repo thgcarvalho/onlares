@@ -9,6 +9,11 @@ package br.com.onlares.observers;
 //import br.com.onlares.model.Usuario;
 //import br.com.onlares.util.JPAUtil;
 
+/**  
+* Copyright (c) 2015 GranDev - All rights reserved.
+* @author Thiago Carvalho - tcarvalho@grandev.com.br
+* 
+*/
 public class InitialDataObserver {
 
 	/**
