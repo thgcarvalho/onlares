@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import br.com.onlares.comparador.ComparadorUnidade;
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Constantes;
+import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 import br.com.onlares.model.Pet;
 import br.com.onlares.model.Unidade;
 
@@ -25,16 +26,13 @@ public class PetDao {
 
 	private final EntityManager em;
 	private final Long condominioId;
+	private final Long unidadeId;
 	
 	@Inject
 	public PetDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
-		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
-				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
-			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
-		} else {
-			this.condominioId = Constantes.CONDOMINIO_INEXISTENTE_ID;
-		}
+		this.condominioId = LocalizadorDoUsuarioLogado.getCondominioIdAtual(usuarioLogado);
+		this.unidadeId = LocalizadorDoUsuarioLogado.getUnidadeIdAtual(usuarioLogado);
 	}
 	
 	@Deprecated
@@ -89,7 +87,7 @@ public class PetDao {
 		return pet;
 	}
 	
-	public Pet buscaNaUnidade(Long unidadeId, Long petId) {
+	public Pet buscaNaUnidade(Long petId) {
 		Pet pet;
 		String strQuery = "SELECT v FROM Pet v"
 				+ " WHERE v.unidade.id = :unidadeId AND v.id = :petId";
@@ -104,7 +102,7 @@ public class PetDao {
 		return pet;
 	}
 	
-	public List<Pet> listaDaUnidade(Long unidadeId) {
+	public List<Pet> listaDaUnidade() {
 		List<Pet> pets;
 		try {
 			pets = em.createQuery("select v from Pet v"

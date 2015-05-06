@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Anuncio;
-import br.com.onlares.model.Constantes;
+import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -22,12 +22,7 @@ public class AnuncioDao {
 	@Inject
 	public AnuncioDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
-		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
-				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
-			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
-		} else {
-			this.condominioId = Constantes.CONDOMINIO_INEXISTENTE_ID;
-		}
+		this.condominioId = LocalizadorDoUsuarioLogado.getCondominioIdAtual(usuarioLogado);
 	}
 	
 	@Deprecated

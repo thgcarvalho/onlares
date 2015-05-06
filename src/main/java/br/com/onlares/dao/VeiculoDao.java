@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import br.com.onlares.comparador.ComparadorUnidade;
 import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Constantes;
+import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 import br.com.onlares.model.Unidade;
 import br.com.onlares.model.Veiculo;
 
@@ -29,12 +30,7 @@ public class VeiculoDao {
 	@Inject
 	public VeiculoDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
-		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
-				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
-			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
-		} else {
-			this.condominioId = Constantes.CONDOMINIO_INEXISTENTE_ID;
-		}
+		this.condominioId = LocalizadorDoUsuarioLogado.getCondominioIdAtual(usuarioLogado);
 	}
 	
 	@Deprecated

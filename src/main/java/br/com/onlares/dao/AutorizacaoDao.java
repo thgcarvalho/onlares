@@ -11,8 +11,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.onlares.controller.UsuarioLogado;
-import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Autorizacao;
+import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -23,16 +23,13 @@ public class AutorizacaoDao {
 
 	private final EntityManager em;
 	private final Long condominioId;
+	private final Long unidadeId;
 	
 	@Inject
 	public AutorizacaoDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
-		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
-				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
-			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
-		} else {
-			this.condominioId = Constantes.CONDOMINIO_INEXISTENTE_ID;
-		}
+		this.condominioId = LocalizadorDoUsuarioLogado.getCondominioIdAtual(usuarioLogado);
+		this.unidadeId = LocalizadorDoUsuarioLogado.getUnidadeIdAtual(usuarioLogado);
 	}
 	
 	@Deprecated
@@ -82,7 +79,7 @@ public class AutorizacaoDao {
 		return unidadeAutorizacao;
 	}
 	
-	public List<Autorizacao> listaDaUnidade(Long unidadeId) {
+	public List<Autorizacao> listaDaUnidade() {
 		List<Autorizacao> autorizacoes;
 		try {
 			autorizacoes = em.createQuery("select r from Autorizacao r"

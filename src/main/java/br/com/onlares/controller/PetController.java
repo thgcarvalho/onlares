@@ -24,18 +24,12 @@ public class PetController {
 	private final PetDao dao;
 	private final Validator validator;
 	private final Result result;
-	private final Long unidadeId;
 
 	@Inject
 	public PetController(UsuarioLogado usuarioLogado, PetDao dao, Validator validator, Result result) {
 		this.dao = dao;
 		this.validator = validator;
 		this.result = result;
-		if (usuarioLogado != null && usuarioLogado.getLocalizadorAtual().getUnidade() != null) {
-			this.unidadeId = usuarioLogado.getLocalizadorAtual().getUnidade().getId();
-		} else {
-			this.unidadeId = 0L;
-		}
 	}
 	
 	public PetController() {
@@ -44,7 +38,7 @@ public class PetController {
 	
 	@Get("/pet/lista")
 	public void lista() {
-		result.include("petUnidadeList", dao.listaDaUnidade(this.unidadeId));
+		result.include("petUnidadeList", dao.listaDaUnidade());
 	}
 	
 	@Get("/pet/novo")
@@ -66,7 +60,7 @@ public class PetController {
 	
 	@Get("/pet/edita/{petId}")
 	public void edita(Long petId) {
-		Pet pet = dao.buscaNaUnidade(this.unidadeId, petId);
+		Pet pet = dao.buscaNaUnidade(petId);
 		if (pet == null) {
 			result.notFound();
 		} else {
@@ -91,7 +85,7 @@ public class PetController {
 	@Delete("/pet/{petId}")
 	public void remove(Long petId){
 		System.out.println("Pet = " + petId + " FOI REMOVIDO!");
-		Pet usuario = dao.buscaNaUnidade(this.unidadeId, petId);
+		Pet usuario = dao.buscaNaUnidade(petId);
 		dao.remove(usuario);
 		result.nothing();
 	}

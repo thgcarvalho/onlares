@@ -30,7 +30,6 @@ public class AutorizacaoController {
 	private final TipoDeAutorizacaoDao tipoDeAutorizacaoDao;
 	private final Validator validator;
 	private final Result result;
-	private final Long unidadeId;
 
 	@Inject
 	public AutorizacaoController(UsuarioLogado usuarioLogado, AutorizacaoDao autorizacaoDao, TipoDeAutorizacaoDao tipoDeAutorizacaoDao, Validator validator, Result result) {
@@ -38,11 +37,6 @@ public class AutorizacaoController {
 		this.tipoDeAutorizacaoDao = tipoDeAutorizacaoDao;
 		this.validator = validator;
 		this.result = result;
-		if (usuarioLogado != null && usuarioLogado.getLocalizadorAtual().getUnidade() != null) {
-			this.unidadeId = usuarioLogado.getLocalizadorAtual().getUnidade().getId();
-		} else {
-			this.unidadeId = 0L;
-		}
 	}
 	
 	public AutorizacaoController() {
@@ -56,7 +50,7 @@ public class AutorizacaoController {
 	
 	@Get("/autorizacao/listaDaUnidade/")
 	public void listaDaUnidade() {
-		List<Autorizacao> autorizacoes = autorizacaoDao.listaDaUnidade(this.unidadeId);
+		List<Autorizacao> autorizacoes = autorizacaoDao.listaDaUnidade();
 		ComparadorAutorizacao comparadorAutorizacao = new ComparadorAutorizacao();
 		Collections.sort(autorizacoes, comparadorAutorizacao);
 		result.include("autorizacaoList", autorizacoes);

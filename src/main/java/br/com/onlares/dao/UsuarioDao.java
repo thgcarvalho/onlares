@@ -16,6 +16,7 @@ import br.com.onlares.controller.UsuarioLogado;
 import br.com.onlares.model.Condominio;
 import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Localizador;
+import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 import br.com.onlares.model.Unidade;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.util.MD5Hashing;
@@ -33,12 +34,7 @@ public class UsuarioDao {
 	@Inject
 	public UsuarioDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
-		if (usuarioLogado != null && usuarioLogado.getUsuario() != null
-				&& usuarioLogado.getLocalizadorAtual().getCondominio() != null) {
-			this.condominioId = usuarioLogado.getLocalizadorAtual().getCondominio().getId();
-		} else {
-			this.condominioId = Constantes.CONDOMINIO_INEXISTENTE_ID;
-		}
+		this.condominioId = LocalizadorDoUsuarioLogado.getCondominioIdAtual(usuarioLogado);
 	}
 	
 	@Deprecated
