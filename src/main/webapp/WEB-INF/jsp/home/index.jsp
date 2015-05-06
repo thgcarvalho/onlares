@@ -47,9 +47,8 @@
 
 							<strong>
 								<i class="ace-icon fa fa-times"></i>
-								Oh pressão!
+								Atenção!
 							</strong>
-
 							Mudar algumas coisas e tente enviar novamente.
 							<br />
 						</div>

@@ -162,7 +162,7 @@
 
 			<b class="arrow"></b>
 		</li>
-<!-- 		
+		<!-- 
 		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-comment-o"></i>
@@ -198,16 +198,16 @@
 
 			<b class="arrow"></b>
 		</li>
-
-		<li class="disabled">
-			<a href="#">
+-->	
+		<li id="menu_documentos" class="">
+			<a href="${ctx}/documento/lista">
 				<i class="menu-icon fa fa-files-o"></i>
 				<span class="menu-text"> Documentos </span>
 			</a>
 
 			<b class="arrow"></b>
 		</li>
-		
+   <!-- 
 		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-phone"></i>
