@@ -12,21 +12,18 @@
 
 	<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 		<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-			<button class="btn btn-success">
+			<a class="btn btn-success" href="${ctx}/home/index">
 				<i class="ace-icon fa fa-phone"></i>
-			</button>
-
-			<button class="btn btn-info">
+			</a>
+			<a class="btn btn-info" href="${ctx}/morador/lista">
 				<i class="ace-icon fa fa-users"></i>
-			</button>
-
-			<button class="btn btn-warning">
+			</a>
+			<a class="btn btn-warning" href="${ctx}/calendario/index">
 				<i class="ace-icon fa fa-calendar"></i>
-			</button>
-
-			<button class="btn btn-danger">
+			</a>
+			<a class="btn btn-danger" href="${ctx}/home/index">
 				<i class="ace-icon fa fa-warning"></i>
-			</button>
+			</a>
 		</div>
 
 		<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
