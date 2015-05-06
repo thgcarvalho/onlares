@@ -135,6 +135,15 @@
 			<b class="arrow"></b>
 		</li>
 		
+		<li id="menuadmin_documentos" class="">
+			<a href="${ctx}/adminDocumento/lista">
+				<i class="menu-icon fa fa-files-o"></i>
+				<span class="menu-text"> Documentos </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
+		
 	</ul><!-- /.nav-list -->
 
 	<div class="sidebar-toggle-admin sidebar-toggle sidebar-collapse" id="sidebar-collapse">

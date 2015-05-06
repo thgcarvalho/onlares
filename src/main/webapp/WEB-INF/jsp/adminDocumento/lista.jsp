@@ -33,6 +33,17 @@
 				Documentos
 			</h1>
 		</div><!-- /.page-header -->
+		
+		<div class="clearfix">
+			<div class="pull-right tableTools-buttons">
+	      		<a href="${ctx}/adminDocumento/novo">
+					<button class="btn btn-success" type="submit" >
+						<i class="ace-icon fa fa-plus bigger-110"></i>
+						Novo
+					</button>
+				</a>
+			</div>
+		</div>
 	
 		<%@ include file="/templates/messages.jsp"%>
 		
@@ -98,7 +109,7 @@
 	    });
 	
 		$(function() {
-			$('#menu_documento').addClass('active');
+			$('#menu_documentos').addClass('active');
 		});
 	</script>
 </content>
