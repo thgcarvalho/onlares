@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
@@ -101,6 +102,14 @@ public class AdminDocumentoController {
 		documentoDao.grava(docuemnto);
 		result.include("notice", "Documento adicionado com sucesso!");
 		result.redirectTo(this).lista();
+	}
+	
+	@Admin
+	@Delete("/adminDocumento/{id}")
+	public void remove(long id) {
+		Documento documento = documentoDao.recupera(id);
+		documentoDao.deleta(documento);
+		result.nothing();
 	}
 	
 	private String checkNull(String value) {

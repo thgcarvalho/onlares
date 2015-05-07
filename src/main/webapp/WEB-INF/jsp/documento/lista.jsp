@@ -42,7 +42,9 @@
 				<div class="row">
 					<c:choose>
 						<c:when test="${documentoList.isEmpty()}">
-						    <h2>Não existem documentos cadastrados</h2>
+						   	<div class="col-sm-12">
+						    	<h4>Não existem documentos cadastrados</h4>
+						    </div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${documentoList}" var="documento">

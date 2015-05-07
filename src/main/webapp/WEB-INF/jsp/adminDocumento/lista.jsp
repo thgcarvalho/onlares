@@ -53,7 +53,9 @@
 				<div class="row">
 					<c:choose>
 						<c:when test="${documentoList.isEmpty()}">
-						    <h2>Não existem documentos cadastrados</h2>
+							<div class="col-sm-12">
+						    	<h4>Não existem documentos cadastrados</h4>
+						    </div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${documentoList}" var="documento">
@@ -62,6 +64,32 @@
 										<i class="ace-icon fa fa-file"></i>
 										${documento.titulo}
 									</h3>
+									
+									<div class="hidden-sm hidden-xs action-buttons pull-right">
+										<a class="deletar" href="${linkTo[AdminDocumentoController].remove(documento.id)}" 
+                  								title="Remover '${unidade.descricao}'." >
+											<i class="ace-icon fa fa-trash-o bigger-130"></i>
+										</a>
+									</div>
+									<div class="hidden-md hidden-lg">
+										<div class="inline pos-rel">
+											<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown" data-position="auto">
+												<i class="ace-icon fa fa-caret-down icon-only bigger-120"></i>
+											</button>
+
+											<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+												<li>
+													<a href="${linkTo[AdminDocumentoController].remove(documento.id)}" 
+														class="deletar tooltip-error" data-rel="tooltip" title="Remover" >
+														<span class="red">
+															<i class="ace-icon fa fa-trash-o bigger-120"></i>
+														</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<br/>
 									<a href="${linkTo[AdminDocumentoController].documento(documento.id)}" class="thumbnail" target="_blank">
 										<img class="img-responsive" src="${ctx}/resources/images/document-down-icon.png" alt="${documento.titulo}" />
 									</a>
@@ -79,6 +107,31 @@
 <content tag="local_script">
 	<!-- page specific plugin scripts -->
 	<!-- inline scripts related to this page -->
+	
+	<!-- delete script -->
+	<script type="text/javascript">
+		$(".deletar").on("click", function(event) {
+			event.preventDefault();
+			if (confirm('Você realmente deseja exlucir esse registro?')) {
+				$.ajax({
+					url: $(this).attr("href"),
+					type: 'POST',
+					data: { _method: "DELETE"},
+					success: function(data) {
+		   				location.href = '<c:url value="/adminDocumento/lista"/>';
+	   				}
+				}).done(function(data, textStatus, jqXHR){
+					console.log("REMOVER");
+				}).fail(function(jqXHR, textStatus, errorThrown){
+					console.log("O item não foi removido!");
+					alert("O item não foi removido!");
+				});
+			      
+			    //$(this).closest('tr').remove();
+			    return false;
+			}
+		});
+	</script>
 	
 	<!-- menu script -->
 	<script type="text/javascript">
