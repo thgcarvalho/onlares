@@ -29,6 +29,7 @@
 	
 		<!-- Page Content -->
 	    <div class="main-content">
+	    	<%@ include file="/templates/fornecedores.jsp"%>
 			<!-- body que muda! -->
 			<decorator:body />
 		</div>
@@ -71,6 +72,21 @@
 	<!-- page specific plugin scripts -->
 	<!-- inline scripts related to this page -->
 	<decorator:getProperty property="page.local_script"></decorator:getProperty>
+	
+	<!-- modal fornecedores -->
+	<script type="text/javascript">
+		jQuery(function($) {
+			$('.modal.aside').ace_aside();
+			
+			$('#aside-inside-modal').addClass('aside').ace_aside({container: '#my-modal > .modal-dialog'});
+			
+			$(document).one('ajaxloadstart.page', function(e) {
+				//in ajax mode, remove before leaving page
+				$('.modal.aside').remove();
+				$(window).off('.aside')
+			});
+		})
+	</script>
 	
 	<!-- bootbox suport modal script -->
 	<script src="${ctx}/assets/js/bootbox.min.js"></script>
