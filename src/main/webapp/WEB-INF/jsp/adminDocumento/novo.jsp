@@ -47,32 +47,24 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
-				<form class="form-horizontal" role="form" action="${ctx}/adminDocumento/" method="post">
-			
+				<form class="form-horizontal" action="${ctx}/adminDocumento/" method="post" enctype="multipart/form-data">
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="nome"> Nome* </label>
+						<label class="col-sm-3 control-label no-padding-right" for="titulo"> Título* </label>
 						<div class="col-sm-5">
-							<input type="text" required="required" id="nome" name="" value=" " 
-							placeholder="Nome" maxlength="45" autofocus class="col-xs-10 col-sm-5"/>
+							<input type="text" required="required" id="titulo" name="titulo"
+							placeholder="Título" maxlength="45" autofocus class="col-xs-10 col-sm-5"/>
 						</div>
 					</div>
 
 					<div class="space-4"></div>
 					
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="id-input-file-2"> Arquivo </label>
+						<label class="col-sm-3 control-label no-padding-right" for="id-input-file"> Arquivo* </label>
 						<div class="col-sm-4">
-							<input type="file" id="id-input-file-2" />
+							<input type="file" required="required" name="arquivo" id="id-input-file" />
 						</div>
 					</div>
 
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="id-input-file-3"></label>
-						<div class="col-sm-4">
-							<input multiple="" type="file" id="id-input-file-3" />
-						</div>
-					</div>
-					
 					<div class="clearfix form-actions">
 						<div class="col-md-offset-5">
 							<button class="btn btn-info" type="submit">
@@ -115,7 +107,7 @@
 	<script type="text/javascript">
 		jQuery(function($) {
 			
-			$('#id-input-file-1 , #id-input-file-2').ace_file_input({
+			$('#id-input-file').ace_file_input({
 				no_file:'Sem Arquivo ...',
 				btn_choose:'Selecionar',
 				btn_change:'Alterar',
@@ -128,46 +120,7 @@
 				//
 			});
 			//pre-show a file name, for example a previously selected file
-			//$('#id-input-file-1').ace_file_input('show_file_list', ['myfile.txt'])
-		
-			$('#id-input-file-3').ace_file_input({
-				style:'well',
-				btn_choose:'Arraste e solte arquivos aqui ou clique para escolher',
-				btn_change:null,
-				no_icon:'ace-icon fa fa-cloud-upload',
-	
-				droppable:true,
-				thumbnail:'small'//large | fit
-				//,icon_remove:null//set null, to hide remove/reset button
-				/**,before_change:function(files, dropped) {
-					//Check an example below
-					//or examples/file-upload.html
-					return true;
-				}*/
-				/**,before_remove : function() {
-					return true;
-				}*/
-				,
-				preview_error : function(filename, error_code) {
-					//name of the file that failed
-					//error_code values
-					//1 = 'FILE_LOAD_FAILED',
-					//2 = 'IMAGE_LOAD_FAILED',
-					//3 = 'THUMBNAIL_FAILED'
-					//alert(error_code);
-				}
-		
-			}).on('change', function(){
-				//console.log($(this).data('ace_input_files'));
-				//console.log($(this).data('ace_input_method'));
-			});
-			
-			
-			//$('#id-input-file-3')
-			//.ace_file_input('show_file_list', [
-				//{type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
-				//{type: 'file', name: 'hello.txt'}
-			//]);
+			//$('#id-input-file').ace_file_input('show_file_list', ['myfile.txt'])
 		
 		});
 	</script>

@@ -40,45 +40,24 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
-					<div class="col-xs-3">
-						<h3 class="header smaller lighter blue">
-							<i class="ace-icon fa fa-file"></i>
-							Convenção
-						</h3>
-						<a href="email-confirmation.html" class="thumbnail" target="_blank">
-							<img class="img-responsive" src="${ctx}/assets/images/email1.png" alt="Email Template" />
-						</a>
-					</div>
-
-					<div class="col-xs-3">
-						<h3 class="header smaller lighter blue">
-							<i class="ace-icon fa fa-file"></i>
-							Regimento interno
-						</h3>
-						<a href="email-navbar.html" class="thumbnail" target="_blank">
-							<img class="img-responsive" src="${ctx}/assets/images/email2.png" alt="Email Template" />
-						</a>
-					</div>
-
-					<div class="col-xs-3">
-						<h3 class="header smaller lighter blue">
-							<i class="ace-icon fa fa-list"></i>
-							Atas
-						</h3>
-						<a href="email-newsletter.html" class="thumbnail" target="_blank">
-							<img class="img-responsive" src="${ctx}/assets/images/email3.png" alt="Email Template" />
-						</a>
-					</div>
-
-					<div class="col-xs-3">
-						<h3 class="header smaller lighter blue">
-							<i class="ace-icon fa fa-list"></i>
-							Balancetes
-						</h3>
-						<a href="email-contrast.html" class="thumbnail" target="_blank">
-							<img class="img-responsive" src="${ctx}/assets/images/email4.png" alt="Email Template" />
-						</a>
-					</div>
+					<c:choose>
+						<c:when test="${documentoList.isEmpty()}">
+						    <h2>Não existem documentos cadastrados</h2>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${documentoList}" var="documento">
+								<div class="col-xs-3">
+									<h3 class="header smaller lighter blue">
+										<i class="ace-icon fa fa-file"></i>
+										${documento.titulo}
+									</h3>
+									<a href="${linkTo[DocumentoController].documento(documento.id)}" class="thumbnail" target="_blank">
+										<img class="img-responsive" src="${ctx}/resources/images/document-down-icon.png" alt="${documento.titulo}" />
+									</a>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<!-- PAGE CONTENT ENDS -->
 			</div><!-- /.col -->
