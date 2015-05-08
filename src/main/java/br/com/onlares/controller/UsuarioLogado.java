@@ -47,15 +47,6 @@ public class UsuarioLogado implements Serializable {
 		this.localizadorAtual = localizadorAtual;
 	}
 	
-//	public Long getCondominioIdAtual(){
-//		if (this.getUsuario() != null
-//				&& this.getLocalizadorAtual().getCondominio() != null) {
-//			return this.getLocalizadorAtual().getCondominio().getId();
-//		} else {
-//			return Constantes.CONDOMINIO_INEXISTENTE_ID;
-//		}
-//	}
-	
 	public void logout() {
 		this.usuario = null;
 	}

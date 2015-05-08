@@ -88,4 +88,9 @@ public class Anuncio implements Serializable {
 		this.condominioId = condominioId;
 	}
 	
+	@Override
+	public String toString() {
+		return "atvd=" + atividade + " titl=" + titulo;
+	}
+	
 }

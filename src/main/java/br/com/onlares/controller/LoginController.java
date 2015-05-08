@@ -13,6 +13,7 @@ import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
 import br.com.onlares.annotations.Public;
+import br.com.onlares.dao.AnuncioDao;
 import br.com.onlares.dao.LocalizadorDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Localizador;
@@ -27,23 +28,27 @@ import br.com.onlares.model.Usuario;
 public class LoginController {
 	
 	private final UsuarioDao usuariodao;
+	private final LocalizadorDao localizadorDao;
+	private final AnuncioDao anuncioDao;
 	private final Validator validator;
 	private final Result result;
 	private final UsuarioLogado usuarioLogado;
-	private final LocalizadorDao localizadorDao;
+	private final ColetorDeAnuncio coletorDeAnuncio;
 	
 	@Inject
-	public LoginController(UsuarioDao usuariodao, LocalizadorDao localizadorDao, Validator validator, Result result, UsuarioLogado usuarioLogado) {
+	public LoginController(UsuarioDao usuariodao, LocalizadorDao localizadorDao, AnuncioDao anuncioDao, Validator validator, Result result, UsuarioLogado usuarioLogado, ColetorDeAnuncio coletorDeAnuncio) {
 		this.usuariodao = usuariodao;
 		this.localizadorDao = localizadorDao;
+		this.anuncioDao = anuncioDao;
 		this.validator = validator;
 		this.result = result;
 		this.usuarioLogado = usuarioLogado;
+		this.coletorDeAnuncio = coletorDeAnuncio;
 	}
 	
 	@Deprecated
 	public LoginController() {
-		this(null, null, null, null, null);
+		this(null, null, null, null, null, null, null);
 	}
 
 	@Get("/login")
@@ -63,16 +68,36 @@ public class LoginController {
 			validator.add(new SimpleMessage("login", e.getMessage()));
 			validator.onErrorUsePageOf(this).login();
 		} 
+		
+		inicializaUsuarioLogado(usuario);
+		inicializaAnuncios();
+		
+		result.redirectTo(HomeController.class).index();
+	}
+	
+	private void inicializaUsuarioLogado(Usuario usuario) {
 		Usuario usuarioDB = usuariodao.buscaPorEmail(usuario.getEmail());
 		List<Localizador> localizadores = localizadorDao.lista(usuarioDB.getId());
 		usuarioLogado.setUsuario(usuarioDB);
 		usuarioLogado.setLocalizadores(localizadores);
-		result.redirectTo(HomeController.class).index();
+	}
+	
+	private void limpaUsuarioLogado() {
+		usuarioLogado.logout();
+	}
+	
+	private void inicializaAnuncios() {
+		coletorDeAnuncio.setAnuncios(anuncioDao.lista());
+	}
+	
+	private void limpaAnuncios() {
+		coletorDeAnuncio.limpa();
 	}
 	
 	@Get("/logout")
 	public void sair() {
-		usuarioLogado.logout();
+		limpaUsuarioLogado();
+		limpaAnuncios();
 		result.redirectTo(this).login();
 	}
 	
@@ -82,6 +107,7 @@ public class LoginController {
 		for (Localizador localizadorDB : usuarioLogado.getLocalizadores()) {
 			if (localizadorDB.getId().equals(localizadorId)) {
 				usuarioLogado.setLocalizadorAtual(localizadorDB);
+				inicializaAnuncios();
 				break;
 			}
 		}

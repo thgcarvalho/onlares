@@ -112,3 +112,7 @@
 .ace-nav > li.dark-blue > a {
   background-color:#2E6589 !important;
 }
+
+.modal.aside-vc.navbar-offset .modal-dialog .aside-trigger {
+  top:50px!important;
+}

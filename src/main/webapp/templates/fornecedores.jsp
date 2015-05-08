@@ -9,28 +9,23 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						<span class="white">&times;</span>
 					</button>
-					Based on Modal boxes
+					Fornecedores
 				</div>
 			</div>
 
 			<div class="modal-body">
-				<h3 class="lighter">Custom Elements and Content</h3>
-
-				<br />
-				With no modal backdrop
-				<br />
-				<br />
-				<br />
-				2
-				<br />
-				<br />
-				<br />
-				3
+				<c:forEach items="${coletorDeAnuncio.visualidados}" var="anuncio">
+					<h3 class="lighter">${anuncio.atividade}</h3>
+					<a>${anuncio.titulo}</a>
+					<br />
+					${anuncio.fone1} / ${anuncio.fone2} 
+					<hr />
+				</c:forEach>
 			</div>
 		</div><!-- /.modal-content -->
 
 		<button class="aside-trigger btn btn-info btn-app btn-xs ace-settings-btn" data-target="#right-menu" data-toggle="modal" type="button">
-			<i data-icon1="fa-plus" data-icon2="fa-minus" class="ace-icon fa fa-plus bigger-110 icon-only"></i>
+			<i data-icon1="fa-phone" data-icon2="fa-phone" class="ace-icon fa fa-phone bigger-110 icon-only"></i>
 		</button>
 	</div><!-- /.modal-dialog -->
 </div>
