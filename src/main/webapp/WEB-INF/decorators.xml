@@ -13,6 +13,7 @@
 		<pattern>/autorizacao/*</pattern>
 		<pattern>/calendario/*</pattern>
 		<pattern>/documento/*</pattern>
+		<pattern>/anuncio/*</pattern>
 	</decorator>
 
 	<decorator name="admin" page="template_admin.jsp">

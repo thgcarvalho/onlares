@@ -1,5 +1,8 @@
 package br.com.onlares.controller;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
@@ -31,7 +34,9 @@ public class AnuncioController {
 
 	@Get
 	public void lista() {
-		result.include("anuncioList", anuncioDao.lista());
+		List<Anuncio> lista = anuncioDao.lista();
+		Collections.sort(lista);
+		result.include("anuncioList", lista);
 	}
 	
 	@Get("/anuncio/visualiza/{anuncioId}")

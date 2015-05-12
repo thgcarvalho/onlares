@@ -29,7 +29,7 @@
 	
 		<!-- Page Content -->
 	    <div class="main-content">
-	    	<%@ include file="/templates/anunciantes.jsp"%>
+	    	<%@ include file="/templates/anuncios.jsp"%>
 			<!-- body que muda! -->
 			<decorator:body />
 		</div>

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 */
 @Entity
 @Table(name = "anuncio")
-public class Anuncio implements Serializable {
+public class Anuncio implements Comparable<Anuncio>, Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -26,6 +26,8 @@ public class Anuncio implements Serializable {
 	private String atividade;
 	private String titulo;
 	private String descricao;
+	private String anunciante;
+	private String endereco;
 	private String fone1;
 	private String fone2;
 	private String email;
@@ -56,6 +58,18 @@ public class Anuncio implements Serializable {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	public String getAnunciante() {
+		return anunciante;
+	}
+	public void setAnunciante(String anunciante) {
+		this.anunciante = anunciante;
+	}
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 	public String getFone1() {
 		return fone1;
@@ -88,9 +102,28 @@ public class Anuncio implements Serializable {
 		this.condominioId = condominioId;
 	}
 	
+	public String getFones() {
+		String fones = "";
+		if (fone1 != null && !fone1.equals("")) {
+			fones += fone1;
+			if (fone2 != null && !fone2.equals("")) {
+				fones += " / ";
+				fones += fone2;
+			}
+		} else if (fone2 != null && !fone2.equals("")) {
+			fones += fone2;
+		}
+		return fones;
+	}
+	
 	@Override
 	public String toString() {
 		return "atvd=" + atividade + " titl=" + titulo;
+	}
+	@Override
+	public int compareTo(Anuncio outroAnuncio) {
+        int atvd = this.atividade.compareTo(outroAnuncio.atividade);
+        return atvd == 0 ? this.titulo.compareTo(outroAnuncio.titulo) : atvd;
 	}
 	
 }
