@@ -162,7 +162,7 @@
 
 			<b class="arrow"></b>
 		</li>
-		<!-- 
+<!-- 
 		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-comment-o"></i>
@@ -171,16 +171,16 @@
 
 			<b class="arrow"></b>
 		</li>
-
-		<li class="disabled">
-			<a href="#">
+-->	
+		<li id="menu_avisos" class="">
+			<a href="${ctx}/aviso/index">
 				<i class="menu-icon fa fa-warning"></i>
 				<span class="menu-text"> Avisos </span>
 			</a>
 
 			<b class="arrow"></b>
 		</li>
-		
+<!-- 	
 		<li class="disabled">
 			<a href="#">
 				<i class="menu-icon fa fa-comments"></i>

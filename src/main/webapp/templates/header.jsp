@@ -77,7 +77,7 @@
 					</li>
 				</ul>
 			</li>
-
+<!-- 
 			<li class="green">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
@@ -98,7 +98,7 @@
 					</li>
 				</ul>
 			</li>
-
+ -->
 			<li class="light-blue">
 				<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 					<span class="user-info">

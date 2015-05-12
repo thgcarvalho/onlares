@@ -135,6 +135,15 @@
 			<b class="arrow"></b>
 		</li>
 		
+		<li id="menuadmin_avisos" class="">
+			<a href="${ctx}/adminAviso/index">
+				<i class="menu-icon fa fa-warning"></i>
+				<span class="menu-text"> Avisos </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
+		
 		<li id="menuadmin_documentos" class="">
 			<a href="${ctx}/adminDocumento/lista">
 				<i class="menu-icon fa fa-files-o"></i>
