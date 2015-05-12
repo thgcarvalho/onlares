@@ -29,7 +29,7 @@
 	
 		<!-- Page Content -->
 	    <div class="main-content">
-	    	<%@ include file="/templates/fornecedores.jsp"%>
+	    	<%@ include file="/templates/anunciantes.jsp"%>
 			<!-- body que muda! -->
 			<decorator:body />
 		</div>
@@ -73,7 +73,7 @@
 	<!-- inline scripts related to this page -->
 	<decorator:getProperty property="page.local_script"></decorator:getProperty>
 	
-	<!-- modal fornecedores -->
+	<!-- modal anunciantes -->
 	<script type="text/javascript">
 		jQuery(function($) {
 			$('.modal.aside').ace_aside();

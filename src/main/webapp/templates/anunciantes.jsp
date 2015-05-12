@@ -9,14 +9,15 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						<span class="white">&times;</span>
 					</button>
-					Fornecedores
+					Anunciantes
 				</div>
 			</div>
 
 			<div class="modal-body">
 				<c:forEach items="${coletorDeAnuncio.visualidados}" var="anuncio">
 					<h3 class="lighter">${anuncio.atividade}</h3>
-					<a>${anuncio.titulo}</a>
+						<a href="#" target="_blank">
+						${anuncio.titulo} <i class="ace-icon fa fa-external-link"></i> </a>
 					<br />
 					${anuncio.fone1} / ${anuncio.fone2} 
 					<hr />

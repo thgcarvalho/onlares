@@ -17,6 +17,7 @@ import br.com.onlares.dao.AnuncioDao;
 import br.com.onlares.dao.LocalizadorDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Localizador;
+import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 import br.com.onlares.model.Usuario;
 
 /**  
@@ -69,25 +70,21 @@ public class LoginController {
 			validator.onErrorUsePageOf(this).login();
 		} 
 		
-		inicializaUsuarioLogado(usuario);
-		inicializaAnuncios();
-		
-		result.redirectTo(HomeController.class).index();
-	}
-	
-	private void inicializaUsuarioLogado(Usuario usuario) {
+		// UsuarioLogado
 		Usuario usuarioDB = usuariodao.buscaPorEmail(usuario.getEmail());
 		List<Localizador> localizadores = localizadorDao.lista(usuarioDB.getId());
 		usuarioLogado.setUsuario(usuarioDB);
 		usuarioLogado.setLocalizadores(localizadores);
+		// Anuncios
+		Long condominioId = LocalizadorDoUsuarioLogado.getCondominioIdAtual(usuarioLogado);
+		anuncioDao.setCondominioId(condominioId);
+		coletorDeAnuncio.setAnuncios(anuncioDao.lista());
+		
+		result.redirectTo(HomeController.class).index();
 	}
 	
 	private void limpaUsuarioLogado() {
 		usuarioLogado.logout();
-	}
-	
-	private void inicializaAnuncios() {
-		coletorDeAnuncio.setAnuncios(anuncioDao.lista());
 	}
 	
 	private void limpaAnuncios() {
@@ -107,7 +104,7 @@ public class LoginController {
 		for (Localizador localizadorDB : usuarioLogado.getLocalizadores()) {
 			if (localizadorDB.getId().equals(localizadorId)) {
 				usuarioLogado.setLocalizadorAtual(localizadorDB);
-				inicializaAnuncios();
+				coletorDeAnuncio.setAnuncios(anuncioDao.lista());
 				break;
 			}
 		}

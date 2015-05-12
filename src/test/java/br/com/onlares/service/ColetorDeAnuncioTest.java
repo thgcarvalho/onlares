@@ -1,15 +1,13 @@
 package br.com.onlares.service;
 
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import br.com.onlares.dao.AnuncioDao;
+import br.com.onlares.controller.ColetorDeAnuncio;
 import br.com.onlares.model.Anuncio;
 
 /**  
@@ -21,7 +19,6 @@ public class ColetorDeAnuncioTest {
 
 	@Test
 	public void deveEmbaralharListaDeAnuncios() {
-		AnuncioDao daoFalso = mock(AnuncioDao.class);
 		List<Anuncio> anunciosDB = new ArrayList<Anuncio>();
 		Anuncio anuncioDB;
 		for (int i = 0; i < 100; i++) {
@@ -29,11 +26,9 @@ public class ColetorDeAnuncioTest {
 			anuncioDB.setTitulo("Anúncio" + i);
 			anunciosDB.add(anuncioDB);
 		}
-		
-		when(daoFalso.lista()).thenReturn(new ArrayList<>(anunciosDB));
-		
-		ColetorDeAnuncio coletorDeAnuncio = new ColetorDeAnuncio(daoFalso);
-		List<Anuncio> anuncios = coletorDeAnuncio.getAnuncios();
+		ColetorDeAnuncio coletorDeAnuncio = new ColetorDeAnuncio();
+		coletorDeAnuncio.setAnuncios(anunciosDB);
+		List<Anuncio> anuncios = coletorDeAnuncio.getVisualidados();
 	
 		boolean diferente = false;
 		
