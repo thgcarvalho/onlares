@@ -174,7 +174,7 @@
 		</li>
 -->	
 		<li id="menu_avisos" class="">
-			<a href="${ctx}/aviso/index">
+			<a href="${ctx}/aviso/lista">
 				<i class="menu-icon fa fa-warning"></i>
 				<span class="menu-text"> Avisos </span>
 			</a>
