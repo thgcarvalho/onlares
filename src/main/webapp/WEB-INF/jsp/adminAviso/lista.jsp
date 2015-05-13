@@ -30,13 +30,13 @@
 	
 		<div class="page-header">
 			<h1>
-				Documentos
+				Avisos
 			</h1>
 		</div><!-- /.page-header -->
 		
 		<div class="clearfix">
 			<div class="pull-right tableTools-buttons">
-	      		<a href="${ctx}/adminDocumento/novo">
+	      		<a href="${ctx}/adminAviso/novo">
 					<button class="btn btn-success" type="submit" >
 						<i class="ace-icon fa fa-plus bigger-110"></i>
 						Novo
@@ -52,22 +52,22 @@
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
 					<c:choose>
-						<c:when test="${documentoList.isEmpty()}">
+						<c:when test="${avisoList.isEmpty()}">
 							<div class="col-sm-12">
-						    	<h4>Não existem documentos cadastrados</h4>
+						    	<h4>Não existem avisos cadastrados</h4>
 						    </div>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${documentoList}" var="documento">
-								<div class="col-xs-3">
-									<h3 class="header smaller lighter blue">
-										<i class="ace-icon fa fa-file"></i>
-										${documento.titulo}
-									</h3>
-									
-									<div class="hidden-sm hidden-xs action-buttons pull-right">
-										<a class="deletar" href="${linkTo[AdminDocumentoController].remove(documento.id)}" 
-                  								title="Remover '${documento.descricao}'." >
+							<c:forEach items="${avisoList}" var="aviso">
+								<div class="col-xs-12">
+									<div class="header bigger lighter blue">
+										<a href="${linkTo[AdminAvisoController].visualiza(aviso.id)}">
+											<i class="ace-icon fa fa-file"></i>
+											${aviso.titulo}
+										</a>
+										<div class="hidden-sm hidden-xs action-buttons pull-right">
+										<a class="deletar" href="${linkTo[AdminAvisoController].remove(aviso.id)}" 
+                  								title="Remover '${aviso.titulo}'" >
 											<i class="ace-icon fa fa-trash-o bigger-130"></i>
 										</a>
 									</div>
@@ -79,7 +79,7 @@
 
 											<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 												<li>
-													<a href="${linkTo[AdminDocumentoController].remove(documento.id)}" 
+													<a href="${linkTo[AdminAvisoController].remove(aviso.id)}" 
 														class="deletar tooltip-error" data-rel="tooltip" title="Remover" >
 														<span class="red">
 															<i class="ace-icon fa fa-trash-o bigger-120"></i>
@@ -89,11 +89,8 @@
 											</ul>
 										</div>
 									</div>
-									<br/>
-									<a href="${linkTo[AdminDocumentoController].documento(documento.id)}" class="thumbnail" target="_blank">
-										<img class="img-responsive" src="${ctx}/resources/images/document-down-icon.png" alt="${documento.titulo}" />
-									</a>
 								</div>
+							</div>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -118,7 +115,7 @@
 					type: 'POST',
 					data: { _method: "DELETE"},
 					success: function(data) {
-		   				location.href = '<c:url value="/adminDocumento/lista"/>';
+		   				location.href = '<c:url value="/adminAviso/lista"/>';
 	   				}
 				}).done(function(data, textStatus, jqXHR){
 					console.log("REMOVER");
@@ -141,7 +138,7 @@
 	    });
 	
 		$(function() {
-			$('#menuadmin_documentos').addClass('active');
+			$('#menuadmin_avisos').addClass('active');
 		});
 	</script>
 </content>

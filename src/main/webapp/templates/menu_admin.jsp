@@ -24,6 +24,15 @@
 
 	<ul  id="menuadmin_home" class="nav nav-list">
 	
+		<li id="menuadmin_home" class="">
+			<a href="${ctx}/adminHome/index">
+				<i class="menu-icon fa fa-home"></i>
+				<span class="menu-text"> Home </span>
+			</a>
+
+			<b class="arrow"></b>
+		</li>
+		
 		<li id="menuadmin_unidades" class="">
 			<a href="${ctx}/adminUnidade/lista">
 				<i class="menu-icon fa fa-map-marker"></i>
@@ -136,7 +145,7 @@
 		</li>
 		
 		<li id="menuadmin_avisos" class="">
-			<a href="${ctx}/adminAviso/index">
+			<a href="${ctx}/adminAviso/lista">
 				<i class="menu-icon fa fa-warning"></i>
 				<span class="menu-text"> Avisos </span>
 			</a>

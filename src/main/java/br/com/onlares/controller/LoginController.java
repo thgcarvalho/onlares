@@ -114,7 +114,6 @@ public class LoginController {
 			result.redirectTo(HomeController.class).index();
 		}
 	}
-
 	
 	public UsuarioLogado getUsuarioLogado() {
 		return usuarioLogado;

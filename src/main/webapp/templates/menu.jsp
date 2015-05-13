@@ -38,6 +38,7 @@
 	</div><!-- /.sidebar-shortcuts -->
 
 	<ul class="nav nav-list">
+	<!--
 		<li id="menu_home" class="">
 			<a href="${ctx}/home/index">
 				<i class="menu-icon fa fa-home"></i>
@@ -46,7 +47,7 @@
 
 			<b class="arrow"></b>
 		</li>
-		
+		-->
 		<li id="menu_moradores" class="">
 			<a href="${ctx}/morador/lista">
 				<i class="menu-icon fa fa-users"></i>

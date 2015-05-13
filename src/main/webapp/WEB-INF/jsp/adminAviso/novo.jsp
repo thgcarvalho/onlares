@@ -42,17 +42,19 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS <textarea class="wysiwyg-editor" id="editor1" name="editor" placeholder="Enter text ..."></textarea>-->
 				<form class="form-horizontal" id="myform" role="form" action="${ctx}/adminAviso/" method="post">
-					<input type="hidden" id="html" name="html" />
-					<div class="wysiwyg-editor" name="editor1" id="editor1"></div>
-
-					
-					<!--
-					<textarea class="wysiwyg-editor" id="editor1" name="editor1"></textarea>
-					<br><br><p>click me</p>
-					<textarea class="wysiwyg-editor" id="editor1" name="editor" placeholder="Enter text ..."></textarea>
 				
-					<div class="wysiwyg-editor" id="editor2"></div>
-		-->
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="titulo"> Título* </label>
+						<div class="col-sm-9">
+							<input type="text" required="required" id="titulo" name="aviso.titulo" value="${aviso.titulo}" 
+							placeholder="Título" maxlength="60" autofocus class="col-xs-10 col-sm-5" />
+						</div>
+					</div>
+
+					<div class="space-4"></div>
+				
+					<input type="hidden" id="html" name="aviso.texto" />
+					<div class="wysiwyg-editor" name="editor1" id="editor1"></div>
 					<div class="hr hr-double dotted"></div>
 					
 					<div class="clearfix form-actions">
@@ -90,7 +92,6 @@
 			$("#myform").submit(function() {
 			   // Retrieve the HTML from the plugin
 			   var html = $('#editor1').html();
-			   alert(html);
 			   // Put this in the hidden field
 			   $("#html").val(html);
 			});
