@@ -10,10 +10,10 @@ import br.com.onlares.annotations.Admin;
 * 
 */
 @Controller
-public class AdminController {
+public class AdminPainelController {
 	
 	@Admin
-	@Get("/admin/index")
+	@Get("/adminPainel/index")
 	public void index() {
 
 	}

@@ -50,7 +50,7 @@
 			<li>
 				<c:if test="${usuarioLogado.usuario.admin}">
 	      			<li class="blue" >
-						<a href="${ctx}/admin/index">
+						<a href="${ctx}/adminPainel/index">
 							<i class="ace-icon fa fa-user"></i>
 						</a>
 					</li>

@@ -21,11 +21,11 @@
 			<a class="btn btn-warning" href="${ctx}/calendario/index">
 				<i class="ace-icon fa fa-calendar"></i>
 			</a>
-			<a class="btn btn-danger" href="${ctx}/home/index">
+			<a class="btn btn-danger" href="${ctx}/aviso/lista">
 				<i class="ace-icon fa fa-warning"></i>
 			</a>
 		</div>
-
+		
 		<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 			<span class="btn btn-success"></span>
 
@@ -38,7 +38,7 @@
 	</div><!-- /.sidebar-shortcuts -->
 
 	<ul class="nav nav-list">
-	<!--
+
 		<li id="menu_home" class="">
 			<a href="${ctx}/home/index">
 				<i class="menu-icon fa fa-home"></i>
@@ -47,7 +47,7 @@
 
 			<b class="arrow"></b>
 		</li>
-		-->
+
 		<li id="menu_moradores" class="">
 			<a href="${ctx}/morador/lista">
 				<i class="menu-icon fa fa-users"></i>

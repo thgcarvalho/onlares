@@ -24,10 +24,10 @@
 
 	<ul  id="menuadmin_home" class="nav nav-list">
 	
-		<li id="menuadmin_home" class="">
-			<a href="${ctx}/adminHome/index">
-				<i class="menu-icon fa fa-home"></i>
-				<span class="menu-text"> Home </span>
+		<li id="menuadmin_painel" class="">
+			<a href="${ctx}/adminPainel/index">
+				<i class="menu-icon fa fa-tachometer"></i>
+				<span class="menu-text"> Painel </span>
 			</a>
 
 			<b class="arrow"></b>
