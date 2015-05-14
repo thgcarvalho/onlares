@@ -51,4 +51,9 @@ public class UsuarioLogado implements Serializable {
 		this.usuario = null;
 	}
 	
+	@Override
+	public String toString() {
+		return "usuario=" + usuario + " lclzdr=" + localizadorAtual;
+	}
+	
 }

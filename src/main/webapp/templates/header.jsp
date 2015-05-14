@@ -60,18 +60,18 @@
 			<li class="purple">
 				<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 					<i class="ace-icon fa fa-bell icon-animated-bell"></i>
-					<span class="badge badge-important">${usuarioLogado.usuario.notificacoes}</span>
+					<span class="badge badge-important">${usuarioLogado.usuario.quantidadeDeAvisos}</span>
 				</a>
 
 				<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
 					<li class="dropdown-header">
 						<i class="ace-icon fa fa-exclamation-triangle"></i>
-						${usuarioLogado.usuario.notificacoes} Avisos
+						${usuarioLogado.usuario.quantidadeDeAvisos} Avisos não visualizados
 					</li>
 
 					<li class="dropdown-footer">
-						<a href="#">
-							Ver todas os avisos
+						<a href="${ctx}/aviso/lista">
+							Visualizar avisos
 							<i class="ace-icon fa fa-arrow-right"></i>
 						</a>
 					</li>

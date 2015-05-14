@@ -19,6 +19,7 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.bean.ColetorDeAnuncio;
 import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.AnuncioDao;
+import br.com.onlares.dao.AvisoUsuarioDao;
 import br.com.onlares.dao.LocalizadorDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Localizador;
@@ -36,6 +37,7 @@ public class LoginControllerTest {
 		UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
 		LocalizadorDao localizadorDaoFalso = mock(LocalizadorDao.class);
 		AnuncioDao anuncioDaoFalso = mock(AnuncioDao.class);
+		AvisoUsuarioDao avisoUsuarioDaoFalso = mock(AvisoUsuarioDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		
@@ -46,7 +48,7 @@ public class LoginControllerTest {
 		when(usuarioDaoFalso.buscaPorEmail("tcarvalho@onlares.com.br")).thenReturn(usuarioDB);
 		when(localizadorDaoFalso.lista(usuarioDB.getId())).thenReturn(new ArrayList<Localizador>());
 		
-		LoginController loginController = new LoginController(usuarioDaoFalso, localizadorDaoFalso, anuncioDaoFalso, validatorFalso, resultFalso, new UsuarioLogado(), new ColetorDeAnuncio());
+		LoginController loginController = new LoginController(usuarioDaoFalso, localizadorDaoFalso, anuncioDaoFalso, avisoUsuarioDaoFalso, validatorFalso, resultFalso, new UsuarioLogado(), new ColetorDeAnuncio());
 		loginController.auth(usuarioForm);
 		UsuarioLogado usuarioLogado = loginController.getUsuarioLogado();
 		
@@ -63,7 +65,7 @@ public class LoginControllerTest {
 		
 		when(daoFalso.existe(usuarioForm)).thenReturn(false);
 		
-		LoginController loginController = new LoginController(daoFalso, null, null, validatorFalso, resultFalso, new UsuarioLogado(), new ColetorDeAnuncio());
+		LoginController loginController = new LoginController(daoFalso, null, null, null, validatorFalso, resultFalso, new UsuarioLogado(), new ColetorDeAnuncio());
 		loginController.auth(usuarioForm);
 		UsuarioLogado usuarioLogado = loginController.getUsuarioLogado();
 		
@@ -78,7 +80,7 @@ public class LoginControllerTest {
 		Usuario usuario = new Usuario("tcarvalho@onlares.com.br", "S3cr3t", "Thiago Carvalho");
 		usuarioLogado.setUsuario(usuario);
 		
-		LoginController loginController = new LoginController(null, null, null, null, resultFalso, usuarioLogado, new ColetorDeAnuncio());
+		LoginController loginController = new LoginController(null, null, null, null, null, resultFalso, usuarioLogado, new ColetorDeAnuncio());
 		
 		assertNotNull(loginController.getUsuarioLogado().getUsuario());
 		loginController.sair();

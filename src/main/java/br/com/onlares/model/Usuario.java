@@ -57,6 +57,9 @@ public class Usuario implements Serializable {
 	private List<Unidade> unidades;
 	@Transient
 	private String localizacoes;
+	@Transient
+	private int quantidadeDeAvisos;
+	
 	private String foto;
 	@Transient
 	private String fotoTemp;
@@ -283,9 +286,12 @@ public class Usuario implements Serializable {
 		return false;
 	}
 	
-	@Transient
-	public int getNotificacoes() {
-		return 0;
+	public int getQuantidadeDeAvisos() {
+		return quantidadeDeAvisos;
+	}
+	
+	public void setQuantidadeDeAvisos(int quantidadeDeAvisos) {
+		this.quantidadeDeAvisos = quantidadeDeAvisos;
 	}
 	
 	@Transient
