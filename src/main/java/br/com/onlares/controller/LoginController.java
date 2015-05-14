@@ -19,7 +19,6 @@ import br.com.onlares.dao.AnuncioDao;
 import br.com.onlares.dao.AvisoUsuarioDao;
 import br.com.onlares.dao.LocalizadorDao;
 import br.com.onlares.dao.UsuarioDao;
-import br.com.onlares.model.AvisoUsuario;
 import br.com.onlares.model.Localizador;
 import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 import br.com.onlares.model.Usuario;
