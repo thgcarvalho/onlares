@@ -13,6 +13,8 @@ import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.caelum.vraptor.view.Results;
 import br.com.onlares.annotations.Public;
+import br.com.onlares.bean.ColetorDeAnuncio;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.AnuncioDao;
 import br.com.onlares.dao.LocalizadorDao;
 import br.com.onlares.dao.UsuarioDao;

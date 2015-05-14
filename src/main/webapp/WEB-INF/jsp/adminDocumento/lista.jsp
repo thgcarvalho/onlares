@@ -67,7 +67,7 @@
 									
 									<div class="hidden-sm hidden-xs action-buttons pull-right">
 										<a class="deletar" href="${linkTo[AdminDocumentoController].remove(documento.id)}" 
-                  								title="Remover '${documento.descricao}'." >
+                  								title="Remover '${documento.titulo}'" >
 											<i class="ace-icon fa fa-trash-o bigger-130"></i>
 										</a>
 									</div>

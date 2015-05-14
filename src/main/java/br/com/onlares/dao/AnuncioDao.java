@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import br.com.onlares.controller.UsuarioLogado;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.model.Anuncio;
 import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 

@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import br.com.onlares.controller.UsuarioLogado;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.model.Calendario;
 import br.com.onlares.model.Condominio;
 import br.com.onlares.model.LocalizadorDoUsuarioLogado;

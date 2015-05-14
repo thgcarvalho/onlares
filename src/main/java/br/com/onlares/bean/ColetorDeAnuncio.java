@@ -1,4 +1,4 @@
-package br.com.onlares.controller;
+package br.com.onlares.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;

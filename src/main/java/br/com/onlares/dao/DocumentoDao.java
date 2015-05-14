@@ -9,7 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import br.com.onlares.controller.UsuarioLogado;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.model.Condominio;
 import br.com.onlares.model.Documento;
 import br.com.onlares.model.LocalizadorDoUsuarioLogado;
@@ -38,8 +38,10 @@ public class DocumentoDao {
 	public List<Documento> listaSemArquivo() {
 		List<Documento> documentos = new ArrayList<Documento>();
 		Documento documento;
-		String consulta = "SELECT d.id, d.titulo FROM Documento d";
+		String consulta = "SELECT d.id, d.titulo FROM Documento d"
+				+ " WHERE d.condominio.id = :condominioId";
 		TypedQuery<Object[]> query = em.createQuery(consulta, Object[].class);
+		query.setParameter("condominioId", condominioId);
 		List<Object[]> results = query.getResultList();
 		
 		for (Object[] result : results) {

@@ -1,6 +1,6 @@
 package br.com.onlares.model;
 
-import br.com.onlares.controller.UsuarioLogado;
+import br.com.onlares.bean.UsuarioLogado;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.

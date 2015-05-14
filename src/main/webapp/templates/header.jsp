@@ -66,12 +66,12 @@
 				<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
 					<li class="dropdown-header">
 						<i class="ace-icon fa fa-exclamation-triangle"></i>
-						${usuarioLogado.usuario.notificacoes} Notificações
+						${usuarioLogado.usuario.notificacoes} Avisos
 					</li>
 
 					<li class="dropdown-footer">
 						<a href="#">
-							Ver todas as notificações
+							Ver todas os avisos
 							<i class="ace-icon fa fa-arrow-right"></i>
 						</a>
 					</li>

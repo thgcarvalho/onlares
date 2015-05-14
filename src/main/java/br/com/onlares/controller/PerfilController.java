@@ -23,6 +23,7 @@ import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.FotoDao;
 import br.com.onlares.dao.TempDao;
 import br.com.onlares.dao.UsuarioDao;

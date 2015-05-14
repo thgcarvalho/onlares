@@ -15,6 +15,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.comparador.ComparadorReserva;
 import br.com.onlares.dao.EspacoDao;
 import br.com.onlares.dao.ReservaDao;

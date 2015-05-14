@@ -18,6 +18,7 @@ import br.com.caelum.vraptor.simplemail.Mailer;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.AlteraEmailDao;
 import br.com.onlares.dao.ExcluiContaDao;
 import br.com.onlares.dao.UsuarioDao;

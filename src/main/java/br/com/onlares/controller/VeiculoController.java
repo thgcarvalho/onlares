@@ -10,6 +10,7 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.VeiculoDao;
 import br.com.onlares.model.Veiculo;
 

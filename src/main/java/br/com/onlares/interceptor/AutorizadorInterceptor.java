@@ -10,7 +10,7 @@ import br.com.caelum.vraptor.controller.ControllerMethod;
 import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
 import br.com.caelum.vraptor.view.Results;
 import br.com.onlares.annotations.Admin;
-import br.com.onlares.controller.UsuarioLogado;
+import br.com.onlares.bean.UsuarioLogado;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.

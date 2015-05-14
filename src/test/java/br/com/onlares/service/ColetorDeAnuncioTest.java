@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import br.com.onlares.controller.ColetorDeAnuncio;
+import br.com.onlares.bean.ColetorDeAnuncio;
 import br.com.onlares.model.Anuncio;
 
 /**  

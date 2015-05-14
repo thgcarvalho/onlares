@@ -16,6 +16,8 @@ import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.util.test.MockValidator;
 import br.com.caelum.vraptor.validator.ValidationException;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.onlares.bean.ColetorDeAnuncio;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.AnuncioDao;
 import br.com.onlares.dao.LocalizadorDao;
 import br.com.onlares.dao.UsuarioDao;
