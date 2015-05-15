@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Result;
+import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.AvisoDao;
 import br.com.onlares.dao.AvisoVisualizadoDao;
 import br.com.onlares.model.Aviso;
@@ -21,17 +22,19 @@ public class AvisoController {
 	
 	private final AvisoDao avisoDao;
 	private final AvisoVisualizadoDao avisoVisualizadoDao;
+	private final UsuarioLogado usuarioLogado;
 	private final Result result;
 
 	@Inject
-	public AvisoController(AvisoDao avisoDao, AvisoVisualizadoDao avisoVisualizadoDao, Result result) {
+	public AvisoController(AvisoDao avisoDao, AvisoVisualizadoDao avisoVisualizadoDao, UsuarioLogado usuarioLogado, Result result) {
 		this.avisoDao = avisoDao;
 		this.avisoVisualizadoDao = avisoVisualizadoDao;
+		this.usuarioLogado = usuarioLogado;
 		this.result = result;
 	}
 	
 	public AvisoController() {
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 	
 	@Get("/aviso/lista")
@@ -49,6 +52,7 @@ public class AvisoController {
 		} else {
 			if (!avisoVisualizadoDao.foiVisualizado(id)) {
 				avisoVisualizadoDao.adiciona(id);
+				usuarioLogado.getUsuario().removeUmAviso();
 			}
 			result.include("aviso", aviso);
 		}

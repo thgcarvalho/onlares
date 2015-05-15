@@ -288,9 +288,11 @@ public class Usuario implements Serializable {
 	public int getQuantidadeDeAvisos() {
 		return quantidadeDeAvisos;
 	}
-	
 	public void setQuantidadeDeAvisos(int quantidadeDeAvisos) {
 		this.quantidadeDeAvisos = quantidadeDeAvisos;
+	}
+	public void removeUmAviso() {
+		quantidadeDeAvisos--;
 	}
 	
 	@Transient

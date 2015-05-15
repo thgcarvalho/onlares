@@ -22,7 +22,7 @@
 			</li>
 			<li>
 			<i class=""></i>
-				<a href="${ctx}/adminAviso/lista">Avisos</a>
+				<a href="${ctx}/aviso/lista">Avisos</a>
 			</li>
 			<li class="active">Aviso</li>
 		</ul><!-- /.breadcrumb -->
