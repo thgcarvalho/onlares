@@ -12,7 +12,6 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.comparador.ComparadorAutorizacao;
 import br.com.onlares.dao.AutorizacaoDao;
 import br.com.onlares.dao.TipoDeAutorizacaoDao;
@@ -33,7 +32,7 @@ public class AutorizacaoController {
 	private final Result result;
 
 	@Inject
-	public AutorizacaoController(UsuarioLogado usuarioLogado, AutorizacaoDao autorizacaoDao, TipoDeAutorizacaoDao tipoDeAutorizacaoDao, Validator validator, Result result) {
+	public AutorizacaoController(AutorizacaoDao autorizacaoDao, TipoDeAutorizacaoDao tipoDeAutorizacaoDao, Validator validator, Result result) {
 		this.autorizacaoDao = autorizacaoDao;
 		this.tipoDeAutorizacaoDao = tipoDeAutorizacaoDao;
 		this.validator = validator;
@@ -41,7 +40,7 @@ public class AutorizacaoController {
 	}
 	
 	public AutorizacaoController() {
-		this(null, null, null, null, null);
+		this(null, null, null, null);
 	}
 	
 	@Get("/autorizacao/index")

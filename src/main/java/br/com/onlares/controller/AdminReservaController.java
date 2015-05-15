@@ -15,7 +15,6 @@ import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
-import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.comparador.ComparadorReserva;
 import br.com.onlares.dao.EspacoDao;
 import br.com.onlares.dao.ReservaDao;
@@ -36,7 +35,7 @@ public class AdminReservaController {
 	private final Result result;
 
 	@Inject
-	public AdminReservaController(UsuarioLogado usuarioLogado, EspacoDao espacoDao, ReservaDao reservaDao, Validator validator, Result result) {
+	public AdminReservaController(EspacoDao espacoDao, ReservaDao reservaDao, Validator validator, Result result) {
 		this.reservaDao = reservaDao;
 		this.espacoDao = espacoDao;
 		this.validator = validator;
@@ -44,7 +43,7 @@ public class AdminReservaController {
 	}
 	
 	public AdminReservaController() {
-		this(null, null, null, null, null);
+		this(null, null, null, null);
 	}
 	
 	@Admin

@@ -47,6 +47,9 @@ public class AvisoController {
 		if (aviso == null) {
 			result.notFound();
 		} else {
+			if (!avisoVisualizadoDao.foiVisualizado(id)) {
+				avisoVisualizadoDao.adiciona(id);
+			}
 			result.include("aviso", aviso);
 		}
 	}

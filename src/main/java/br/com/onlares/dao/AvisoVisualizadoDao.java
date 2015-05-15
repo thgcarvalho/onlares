@@ -31,18 +31,37 @@ public class AvisoVisualizadoDao {
 		this(null, null); // para uso do CDI
 	}
 	
+	public void adiciona(Long avisoId) {
+		AvisoVisualizado avisoVisualizado = new AvisoVisualizado();
+		avisoVisualizado.setAvisoId(avisoId);
+		avisoVisualizado.setUsuarioId(usuarioId);
+		em.persist(avisoVisualizado);
+	}
+	
+	public boolean foiVisualizado(Long avisoId) {
+		List<AvisoVisualizado> avisosVisualizados = em.createQuery("SELECT av FROM AvisoVisualizado av"
+			+ " where av.usuarioId = :usuarioId", AvisoVisualizado.class)
+			.setParameter("usuarioId", this.usuarioId).getResultList();
+		for (AvisoVisualizado avisoVisualizado : avisosVisualizados) {
+			if (avisoId.compareTo(avisoVisualizado.getAvisoId()) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void setaVisualizacao(List<Aviso> avisos) {
 		List<AvisoVisualizado> avisosVisualizados = em.createQuery("SELECT av FROM AvisoVisualizado av"
 			+ " where av.usuarioId = :usuarioId", AvisoVisualizado.class)
 			.setParameter("usuarioId", this.usuarioId).getResultList();
 		for (Aviso aviso : avisos) {
+			aviso.setVisualizado(false);
 			for (AvisoVisualizado avisoVisualizado : avisosVisualizados) {
 				if (aviso.getId().compareTo(avisoVisualizado.getAvisoId()) == 0) {
 					aviso.setVisualizado(true);
 					break;
 				}
 			}
-			aviso.setVisualizado(false);
 		}
 	}
 	

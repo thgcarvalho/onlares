@@ -11,7 +11,6 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.annotations.Admin;
-import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.PetDao;
 import br.com.onlares.dao.UnidadeDao;
 import br.com.onlares.model.Pet;
@@ -30,7 +29,7 @@ public class AdminPetController {
 	private final Result result;
 
 	@Inject
-	public AdminPetController(UsuarioLogado usuarioLogado, PetDao petDao, UnidadeDao unidadeDao, Validator validator, Result result) {
+	public AdminPetController(PetDao petDao, UnidadeDao unidadeDao, Validator validator, Result result) {
 		this.petDao = petDao;
 		this.unidadeDao = unidadeDao;
 		this.validator = validator;
@@ -38,7 +37,7 @@ public class AdminPetController {
 	}
 	
 	public AdminPetController() {
-		this(null, null, null, null, null);
+		this(null, null, null, null);
 	}
 	
 	@Admin

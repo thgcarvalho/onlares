@@ -10,7 +10,6 @@ import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.PetDao;
 import br.com.onlares.model.Pet;
 
@@ -27,14 +26,14 @@ public class PetController {
 	private final Result result;
 
 	@Inject
-	public PetController(UsuarioLogado usuarioLogado, PetDao dao, Validator validator, Result result) {
+	public PetController(PetDao dao, Validator validator, Result result) {
 		this.dao = dao;
 		this.validator = validator;
 		this.result = result;
 	}
 	
 	public PetController() {
-		this(null, null, null, null);
+		this(null, null, null);
 	}
 	
 	@Get("/pet/lista")

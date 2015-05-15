@@ -59,10 +59,9 @@ public class Usuario implements Serializable {
 	private String localizacoes;
 	@Transient
 	private int quantidadeDeAvisos;
-	
-	private String foto;
 	@Transient
 	private String fotoTemp;
+	private String foto;
 
 	public Usuario() {
 		this(null, null, null);

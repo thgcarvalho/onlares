@@ -35,7 +35,6 @@ public class ReservaController {
 	private final EspacoDao espacoDao;
 	private final Validator validator;
 	private final Result result;
-	private final Long unidadeId;
 
 	@Inject
 	public ReservaController(UsuarioLogado usuarioLogado, ReservaDao reservaDao, EspacoDao espacoDao, Validator validator, Result result) {
@@ -43,11 +42,6 @@ public class ReservaController {
 		this.espacoDao = espacoDao;
 		this.validator = validator;
 		this.result = result;
-		if (usuarioLogado != null && usuarioLogado.getLocalizadorAtual().getUnidade() != null) {
-			this.unidadeId = usuarioLogado.getLocalizadorAtual().getUnidade().getId();
-		} else {
-			this.unidadeId = 0L;
-		}
 	}
 	
 	public ReservaController() {
@@ -75,7 +69,7 @@ public class ReservaController {
 	
 	@Get("/reserva/listaDaUnidade/")
 	public void listaDaUnidade() {
-		List<Reserva> reservas= reservaDao.listaDaUnidade(this.unidadeId);
+		List<Reserva> reservas= reservaDao.listaDaUnidade();
 		for (Reserva reserva : reservas) {
 			if (podeCancelar(reserva)) {
 				reserva.setPodeCancelar(true);

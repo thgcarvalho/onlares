@@ -23,11 +23,13 @@ public class ReservaDao {
 
 	private final EntityManager em;
 	private final Long condominioId;
+	private final Long unidadeId;
 	
 	@Inject
 	public ReservaDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
 		this.condominioId = LocalizadorDoUsuarioLogado.getCondominioIdAtual(usuarioLogado);
+		this.unidadeId = LocalizadorDoUsuarioLogado.getUnidadeIdAtual(usuarioLogado);
 	}
 	
 	@Deprecated
@@ -77,12 +79,12 @@ public class ReservaDao {
 		return unidadeReserva;
 	}
 	
-	public List<Reserva> listaDaUnidade(Long unidadeId) {
+	public List<Reserva> listaDaUnidade() {
 		List<Reserva> reservas;
 		try {
 			reservas = em.createQuery("select r from Reserva r"
 					+ " where r.unidade.id = :unidadeId", Reserva.class)
-					.setParameter("unidadeId", unidadeId).getResultList();
+					.setParameter("unidadeId", this.unidadeId).getResultList();
 		} catch (EntityNotFoundException e) {
 			reservas = new ArrayList<Reserva>();
 		}

@@ -25,18 +25,12 @@ public class VeiculoController {
 	private final VeiculoDao dao;
 	private final Validator validator;
 	private final Result result;
-	private final Long unidadeId;
 
 	@Inject
 	public VeiculoController(UsuarioLogado usuarioLogado, VeiculoDao dao, Validator validator, Result result) {
 		this.dao = dao;
 		this.validator = validator;
 		this.result = result;
-		if (usuarioLogado != null && usuarioLogado.getLocalizadorAtual().getUnidade() != null) {
-			this.unidadeId = usuarioLogado.getLocalizadorAtual().getUnidade().getId();
-		} else {
-			this.unidadeId = 0L;
-		}
 	}
 	
 	public VeiculoController() {
@@ -45,7 +39,7 @@ public class VeiculoController {
 	
 	@Get("/veiculo/lista")
 	public void lista() {
-		result.include("veiculoUnidadeList", dao.listaDaUnidade(this.unidadeId));
+		result.include("veiculoUnidadeList", dao.listaDaUnidade());
 	}
 	
 	@Get("/veiculo/novo")
@@ -70,7 +64,7 @@ public class VeiculoController {
 	
 	@Get("/veiculo/edita/{veiculoId}")
 	public void edita(Long veiculoId) {
-		Veiculo veiculo = dao.buscaNaUnidade(this.unidadeId, veiculoId);
+		Veiculo veiculo = dao.buscaNaUnidade(veiculoId);
 		if (veiculo == null) {
 			result.notFound();
 		} else {
@@ -98,7 +92,7 @@ public class VeiculoController {
 	@Delete("/veiculo/{veiculoId}")
 	public void remove(Long veiculoId){
 		System.out.println("Veículo = " + veiculoId + " FOI REMOVIDO!");
-		Veiculo usuario = dao.buscaNaUnidade(this.unidadeId, veiculoId);
+		Veiculo usuario = dao.buscaNaUnidade(veiculoId);
 		dao.remove(usuario);
 		result.nothing();
 	}

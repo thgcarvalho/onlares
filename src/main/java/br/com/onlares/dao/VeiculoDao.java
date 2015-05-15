@@ -26,11 +26,13 @@ public class VeiculoDao {
 
 	private final EntityManager em;
 	private final Long condominioId;
+	private final Long unidadeId;
 	
 	@Inject
 	public VeiculoDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
 		this.condominioId = LocalizadorDoUsuarioLogado.getCondominioIdAtual(usuarioLogado);
+		this.unidadeId = LocalizadorDoUsuarioLogado.getUnidadeIdAtual(usuarioLogado);
 	}
 	
 	@Deprecated
@@ -85,13 +87,13 @@ public class VeiculoDao {
 		return veiculo;
 	}
 	
-	public Veiculo buscaNaUnidade(Long unidadeId, Long veiculoId) {
+	public Veiculo buscaNaUnidade(Long veiculoId) {
 		Veiculo veiculo;
 		String strQuery = "SELECT v FROM Veiculo v"
 				+ " WHERE v.unidade.id = :unidadeId AND v.id = :veiculoId";
 		try {
 			Query query = em.createQuery(strQuery, Veiculo.class);
-			query.setParameter("unidadeId", unidadeId);
+			query.setParameter("unidadeId", this.unidadeId);
 			query.setParameter("veiculoId", veiculoId);
 			veiculo = (Veiculo) query.getSingleResult();
 		} catch (NoResultException nrExp) {
@@ -100,12 +102,12 @@ public class VeiculoDao {
 		return veiculo;
 	}
 	
-	public List<Veiculo> listaDaUnidade(Long unidadeId) {
+	public List<Veiculo> listaDaUnidade() {
 		List<Veiculo> veiculos;
 		try {
 			veiculos = em.createQuery("select v from Veiculo v"
 					+ " where v.unidade.id = :unidadeId", Veiculo.class)
-					.setParameter("unidadeId", unidadeId).getResultList();
+					.setParameter("unidadeId", this.unidadeId).getResultList();
 		} catch (EntityNotFoundException e) {
 			veiculos = new ArrayList<Veiculo>();
 		}
