@@ -51,8 +51,18 @@
 								<div class="col-xs-12">
 									<div class="header bigger lighter blue">
 										<a href="${linkTo[AvisoController].visualiza(aviso.id)}">
-											<i class="ace-icon fa fa-file"></i>
-											${aviso.titulo}
+											<c:choose>
+												<c:when test="${aviso.visualizado}">
+													<i class="ace-icon fa fa-file-o"></i>
+													${aviso.titulo}
+												</c:when>
+												<c:otherwise>
+													<i class="ace-icon fa fa-file"></i>
+													<b>
+														${aviso.titulo}
+													</b>
+												</c:otherwise>
+											</c:choose>
 										</a>
 									</div>
 								</div>

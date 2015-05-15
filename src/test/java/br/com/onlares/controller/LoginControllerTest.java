@@ -19,7 +19,7 @@ import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.bean.ColetorDeAnuncio;
 import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.AnuncioDao;
-import br.com.onlares.dao.AvisoUsuarioDao;
+import br.com.onlares.dao.AvisoVisualizadoDao;
 import br.com.onlares.dao.LocalizadorDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Localizador;
@@ -37,7 +37,7 @@ public class LoginControllerTest {
 		UsuarioDao usuarioDaoFalso = mock(UsuarioDao.class);
 		LocalizadorDao localizadorDaoFalso = mock(LocalizadorDao.class);
 		AnuncioDao anuncioDaoFalso = mock(AnuncioDao.class);
-		AvisoUsuarioDao avisoUsuarioDaoFalso = mock(AvisoUsuarioDao.class);
+		AvisoVisualizadoDao avisoUsuarioDaoFalso = mock(AvisoVisualizadoDao.class);
 		Validator validatorFalso = new MockValidator();
 		Result resultFalso = new MockResult();
 		

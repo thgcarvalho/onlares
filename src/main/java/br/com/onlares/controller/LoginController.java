@@ -16,7 +16,7 @@ import br.com.onlares.annotations.Public;
 import br.com.onlares.bean.ColetorDeAnuncio;
 import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.dao.AnuncioDao;
-import br.com.onlares.dao.AvisoUsuarioDao;
+import br.com.onlares.dao.AvisoVisualizadoDao;
 import br.com.onlares.dao.LocalizadorDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.Localizador;
@@ -34,14 +34,14 @@ public class LoginController {
 	private final UsuarioDao usuariodao;
 	private final LocalizadorDao localizadorDao;
 	private final AnuncioDao anuncioDao;
-	private final AvisoUsuarioDao avisoUsuarioDao;
+	private final AvisoVisualizadoDao avisoUsuarioDao;
 	private final Validator validator;
 	private final Result result;
 	private final UsuarioLogado usuarioLogado;
 	private final ColetorDeAnuncio coletorDeAnuncio;
 	
 	@Inject
-	public LoginController(UsuarioDao usuariodao, LocalizadorDao localizadorDao, AnuncioDao anuncioDao, AvisoUsuarioDao avisoUsuarioDao, Validator validator, Result result, UsuarioLogado usuarioLogado, ColetorDeAnuncio coletorDeAnuncio) {
+	public LoginController(UsuarioDao usuariodao, LocalizadorDao localizadorDao, AnuncioDao anuncioDao, AvisoVisualizadoDao avisoUsuarioDao, Validator validator, Result result, UsuarioLogado usuarioLogado, ColetorDeAnuncio coletorDeAnuncio) {
 		this.usuariodao = usuariodao;
 		this.localizadorDao = localizadorDao;
 		this.anuncioDao = anuncioDao;
@@ -85,9 +85,7 @@ public class LoginController {
 		anuncioDao.setCondominioId(condominioId);
 		coletorDeAnuncio.setAnuncios(anuncioDao.lista());
 		// Avisos
-		//List<AvisoUsuario> listaDoUsuario = avisoUsuarioDao.listaDoUsuario(usuarioDB.getId());
-		Integer quantidadeNaoVisualizada = avisoUsuarioDao.quantidadeNaoVisualizada(usuarioDB.getId());
-		System.out.println("listaDoUsuario" + quantidadeNaoVisualizada);
+		int quantidadeNaoVisualizada = avisoUsuarioDao.quantidadeNaoVisualizada(usuarioDB.getId(), condominioId);
 		usuarioLogado.getUsuario().setQuantidadeDeAvisos(quantidadeNaoVisualizada);
 		
 		result.redirectTo(HomeController.class).index();

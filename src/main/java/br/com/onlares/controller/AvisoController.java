@@ -1,11 +1,14 @@
 package br.com.onlares.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Result;
 import br.com.onlares.dao.AvisoDao;
+import br.com.onlares.dao.AvisoVisualizadoDao;
 import br.com.onlares.model.Aviso;
 
 /**  
@@ -17,21 +20,25 @@ import br.com.onlares.model.Aviso;
 public class AvisoController {
 	
 	private final AvisoDao avisoDao;
+	private final AvisoVisualizadoDao avisoVisualizadoDao;
 	private final Result result;
 
 	@Inject
-	public AvisoController(AvisoDao avisoDao, Result result) {
+	public AvisoController(AvisoDao avisoDao, AvisoVisualizadoDao avisoVisualizadoDao, Result result) {
 		this.avisoDao = avisoDao;
+		this.avisoVisualizadoDao = avisoVisualizadoDao;
 		this.result = result;
 	}
 	
 	public AvisoController() {
-		this(null, null);
+		this(null, null, null);
 	}
 	
 	@Get("/aviso/lista")
 	public void lista() {
-		result.include("avisoList", avisoDao.listaSemTexto());
+		List<Aviso> avisos = avisoDao.listaSemTexto();
+		avisoVisualizadoDao.setaVisualizacao(avisos);
+		result.include("avisoList", avisos);
 	}
 	
 	@Get("/aviso/visualiza/{id}")

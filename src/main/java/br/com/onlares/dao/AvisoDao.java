@@ -11,10 +11,8 @@ import javax.persistence.TypedQuery;
 
 import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.model.Aviso;
-import br.com.onlares.model.AvisoUsuario;
 import br.com.onlares.model.Condominio;
 import br.com.onlares.model.LocalizadorDoUsuarioLogado;
-import br.com.onlares.model.Usuario;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -25,13 +23,11 @@ public class AvisoDao {
 
 	private final EntityManager em;
 	private final Long condominioId;
-	private final MoradorDao moradorDao;
 	
 	@Inject
 	public AvisoDao(EntityManager em, UsuarioLogado usuarioLogado) {
 		this.em = em;
 		this.condominioId = LocalizadorDoUsuarioLogado.getCondominioIdAtual(usuarioLogado);
-		this.moradorDao = new MoradorDao(em, usuarioLogado);
 	}
 	
 	@Deprecated
@@ -57,23 +53,11 @@ public class AvisoDao {
 		return avisos;
 	}
 	
-	public List<Usuario> listaUsuariosRegistrados() {
-		return moradorDao.listaRegistrados();
-	}
-	
 	public void adiciona(Aviso aviso) {
 		Condominio condominio = new Condominio();
 		condominio.setId(condominioId);
 		aviso.setCondominio(condominio);
 		em.persist(aviso);
-		AvisoUsuario avisoUsuario;
-		for (Usuario usuario : listaUsuariosRegistrados()) {
-			avisoUsuario = new AvisoUsuario();
-			avisoUsuario.setAviso(aviso);
-			avisoUsuario.setUsuario(usuario);
-			avisoUsuario.setVisualizado(false);
-			em.persist(avisoUsuario);
-		}
 	}
 	
 	public Aviso busca(Long avisoId) {

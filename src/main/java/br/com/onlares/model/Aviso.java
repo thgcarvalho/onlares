@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -29,6 +30,8 @@ public class Aviso implements Serializable {
 	private Condominio condominio;
 	private String titulo;
 	private String texto;
+	@Transient
+	private boolean visualizado;
 	
 	public Long getId() {
 		return id;
@@ -54,7 +57,12 @@ public class Aviso implements Serializable {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-
+	public boolean isVisualizado() {
+		return visualizado;
+	}
+	public void setVisualizado(boolean visualizado) {
+		this.visualizado = visualizado;
+	}
 
 	@Override
 	public String toString() {

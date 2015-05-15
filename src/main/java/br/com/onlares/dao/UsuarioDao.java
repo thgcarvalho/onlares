@@ -276,23 +276,14 @@ public class UsuarioDao {
 		// Todos foram removidos - Adiciona unidade nao relacionada
 		if ((removeList.size() > 0 && insertList.size() == 0)
 				&& (removeList.size() == localizadoresDB.size())) {
-//			boolean unidadeNaoRelacionadaJaExistente = false;
-//			for (Localizador loc : localizadoresDB) {
-//				if (loc.getUnidade().getId().equals(Constantes.UNIDADE_NAO_RELACIONADA_ID)) {
-//					unidadeNaoRelacionadaJaExistente = true;
-//					break;
-//				}
-//			} 
-//			if (!unidadeNaoRelacionadaJaExistente) {
-				Localizador locUnidNaoRelac = new Localizador();
-				Unidade unidade = new Unidade();
-				unidade.setId(Constantes.UNIDADE_NAO_RELACIONADA_ID);
-				locUnidNaoRelac = new Localizador();
-				locUnidNaoRelac.setCondominio(condominio);
-				locUnidNaoRelac.setUsuario(usuario);
-				locUnidNaoRelac.setUnidade(unidade);
-				em.persist(locUnidNaoRelac);
-//			}
+			Localizador locUnidNaoRelac = new Localizador();
+			Unidade unidade = new Unidade();
+			unidade.setId(Constantes.UNIDADE_NAO_RELACIONADA_ID);
+			locUnidNaoRelac = new Localizador();
+			locUnidNaoRelac.setCondominio(condominio);
+			locUnidNaoRelac.setUsuario(usuario);
+			locUnidNaoRelac.setUnidade(unidade);
+			em.persist(locUnidNaoRelac);
 		}
 	}
 	
