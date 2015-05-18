@@ -15,6 +15,7 @@
 		<pattern>/documento/*</pattern>
 		<pattern>/anuncio/*</pattern>
 		<pattern>/aviso/*</pattern>
+		<pattern>/mensagem/*</pattern>
 	</decorator>
 
 	<decorator name="admin" page="template_admin.jsp">

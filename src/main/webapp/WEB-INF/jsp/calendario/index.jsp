@@ -20,10 +20,12 @@
 		</script>
 
 		<ul class="breadcrumb">
-			<li class="active">
+			<li>
 				<i class="ace-icon fa fa-home home-icon"></i>
-				Calendário
+				<a href="${ctx}/admin/index">Home</a>
 			</li>
+
+			<li class="active">Calendário</li>
 		</ul><!-- /.breadcrumb -->
 		
 	</div>
@@ -35,6 +37,12 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
+				<div class="page-header">
+					<h1>
+						Calendário
+					</h1>
+				</div><!-- /.page-header -->
+				
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="space"></div>

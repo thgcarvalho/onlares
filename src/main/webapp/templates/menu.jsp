@@ -44,7 +44,6 @@
 				<i class="menu-icon fa fa-home"></i>
 				<span class="menu-text"> Home </span>
 			</a>
-
 			<b class="arrow"></b>
 		</li>
 
@@ -53,7 +52,6 @@
 				<i class="menu-icon fa fa-users"></i>
 				<span class="menu-text"> Moradores </span>
 			</a>
-
 			<b class="arrow"></b>
 		</li>
 		
@@ -62,7 +60,6 @@
 				<i class="menu-icon fa fa-car"></i>
 				<span class="menu-text"> Veículos </span>
 			</a>
-
 			<b class="arrow"></b>
 		</li>
 		
@@ -71,7 +68,6 @@
 				<i class="menu-icon fa fa-paw"></i>
 				<span class="menu-text"> Pets </span>
 			</a>
-
 			<b class="arrow"></b>
 		</li>
 		
@@ -79,7 +75,6 @@
 			<a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-book"></i>
 				<span class="menu-text"> Reservas </span>
-
 				<b class="arrow fa fa-angle-down"></b>
 			</a>
 
@@ -91,7 +86,6 @@
 						<i class="menu-icon fa fa-caret-right"></i>
 						Espaços
 					</a>
-
 					<b class="arrow"></b>
 				</li>
 
@@ -100,7 +94,6 @@
 						<i class="menu-icon fa fa-caret-right"></i>
 						Minhas reservas
 					</a>
-
 					<b class="arrow"></b>
 				</li>
 
@@ -114,7 +107,6 @@
 
 				<b class="arrow fa fa-angle-down"></b>
 			</a>
-
 			<b class="arrow"></b>
 
 			<ul class="submenu">
@@ -123,7 +115,6 @@
 						<i class="menu-icon fa fa-caret-right"></i>
 						Tipos de Autorizações
 					</a>
-
 					<b class="arrow"></b>
 				</li>
 
@@ -132,7 +123,6 @@
 						<i class="menu-icon fa fa-caret-right"></i>
 						Minhas autorizações
 					</a>
-
 					<b class="arrow"></b>
 				</li>
 
@@ -163,22 +153,20 @@
 
 			<b class="arrow"></b>
 		</li>
-<!-- 
-		<li class="disabled">
-			<a href="#">
+
+		<li id="menu_mensagens" class="">
+			<a href="${ctx}/mensagem/recebidas">
 				<i class="menu-icon fa fa-comment-o"></i>
 				<span class="menu-text"> Mensagens </span>
 			</a>
-
 			<b class="arrow"></b>
 		</li>
--->	
+
 		<li id="menu_avisos" class="">
 			<a href="${ctx}/aviso/lista">
 				<i class="menu-icon fa fa-warning"></i>
 				<span class="menu-text"> Avisos </span>
 			</a>
-
 			<b class="arrow"></b>
 		</li>
 <!-- 	
@@ -205,7 +193,6 @@
 				<i class="menu-icon fa fa-files-o"></i>
 				<span class="menu-text"> Documentos </span>
 			</a>
-
 			<b class="arrow"></b>
 		</li>
    <!-- 
@@ -214,7 +201,6 @@
 				<i class="menu-icon fa fa-phone"></i>
 				<span class="menu-text"> Fornecedores </span>
 			</a>
-
 			<b class="arrow"></b>
 		</li>
 	-->
@@ -223,7 +209,6 @@
 				<i class="menu-icon fa fa-headphones"></i>
 				<span class="menu-text"> Suporte </span>
 			</a>
-
 			<b class="arrow"></b>
 		</li>
 
