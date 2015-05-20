@@ -35,6 +35,10 @@
 		<div class="page-header">
 			<h1>
 				Moradores
+				<small>
+					<i class="ace-icon fa fa-angle-double-right"></i>
+					lista de usuários cadastrados
+				</small>
 			</h1>
 		</div><!-- /.page-header -->
 	

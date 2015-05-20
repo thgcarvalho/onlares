@@ -34,6 +34,78 @@
 			<div class="col-xs-12">
 				<!-- PAGE CONTENT BEGINS -->
 				<div class="row">
+					<div class="col-sm-6">
+						<h3 class="header smaller lighter blue">
+							<i class="ace-icon fa fa-bullhorn"></i>
+							Alertas
+						</h3>
+
+						<div class="alert alert-danger">
+							<button type="button" class="close" data-dismiss="alert">
+								<i class="ace-icon fa fa-times"></i>
+							</button>
+
+							<strong>
+								<i class="ace-icon fa fa-times"></i>
+								Atenção!
+							</strong>
+							Mudar algumas coisas e tente enviar novamente.
+							<br />
+						</div>
+
+						<div class="alert alert-warning">
+							<button type="button" class="close" data-dismiss="alert">
+								<i class="ace-icon fa fa-times"></i>
+							</button>
+							<strong>Atenção!</strong>
+
+							Melhor visualizar os avisos, você não está olhando esta área.
+							<br />
+						</div>
+
+						<div class="alert alert-block alert-success">
+							<button type="button" class="close" data-dismiss="alert">
+								<i class="ace-icon fa fa-times"></i>
+							</button>
+
+							<strong>
+								<i class="ace-icon fa fa-check"></i>
+								Muito bem!
+							</strong>
+							Você lidado com êxito todas as mensagem de alerta.
+							<br />
+						</div>
+
+						<div class="alert alert-info">
+							<button type="button" class="close" data-dismiss="alert">
+								<i class="ace-icon fa fa-times"></i>
+							</button>
+							<strong>Aviso!</strong>
+							Esse alerta precisa de sua atenção, mas não é super importante.
+							<br />
+						</div>
+					</div><!-- /.col -->
+
+					<div class="col-sm-6">
+						<h3 class="header smaller lighter blue">
+							<i class="ace-icon fa fa-rss"></i>
+							Notícias
+						</h3>
+
+						<div class="well">
+							<h4 class="green smaller lighter">Inadimplência</h4>
+							 A inadimplência em condomínios e loteamentos pelo país afora revolta moradores e dá origem a ações judiciais de cobrança que se arrastam por anos e anos. Síndicos, administradores e advogados…
+						</div>
+						<div class="well well-lg">
+							<h4 class="green smaller lighter">Animais</h4>
+							Não é permitido ao síndico ou a assembleia deliberar em detrimento ao direito de propriedade. A convivência com animais em condomínios é uma das grandes causas de discórdias e brigas…
+						</div>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+				
+				<hr />
+				
+				<div class="row">
 					<div class="col-xs-12">
 						<div class="widget-box">
 							<div class="widget-header">

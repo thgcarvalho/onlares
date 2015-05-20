@@ -76,7 +76,7 @@
 											        <label class="block">
 											            <input type="checkbox" class="ace" id="termos" name="termos" /> <span class="lbl">
 											                Li e aceito os
-											                <a href="#">Termos de uso</a>
+											                <a href="http://www.onlares.com.br/privacidade" target="_blank">Termos de uso</a>
 											            </span>
 											
 											        </label>

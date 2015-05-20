@@ -5,8 +5,9 @@
 <html>
 
 <head>
-	<meta name="description" content="" />
 	<!-- page specific plugin styles -->
+	<link rel="stylesheet" href="${ctx}/assets/css/jquery-ui.custom.min.css" />
+	<link rel="stylesheet" href="${ctx}/assets/css/chosen.min.css" />
 </head>
 
 <body>
@@ -94,47 +95,49 @@
 					</div><!-- /.col -->
 				</div><!-- /.row -->
 
-				<form id="id-message-form" class="form-horizontal message-form col-xs-12">
-					<div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-recipient">Para:</label>
-
-							<div class="col-sm-6 col-xs-12">
-								<div class="input-icon block col-xs-12 no-padding">
-									<input type="text" class="col-xs-12" maxlength="45" name="recipient" id="form-field-recipient" placeholder="Usuário(s)" />
-									<i class="ace-icon fa fa-user"></i>
-								</div>
-							</div>
+				<form id="myform" class="form-horizontal message-form col-xs-12">
+				
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="form-field-select-4">Para*:</label>
+						<div class="col-sm-6 col-xs-12">
+							<select multiple="" name="destinatarios[]" class="chosen-select form-control col-sm-6 col-xs-12" id="form-field-select-4" data-placeholder="Usuário(s)">
+								<c:forEach items="${moradorList}" var="morador" >							
+									<c:choose>
+										<c:when test="${mensagem.contemUsuario(morador.id)}">
+											<option value="${morador.id}" selected="selected">${morador.nome} - ${morador.localizacoes}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${morador.id}">${morador.nome} - ${morador.localizacoes}</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</select>
 						</div>
-
-						<div class="hr hr-18 dotted"></div>
-
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" for="form-field-subject">Assunto:</label>
-
-							<div class="col-sm-6 col-xs-12">
-								<div class="input-icon block col-xs-12 no-padding">
-									<input maxlength="100" type="text" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Assunto" />
-									<i class="ace-icon fa fa-comment-o"></i>
-								</div>
-							</div>
-						</div>
-
-						<div class="hr hr-18 dotted"></div>
-
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right">
-								<span class="inline space-24 hidden-480"></span>
-								Mensagem:
-							</label>
-
-							<div class="col-sm-9">
-								<div class="wysiwyg-editor"></div>
-							</div>
-						</div>
-
-						<div class="space"></div>
 					</div>
+					
+					<div class="hr hr-18 dotted"></div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="form-field-subject">Assunto*:</label>
+						<div class="col-sm-6 col-xs-12">
+							<input maxlength="100" type="text" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Assunto" />
+						</div>
+					</div>
+
+					<div class="hr hr-18 dotted"></div>
+
+					<input type="hidden" id="html" name="aviso.texto" />
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right">
+							<span class="inline space-24 hidden-480"></span>
+							Mensagem*:
+						</label>
+						<div class="col-sm-9">
+							<div class="wysiwyg-editor" name="editor1" id="editor1"></div>
+						</div>
+					</div>
+
+					<div class="space"></div>
 				</form>
 				<!-- PAGE CONTENT ENDS -->
 			</div><!-- /.col -->
@@ -144,12 +147,137 @@
 
 <content tag="local_script">
 	<!-- page specific plugin scripts -->
+	<!--[if lte IE 8]>
+		 <script src="${ctx}/assets/js/excanvas.min.js"></script>
+	<![endif]-->
+	<script src="${ctx}/assets/js/jquery-ui.custom.min.js"></script>
+	<script src="${ctx}/assets/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="${ctx}/assets/js/chosen.jquery.min.js"></script>
+	<script src="${ctx}/assets/js/fuelux.spinner.min.js"></script>
+	<script src="${ctx}/assets/js/bootstrap-datepicker.min.js"></script>
+	<script src="${ctx}/assets/js/bootstrap-timepicker.min.js"></script>
+	<script src="${ctx}/assets/js/moment.min.js"></script>
+	<script src="${ctx}/assets/js/daterangepicker.min.js"></script>
+	<script src="${ctx}/assets/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="${ctx}/assets/js/bootstrap-colorpicker.min.js"></script>
+	<script src="${ctx}/assets/js/jquery.knob.min.js"></script>
+	<script src="${ctx}/assets/js/jquery.autosize.min.js"></script>
+	<script src="${ctx}/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+	<script src="${ctx}/assets/js/jquery.maskedinput.min.js"></script>
 	<script src="${ctx}/assets/js/bootstrap-tag.min.js"></script>
+	
 	<script src="${ctx}/assets/js/jquery.hotkeys.min.js"></script>
 	<script src="${ctx}/assets/js/bootstrap-wysiwyg.min.js"></script>
-		
+	
 	<!-- inline scripts related to this page -->
+	<script type="text/javascript">
+		jQuery(function($) {
+
+	</script>
+	
+
+	<!-- inline scripts related to this page -->
+	<script type="text/javascript">
+		jQuery(function($){
+			if(!ace.vars['touch']) {
+				$('.chosen-select').chosen({allow_single_deselect:true}); 
+				//resize the chosen on window resize
 		
+				$(window)
+				.off('resize.chosen')
+				.on('resize.chosen', function() {
+					$('.chosen-select').each(function() {
+						 var $this = $(this);
+						 $this.next().css({'width': $this.parent().width()});
+					})
+				}).trigger('resize.chosen');
+				//resize chosen on sidebar collapse/expand
+				$(document).on('settings.ace.chosen', function(e, event_name, event_val) {
+					if(event_name != 'sidebar_collapsed') return;
+					$('.chosen-select').each(function() {
+						 var $this = $(this);
+						 $this.next().css({'width': $this.parent().width()});
+					})
+				});
+		
+		
+				$('#chosen-multiple-style .btn').on('click', function(e){
+					var target = $(this).find('input[type=radio]');
+					var which = parseInt(target.val());
+					if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
+					 else $('#form-field-select-4').removeClass('tag-input-style');
+				});
+			}
+		
+			//and its width cannot be determined.
+			//so we set the width after modal is show
+			$('#modal-form').on('shown.bs.modal', function () {
+				if(!ace.vars['touch']) {
+					$(this).find('.chosen-container').each(function(){
+						$(this).find('a:first-child').css('width' , '210px');
+						$(this).find('.chosen-drop').css('width' , '210px');
+						$(this).find('.chosen-search input').css('width' , '200px');
+					});
+				}
+			})
+			/**
+			//or you can activate the chosen plugin after modal is shown
+			//this way select element becomes visible with dimensions and chosen works as expected
+			$('#modal-form').on('shown', function () {
+				$(this).find('.modal-chosen').chosen();
+			})
+			*/
+			$(document).one('ajaxloadstart.page', function(e) {
+				$('textarea[class*=autosize]').trigger('autosize.destroy');
+				$('.limiterBox,.autosizejs').remove();
+				$('.daterangepicker.dropdown-menu,.colorpicker.dropdown-menu,.bootstrap-datetimepicker-widget.dropdown-menu').remove();
+			});
+			
+			
+		
+			$("#myform").submit(function() {
+			   // Retrieve the HTML from the plugin
+			   var html = $('#editor1').html();
+			   // Put this in the hidden field
+			   $("#html").val(html);
+			});
+			
+			function showErrorAlert (reason, detail) {
+				var msg='';
+				if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
+				else {
+					//console.log("error uploading file", reason, detail);
+				}
+				$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
+				 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
+			}
+			
+			//$('#editor1').ace_wysiwyg();//this will create the default editor will all buttons
+		
+			//but we want to change a few buttons colors for the third style
+			$('#editor1').ace_wysiwyg({
+				toolbar:
+				[
+					'bold',
+					'italic',
+					'strikethrough',
+					'underline',
+					null,
+					'justifyleft',
+					'justifycenter',
+					'justifyright',
+					null,
+					'createLink',
+					'unlink',
+					null,
+					'undo',
+					'redo'
+				]
+			}).prev().addClass('wysiwyg-style1');
+		
+		});
+	</script>
+	
 	<!-- menu script -->
 	<script type="text/javascript">
 		$('li').click(function(e) {
@@ -157,9 +285,9 @@
 	        $(this).addClass('active');
 	    });
 	
-		$(function() {
-			$('#menu_mensagens').addClass('active');
-		});
+		window.onload = function() {
+			document.getElementById('menu_mensagens').className = 'active';
+		};
 	</script>
 </content>
 

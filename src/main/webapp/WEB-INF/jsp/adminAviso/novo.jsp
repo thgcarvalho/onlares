@@ -40,7 +40,7 @@
 		
 		<div class="row">
 			<div class="col-xs-12">
-				<!-- PAGE CONTENT BEGINS <textarea class="wysiwyg-editor" id="editor1" name="editor" placeholder="Enter text ..."></textarea>-->
+				<!-- PAGE CONTENT BEGINS -->
 				<form class="form-horizontal" id="myform" role="form" action="${ctx}/adminAviso/" method="post">
 				
 					<div class="form-group">

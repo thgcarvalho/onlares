@@ -9,6 +9,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Result;
 import br.com.onlares.dao.AvisoDao;
 import br.com.onlares.dao.AvisoVisualizadoDao;
+import br.com.onlares.dao.MoradorDao;
 import br.com.onlares.model.Aviso;
 
 /**  
@@ -20,18 +21,20 @@ import br.com.onlares.model.Aviso;
 public class MensagemController {
 	
 	private final AvisoDao avisoDao;
+	private final MoradorDao moradorDao;
 	private final AvisoVisualizadoDao avisoVisualizadoDao;
 	private final Result result;
 
 	@Inject
-	public MensagemController(AvisoDao avisoDao, AvisoVisualizadoDao avisoVisualizadoDao, Result result) {
+	public MensagemController(AvisoDao avisoDao, MoradorDao moradorDao, AvisoVisualizadoDao avisoVisualizadoDao, Result result) {
 		this.avisoDao = avisoDao;
+		this.moradorDao = moradorDao;
 		this.avisoVisualizadoDao = avisoVisualizadoDao;
 		this.result = result;
 	}
 	
 	public MensagemController() {
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 	
 	@Get("/mensagem/enviadas")
@@ -47,6 +50,7 @@ public class MensagemController {
 	
 	@Get("/mensagem/novo")
 	public void novo() {
+		result.include("moradorList", moradorDao.listaRegistrados());
 	}
 	
 	@Get("/mensagem/visualizaEnviada/{id}")
