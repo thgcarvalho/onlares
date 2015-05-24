@@ -75,7 +75,13 @@ public class Usuario implements Serializable {
 	}
 	
 	public boolean isAdmin() {
-		return (this.autorizacao != null && this.autorizacao.equals("ADMIN"));
+		return (this.autorizacao != null && this.autorizacao.contains("A"));
+	}
+	public boolean isSindico() {
+		return (this.autorizacao != null && this.autorizacao.contains("S"));
+	}
+	public boolean isPorteiro() {
+		return (this.autorizacao != null && this.autorizacao.contains("P"));
 	}
 	
 	public Long getId() {
