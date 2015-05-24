@@ -127,3 +127,12 @@
 .bigger {
   font-size:20px !important;
 }
+
+.message-item .data {
+  float:right !important;
+  height:18px !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+  width:100px !important;
+}

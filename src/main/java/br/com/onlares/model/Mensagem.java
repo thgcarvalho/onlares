@@ -3,12 +3,16 @@ package br.com.onlares.model;
 import java.io.Serializable;
 import java.util.Calendar;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import br.com.onlares.util.DataUtil;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -24,8 +28,9 @@ public class Mensagem implements Serializable {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="usuario_id")
-	private Long usuarioId;
+	@ManyToOne
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	private Usuario usuario;
 	private String assunto;
 	private String texto;
 	private Calendar data;
@@ -37,11 +42,11 @@ public class Mensagem implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getUsuarioId() {
-		return usuarioId;
+	public Usuario getUsuario() {
+		return usuario;
 	}
-	public void setUsuarioId(Long usuarioId) {
-		this.usuarioId = usuarioId;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	public String getAssunto() {
 		return assunto;
@@ -67,10 +72,20 @@ public class Mensagem implements Serializable {
 	public void setHora(Calendar hora) {
 		this.hora = hora;
 	}
+	
+	@Transient
+	public String getDataFormatada() {
+		return DataUtil.formatarData(this.data);
+	}
+	
+	@Transient
+	public String getHoraFormatada() {
+		return DataUtil.formatarHora(this.hora);
+	}
 
 	@Override
 	public String toString() {
-		return "msg= " + id + " cond=" + assunto;
+		return "msg= " + id + " assnt=" + assunto;
 	}
 
 }

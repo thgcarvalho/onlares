@@ -7,10 +7,9 @@ import javax.inject.Inject;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Result;
-import br.com.onlares.dao.AvisoDao;
-import br.com.onlares.dao.AvisoVisualizadoDao;
+import br.com.onlares.dao.MensagemDao;
 import br.com.onlares.dao.MoradorDao;
-import br.com.onlares.model.Aviso;
+import br.com.onlares.model.Mensagem;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -20,32 +19,30 @@ import br.com.onlares.model.Aviso;
 @Controller
 public class MensagemController {
 	
-	private final AvisoDao avisoDao;
+	private final MensagemDao mensagemDao;
 	private final MoradorDao moradorDao;
-	private final AvisoVisualizadoDao avisoVisualizadoDao;
 	private final Result result;
 
 	@Inject
-	public MensagemController(AvisoDao avisoDao, MoradorDao moradorDao, AvisoVisualizadoDao avisoVisualizadoDao, Result result) {
-		this.avisoDao = avisoDao;
+	public MensagemController(MensagemDao mensagemDao, MoradorDao moradorDao, Result result) {
+		this.mensagemDao = mensagemDao;
 		this.moradorDao = moradorDao;
-		this.avisoVisualizadoDao = avisoVisualizadoDao;
 		this.result = result;
 	}
 	
 	public MensagemController() {
-		this(null, null, null, null);
-	}
-	
-	@Get("/mensagem/enviadas")
-	public void enviadas() {
+		this(null, null, null);
 	}
 	
 	@Get("/mensagem/recebidas")
 	public void recebidas() {
-		List<Aviso> avisos = avisoDao.listaSemTexto();
-		avisoVisualizadoDao.setaVisualizacao(avisos);
-		result.include("mensagemList", avisos);
+		List<Mensagem> mensagens = mensagemDao.listaRecebidas();
+		result.include("mensagemList", mensagens);
+		result.include("mensagemTotal", mensagens.size());
+	}
+	
+	@Get("/mensagem/enviadas")
+	public void enviadas() {
 	}
 	
 	@Get("/mensagem/novo")
