@@ -1,5 +1,6 @@
 package br.com.onlares.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import br.com.onlares.bean.UsuarioLogado;
+import br.com.onlares.model.Envio;
 import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 import br.com.onlares.model.Mensagem;
 import br.com.onlares.model.Usuario;
@@ -33,6 +35,17 @@ public class MensagemDao {
 	}
 	
 	public List<Mensagem> listaRecebidas() {
+		List<Envio> envios = em.createQuery("SELECT e FROM Envio e"
+				+ " where e.usuario.id = :usuarioId", Envio.class)
+				.setParameter("usuarioId", usuarioId).getResultList();
+		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+		Mensagem mensagem = null;
+		for (Envio envio : envios) {
+			mensagem = envio.getMensagem();
+			mensagem.setVisualizado(envio.isVisualizado());
+			mensagens.add(mensagem);
+		}
+		
 		List<Mensagem> recebidas = em.createQuery("SELECT e.mensagem FROM Envio e"
 				+ " where e.usuario.id = :usuarioId", Mensagem.class)
 				.setParameter("usuarioId", usuarioId).getResultList();
@@ -43,15 +56,6 @@ public class MensagemDao {
 		List<Mensagem> enviadas = em.createQuery("SELECT m FROM Mensagem m"
 				+ " where m.usuario.id = :usuarioId", Mensagem.class)
 				.setParameter("usuarioId", usuarioId).getResultList();
-		
-//		List<Mensagem> envios = em.createQuery("SELECT e.mensagem FROM Envio e"
-//				+ " where e.usuario.id = :usuarioId", Mensagem.class)
-//				.setParameter("usuarioId", usuarioId).getResultList();
-//		
-//		List<Mensagem> eee = em.createQuery("SELECT e.mensagem FROM Envio e"
-//				+ " where e.usuario.id = :usuarioId", Mensagem.class)
-//				.setParameter("usuarioId", usuarioId).getResultList();
-		
 		return enviadas;
 	}
 	
@@ -97,22 +101,25 @@ public class MensagemDao {
 		return usuarios;
 	}
 	
-//	public String buscaDestinatarios(Mensagem mensagem) {
-//		List<String> destinatarios = null;
-//		String strDestinatarios = "";
-//		try {
-//			destinatarios = em.createQuery("SELECT e.usuario.nome FROM Envio e"
-//					+ " WHERE e.mensagem.id = :mensagemId"
-//					+ " AND e.usuario.id = :usuarioId", String.class)
-//					.setParameter("mensagemId", mensagem.getId())
-//					.setParameter("usuarioId", usuarioId).getResultList();
-//		} catch (NoResultException nrExp) {
-//			strDestinatarios = null;
-//		}
-//		for (String destinatario : destinatarios) {
-//			strDestinatarios += destinatario + "; ";
-//		}
-//		return strDestinatarios;
-//	}
+	public boolean foiVisualizado(Long mensagemId) {
+		Envio envio = em.createQuery("SELECT e FROM Envio e"
+				+ " WHERE e.mensagem.id = :mensagemId"
+				+ " AND e.usuario.id = :usuarioId", Envio.class)
+				.setParameter("mensagemId", mensagemId)
+				.setParameter("usuarioId", this.usuarioId).getSingleResult();
+		if (envio.isVisualizado()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void setaVisualizacao(Long mensagemId) {
+		Envio envio = em.createQuery("SELECT e FROM Envio e"
+				+ " WHERE e.mensagem.id = :mensagemId"
+				+ " AND e.usuario.id = :usuarioId", Envio.class)
+				.setParameter("mensagemId", mensagemId)
+				.setParameter("usuarioId", this.usuarioId).getSingleResult();
+		envio.setVisualizado(true);
+	}
 	
 }

@@ -59,6 +59,10 @@ public class MensagemController {
 		if (mensagem == null) {
 			result.notFound();
 		} else {
+			if (!mensagemDao.foiVisualizado(id)) {
+				mensagemDao.setaVisualizacao(id);
+				mensagem.setVisualizado(true);
+			}
 			result.include("mensagem", mensagem);
 		}
 	}

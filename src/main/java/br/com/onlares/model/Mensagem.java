@@ -35,6 +35,8 @@ public class Mensagem implements Serializable {
 	private String texto;
 	private Calendar data;
 	private Calendar hora;
+	@Transient
+	private boolean visualizado;
 
 	public Long getId() {
 		return id;
@@ -71,6 +73,12 @@ public class Mensagem implements Serializable {
 	}
 	public void setHora(Calendar hora) {
 		this.hora = hora;
+	}
+	public boolean isVisualizado() {
+		return visualizado;
+	}
+	public void setVisualizado(boolean visualizado) {
+		this.visualizado = visualizado;
 	}
 	
 	@Transient

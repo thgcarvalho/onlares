@@ -156,7 +156,86 @@
 	<!-- page specific plugin scripts -->
 		
 	<!-- inline scripts related to this page -->
+	<script type="text/javascript">
+		jQuery(function($){
+			//basic initializations
+			$('.message-list .message-item input[type=checkbox]').removeAttr('checked');
+			$('.message-list').on('click', '.message-item input[type=checkbox]' , function() {
+				$(this).closest('.message-item').toggleClass('selected');
+				if(this.checked) Inbox.display_bar(1);//display action toolbar when a message is selected
+				else {
+					Inbox.display_bar($('.message-list input[type=checkbox]:checked').length);
+					//determine number of selected messages and display/hide action toolbar accordingly
+				}		
+			});
+			
+			//check/uncheck all messages
+			$('#id-toggle-all').removeAttr('checked').on('click', function(){
+				if(this.checked) {
+					Inbox.select_all();
+				} else Inbox.select_none();
+			});
+			
+			//select all
+			$('#id-select-message-all').on('click', function(e) {
+				e.preventDefault();
+				Inbox.select_all();
+			});
+			
+			//select none
+			$('#id-select-message-none').on('click', function(e) {
+				e.preventDefault();
+				Inbox.select_none();
+			});
+			
+			/////////
 		
+			//display first message in a new area
+			$('.message-list .message-item:eq(0) .text').on('click', function() {
+				//show the loading icon
+				$('.message-container').append('<div class="message-loading-overlay"><i class="fa-spin ace-icon fa fa-spinner orange2 bigger-160"></i></div>');
+				
+				$('.message-inline-open').removeClass('message-inline-open').find('.message-content').remove();
+			});
+		
+			var Inbox = {
+				//displays a toolbar according to the number of selected messages
+				display_bar : function (count) {
+					if(count == 0) {
+						$('#id-toggle-all').removeAttr('checked');
+						$('#id-message-list-navbar .message-toolbar').addClass('hide');
+						$('#id-message-list-navbar .message-infobar').removeClass('hide');
+					}
+					else {
+						$('#id-message-list-navbar .message-infobar').addClass('hide');
+						$('#id-message-list-navbar .message-toolbar').removeClass('hide');
+					}
+				}
+				,
+				select_all : function() {
+					var count = 0;
+					$('.message-item input[type=checkbox]').each(function(){
+						this.checked = true;
+						$(this).closest('.message-item').addClass('selected');
+						count++;
+					});
+					
+					$('#id-toggle-all').get(0).checked = true;
+					
+					Inbox.display_bar(count);
+				}
+				,
+				select_none : function() {
+					$('.message-item input[type=checkbox]').removeAttr('checked').closest('.message-item').removeClass('selected');
+					$('#id-toggle-all').get(0).checked = false;
+					
+					Inbox.display_bar(0);
+				}
+			}
+		
+		});
+	</script>
+	
 	<!-- menu script -->
 	<script type="text/javascript">
 		$('li').click(function(e) {
