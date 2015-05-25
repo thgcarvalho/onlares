@@ -87,7 +87,7 @@
 
 												<div class="messagebar-item-right">
 													<i class="ace-icon fa fa-clock-o bigger-110 orange"></i>
-													<span class="grey">Hoje, 7:15 pm</span>
+													<span class="grey">${mensagem.dataFormatada}, ${mensagem.horaFormatada}</span>
 												</div>
 											</div>
 										</div>
@@ -101,22 +101,19 @@
 				<div class="message-content" id="id-message-content">
 					<div class="message-header clearfix">
 						<div class="pull-left">
-							<span class="blue bigger-125"> $[mensagem.assunto] </span>
+							<span class="blue bigger-125"> ${mensagem.assunto} </span>
 
 							<div class="space-4"></div>
-
+							
 							&nbsp;
-							De: <a href="#" class="sender">$[mensagem.usuario]</a>
-
-							&nbsp;
-							Para: <a href="#" class="sender">$[mensagem.para]</a>
+							De: <a href="${linkTo[PerfilController].visualiza(mensagem.usuario.id)}" class="sender">${mensagem.usuario.nome}</a>
 						</div>
 					</div>
 
 					<div class="hr hr-double"></div>
 
 					<div class="message-body">
-						$[mensagem.texto]
+						${mensagem.texto}
 					</div>
 
 					<div class="hr hr-double"></div>

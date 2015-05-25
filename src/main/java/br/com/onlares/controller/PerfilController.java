@@ -159,9 +159,19 @@ public class PerfilController implements Serializable{
 		result.redirectTo(this).edita();
 	}
 	
-	@Get("/perfil/visualiza/{email}")
-	public void visualiza(String email) {
-		Usuario usuario = usuarioDao.buscaPorEmail(email);
+//	@Get("/perfil/visualiza/{email}")
+//	public void visualiza(String email) {
+//		Usuario usuario = usuarioDao.buscaPorEmail(email);
+//		if (usuario == null) {
+//			result.notFound();
+//		} else {
+//			result.include("usuario", usuario);
+//		}
+//	}
+	
+	@Get("/perfil/visualiza/{id}")
+	public void visualiza(Long id) {
+		Usuario usuario = usuarioDao.buscaPorId(id);
 		if (usuario == null) {
 			result.notFound();
 		} else {

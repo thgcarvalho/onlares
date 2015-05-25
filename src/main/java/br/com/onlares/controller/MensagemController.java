@@ -50,24 +50,24 @@ public class MensagemController {
 		result.include("moradorList", moradorDao.listaRegistrados());
 	}
 	
-	@Get("/mensagem/visualizaEnviada/{id}")
-	public void visualizaEnviada(Long id) {
-//		Mensagem mensagem = mensagemDao.busca(id);
-//		if (mensagem == null) {
-//			result.notFound();
-//		} else {
-//			result.include("mensagem", mensagem);
-//		}
-	}
-	
 	@Get("/mensagem/visualizaRecebida/{id}")
 	public void visualizaRecebida(Long id) {
-//		Mensagem mensagem = mensagemDao.busca(id);
-//		if (mensagem == null) {
-//			result.notFound();
-//		} else {
-//			result.include("mensagem", mensagem);
-//		}
+		Mensagem mensagem = mensagemDao.buscaRecebida(id);
+		if (mensagem == null) {
+			result.notFound();
+		} else {
+			result.include("mensagem", mensagem);
+		}
+	}
+	
+	@Get("/mensagem/visualizaEnviada/{id}")
+	public void visualizaEnviada(Long id) {
+		Mensagem mensagem = mensagemDao.buscaEnviada(id);
+		if (mensagem == null) {
+			result.notFound();
+		} else {
+			result.include("mensagem", mensagem);
+		}
 	}
 	
 }
