@@ -36,13 +36,16 @@ public class MensagemController {
 	
 	@Get("/mensagem/recebidas")
 	public void recebidas() {
-		List<Mensagem> mensagens = mensagemDao.listaRecebidas();
-		result.include("mensagemList", mensagens);
-		result.include("mensagemTotal", mensagens.size());
+		List<Mensagem> recebidas = mensagemDao.listaRecebidas();
+		result.include("mensagemList", recebidas);
+		result.include("mensagemTotal", recebidas.size());
 	}
 	
 	@Get("/mensagem/enviadas")
 	public void enviadas() {
+		List<Mensagem> enviadas = mensagemDao.listaEnviadas();
+		result.include("mensagemList", enviadas);
+		result.include("mensagemTotal", enviadas.size());
 	}
 	
 	@Get("/mensagem/novo")
@@ -67,6 +70,7 @@ public class MensagemController {
 			result.notFound();
 		} else {
 			result.include("mensagem", mensagem);
+			result.include("destinatarios", mensagemDao.buscaDestinatarios(mensagem));
 		}
 	}
 	

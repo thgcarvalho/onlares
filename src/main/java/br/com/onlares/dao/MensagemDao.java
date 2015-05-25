@@ -9,6 +9,7 @@ import javax.persistence.NoResultException;
 import br.com.onlares.bean.UsuarioLogado;
 import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 import br.com.onlares.model.Mensagem;
+import br.com.onlares.model.Usuario;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -38,31 +39,80 @@ public class MensagemDao {
 		return recebidas;
 	}
 	
+	public List<Mensagem> listaEnviadas() {
+		List<Mensagem> enviadas = em.createQuery("SELECT m FROM Mensagem m"
+				+ " where m.usuario.id = :usuarioId", Mensagem.class)
+				.setParameter("usuarioId", usuarioId).getResultList();
+		
+//		List<Mensagem> envios = em.createQuery("SELECT e.mensagem FROM Envio e"
+//				+ " where e.usuario.id = :usuarioId", Mensagem.class)
+//				.setParameter("usuarioId", usuarioId).getResultList();
+//		
+//		List<Mensagem> eee = em.createQuery("SELECT e.mensagem FROM Envio e"
+//				+ " where e.usuario.id = :usuarioId", Mensagem.class)
+//				.setParameter("usuarioId", usuarioId).getResultList();
+		
+		return enviadas;
+	}
+	
 	public Mensagem buscaRecebida(Long mensagemId) {
-		Mensagem mnsagem;
+		Mensagem recebida;
 		try {
-			mnsagem = em.createQuery("SELECT e.mensagem FROM Envio e"
+			recebida = em.createQuery("SELECT e.mensagem FROM Envio e"
 					+ " WHERE e.mensagem.id = :mensagemId"
 					+ " AND e.usuario.id = :usuarioId", Mensagem.class)
 					.setParameter("mensagemId", mensagemId)
 					.setParameter("usuarioId", usuarioId).getSingleResult();
 		} catch (NoResultException nrExp) {
-			mnsagem = null;
+			recebida = null;
 		}
-		return mnsagem;
+		return recebida;
 	}
 	
 	public Mensagem buscaEnviada(Long mensagemId) {
-		Mensagem mnsagem;
+		Mensagem enviada;
 		try {
-			mnsagem = em.createQuery("SELECT m FROM Mensagem m"
+			enviada = em.createQuery("SELECT m FROM Mensagem m"
 					+ " WHERE m.id = :mensagemId"
 					+ " AND m.usuario.id = :usuarioId", Mensagem.class)
 					.setParameter("mensagemId", mensagemId)
 					.setParameter("usuarioId", usuarioId).getSingleResult();
 		} catch (NoResultException nrExp) {
-			mnsagem = null;
+			enviada = null;
 		}
-		return mnsagem;
+		return enviada;
 	}
+	
+	public List<Usuario> buscaDestinatarios(Mensagem mensagem) {
+		List<Usuario> usuarios;
+		try {
+			usuarios = em.createQuery("SELECT e.usuario FROM Envio e"
+					+ " WHERE e.mensagem.id = :mensagemId"
+					+ " AND e.usuario.id = :usuarioId", Usuario.class)
+					.setParameter("mensagemId", mensagem.getId())
+					.setParameter("usuarioId", usuarioId).getResultList();
+		} catch (NoResultException nrExp) {
+			usuarios = null;
+		}
+		return usuarios;
+	}
+	
+//	public String buscaDestinatarios(Mensagem mensagem) {
+//		List<String> destinatarios = null;
+//		String strDestinatarios = "";
+//		try {
+//			destinatarios = em.createQuery("SELECT e.usuario.nome FROM Envio e"
+//					+ " WHERE e.mensagem.id = :mensagemId"
+//					+ " AND e.usuario.id = :usuarioId", String.class)
+//					.setParameter("mensagemId", mensagem.getId())
+//					.setParameter("usuarioId", usuarioId).getResultList();
+//		} catch (NoResultException nrExp) {
+//			strDestinatarios = null;
+//		}
+//		for (String destinatario : destinatarios) {
+//			strDestinatarios += destinatario + "; ";
+//		}
+//		return strDestinatarios;
+//	}
+	
 }

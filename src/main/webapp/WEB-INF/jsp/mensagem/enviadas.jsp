@@ -106,62 +106,37 @@
 										</div>
 										<div class="message-list-container">
 											<div class="message-list" id="message-list">
-												<div class="message-item message-unread">
-													<label class="inline">
-														<input type="checkbox" class="ace" />
-														<span class="lbl"></span>
-													</label>
-													<a href="${linkTo[MensagemController].visualizaEnviada(1)}" data-target="inbox">
-														<span class="sender" title="Thiago Carvalho">Thiago Carvalho </span>
-														<span class="time">$[mensagem.hora]</span>
-	
-														<span class="summary">
-															<span class="text">
-																$[mensagem.assunto]
-															</span>
-														</span>
-													</a>
-												</div>
+											<c:choose>
+												<c:when test="${mensagemList.isEmpty()}">
+													<h3>Sem mensagens</h3>
+												</c:when>
+												<c:otherwise>
+													<c:forEach items="${mensagemList}" var="mensagem">
+														<div class="message-item message-unread">
+															<label class="inline">
+																<input type="checkbox" class="ace" />
+																<span class="lbl"></span>
+															</label>
+															<a href="${linkTo[MensagemController].visualizaEnviada(mensagem.id)}" data-target="inbox">
+																<span class="sender">${mensagem.usuario.nome} </span>
+																<span class="data">${mensagem.dataFormatada}</span>
+			
+																<span class="summary">
+																	<span class="text">
+																		${mensagem.assunto}
+																	</span>
+																</span>
+															</a>
+														</div>
+														</c:forEach>
+												</c:otherwise>
+											</c:choose>
 											</div>
 										</div>
 										<div class="message-footer clearfix">
-											<div class="pull-left"> 151 mensagens do total </div>
+											<div class="pull-left"> ${mensagemTotal} mensagens do total </div>
 
 											<div class="pull-right">
-												<div class="inline middle">página 1 de 16 </div>
-
-												&nbsp; &nbsp;
-												<ul class="pagination middle">
-													<li class="disabled">
-														<span>
-															<i class="ace-icon fa fa-step-backward middle"></i>
-														</span>
-													</li>
-
-													<li class="disabled">
-														<span>
-															<i class="ace-icon fa fa-caret-left bigger-140 middle"></i>
-														</span>
-													</li>
-
-													<li>
-														<span>
-															<input value="1" maxlength="3" type="text" />
-														</span>
-													</li>
-
-													<li>
-														<a href="#">
-															<i class="ace-icon fa fa-caret-right bigger-140 middle"></i>
-														</a>
-													</li>
-
-													<li>
-														<a href="#">
-															<i class="ace-icon fa fa-step-forward middle"></i>
-														</a>
-													</li>
-												</ul>
 											</div>
 										</div>
 										

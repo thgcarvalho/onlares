@@ -79,7 +79,7 @@
 
 											<div>
 												<div class="messagebar-item-left">
-													<a href="${linkTo[MensagemController].recebidas()}">
+													<a href="${linkTo[MensagemController].enviadas()}">
 														<i class="ace-icon fa fa-arrow-left blue bigger-110 middle"></i>
 														<b class="bigger-110 middle">Voltar</b>
 													</a>
@@ -87,7 +87,7 @@
 
 												<div class="messagebar-item-right">
 													<i class="ace-icon fa fa-clock-o bigger-110 orange"></i>
-													<span class="grey">Hoje, 7:15 pm</span>
+													<span class="grey">${mensagem.dataFormatada}, ${mensagem.horaFormatada}</span>
 												</div>
 											</div>
 										</div>
@@ -101,22 +101,22 @@
 				<div class="message-content" id="id-message-content">
 					<div class="message-header clearfix">
 						<div class="pull-left">
-							<span class="blue bigger-125"> $[mensagem.assunto] </span>
+							<span class="blue bigger-125"> ${mensagem.assunto} </span>
 
 							<div class="space-4"></div>
 
 							&nbsp;
-							De: <a href="#" class="sender">$[mensagem.usuario]</a>
-
-							&nbsp;
-							Para: <a href="#" class="sender">$[mensagem.para]</a>
+							Para: 
+							<c:forEach items="${destinatarios}" var="usuario">
+								<a href="${linkTo[PerfilController].visualiza(usuario.id)}" class="sender">${usuario.nome}</a>; 
+							</c:forEach>
 						</div>
 					</div>
 
 					<div class="hr hr-double"></div>
 
 					<div class="message-body">
-						$[mensagem.texto]
+						${mensagem.texto}
 					</div>
 
 					<div class="hr hr-double"></div>
