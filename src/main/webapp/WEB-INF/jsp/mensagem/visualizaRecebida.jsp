@@ -101,6 +101,7 @@
 				<div class="message-content" id="id-message-content">
 					<div class="message-header clearfix">
 						<div class="pull-left">
+							Assunto: 
 							<span class="blue bigger-125"> ${mensagem.assunto} </span>
 
 							<div class="space-4"></div>

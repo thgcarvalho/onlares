@@ -6,7 +6,10 @@ import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.validator.I18nMessage;
+import br.com.caelum.vraptor.validator.Validator;
 import br.com.onlares.dao.MensagemDao;
 import br.com.onlares.dao.MoradorDao;
 import br.com.onlares.model.Mensagem;
@@ -21,17 +24,19 @@ public class MensagemController {
 	
 	private final MensagemDao mensagemDao;
 	private final MoradorDao moradorDao;
+	private final Validator validator;
 	private final Result result;
 
 	@Inject
-	public MensagemController(MensagemDao mensagemDao, MoradorDao moradorDao, Result result) {
+	public MensagemController(MensagemDao mensagemDao, MoradorDao moradorDao, Validator validator, Result result) {
 		this.mensagemDao = mensagemDao;
 		this.moradorDao = moradorDao;
+		this.validator = validator;
 		this.result = result;
 	}
 	
 	public MensagemController() {
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 	
 	@Get("/mensagem/recebidas")
@@ -46,11 +51,6 @@ public class MensagemController {
 		List<Mensagem> enviadas = mensagemDao.listaEnviadas();
 		result.include("mensagemList", enviadas);
 		result.include("mensagemTotal", enviadas.size());
-	}
-	
-	@Get("/mensagem/novo")
-	public void novo() {
-		result.include("moradorList", moradorDao.listaRegistrados());
 	}
 	
 	@Get("/mensagem/visualizaRecebida/{id}")
@@ -75,6 +75,35 @@ public class MensagemController {
 		} else {
 			result.include("mensagem", mensagem);
 			result.include("destinatarios", mensagemDao.buscaDestinatarios(mensagem));
+		}
+	}
+	
+	@Get("/mensagem/novo")
+	public void novo() {
+		result.include("moradorList", moradorDao.listaRegistrados());
+	}
+	
+	@Post("/mensagem/")
+	public void envia(Mensagem mensagem, List<Long> destinatarios) {
+        if (checkNull(mensagem.getAssunto()).equals("")) {
+   			validator.add(new I18nMessage("mensagem.envia", "campo.obrigatorio", "Assunto"));
+   		}
+        if (checkNull(mensagem.getTexto()).equals("")) {
+   			validator.add(new I18nMessage("mensagem.envia", "campo.obrigatorio", "Texto"));
+   		}
+        
+		validator.onErrorUsePageOf(this).novo();
+		
+		mensagemDao.envia(mensagem, destinatarios);
+		result.include("notice", "Mensagem enviada com sucesso!");
+		result.redirectTo(this).enviadas();
+	}
+	
+	private String checkNull(String value) {
+		if (value == null) {
+			return ("");
+		} else {
+			return (value.trim());
 		}
 	}
 	

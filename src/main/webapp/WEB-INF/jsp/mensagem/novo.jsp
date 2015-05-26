@@ -79,7 +79,7 @@
 
 												<div class="messagebar-item-right">
 													<span class="inline btn-send-message">
-														<button type="button" class="btn btn-sm btn-primary no-border btn-white btn-round">
+														<button type="submit" class="btn btn-sm btn-primary no-border btn-white btn-round">
 															<span class="bigger-110">Enviar</span>
 
 															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -95,7 +95,7 @@
 					</div><!-- /.col -->
 				</div><!-- /.row -->
 
-				<form id="myform" class="form-horizontal message-form col-xs-12">
+				<form id="myform" class="form-horizontal message-form col-xs-12" action="${ctx}/mensagem/" method="post" >
 				
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="form-field-select-4">Para*:</label>
@@ -120,13 +120,13 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="form-field-subject">Assunto*:</label>
 						<div class="col-sm-6 col-xs-12">
-							<input maxlength="100" type="text" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Assunto" />
+							<input maxlength="100" type="text" name="mensagem.assunto" class="col-xs-12" name="subject" id="form-field-subject" placeholder="Assunto" />
 						</div>
 					</div>
 
 					<div class="hr hr-18 dotted"></div>
 
-					<input type="hidden" id="html" name="aviso.texto" />
+					<input type="hidden" id="html" name="mensagem.texto" />
 					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right">
 							<span class="inline space-24 hidden-480"></span>
@@ -138,6 +138,16 @@
 					</div>
 
 					<div class="space"></div>
+					
+					<div class="clearfix form-actions">
+						<div class="col-md-offset-5">
+							<button class="btn btn-info" type="submit">
+								<i class="ace-icon fa fa-check bigger-110"></i>
+								Enviar
+							</button>
+						</div>
+					</div>
+					
 				</form>
 				<!-- PAGE CONTENT ENDS -->
 			</div><!-- /.col -->
@@ -168,12 +178,6 @@
 	
 	<script src="${ctx}/assets/js/jquery.hotkeys.min.js"></script>
 	<script src="${ctx}/assets/js/bootstrap-wysiwyg.min.js"></script>
-	
-	<!-- inline scripts related to this page -->
-	<script type="text/javascript">
-		jQuery(function($) {
-
-	</script>
 	
 
 	<!-- inline scripts related to this page -->

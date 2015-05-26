@@ -3,6 +3,7 @@ package br.com.onlares.util;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
@@ -220,6 +221,20 @@ public class DataUtil {
 			horaFormatada = "";
 		}
 		return horaFormatada;
+	}
+	
+	public static Calendar formatarHoraCalenndar(Calendar calendar) {
+		Calendar horaCalendarFormatada = GregorianCalendar.getInstance();
+		String strHm = null;
+		Date dtHm = null;
+		try {
+			strHm = sdfhm.format(calendar.getTime());
+			dtHm = sdfhm.parse(strHm);
+			horaCalendarFormatada.setTime(dtHm);
+		} catch (Exception exp) {
+			horaCalendarFormatada = null;
+		}
+		return horaCalendarFormatada;
 	}
 	
 	public static String formatarTudo(Calendar calendar) {

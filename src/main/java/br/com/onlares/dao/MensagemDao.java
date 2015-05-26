@@ -1,6 +1,7 @@
 package br.com.onlares.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -92,7 +93,7 @@ public class MensagemDao {
 		try {
 			usuarios = em.createQuery("SELECT e.usuario FROM Envio e"
 					+ " WHERE e.mensagem.id = :mensagemId"
-					+ " AND e.usuario.id = :usuarioId", Usuario.class)
+					+ " AND e.mensagem.usuario.id = :usuarioId", Usuario.class)
 					.setParameter("mensagemId", mensagem.getId())
 					.setParameter("usuarioId", usuarioId).getResultList();
 		} catch (NoResultException nrExp) {
@@ -120,6 +121,26 @@ public class MensagemDao {
 				.setParameter("mensagemId", mensagemId)
 				.setParameter("usuarioId", this.usuarioId).getSingleResult();
 		envio.setVisualizado(true);
+	}
+	
+	public void envia(Mensagem mensagem, List<Long> destinatarios) {
+		Usuario usuario = new Usuario();
+		usuario.setId(usuarioId);
+		mensagem.setUsuario(usuario);
+		Calendar calendar = Calendar.getInstance();
+		mensagem.setData(calendar);
+		mensagem.setHora(calendar);
+		Envio envio;
+		em.persist(mensagem);
+		for (Long usuarioId : destinatarios) {
+			usuario = new Usuario();
+			usuario.setId(usuarioId);
+			envio = new Envio();
+			envio.setMensagem(mensagem);
+			envio.setUsuario(usuario);
+			envio.setVisualizado(false);
+			em.persist(envio);
+		}
 	}
 	
 }

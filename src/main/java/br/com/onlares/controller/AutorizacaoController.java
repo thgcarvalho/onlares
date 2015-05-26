@@ -77,7 +77,7 @@ public class AutorizacaoController {
 		
 		validator.onErrorRedirectTo(this).novo(autorizacao.getTipoDeAutorizacao().getId());
 		
-		autorizacaoDao.autorizacao(autorizacao);
+		autorizacaoDao.adiciona(autorizacao);
 		result.include("notice", "Autorizacao realizada com sucesso!");
 		result.redirectTo(this).index();
 	}

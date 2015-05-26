@@ -112,7 +112,7 @@
 												</c:when>
 												<c:otherwise>
 													<c:forEach items="${mensagemList}" var="mensagem">
-														<div class="message-item message-unread">
+														<div class="message-item">
 															<label class="inline">
 																<input type="checkbox" class="ace" />
 																<span class="lbl"></span>

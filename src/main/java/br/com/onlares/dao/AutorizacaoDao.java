@@ -44,7 +44,7 @@ public class AutorizacaoDao {
 		return unidadeAutorizacaos;
 	}
 	
-	public void autorizacao(Autorizacao autorizacao) {
+	public void adiciona(Autorizacao autorizacao) {
 		em.persist(autorizacao);
 	}
 	
