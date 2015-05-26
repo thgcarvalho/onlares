@@ -1,4 +1,4 @@
-package br.com.onlares.model;
+package br.com.onlares.util;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.

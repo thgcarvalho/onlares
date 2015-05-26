@@ -31,6 +31,7 @@ public class Envio implements Serializable {
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	private Usuario usuario;
 	private boolean visualizado;
+	private String status;
 	
 	public Long getId() {
 		return id;
@@ -56,7 +57,13 @@ public class Envio implements Serializable {
 	public void setVisualizado(boolean visualizado) {
 		this.visualizado = visualizado;
 	}
-
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	@Override
 	public String toString() {
 		return "msg= " + mensagem + " para=" + usuario;

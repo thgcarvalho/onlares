@@ -3,8 +3,10 @@ package br.com.onlares.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
@@ -98,6 +100,13 @@ public class MensagemController {
 		result.include("notice", "Mensagem enviada com sucesso!");
 		result.redirectTo(this).enviadas();
 	}
+	
+	@Delete("/mensagem/removeEnviada/")
+	public void removeEnviada(List<Long> mensagens, HttpServletRequest request){
+		mensagemDao.removeEnviada(mensagens);
+		result.redirectTo(this).enviadas();
+	}
+	
 	
 	private String checkNull(String value) {
 		if (value == null) {

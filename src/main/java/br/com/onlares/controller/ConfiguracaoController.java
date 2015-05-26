@@ -24,10 +24,10 @@ import br.com.onlares.dao.ExcluiContaDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.AlteraEmail;
 import br.com.onlares.model.ExcluiConta;
-import br.com.onlares.model.Status;
 import br.com.onlares.model.Usuario;
 import br.com.onlares.service.GeradorDeCodigo;
 import br.com.onlares.util.MD5Hashing;
+import br.com.onlares.util.Status;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.

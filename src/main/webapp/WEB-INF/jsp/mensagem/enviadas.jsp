@@ -73,17 +73,23 @@
 							<div class="tab-content no-border no-padding">
 								<div id="inbox" class="tab-pane in active">
 									<div class="message-container">
+									<form id="myform" class="form-horizontal message-form col-xs-12" action="${ctx}/mensagem/removeEnviada/" method="post" >
 										<div id="id-message-list-navbar" class="message-navbar clearfix">
 											<div class="message-bar">
-
 												<div class="message-toolbar hide">
 													<div class="inline position-relative align-left">
 													</div>
-
-													<button type="button" class="btn btn-xs btn-white btn-primary">
-														<i class="ace-icon fa fa-trash-o bigger-125 orange"></i>
+													<a class="deletar" href="">
+														<span class="btn btn-sm btn-danger no-border">
+															<i class="ace-icon fa fa-trash-o bigger-125"></i>
+															<span class="bigger-110">Deletar</span>
+														</span>
+													</a>
+													<button name="_method" value="DELETE" class="btn btn-sm btn-danger no-border ">
+														<i class="ace-icon fa fa-trash-o bigger-125"></i>
 														<span class="bigger-110">Deletar</span>
 													</button>
+													
 												</div>
 											</div>
 
@@ -111,10 +117,10 @@
 													<h3>Sem mensagens</h3>
 												</c:when>
 												<c:otherwise>
-													<c:forEach items="${mensagemList}" var="mensagem">
+													<c:forEach items="${mensagemList}" var="mensagem" >
 														<div class="message-item">
 															<label class="inline">
-																<input type="checkbox" class="ace" />
+																<input type="checkbox" class="ace" name="mensagens[]" value="${mensagem.id}" /> 
 																<span class="lbl"></span>
 															</label>
 															<a href="${linkTo[MensagemController].visualizaEnviada(mensagem.id)}" data-target="inbox">
@@ -139,7 +145,7 @@
 											<div class="pull-right">
 											</div>
 										</div>
-										
+										</form>
 									</div>
 								</div>
 							</div><!-- /.tab-content -->
@@ -158,6 +164,13 @@
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
 		jQuery(function($){
+			$("#myform").submit(function() {
+			   // Retrieve the HTML from the plugin
+			   var html = $('#editor1').html();
+			   // Put this in the hidden field
+			   $("#html").val(html);
+			});
+		
 			//basic initializations
 			$('.message-list .message-item input[type=checkbox]').removeAttr('checked');
 			$('.message-list').on('click', '.message-item input[type=checkbox]' , function() {
@@ -233,6 +246,15 @@
 				}
 			}
 		
+		});
+	</script>
+	
+	<!-- confirm script -->
+	<script type="text/javascript">
+		$( "#myform").submit(function(event) {
+			if (!confirm('Você realmente deseja exlucir essas mensagens?')){
+			  event.preventDefault();
+			}
 		});
 	</script>
 	

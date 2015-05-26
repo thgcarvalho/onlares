@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import br.com.onlares.service.GeradorDeCodigo;
-
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.
 * @author Thiago Carvalho - tcarvalho@grandev.com.br

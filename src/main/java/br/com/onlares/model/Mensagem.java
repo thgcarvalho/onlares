@@ -35,6 +35,7 @@ public class Mensagem implements Serializable {
 	private String texto;
 	private Calendar data;
 	private Calendar hora;
+	private String status;
 	@Transient
 	private boolean visualizado;
 
@@ -79,6 +80,12 @@ public class Mensagem implements Serializable {
 	}
 	public void setVisualizado(boolean visualizado) {
 		this.visualizado = visualizado;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	@Transient

@@ -11,8 +11,8 @@ import br.com.onlares.annotations.Public;
 import br.com.onlares.dao.AlteraEmailDao;
 import br.com.onlares.dao.UsuarioDao;
 import br.com.onlares.model.AlteraEmail;
-import br.com.onlares.model.Status;
 import br.com.onlares.model.Usuario;
+import br.com.onlares.util.Status;
 
 /**  
 * Copyright (c) 2015 GranDev - All rights reserved.

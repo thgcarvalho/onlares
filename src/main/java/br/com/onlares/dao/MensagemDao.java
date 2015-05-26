@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 import br.com.onlares.bean.UsuarioLogado;
+import br.com.onlares.model.Constantes;
 import br.com.onlares.model.Envio;
 import br.com.onlares.model.LocalizadorDoUsuarioLogado;
 import br.com.onlares.model.Mensagem;
@@ -37,26 +38,30 @@ public class MensagemDao {
 	
 	public List<Mensagem> listaRecebidas() {
 		List<Envio> envios = em.createQuery("SELECT e FROM Envio e"
-				+ " where e.usuario.id = :usuarioId", Envio.class)
-				.setParameter("usuarioId", usuarioId).getResultList();
-		List<Mensagem> mensagens = new ArrayList<Mensagem>();
+				+ " where e.usuario.id = :usuarioId"
+				+ " and e.status != :status", Envio.class)
+				.setParameter("usuarioId", usuarioId)
+				.setParameter("status", Constantes.STATUS_EXCLUIDO).getResultList();
+		List<Mensagem> recebidas = new ArrayList<Mensagem>();
 		Mensagem mensagem = null;
 		for (Envio envio : envios) {
 			mensagem = envio.getMensagem();
 			mensagem.setVisualizado(envio.isVisualizado());
-			mensagens.add(mensagem);
+			recebidas.add(mensagem);
 		}
-		
-		List<Mensagem> recebidas = em.createQuery("SELECT e.mensagem FROM Envio e"
-				+ " where e.usuario.id = :usuarioId", Mensagem.class)
-				.setParameter("usuarioId", usuarioId).getResultList();
+//		
+//		List<Mensagem> recebidas = em.createQuery("SELECT e.mensagem FROM Envio e"
+//				+ " where e.usuario.id = :usuarioId", Mensagem.class)
+//				.setParameter("usuarioId", usuarioId).getResultList();
 		return recebidas;
 	}
 	
 	public List<Mensagem> listaEnviadas() {
 		List<Mensagem> enviadas = em.createQuery("SELECT m FROM Mensagem m"
-				+ " where m.usuario.id = :usuarioId", Mensagem.class)
-				.setParameter("usuarioId", usuarioId).getResultList();
+				+ " where m.usuario.id = :usuarioId"
+				+ " and m.status != :status", Mensagem.class)
+				.setParameter("usuarioId", usuarioId)
+				.setParameter("status", Constantes.STATUS_EXCLUIDO).getResultList();
 		return enviadas;
 	}
 	
@@ -130,6 +135,7 @@ public class MensagemDao {
 		Calendar calendar = Calendar.getInstance();
 		mensagem.setData(calendar);
 		mensagem.setHora(calendar);
+		mensagem.setStatus(Constantes.STATUS_ATIVO);
 		Envio envio;
 		em.persist(mensagem);
 		for (Long usuarioId : destinatarios) {
@@ -139,7 +145,26 @@ public class MensagemDao {
 			envio.setMensagem(mensagem);
 			envio.setUsuario(usuario);
 			envio.setVisualizado(false);
+			envio.setStatus(Constantes.STATUS_ATIVO);
 			em.persist(envio);
+		}
+	}
+	
+	public void removeRecebida(List<Long> mensagens) {
+		Mensagem mensagem;
+		for (Long id : mensagens) {
+			mensagem = buscaRecebida(id);
+			System.out.println(mensagem + "EXCLUIDA");
+			mensagem.setStatus(Constantes.STATUS_EXCLUIDO);
+		}
+	}
+
+	public void removeEnviada(List<Long> mensagens) {
+		Mensagem mensagem;
+		for (Long id : mensagens) {
+			mensagem = buscaEnviada(id);
+			System.out.println(mensagem + "EXCLUIDA");
+			mensagem.setStatus(Constantes.STATUS_EXCLUIDO);
 		}
 	}
 	
