@@ -73,23 +73,16 @@
 							<div class="tab-content no-border no-padding">
 								<div id="inbox" class="tab-pane in active">
 									<div class="message-container">
-									<form id="myform" class="form-horizontal message-form col-xs-12" action="${ctx}/mensagem/removeEnviada/" method="post" >
+									<form id="myform" class="form-horizontal message-form col-xs-12" action="${ctx}/mensagem/removeEnviadas/" method="post" >
 										<div id="id-message-list-navbar" class="message-navbar clearfix">
 											<div class="message-bar">
 												<div class="message-toolbar hide">
 													<div class="inline position-relative align-left">
 													</div>
-													<a class="deletar" href="">
-														<span class="btn btn-sm btn-danger no-border">
-															<i class="ace-icon fa fa-trash-o bigger-125"></i>
-															<span class="bigger-110">Deletar</span>
-														</span>
-													</a>
 													<button name="_method" value="DELETE" class="btn btn-sm btn-danger no-border ">
 														<i class="ace-icon fa fa-trash-o bigger-125"></i>
 														<span class="bigger-110">Deletar</span>
 													</button>
-													
 												</div>
 											</div>
 

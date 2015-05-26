@@ -101,12 +101,17 @@ public class MensagemController {
 		result.redirectTo(this).enviadas();
 	}
 	
-	@Delete("/mensagem/removeEnviada/")
-	public void removeEnviada(List<Long> mensagens, HttpServletRequest request){
-		mensagemDao.removeEnviada(mensagens);
-		result.redirectTo(this).enviadas();
+	@Delete("/mensagem/removeRecebidas/")
+	public void removeRecebidas(List<Long> mensagens, HttpServletRequest request){
+		mensagemDao.removeRecebidas(mensagens);
+		result.redirectTo(this).recebidas();
 	}
 	
+	@Delete("/mensagem/removeEnviadas/")
+	public void removeEnviadas(List<Long> mensagens, HttpServletRequest request){
+		mensagemDao.removeEnviadas(mensagens);
+		result.redirectTo(this).enviadas();
+	}
 	
 	private String checkNull(String value) {
 		if (value == null) {

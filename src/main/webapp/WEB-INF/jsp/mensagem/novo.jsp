@@ -78,13 +78,6 @@
 												</div>
 
 												<div class="messagebar-item-right">
-													<span class="inline btn-send-message">
-														<button type="submit" class="btn btn-sm btn-primary no-border btn-white btn-round">
-															<span class="bigger-110">Enviar</span>
-
-															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-														</button>
-													</span>
 												</div>
 											</div>
 										</div>

@@ -49,10 +49,6 @@ public class MensagemDao {
 			mensagem.setVisualizado(envio.isVisualizado());
 			recebidas.add(mensagem);
 		}
-//		
-//		List<Mensagem> recebidas = em.createQuery("SELECT e.mensagem FROM Envio e"
-//				+ " where e.usuario.id = :usuarioId", Mensagem.class)
-//				.setParameter("usuarioId", usuarioId).getResultList();
 		return recebidas;
 	}
 	
@@ -91,6 +87,20 @@ public class MensagemDao {
 			enviada = null;
 		}
 		return enviada;
+	}
+	
+	public Envio buscaEnvio(Long mensagemId) {
+		Envio envio;
+		try {
+			envio = em.createQuery("SELECT e FROM Envio e"
+					+ " WHERE e.mensagem.id = :mensagemId"
+					+ " AND e.usuario.id = :usuarioId", Envio.class)
+					.setParameter("mensagemId", mensagemId)
+					.setParameter("usuarioId", usuarioId).getSingleResult();
+		} catch (NoResultException nrExp) {
+			envio = null;
+		}
+		return envio;
 	}
 	
 	public List<Usuario> buscaDestinatarios(Mensagem mensagem) {
@@ -150,20 +160,18 @@ public class MensagemDao {
 		}
 	}
 	
-	public void removeRecebida(List<Long> mensagens) {
-		Mensagem mensagem;
-		for (Long id : mensagens) {
-			mensagem = buscaRecebida(id);
-			System.out.println(mensagem + "EXCLUIDA");
-			mensagem.setStatus(Constantes.STATUS_EXCLUIDO);
+	public void removeRecebidas(List<Long> mensagens) {
+		Envio envio;
+		for (Long mensagemId : mensagens) {
+			envio = buscaEnvio(mensagemId);
+			envio.setStatus(Constantes.STATUS_EXCLUIDO);
 		}
 	}
 
-	public void removeEnviada(List<Long> mensagens) {
+	public void removeEnviadas(List<Long> mensagens) {
 		Mensagem mensagem;
-		for (Long id : mensagens) {
-			mensagem = buscaEnviada(id);
-			System.out.println(mensagem + "EXCLUIDA");
+		for (Long mensagemId : mensagens) {
+			mensagem = buscaEnviada(mensagemId);
 			mensagem.setStatus(Constantes.STATUS_EXCLUIDO);
 		}
 	}
