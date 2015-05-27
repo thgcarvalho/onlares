@@ -60,7 +60,7 @@
 									<br />
 									<p>
 										<button class="btn btn-success btn-sm tooltip-successs">Comparecerei</button>
-										<button class="btn btn-warning btn-sm tooltip-warning">Talvéz</button>
+										<button class="btn btn-warning btn-sm tooltip-warning">Talvez</button>
 										<button class="btn btn-danger btn-sm tooltip-error">Não poderei</button>
 									</p>
 								</div>

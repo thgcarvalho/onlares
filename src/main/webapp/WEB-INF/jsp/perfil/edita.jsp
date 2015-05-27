@@ -91,15 +91,6 @@
 												</div>
 												
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Email </div>
-							
-													<div class="profile-info-value">
-														<input type="email" readonly="readonly" id="email" name="usuario.email" value="${usuarioLogado.usuario.email}" 
-														placeholder="Email" maxlength="45" class="col-xs-10 col-sm-5" />
-													</div>
-												</div>
-												
-												<div class="profile-info-row">
 													<div class="profile-info-name"> Unidade </div>
 
 													<div class="profile-info-value">

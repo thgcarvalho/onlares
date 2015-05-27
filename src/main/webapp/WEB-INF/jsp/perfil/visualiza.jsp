@@ -91,14 +91,6 @@
 												</div>
 											
 												<div class="profile-info-row">
-													<div class="profile-info-name"> Email </div>
-
-													<div class="profile-info-value">
-														<span>${usuario.email}</span>
-													</div>
-												</div>
-												
-												<div class="profile-info-row">
 													<div class="profile-info-name"> Unidade </div>
 
 													<div class="profile-info-value">

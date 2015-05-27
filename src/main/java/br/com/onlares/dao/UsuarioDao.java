@@ -65,7 +65,6 @@ public class UsuarioDao {
 		String localizacao;
 		boolean found = false;
 		for (Localizador localizador : localizadores) {
-			
 			if (adminGlobal(localizador)) {
 				continue;
 			}
@@ -136,11 +135,10 @@ public class UsuarioDao {
 	
 	public Usuario buscaPorId(Long id) {
 		Usuario usuario = null;
-		System.out.println("buscaPorId(Long " + id +")");
 		if (mesmoCondominio(id)) {
 			usuario = em.find(Usuario.class, id);
+			agrupaUnidades(usuario);
 		}
-		System.out.println(usuario);
 		return usuario;
 	}
 	
@@ -310,7 +308,6 @@ public class UsuarioDao {
 	}
 	
 	private boolean mesmoCondominio(Long usuarioBuscadoId) {
-		System.out.println("mesmoCondominio? " + condominioId);
 		boolean mesmoCondominio = !em.createQuery("select l.usuario from Localizador l"
 				+ " where l.usuario.id = :usuarioBuscadoId"
 				+ " and l.condominio.id = :condominioId", Usuario.class)

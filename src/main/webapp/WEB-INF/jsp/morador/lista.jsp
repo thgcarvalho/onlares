@@ -53,7 +53,6 @@
 							<thead>
 								<tr>
 									<th>Nome</th>
-									<th>Email</th>
 									<th>Unidade</th>
 								</tr>
 							</thead>
@@ -61,9 +60,13 @@
 							<tbody>
 								<c:forEach items="${moradorList}" var="morador">
 									<tr>
-										<td>${morador.nome}</td>
-										<td>${morador.email}</td>
+										<td>
+											<a href="${linkTo[PerfilController].visualiza(morador.id)}" class="sender">
+											${morador.nome}
+											</a>
+										</td>
 										<td>${morador.localizacoes}</td>
+										
 									</tr>
 								</c:forEach>
 							</tbody>
