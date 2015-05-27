@@ -117,7 +117,7 @@
 																<span class="lbl"></span>
 															</label>
 															<a href="${linkTo[MensagemController].visualizaEnviada(mensagem.id)}" data-target="inbox">
-																<span class="sender">${mensagem.usuario.nome} </span>
+																<span class="sender">Eu</span>
 																<span class="data">${mensagem.dataFormatada}</span>
 			
 																<span class="summary">

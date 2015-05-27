@@ -144,6 +144,14 @@
 			<b class="arrow"></b>
 		</li>
 		
+		<li id="menuadmin_mensagens" class="">
+			<a href="${ctx}/adminMensagem/novo">
+				<i class="menu-icon fa fa-comment-o"></i>
+				<span class="menu-text"> Mensagens </span>
+			</a>
+			<b class="arrow"></b>
+		</li>
+		
 		<li id="menuadmin_avisos" class="">
 			<a href="${ctx}/adminAviso/lista">
 				<i class="menu-icon fa fa-warning"></i>

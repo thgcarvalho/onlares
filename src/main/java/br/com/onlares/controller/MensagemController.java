@@ -1,5 +1,6 @@
 package br.com.onlares.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,6 +45,7 @@ public class MensagemController {
 	@Get("/mensagem/recebidas")
 	public void recebidas() {
 		List<Mensagem> recebidas = mensagemDao.listaRecebidas();
+		Collections.sort(recebidas);
 		result.include("mensagemList", recebidas);
 		result.include("mensagemTotal", recebidas.size());
 	}
@@ -51,6 +53,7 @@ public class MensagemController {
 	@Get("/mensagem/enviadas")
 	public void enviadas() {
 		List<Mensagem> enviadas = mensagemDao.listaEnviadas();
+		Collections.sort(enviadas);
 		result.include("mensagemList", enviadas);
 		result.include("mensagemTotal", enviadas.size());
 	}

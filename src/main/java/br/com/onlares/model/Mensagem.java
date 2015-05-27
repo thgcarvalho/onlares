@@ -21,7 +21,7 @@ import br.com.onlares.util.DataUtil;
 */
 @Entity
 @Table(name = "mensagem")
-public class Mensagem implements Serializable {
+public class Mensagem implements Comparable<Mensagem>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -101,6 +101,12 @@ public class Mensagem implements Serializable {
 	@Override
 	public String toString() {
 		return "msg= " + id + " assnt=" + assunto;
+	}
+	
+	@Override
+	public int compareTo(Mensagem outraMensagem) {
+        int mnsg = this.data.compareTo(outraMensagem.data) * -1;
+        return mnsg == 0 ? this.hora.compareTo(outraMensagem.hora) * -1 : mnsg;
 	}
 
 }

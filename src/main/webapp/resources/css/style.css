@@ -136,3 +136,7 @@
   white-space:nowrap !important;
   width:100px !important;
 }
+
+.message-item .summary .text {
+  color:#467287 !important;
+}
