@@ -85,17 +85,17 @@
 										</td>
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
-												<a class="visualizar" href="${linkTo[AdminUsuarioController].visualiza(usuario.email)}" 
+												<a class="visualizar" href="${linkTo[AdminUsuarioController].visualiza(usuario.id)}" 
 													title="Editar" >
 													<i class="ace-icon fa fa-search-plus bigger-130"></i>
 												</a>
 
-												<a class="editar" href="${linkTo[AdminUsuarioController].edita(usuario.email)}" 
+												<a class="editar" href="${linkTo[AdminUsuarioController].edita(usuario.id)}" 
 													title="Editar" >
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 												
-												<a class="deletar" href="${linkTo[AdminUsuarioController].remove(usuario.email)}" 
+												<a class="deletar" href="${linkTo[AdminUsuarioController].remove(usuario.id)}" 
                     								title="Remover" >
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
@@ -110,7 +110,7 @@
 
 													<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 														<li>
-															<a href="${linkTo[AdminUsuarioController].visualiza(usuario.email)}" 
+															<a href="${linkTo[AdminUsuarioController].visualiza(usuario.id)}" 
 																class="tooltip-info" data-rel="tooltip" title="Visualizar">
 																<span class="blue">
 																	<i class="ace-icon fa fa-search-plus bigger-120"></i>
@@ -119,7 +119,7 @@
 														</li>
 
 														<li>
-															<a href="${linkTo[AdminUsuarioController].edita(usuario.email)}" 
+															<a href="${linkTo[AdminUsuarioController].edita(usuario.id)}" 
 																class="tooltip-success" data-rel="tooltip" title="Editar">
 																<span class="green">
 																	<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
@@ -128,7 +128,7 @@
 														</li>
 
 														<li>
-															<a href="${linkTo[AdminUsuarioController].remove(usuario.email)}" 
+															<a href="${linkTo[AdminUsuarioController].remove(usuario.id)}" 
 																class="deletar tooltip-error" data-rel="tooltip" title="Remover" >
 																<span class="red">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>

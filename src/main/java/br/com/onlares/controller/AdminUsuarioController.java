@@ -100,11 +100,11 @@ public class AdminUsuarioController {
 		result.include("notice", "Usuário adicionado com sucesso!");
 		result.redirectTo(this).lista();
 	}
-	
+
 	@Admin
-	@Get("/adminUsuario/edita/{email}")
-	public void edita(String email) {
-		Usuario usuario = usuarioDao.buscaPorEmail(email);
+	@Get("/adminUsuario/edita/{id}")
+	public void edita(Long id) {
+		Usuario usuario = usuarioDao.buscaPorId(id);
 		if (usuario == null) {
 			result.notFound();
 		} else {
@@ -126,7 +126,7 @@ public class AdminUsuarioController {
 		if (checkNull(usuario.getEmail()).equals("")) {
 			erro=true;
 			validator.add(new I18nMessage("usuario.edita", "campo.obrigatorio", "Email"));
-			validator.onErrorUsePageOf(this).edita(usuario.getEmail());
+			validator.onErrorUsePageOf(this).edita(usuario.getId());
 		}
 		
 		List<Usuario> usuarios = usuarioDao.listaTodos();
@@ -143,7 +143,7 @@ public class AdminUsuarioController {
 		if (erro) {
 			result.include("unidadeList", unidadeDao.lista());
 		}
-		validator.onErrorUsePageOf(this).edita(usuario.getEmail());
+		validator.onErrorUsePageOf(this).edita(usuario.getId());
 		
 		if (usuario.getNomeCompleto() != null) {
 			usuario.setNomeCompleto(usuario.getNomeCompleto().toUpperCase());
@@ -172,11 +172,11 @@ public class AdminUsuarioController {
 		result.include("notice", "Usuário atualizado com sucesso!");
 		result.redirectTo(this).lista();
 	}
-	
+
 	@Admin
-	@Get("/adminUsuario/visualiza/{email}")
-	public void visualiza(String email) {
-		Usuario usuario = usuarioDao.buscaPorEmail(email);
+	@Get("/adminUsuario/visualiza/{id}")
+	public void visualiza(Long id) {
+		Usuario usuario = usuarioDao.buscaPorId(id);
 		if (usuario == null) {
 			result.notFound();
 		} else {
@@ -185,10 +185,10 @@ public class AdminUsuarioController {
 	}
 	
 	@Admin
-	@Delete("/adminUsuario/{email}")
-	public void remove(String email){
-		System.out.println("USUARIO = " + email + " FOI REMOVIDO!");
-		Usuario usuario = usuarioDao.buscaPorEmail(email);
+	@Delete("/adminUsuario/{id}")
+	public void remove(Long id){
+		System.out.println("USUARIO = " + id + " FOI REMOVIDO!");
+		Usuario usuario = usuarioDao.buscaPorId(id);
 		usuarioDao.remove(usuario);
 		result.nothing();
 	}

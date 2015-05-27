@@ -67,9 +67,9 @@ public class PerfilController implements Serializable{
 	public void edita() {
 	}
 	
-	@Get("/perfil/{email}/foto")
-	public Download foto(String email, ServletContext context) throws FileNotFoundException {
-		Usuario usuario = usuarioDao.buscaPorEmail(email);
+	@Get("/perfil/{id}/foto")
+	public Download foto(Long id, ServletContext context) throws FileNotFoundException {
+		Usuario usuario = usuarioDao.buscaPorId(id);
 		Foto foto = null;
 		URI fotoTempURI = usuarioLogado.getUsuario().getFotoTemp();
 		if (fotoTempURI != null) {
@@ -158,16 +158,6 @@ public class PerfilController implements Serializable{
 		result.include("notice", "Perfil atualizado com sucesso!");
 		result.redirectTo(this).edita();
 	}
-	
-//	@Get("/perfil/visualiza/{email}")
-//	public void visualiza(String email) {
-//		Usuario usuario = usuarioDao.buscaPorEmail(email);
-//		if (usuario == null) {
-//			result.notFound();
-//		} else {
-//			result.include("usuario", usuario);
-//		}
-//	}
 	
 	@Get("/perfil/visualiza/{id}")
 	public void visualiza(Long id) {

@@ -136,13 +136,14 @@ public class UsuarioDao {
 	
 	public Usuario buscaPorId(Long id) {
 		Usuario usuario = null;
-		if (mesmoCondominio()) {
+		System.out.println("buscaPorId(Long " + id +")");
+		if (mesmoCondominio(id)) {
 			usuario = em.find(Usuario.class, id);
 		}
+		System.out.println(usuario);
 		return usuario;
 	}
 	
-	@Deprecated
 	public Usuario buscaPorEmail(String email) {
 		Usuario usuario;
 		String strQuery = "SELECT u FROM Usuario u WHERE u.email = :email";
@@ -300,7 +301,7 @@ public class UsuarioDao {
 				+ " and l.condominio.id = :condominioId", Localizador.class)
 				.setParameter("usuarioId", usuario.getId())
 				.setParameter("condominioId", condominioId).getResultList();
-		if (mesmoCondominio()) {
+		if (mesmoCondominio(usuario.getId())) {
 			for (Localizador localizador : localizadores) {
 				em.remove(localizador);
 			}
@@ -308,15 +309,20 @@ public class UsuarioDao {
 		}
 	}
 	
-	private boolean mesmoCondominio() {
+	private boolean mesmoCondominio(Long usuarioBuscadoId) {
+		System.out.println("mesmoCondominio? " + condominioId);
 		boolean mesmoCondominio = !em.createQuery("select l.usuario from Localizador l"
-				+ " where l.condominio.id = :condominioId", Usuario.class)
+				+ " where l.usuario.id = :usuarioBuscadoId"
+				+ " and l.condominio.id = :condominioId", Usuario.class)
+				.setParameter("usuarioBuscadoId", usuarioBuscadoId)
 				.setParameter("condominioId", condominioId).getResultList().isEmpty();
 		if (mesmoCondominio) {
 			return true;
 		} else {
-			System.out.println("CONDOMÍNIOS DIFERENTES: usuario="+ usuarioId
-					+ " != " + condominioId);
+			System.out.println("CONDOMÍNIOS DIFERENTES:"
+					+ " condominioId="+ condominioId
+					+ " usuario="+ usuarioId
+					+ " usuarioBuscadoId=" + usuarioBuscadoId);
 			return false;
 		}
 	}

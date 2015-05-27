@@ -91,7 +91,7 @@ public class AlteraSenhaController {
 	        email.addTo(emailDoUsuario);
 	        email.setMsg("Clique no <a>link</a> para realizar a alteração: "
 	        		+ environment.get("context") + "alteraSenha/codigo/" + codigo );
-//	        email.setMsg(emailTemplate());
+	        // email.setMsg(emailTemplate());
 	        mailer.send(email);
 		} catch(EmailException eExp) {
 			eExp.printStackTrace();	
