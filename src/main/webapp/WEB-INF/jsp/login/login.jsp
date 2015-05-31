@@ -49,8 +49,10 @@
 							<br />
 							<br />
 							<div class="center">
-								<img alt="OnLares" src="${ctx}/resources/images/onlares.png" height="70">
-								<h4 class="blue" id="id-company-text" class="blue" >&copy; GranDev</h4>
+								<a href="http://www.onlares.com">
+									<img alt="OnLares" src="${ctx}/resources/images/onlares.png" height="70">
+								</a>
+								<h4 class="blue" id="id-company-text" class="blue" ><a href="http://www.grandev.com.br">&copy; GranDev</a></h4>
 							</div>
 
 							<div class="space-6"></div>
